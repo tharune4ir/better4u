@@ -22,11 +22,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Trelis Life",
-  description: "A highly premium personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
+  description: "A personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
   manifest: "/manifest.json",
   openGraph: {
     title: "Trelis Life",
-    description: "A highly premium personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
+    description: "A personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
     images: [
       {
         url: "/logo-transparent.png",
