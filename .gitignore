@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# custom exclusions
+/content/
+/content/**/*.md
+TRELIS_LIFE_BUILD_STATE.md
+/all_logo_files/
+Gut_Pillar_Recipe_Bible_v2.md
+
+
