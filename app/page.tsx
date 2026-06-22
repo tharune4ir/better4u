@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import LockScreen from "@/components/LockScreen";
 import Navbar, { NavTab } from "@/components/Navbar";
 import Dashboard from "@/components/Dashboard";
 
@@ -62,10 +61,8 @@ function PageContent() {
 
 export default function Page() {
   return (
-    <LockScreen>
-      <Suspense fallback={<div className="min-h-screen bg-[#F7F6F2] flex items-center justify-center text-xs text-slate-400 font-light">LOADING SYSTEM...</div>}>
-        <PageContent />
-      </Suspense>
-    </LockScreen>
+    <Suspense fallback={<div className="min-h-screen bg-[#F7F6F2] flex items-center justify-center text-xs text-slate-400 font-light">LOADING SYSTEM...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }

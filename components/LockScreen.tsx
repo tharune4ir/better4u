@@ -17,6 +17,16 @@ export default function LockScreen({ children }: LockScreenProps) {
   const [isUnlocking, setIsUnlocking] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Restore unlocked state from sessionStorage if exists
+  useEffect(() => {
+    if (!BYPASS_LOCK_FOR_DEVELOPMENT) {
+      const stored = sessionStorage.getItem("trelis_unlocked");
+      if (stored === "true") {
+        setIsUnlocked(true);
+      }
+    }
+  }, []);
+
   // Focus the input automatically on mount and on click
   useEffect(() => {
     if (!isUnlocked) {
@@ -35,6 +45,7 @@ export default function LockScreen({ children }: LockScreenProps) {
     if (val === "rudra22") {
       setIsUnlocking(true);
       setIsError(false);
+      sessionStorage.setItem("trelis_unlocked", "true");
       // Play unlock animation first, then reveal dashboard
       setTimeout(() => {
         setIsUnlocked(true);
