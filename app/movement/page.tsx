@@ -54,8 +54,14 @@ export default function MovementPage() {
   };
   
   const handleTabChange = (tab: NavTab) => {
-    if (tab !== "movement") {
-      router.push(`/?tab=${tab}`);
+    if (tab === "nutrition") {
+      router.push("/nutrition");
+    } else if (tab === "thinking") {
+      router.push("/thinking");
+    } else if (tab === "home-os") {
+      router.push("/home");
+    } else if (tab === "visionary") {
+      router.push("/home?section=visionary");
     }
   };
 

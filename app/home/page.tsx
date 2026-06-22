@@ -72,7 +72,13 @@ function HomeOSContent() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       window.history.pushState({}, "", "/home");
     } else {
-      router.push(`/?tab=${tab}`);
+      if (tab === "nutrition") {
+        router.push("/nutrition");
+      } else if (tab === "movement") {
+        router.push("/movement");
+      } else if (tab === "thinking") {
+        router.push("/thinking");
+      }
     }
   };
 

@@ -77,8 +77,14 @@ export default function ThinkingPage() {
   }, [isTimerRunning, timeLeft]);
 
   const handleTabChange = (tab: NavTab) => {
-    if (tab !== "thinking") {
-      router.push(`/?tab=${tab}`);
+    if (tab === "nutrition") {
+      router.push("/nutrition");
+    } else if (tab === "movement") {
+      router.push("/movement");
+    } else if (tab === "home-os") {
+      router.push("/home");
+    } else if (tab === "visionary") {
+      router.push("/home?section=visionary");
     }
   };
 

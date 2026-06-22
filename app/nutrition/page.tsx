@@ -87,8 +87,14 @@ export default function NutritionPage() {
   const yFloating4 = useTransform(scrollYProgress, [0, 1], [0, 120]);
 
   const handleTabChange = (tab: NavTab) => {
-    if (tab !== "nutrition") {
-      router.push(`/?tab=${tab}`);
+    if (tab === "movement") {
+      router.push("/movement");
+    } else if (tab === "thinking") {
+      router.push("/thinking");
+    } else if (tab === "home-os") {
+      router.push("/home");
+    } else if (tab === "visionary") {
+      router.push("/home?section=visionary");
     }
   };
 
