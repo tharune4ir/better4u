@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { 
   Sparkles, 
   ArrowLeft, 
@@ -38,6 +38,12 @@ const MIND_VISION_MARKERS = [
 
 export default function ThinkingPage() {
   const router = useRouter();
+  
+  // Parallax scroll logic for Seamless Weave floating SVGs
+  const { scrollYProgress } = useScroll();
+  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const yFloat3 = useTransform(scrollYProgress, [0, 1], [0, -80]);
   
   // Mind Vision Board state (10 markers)
   const [mindMarkers, setMindMarkers] = useState<boolean[]>(new Array(10).fill(false));
@@ -113,9 +119,115 @@ export default function ThinkingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden">
       
-      {/* Subtle Glows */}
+      {/* ================= BACKGROUND DECORATIONS & FLOATING CUTOUTS (SEAMLESS WEAVE) ================= */}
+      {/* Ambient Glows */}
       <div className="absolute top-[5%] right-[-15%] w-[35vw] h-[35vw] bg-[#2A7F7F]/3 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-15%] w-[35vw] h-[35vw] bg-[#2A7F7F]/3 rounded-full blur-[130px] pointer-events-none" />
+
+      {/* 1. Synapse / Neural Connection Lines (Top Right) */}
+      <motion.div 
+        style={{ y: yFloat1 }}
+        className="absolute top-20 right-[-5%] w-72 h-72 pointer-events-none opacity-20 md:opacity-35 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[1px]">
+          {/* Neural nodes */}
+          <circle cx="30" cy="50" r="8" fill="url(#syn-node)" />
+          <circle cx="100" cy="30" r="6" fill="url(#syn-node)" />
+          <circle cx="170" cy="60" r="7" fill="url(#syn-node)" />
+          <circle cx="60" cy="120" r="9" fill="url(#syn-node)" />
+          <circle cx="140" cy="110" r="7" fill="url(#syn-node)" />
+          <circle cx="100" cy="170" r="8" fill="url(#syn-node)" />
+          <circle cx="170" cy="160" r="6" fill="url(#syn-node)" />
+          {/* Synaptic connections */}
+          <line x1="30" y1="50" x2="100" y2="30" stroke="#2A7F7F" strokeWidth="1" opacity="0.3" />
+          <line x1="100" y1="30" x2="170" y2="60" stroke="#2A7F7F" strokeWidth="1" opacity="0.25" />
+          <line x1="30" y1="50" x2="60" y2="120" stroke="#2A7F7F" strokeWidth="1" opacity="0.3" />
+          <line x1="100" y1="30" x2="140" y2="110" stroke="#2A7F7F" strokeWidth="1" opacity="0.25" />
+          <line x1="60" y1="120" x2="140" y2="110" stroke="#2A7F7F" strokeWidth="1.5" opacity="0.35" />
+          <line x1="140" y1="110" x2="170" y2="60" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <line x1="60" y1="120" x2="100" y2="170" stroke="#2A7F7F" strokeWidth="1" opacity="0.3" />
+          <line x1="140" y1="110" x2="170" y2="160" stroke="#2A7F7F" strokeWidth="1" opacity="0.25" />
+          <line x1="100" y1="170" x2="170" y2="160" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <defs>
+            <radialGradient id="syn-node" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#5EEAD4" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#2A7F7F" stopOpacity="0.2" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 2. Focus Ring / Camera Aperture (Left - Mid Page) */}
+      <motion.div 
+        style={{ y: yFloat2 }}
+        className="absolute top-[42%] left-[-8%] w-72 h-72 pointer-events-none opacity-15 md:opacity-25 z-0"
+        animate={{ 
+          rotate: [0, 15, 0],
+          scale: [1, 1.03, 1]
+        }}
+        transition={{ 
+          duration: 12, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          {/* Outer aperture ring */}
+          <circle cx="100" cy="100" r="80" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          {/* Aperture blades */}
+          <path d="M100,20 L115,80 L100,75 Z" fill="#2A7F7F" opacity="0.15" />
+          <path d="M169,55 L120,90 L118,78 Z" fill="#2A7F7F" opacity="0.12" />
+          <path d="M169,145 L120,110 L125,100 Z" fill="#2A7F7F" opacity="0.15" />
+          <path d="M100,180 L85,120 L100,125 Z" fill="#2A7F7F" opacity="0.12" />
+          <path d="M31,145 L80,110 L82,122 Z" fill="#2A7F7F" opacity="0.15" />
+          <path d="M31,55 L80,90 L75,100 Z" fill="#2A7F7F" opacity="0.12" />
+          {/* Inner focus circle */}
+          <circle cx="100" cy="100" r="25" stroke="#2A7F7F" strokeWidth="2" opacity="0.3" />
+          <circle cx="100" cy="100" r="12" fill="url(#focus-core)" />
+          <defs>
+            <radialGradient id="focus-core" cx="45%" cy="45%" r="55%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
+              <stop offset="100%" stopColor="rgba(42, 127, 127, 0.15)" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 3. First Principles Staircase (Bottom Right) — ascending geometric steps */}
+      <motion.div 
+        style={{ y: yFloat3 }}
+        className="absolute bottom-28 right-[-4%] w-64 h-64 pointer-events-none opacity-15 md:opacity-25 z-0"
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[1px]">
+          {/* Ascending steps */}
+          <rect x="20" y="160" width="35" height="20" rx="3" fill="url(#step-grad)" opacity="0.6" />
+          <rect x="55" y="135" width="35" height="20" rx="3" fill="url(#step-grad)" opacity="0.5" />
+          <rect x="90" y="110" width="35" height="20" rx="3" fill="url(#step-grad)" opacity="0.45" />
+          <rect x="125" y="85" width="35" height="20" rx="3" fill="url(#step-grad)" opacity="0.4" />
+          <rect x="160" y="60" width="25" height="20" rx="3" fill="url(#step-grad)" opacity="0.35" />
+          {/* Ascending line connecting the steps */}
+          <path 
+            d="M37,160 L72,135 L107,110 L142,85 L172,60" 
+            stroke="#2A7F7F" 
+            strokeWidth="1.5" 
+            strokeDasharray="4 3"
+            strokeLinecap="round"
+            fill="none" 
+            opacity="0.3"
+          />
+          {/* Arrow at the top */}
+          <path d="M170,55 L175,50 L180,58" stroke="#2A7F7F" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3" />
+          <defs>
+            <linearGradient id="step-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#2A7F7F" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#5EEAD4" stopOpacity="0.15" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </motion.div>
 
       {/* Navigation */}
       <Navbar activeTab="thinking" setActiveTab={handleTabChange} />

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { 
   Activity, 
   Sparkles, 
@@ -41,6 +41,13 @@ export default function MovementPage() {
   const router = useRouter();
   const [activeStepId, setActiveStepId] = useState<string>("joints");
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
+  
+  // Parallax scroll logic for Seamless Weave floating SVGs
+  const { scrollYProgress } = useScroll();
+  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const yFloat3 = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const yFloat4 = useTransform(scrollYProgress, [0, 1], [0, 130]);
   
   // Body Vision Board state (10 markers)
   const [bodyMarkers, setBodyMarkers] = useState<boolean[]>(new Array(10).fill(false));
@@ -81,8 +88,104 @@ export default function MovementPage() {
       <div className="absolute top-[10%] left-[-10%] w-[30vw] h-[30vw] bg-[#2A7F7F]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[40vw] h-[40vw] bg-[#2A7F7F]/5 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Floating Abstract Kinetic Rings SVG */}
+      {/* 1. Kinetic Spine Wave (Top Right) — a flowing S-curve representing the spine */}
       <motion.div 
+        style={{ y: yFloat1 }}
+        className="absolute top-16 right-[-6%] w-64 h-72 pointer-events-none opacity-20 md:opacity-35 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <svg viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[1px]">
+          <path 
+            d="M100,10 C60,50 140,90 100,130 C60,170 140,210 100,240" 
+            stroke="url(#spine-grad)" 
+            strokeWidth="3" 
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Vertebrae nodes */}
+          <circle cx="100" cy="10" r="5" fill="#2A7F7F" opacity="0.5" />
+          <circle cx="80" cy="70" r="4" fill="#2A7F7F" opacity="0.4" />
+          <circle cx="120" cy="90" r="4" fill="#2A7F7F" opacity="0.4" />
+          <circle cx="100" cy="130" r="5" fill="#2A7F7F" opacity="0.5" />
+          <circle cx="80" cy="170" r="4" fill="#2A7F7F" opacity="0.4" />
+          <circle cx="120" cy="210" r="4" fill="#2A7F7F" opacity="0.4" />
+          <circle cx="100" cy="240" r="5" fill="#2A7F7F" opacity="0.5" />
+          <defs>
+            <linearGradient id="spine-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#2A7F7F" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="#5EEAD4" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#2A7F7F" stopOpacity="0.7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 2. Abstract Mace/Club (Left - Mid Page) — ancient training tool silhouette */}
+      <motion.div 
+        style={{ y: yFloat2 }}
+        className="absolute top-[38%] left-[-7%] w-72 h-72 pointer-events-none opacity-15 md:opacity-25 z-0"
+        animate={{ 
+          rotate: [0, 5, -5, 0],
+          scale: [1, 1.02, 1]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[1px]">
+          {/* Handle */}
+          <rect x="95" y="80" width="10" height="100" rx="5" fill="url(#mace-handle)" />
+          {/* Head */}
+          <ellipse cx="100" cy="65" rx="35" ry="30" fill="url(#mace-head)" />
+          <ellipse cx="100" cy="65" rx="20" ry="16" fill="white" opacity="0.08" />
+          <defs>
+            <linearGradient id="mace-handle" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#2A7F7F" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#1e5c5c" stopOpacity="0.2" />
+            </linearGradient>
+            <radialGradient id="mace-head" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#5EEAD4" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#2A7F7F" stopOpacity="0.15" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 3. Glowing Joint/Node Circle (Right - Lower Mid) */}
+      <motion.div 
+        style={{ y: yFloat3 }}
+        className="absolute top-[62%] right-[-5%] w-60 h-60 pointer-events-none opacity-15 md:opacity-25 z-0"
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          {/* Outer glow ring */}
+          <circle cx="100" cy="100" r="70" stroke="#2A7F7F" strokeWidth="1" opacity="0.3" />
+          <circle cx="100" cy="100" r="55" stroke="#2A7F7F" strokeWidth="1.5" strokeDasharray="8 4" opacity="0.25" />
+          {/* Core joint node */}
+          <circle cx="100" cy="100" r="30" fill="url(#joint-grad)" />
+          {/* Inner highlight */}
+          <circle cx="90" cy="90" r="15" fill="white" opacity="0.1" />
+          {/* Connective lines radiating outward */}
+          <line x1="100" y1="30" x2="100" y2="70" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <line x1="170" y1="100" x2="130" y2="100" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <line x1="100" y1="170" x2="100" y2="130" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <line x1="30" y1="100" x2="70" y2="100" stroke="#2A7F7F" strokeWidth="1" opacity="0.2" />
+          <defs>
+            <radialGradient id="joint-grad" cx="45%" cy="45%" r="55%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
+              <stop offset="50%" stopColor="rgba(42, 127, 127, 0.2)" />
+              <stop offset="100%" stopColor="rgba(42, 127, 127, 0.05)" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 4. Floating Kinetic Rings (Bottom Left) — slow rotation */}
+      <motion.div 
+        style={{ y: yFloat4 }}
         animate={{ 
           rotate: 360,
           scale: [1, 1.05, 1]
@@ -92,7 +195,7 @@ export default function MovementPage() {
           repeat: Infinity, 
           ease: "linear" 
         }}
-        className="absolute top-[25%] right-[-5%] w-72 h-72 opacity-10 pointer-events-none z-0"
+        className="absolute bottom-24 left-[-4%] w-64 h-64 pointer-events-none opacity-10 md:opacity-20 z-0"
       >
         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <circle cx="100" cy="100" r="80" stroke="#2A7F7F" strokeWidth="1.5" strokeDasharray="5 5" />

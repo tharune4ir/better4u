@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { 
   Wrench, 
   Home, 
@@ -33,6 +33,12 @@ function HomeOSContent() {
   const [filter, setFilter] = useState<"all" | "handyman" | "kitchen" | "runway-admin">("all");
   const [activeProductId, setActiveProductId] = useState<string>("p1");
   const [activeNavTab, setActiveNavTab] = useState<NavTab>("home-os");
+
+  // Parallax scroll logic for Seamless Weave floating SVGs
+  const { scrollYProgress } = useScroll();
+  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, -110]);
+  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, 130]);
+  const yFloat3 = useTransform(scrollYProgress, [0, 1], [0, -70]);
 
   // Home OS Vision Board state (4 markers)
   const [homeMarkers, setHomeMarkers] = useState<boolean[]>(new Array(4).fill(false));
@@ -92,9 +98,103 @@ function HomeOSContent() {
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden">
       
-      {/* Background Glows */}
+      {/* ================= BACKGROUND DECORATIONS & FLOATING CUTOUTS (SEAMLESS WEAVE) ================= */}
+      {/* Ambient Glows */}
       <div className="absolute top-[15%] left-[-10%] w-[35vw] h-[35vw] bg-[#2A7F7F]/4 rounded-full blur-[135px] pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[40vw] h-[40vw] bg-[#2A7F7F]/4 rounded-full blur-[140px] pointer-events-none" />
+
+      {/* 1. Architectural Blueprint Archway (Top Right) */}
+      <motion.div 
+        style={{ y: yFloat1 }}
+        className="absolute top-16 right-[-5%] w-64 h-72 pointer-events-none opacity-20 md:opacity-30 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.25 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[1px]">
+          {/* Arch */}
+          <path 
+            d="M40,220 L40,100 A60,60 0 0,1 160,100 L160,220" 
+            stroke="url(#arch-grad)" 
+            strokeWidth="2" 
+            fill="none"
+          />
+          {/* Keystone */}
+          <rect x="92" y="38" width="16" height="12" rx="2" fill="#2A7F7F" opacity="0.3" />
+          {/* Column bases */}
+          <rect x="30" y="215" width="20" height="8" rx="2" fill="#2A7F7F" opacity="0.25" />
+          <rect x="150" y="215" width="20" height="8" rx="2" fill="#2A7F7F" opacity="0.25" />
+          {/* Blueprint cross lines */}
+          <line x1="40" y1="140" x2="160" y2="140" stroke="#2A7F7F" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.15" />
+          <line x1="40" y1="180" x2="160" y2="180" stroke="#2A7F7F" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.15" />
+          <line x1="100" y1="45" x2="100" y2="220" stroke="#2A7F7F" strokeWidth="0.5" strokeDasharray="6 4" opacity="0.1" />
+          <defs>
+            <linearGradient id="arch-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#2A7F7F" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#5EEAD4" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#2A7F7F" stopOpacity="0.5" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 2. System Gear Node (Left - Mid Page) */}
+      <motion.div 
+        style={{ y: yFloat2 }}
+        className="absolute top-[40%] left-[-7%] w-64 h-64 pointer-events-none opacity-15 md:opacity-25 z-0"
+        animate={{ 
+          rotate: 360 
+        }}
+        transition={{ 
+          duration: 30, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          {/* Gear teeth (simplified) */}
+          <path 
+            d="M100,15 L108,35 L92,35 Z M100,185 L108,165 L92,165 Z M15,100 L35,108 L35,92 Z M185,100 L165,108 L165,92 Z M32,32 L50,45 L45,50 Z M168,32 L150,45 L155,50 Z M32,168 L50,155 L45,150 Z M168,168 L150,155 L155,150 Z" 
+            fill="#2A7F7F" 
+            opacity="0.25"
+          />
+          {/* Outer ring */}
+          <circle cx="100" cy="100" r="65" stroke="#2A7F7F" strokeWidth="2" opacity="0.2" />
+          {/* Inner ring */}
+          <circle cx="100" cy="100" r="40" stroke="#2A7F7F" strokeWidth="1.5" opacity="0.15" />
+          {/* Core */}
+          <circle cx="100" cy="100" r="18" fill="url(#gear-core)" />
+          <defs>
+            <radialGradient id="gear-core" cx="45%" cy="45%" r="55%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
+              <stop offset="100%" stopColor="rgba(42, 127, 127, 0.12)" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </motion.div>
+
+      {/* 3. Blueprint Grid Lines (Bottom Right) */}
+      <motion.div 
+        style={{ y: yFloat3 }}
+        className="absolute bottom-32 right-[-3%] w-56 h-56 pointer-events-none opacity-10 md:opacity-20 z-0"
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter blur-[0.5px]">
+          {/* Grid lines */}
+          <line x1="0" y1="40" x2="200" y2="40" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.3" />
+          <line x1="0" y1="80" x2="200" y2="80" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.25" />
+          <line x1="0" y1="120" x2="200" y2="120" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.3" />
+          <line x1="0" y1="160" x2="200" y2="160" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.25" />
+          <line x1="40" y1="0" x2="40" y2="200" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.25" />
+          <line x1="80" y1="0" x2="80" y2="200" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.3" />
+          <line x1="120" y1="0" x2="120" y2="200" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.25" />
+          <line x1="160" y1="0" x2="160" y2="200" stroke="#2A7F7F" strokeWidth="0.5" opacity="0.3" />
+          {/* Accent nodes at intersections */}
+          <circle cx="80" cy="80" r="3" fill="#2A7F7F" opacity="0.25" />
+          <circle cx="120" cy="120" r="3" fill="#2A7F7F" opacity="0.25" />
+          <circle cx="80" cy="160" r="2.5" fill="#2A7F7F" opacity="0.2" />
+          <circle cx="160" cy="80" r="2.5" fill="#2A7F7F" opacity="0.2" />
+        </svg>
+      </motion.div>
 
       {/* Navigation */}
       <Navbar activeTab={activeNavTab} setActiveTab={handleTabChange} />
