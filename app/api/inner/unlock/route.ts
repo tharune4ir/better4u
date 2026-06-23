@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * Handles the lock check for the Phase 3 private inner room.
+ * Compares the client-submitted password with process.env.INNER_PASSWORD
+ * and sets an httpOnly session cookie if authenticated.
+ */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
