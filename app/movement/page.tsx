@@ -742,33 +742,33 @@ export default function MovementPage() {
             </div>
 
             {/* Step Breakdown Card */}
-            <div className="glassmorphic rounded-3xl p-6">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F] mb-1">
+            <div className="glassmorphic rounded-3xl p-6 sm:p-7">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F] mb-1.5">
                 Active Step Protocol
               </h4>
-              <h3 className="text-sm font-semibold text-slate-900 mb-3">
+              <h3 className="text-lg font-semibold text-slate-900 mb-3">
                 {activeStep.partTitle}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed mb-4">
+              <p className="text-sm text-slate-500 font-light leading-relaxed mb-5">
                 {activeStep.description}
               </p>
 
-              <div className="border-t border-black/[0.03] pt-4 flex flex-col gap-3">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+              <div className="border-t border-black/[0.03] pt-5 flex flex-col gap-3.5">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                   Target Movements
                 </span>
                 
-                <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
+                <div className="flex flex-col gap-5 max-h-[300px] overflow-y-auto pr-1">
                   {activeStep.exercises.map((ex, idx) => (
-                    <div key={idx} className="flex flex-col gap-0.5">
-                      <span className="text-sm font-bold text-slate-800 flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-[#2A7F7F]" />
+                    <div key={idx} className="flex flex-col gap-1.5 pb-4 border-b border-black/[0.03] last:border-0 last:pb-0">
+                      <span className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F]" />
                         {ex.name}
                       </span>
-                      <span className="text-xs text-slate-500 font-light leading-snug">
+                      <span className="text-sm text-slate-500 font-light leading-relaxed pl-3">
                         {ex.details}
                       </span>
-                      <span className="text-xs text-[#2A7F7F] font-medium leading-none italic mt-0.5">
+                      <span className="text-sm text-[#2A7F7F] font-semibold italic mt-1 pl-3 leading-relaxed">
                         Regression: {ex.regression}
                       </span>
                     </div>
@@ -784,14 +784,16 @@ export default function MovementPage() {
         <div className="glassmorphic rounded-3xl p-6 sm:p-8 mb-12 relative overflow-hidden">
           <div className="absolute top-[-20%] left-[-10%] w-48 h-48 bg-[#2A7F7F]/5 rounded-full blur-3xl pointer-events-none" />
           
-          <div className="mb-6">
-            <h3 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-1.5">
-              Home Strength Progression Ladder
-              <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+          <div className="mb-6 flex flex-col gap-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-950">
+                Home Strength Progression Ladder
+              </h3>
+              <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded">
                 Calisthenics
               </span>
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400 font-light mt-0.5">
+            </div>
+            <p className="text-sm text-slate-500 font-light mt-1.5 leading-relaxed">
               A structured home progression framework across 6 key movement patterns. Master each level before advancing.
             </p>
           </div>
@@ -802,7 +804,7 @@ export default function MovementPage() {
               <button
                 key={pattern}
                 onClick={() => setActiveLadderPattern(pattern)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium tracking-wide transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-sm font-semibold tracking-wide transition-all cursor-pointer ${
                   activeLadderPattern === pattern
                     ? "bg-[#2A7F7F] text-white shadow-sm"
                     : "bg-white/60 border border-black/[0.03] text-slate-600 hover:bg-white"
@@ -875,19 +877,19 @@ export default function MovementPage() {
             ).map((step, index) => (
               <div 
                 key={index} 
-                className="bg-white/50 border border-black/[0.02] rounded-2xl p-4.5 space-y-2 flex flex-col justify-between"
+                className="bg-white/50 border border-black/[0.02] rounded-2xl p-5 space-y-3.5 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-extrabold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
                       {step.level}
                     </span>
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                       Step {index + 1}
                     </span>
                   </div>
-                  <h4 className="text-sm font-semibold text-slate-900 mt-2">{step.name}</h4>
-                  <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                  <h4 className="text-base font-bold text-slate-950 mt-3">{step.name}</h4>
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mt-2">
                     {step.detail}
                   </p>
                 </div>
