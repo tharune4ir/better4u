@@ -3,16 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { 
-  Sparkles, 
   Apple, 
   Activity, 
   BrainCircuit, 
-  Compass, 
   Sparkle
 } from "lucide-react";
 
-export type NavTab = "nutrition" | "movement" | "thinking" | "home-os" | "visionary";
+export type NavTab = "food" | "movement" | "thinking";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -20,6 +19,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
+  const router = useRouter();
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -39,18 +39,16 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { id: "nutrition" as NavTab, label: "Nutrition", sub: "Gut", icon: Apple },
-    { id: "movement" as NavTab, label: "Movement", sub: "Body", icon: Activity },
-    { id: "thinking" as NavTab, label: "Thinking", sub: "Mind", icon: BrainCircuit },
-    { id: "home-os" as NavTab, label: "Home OS", sub: "Core", icon: Compass },
-    { id: "visionary" as NavTab, label: "Visionary", sub: "Future", icon: Sparkles },
+    { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
+    { id: "movement" as NavTab, label: "Movement", sub: "Build", icon: Activity },
+    { id: "thinking" as NavTab, label: "Thinking", sub: "Rest", icon: BrainCircuit },
   ];
 
   return (
     <>
       {/* ==================== 1. MOBILE TOP HEADER (Branding & Clock) ==================== */}
       <header className="flex md:hidden items-center justify-between px-6 h-16 bg-[#F7F6F2]/80 backdrop-blur-md border-b border-black/[0.03] sticky top-0 z-40 select-none">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActiveTab("home-os")}>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => router.push("/")}>
           <div className="relative w-9 h-9 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"
@@ -80,8 +78,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className="flex-1 h-full flex flex-col justify-center items-center min-h-[44px] cursor-pointer relative"
-              style={{ minHeight: "48px" }} // Exceeds iOS 44px tap target requirements
+              className="flex-1 h-full flex flex-col justify-center items-center min-h-[48px] cursor-pointer relative"
             >
               <div className={`p-1 rounded-full transition-all duration-300 ${
                 isActive ? "text-[#2A7F7F] scale-110" : "text-slate-400"
@@ -109,7 +106,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
       {/* ==================== 3. DESKTOP STICKY TOP NAV BAR ==================== */}
       <header className="hidden md:flex sticky top-0 z-40 w-full h-20 border-b border-black/[0.03] bg-[#F7F6F2]/75 backdrop-blur-md items-center justify-between px-12 select-none">
         {/* Brand Logo */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab("home-os")}>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
           <div className="relative w-11 h-11 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"

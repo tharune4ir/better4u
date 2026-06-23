@@ -14,7 +14,12 @@ import {
   BookOpen,
   HelpCircle,
   Quote,
-  Check
+  Check,
+  Compass,
+  Shuffle,
+  Volume2,
+  Moon,
+  Coffee
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { 
@@ -22,6 +27,31 @@ import {
   VOICE_SECTIONS, 
   NEUROPLASTICITY_SUMMARY 
 } from "@/lib/mind-data";
+
+const CURIOSITY_OS_PRINCIPLES = [
+  { id: 1, title: "Let interest guide", detail: "Ignore pre-made syllabi. Learn what you are naturally drawn to in the moment." },
+  { id: 2, title: "Define what you're building", detail: "Never learn in the abstract. Always have a specific project (app, note, design) you are constructing." },
+  { id: 3, title: "One project at a time", detail: "Multi-tasking is structural dilution. Select one project, run it to completion, then switch." },
+  { id: 4, title: "Hunt, don't hoard", detail: "Stop compiling endless bookmarks and PDFs. Find the exact resource needed for your current block, consume it, and build immediately." },
+  { id: 5, title: "30–90 min deep blocks", detail: "Protect short, high-fidelity focus blocks. Multi-hour sessions lead to fatigue and shallow learning." },
+  { id: 6, title: "Compress what you learn", detail: "Synthesize. Boil pages of notes down into a single card or schematic. If you cannot compress it, you do not understand it." },
+  { id: 7, title: "Iterate against reality", detail: "Publish, test, or get feedback. A model tested against the real world will expose its flaws in minutes." }
+];
+
+const LANTERN_STATIONS = [
+  { id: 1, title: "Observe without labeling", detail: "Quiet the automatic judgment engine. Look at raw data and behaviors before assigning categories like 'good' or 'bad'." },
+  { id: 2, title: "Precision in Language", detail: "Banish vague placeholders like 'fine', 'busy', or 'stuff'. Use precise words to pinpoint your physical and emotional reality." },
+  { id: 3, title: "The Reality Check", detail: "Write down your core assumptions. Periodically measure them against physical metrics to correct cognitive drift." }
+];
+
+const DAILY_THINKING_REPS = [
+  "If you were guaranteed to fail at your current project, how would it happen? (Inversion principle)",
+  "What is one belief you held for years that you recently discarded? What updated your view?",
+  "Look at your biggest current problem. How would you solve it if you had only $10 or 1 hour?",
+  "Are you currently solving the real problem, or just a comfortable proxy to feel productive?",
+  "Write down the next decision you need to make. What is its second-order consequence? And then what?",
+  "What is the most direct, honest truth about your current situation that you are avoiding?"
+];
 
 const MIND_VISION_MARKERS = [
   { label: "First Principles: drill down to core truths before forming opinions", type: "mental" },
@@ -60,6 +90,13 @@ export default function ThinkingPage() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
+  // Rest Timer (Do Nothing Break)
+  const [restTimeLeft, setRestTimeLeft] = useState(300);
+  const [isRestTimerRunning, setIsRestTimerRunning] = useState(false);
+
+  // Daily Reps State
+  const [currentThinkingRepIdx, setCurrentThinkingRepIdx] = useState(0);
+
   // Clarity States
   const [clarityText, setClarityText] = useState("");
   const [clarityValue, setClarityValue] = useState(7);
@@ -82,15 +119,28 @@ export default function ThinkingPage() {
     };
   }, [isTimerRunning, timeLeft]);
 
+  // Rest Timer Tick
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isRestTimerRunning && restTimeLeft > 0) {
+      interval = setInterval(() => {
+        setRestTimeLeft(prev => prev - 1);
+      }, 1000);
+    } else if (restTimeLeft === 0) {
+      setIsRestTimerRunning(false);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRestTimerRunning, restTimeLeft]);
+
   const handleTabChange = (tab: NavTab) => {
-    if (tab === "nutrition") {
-      router.push("/nutrition");
-    } else if (tab === "movement") {
+    if (tab === "movement") {
       router.push("/movement");
-    } else if (tab === "home-os") {
-      router.push("/home");
-    } else if (tab === "visionary") {
-      router.push("/home?section=visionary");
+    } else if (tab === "thinking") {
+      router.push("/thinking");
+    } else if (tab === "food") {
+      router.push("/food");
     }
   };
 
@@ -107,6 +157,15 @@ export default function ThinkingPage() {
   const resetTimer = () => {
     setIsTimerRunning(false);
     setTimeLeft(25 * 60);
+  };
+
+  const toggleRestTimer = () => {
+    setIsRestTimerRunning(!isRestTimerRunning);
+  };
+
+  const resetRestTimer = () => {
+    setIsRestTimerRunning(false);
+    setRestTimeLeft(300);
   };
 
   // Circular SVG Progress calculation
@@ -665,6 +724,39 @@ export default function ThinkingPage() {
           </p>
         </motion.div>
 
+        {/* ==================== CURIOSITY OS (HOW TO LEARN) ==================== */}
+        <div className="mb-16">
+          <div className="mb-8">
+            <h2 className="text-lg font-light text-slate-900">
+              Curiosity OS <span className="font-semibold text-slate-950">Learning Principles</span>
+            </h2>
+            <p className="text-[10px] text-slate-400 font-light mt-0.5">
+              The 7 pillars of efficient self-education. Let interest guide and iterate against reality.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {CURIOSITY_OS_PRINCIPLES.map((p) => (
+              <div 
+                key={p.id}
+                className="bg-white/50 border border-black/[0.02] rounded-2xl p-5 flex flex-col justify-between hover:border-[#2A7F7F]/20 transition-all duration-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                      0{p.id}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-semibold text-slate-900 mt-3">{p.title}</h4>
+                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-2">
+                    {p.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ==================== THE VOICE MASTERCLASS ==================== */}
         <div className="mb-6">
           <div className="mb-8">
@@ -721,11 +813,114 @@ export default function ThinkingPage() {
           </div>
         </div>
 
+        {/* ==================== VOCABULARY & RESOLUTION (LANTERN STATIONS) ==================== */}
+        <div className="mb-16 mt-12 border-t border-black/[0.03] pt-12">
+          <div className="mb-8">
+            <h2 className="text-lg font-light text-slate-900">
+              Vocabulary & <span className="font-semibold text-slate-950">Resolution</span>
+            </h2>
+            <p className="text-[10px] text-slate-400 font-light mt-0.5">
+              Clarity is higher resolution. Calibrate your lens through these three lantern stations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {LANTERN_STATIONS.map((station) => (
+              <div 
+                key={station.id}
+                className="bg-white/50 border border-black/[0.02] rounded-2xl p-5 hover:border-[#2A7F7F]/20 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                      Station 0{station.id}
+                    </span>
+                    <Compass className="w-4 h-4 text-[#2A7F7F]" />
+                  </div>
+                  <h4 className="text-xs font-semibold text-slate-900">{station.title}</h4>
+                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-2">
+                    {station.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ==================== THE REST CORNER & DAILY REP ==================== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 border-t border-black/[0.03] pt-12">
+          
+          {/* Do Nothing Corner */}
+          <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+                  The Rest / Do-Nothing Corner
+                </span>
+                <Moon className="w-4 h-4 text-[#2A7F7F]" />
+              </div>
+              <h4 className="text-xs font-semibold text-slate-900">Boredom-on-Purpose</h4>
+              <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-1">
+                Train your brain to sit with zero inputs (no screen, no text, no audio) for 5 minutes. Protect empty buffers.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between mt-4 bg-black/[0.01] p-3 rounded-2xl border border-black/[0.01]">
+              <div className="flex flex-col">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Countdown</span>
+                <span className="text-base font-semibold text-slate-900 tabular-nums">
+                  {formatTime(restTimeLeft)}
+                </span>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={toggleRestTimer}
+                  className="px-4 py-1.5 rounded-xl bg-[#2A7F7F] text-white text-[10px] font-semibold hover:bg-[#1e5c5c] transition-colors cursor-pointer"
+                >
+                  {isRestTimerRunning ? "Pause" : "Start Break"}
+                </button>
+                <button
+                  onClick={resetRestTimer}
+                  className="p-1.5 rounded-xl bg-slate-200/60 text-slate-600 hover:bg-slate-200 transition-all cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Daily Thinking Rep */}
+          <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+                  Daily Thinking Rep
+                </span>
+                <Shuffle className="w-4 h-4 text-[#2A7F7F]" />
+              </div>
+              <h4 className="text-xs font-semibold text-slate-900">Logical Sanity Check</h4>
+              <p className="text-[11px] text-[#2A7F7F] italic leading-relaxed mt-3">
+                "{DAILY_THINKING_REPS[currentThinkingRepIdx]}"
+              </p>
+            </div>
+
+            <button
+              onClick={() => setCurrentThinkingRepIdx((prev) => (prev + 1) % DAILY_THINKING_REPS.length)}
+              className="w-full py-2.5 mt-4 rounded-xl border border-black/[0.04] bg-white/40 hover:bg-white text-[10px] font-semibold text-slate-700 tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <Shuffle className="w-3 h-3 text-[#2A7F7F]" />
+              Draw Another Rep
+            </button>
+          </div>
+
+        </div>
+
       </main>
 
       {/* Simple Footer */}
       <footer className="w-full text-center py-8 pb-28 md:pb-8 text-[10px] tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
-        TRELIS LIFE SYSTEM • VER 4.0 • CRAFTED FOR STEADY PROGRESS
+        BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>
   );

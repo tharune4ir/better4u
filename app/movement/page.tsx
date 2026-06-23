@@ -60,15 +60,15 @@ export default function MovementPage() {
     });
   };
   
+  const [activeLadderPattern, setActiveLadderPattern] = useState<string>("Squat");
+
   const handleTabChange = (tab: NavTab) => {
-    if (tab === "nutrition") {
-      router.push("/nutrition");
+    if (tab === "movement") {
+      router.push("/movement");
     } else if (tab === "thinking") {
       router.push("/thinking");
-    } else if (tab === "home-os") {
-      router.push("/home");
-    } else if (tab === "visionary") {
-      router.push("/home?section=visionary");
+    } else if (tab === "food") {
+      router.push("/food");
     }
   };
 
@@ -780,6 +780,122 @@ export default function MovementPage() {
           </div>
         </div>
 
+        {/* ==================== HOME STRENGTH PROGRESSION LADDER ==================== */}
+        <div className="glassmorphic rounded-3xl p-6 sm:p-8 mb-12 relative overflow-hidden">
+          <div className="absolute top-[-20%] left-[-10%] w-48 h-48 bg-[#2A7F7F]/5 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="mb-6">
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-1.5">
+              Home Strength Progression Ladder
+              <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                Calisthenics
+              </span>
+            </h3>
+            <p className="text-[10px] sm:text-xs text-slate-400 font-light mt-0.5">
+              A structured home progression framework across 6 key movement patterns. Master each level before advancing.
+            </p>
+          </div>
+
+          {/* Pattern Tabs */}
+          <div className="flex flex-wrap gap-1 border-b border-black/[0.03] pb-3.5 mb-6">
+            {["Squat", "Push", "Pull", "Hinge", "Carry", "Core"].map((pattern) => (
+              <button
+                key={pattern}
+                onClick={() => setActiveLadderPattern(pattern)}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-medium tracking-wide transition-all cursor-pointer ${
+                  activeLadderPattern === pattern
+                    ? "bg-[#2A7F7F] text-white shadow-sm"
+                    : "bg-white/60 border border-black/[0.03] text-slate-600 hover:bg-white"
+                }`}
+              >
+                {pattern}
+              </button>
+            ))}
+          </div>
+
+          {/* Ladder Steps */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {(
+              [
+                {
+                  pattern: "Squat",
+                  steps: [
+                    { level: "L1", name: "Chair / Box Squat", detail: "Squat down onto a chair with control, tap, and stand up. Keep heels flat." },
+                    { level: "L2", name: "Assisted Deep Squat", detail: "Hold onto a door frame or sturdy table, sit all the way down, heels flat." },
+                    { level: "L3", name: "Bodyweight Squat", detail: "Squat below parallel with zero assistance, maintaining upright chest." },
+                    { level: "L4", name: "Loaded Squat", detail: "Squat under external load (goblet position or holding mudgar/gada)." }
+                  ]
+                },
+                {
+                  pattern: "Push",
+                  steps: [
+                    { level: "L1", name: "Wall / Counter Push-up", detail: "Elevated hands push-up against a wall or counter. Keep rigid plank." },
+                    { level: "L2", name: "Knee Push-up", detail: "Perform push-ups with knees on the floor, chest touching ground." },
+                    { level: "L3", name: "Flat Floor Push-up", detail: "Strict flat floor push-up. Elbows at 45 degrees, body in line." },
+                    { level: "L4", name: "Archer / Weighted Push-up", detail: "Uneven push-ups or holding weight plate on back." }
+                  ]
+                },
+                {
+                  pattern: "Pull",
+                  steps: [
+                    { level: "L1", name: "Doorframe Row", detail: "Hold door frame with hands, lean back, and pull chest to frame." },
+                    { level: "L2", name: "Table / Band Row", detail: "Lie under sturdy table to pull up, or pull heavy resistance bands." },
+                    { level: "L3", name: "Passive & Active Hang", detail: "Hang from pull-up bar. Dead hang for grip, active hang for scapula." },
+                    { level: "L4", name: "Strict Pull-up", detail: "Pull from dead hang until chin clears the bar with no kipping." }
+                  ]
+                },
+                {
+                  pattern: "Hinge",
+                  steps: [
+                    { level: "L1", name: "Wall Hip Hinge", detail: "Stand 1 foot from wall, push hips back until they tap wall. Soft knees." },
+                    { level: "L2", name: "Double-Leg Glute Bridge", detail: "Lie on floor, drive heels down to lift hips. Squeeze glutes." },
+                    { level: "L3", name: "Single-Leg Glute Bridge", detail: "Bridge with one leg lifted, keeping hips perfectly level." },
+                    { level: "L4", name: "Single-Leg Romanian Deadlift", detail: "Hinge on one leg holding a mudgar/kettlebell, hips square." }
+                  ]
+                },
+                {
+                  pattern: "Carry",
+                  steps: [
+                    { level: "L1", name: "Double-Hand Suitcase Carry", detail: "Walk holding moderate weights in both hands. Shoulders back." },
+                    { level: "L2", name: "Single-Hand Suitcase Carry", detail: "Carry weight in one hand only. Walk straight, don't tilt." },
+                    { level: "L3", name: "Front Rack Carry", detail: "Clean and hold mudgar/kettlebell at chest level, walk tall." },
+                    { level: "L4", name: "Overhead Carry", detail: "Lock weight out overhead. Walk with active shoulder stabilization." }
+                  ]
+                },
+                {
+                  pattern: "Core",
+                  steps: [
+                    { level: "L1", name: "Knee Plank / Deadbug", detail: "Brace core on knees or lie down and extend opposite arm/leg." },
+                    { level: "L2", name: "Full Forearm Plank", detail: "Hold straight plank, squeeze glutes and abs, round upper back." },
+                    { level: "L3", name: "Hollow Body Hold", detail: "Lie on back, lift shoulder blades & feet, press lower back into floor." },
+                    { level: "L4", name: "L-Sit Hang", detail: "Hang on bar, lift legs straight to 90 degrees and hold." }
+                  ]
+                }
+              ].find((l) => l.pattern === activeLadderPattern)?.steps || []
+            ).map((step, index) => (
+              <div 
+                key={index} 
+                className="bg-white/50 border border-black/[0.02] rounded-2xl p-4.5 space-y-2 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                      {step.level}
+                    </span>
+                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+                      Step {index + 1}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-semibold text-slate-900 mt-2">{step.name}</h4>
+                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-1">
+                    {step.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ==================== ANCIENT SIMPLE TOOLS SECTION ==================== */}
         <div className="glassmorphic rounded-3xl p-6 sm:p-8 relative overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-48 h-48 bg-[#2A7F7F]/5 rounded-full blur-3xl pointer-events-none" />
@@ -840,7 +956,7 @@ export default function MovementPage() {
 
       {/* Simple Footer */}
       <footer className="w-full text-center py-8 pb-28 md:pb-8 text-[10px] tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
-        TRELIS LIFE SYSTEM • VER 4.0 • CRAFTED FOR STEADY PROGRESS
+        BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>
   );
