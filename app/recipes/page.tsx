@@ -604,7 +604,7 @@ export default function RecipesPage() {
               placeholder="Search recipes, ingredients, tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-white/60 backdrop-blur-sm border border-black/[0.04] rounded-2xl text-base font-light text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2A7F7F]/40 focus:bg-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
+              className="w-full pl-11 pr-4 py-3 bg-white/60 backdrop-blur-sm border border-black/[0.04] rounded-2xl text-sm font-light text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2A7F7F]/40 focus:bg-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
             />
           </div>
 
@@ -669,7 +669,7 @@ export default function RecipesPage() {
                   <h3 className="text-base font-semibold text-slate-900 mb-2.5">
                     {recipe.title} {recipe.comingSoon && <span className="text-sm font-normal text-amber-600">(Soon)</span>}
                   </h3>
-                  <p className="text-base text-slate-500 font-light leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-4 line-clamp-2">
                     {recipe.ingredients.slice(0, 3).join(", ")}...
                   </p>
                 </div>
@@ -694,7 +694,7 @@ export default function RecipesPage() {
 
         {filteredRecipes.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-base text-slate-400 font-light">No recipes found matching your query.</p>
+            <p className="text-sm text-slate-405 font-light">No recipes found matching your query.</p>
           </div>
         )}
       </main>
@@ -735,7 +735,7 @@ export default function RecipesPage() {
                   onClick={() => setSelectedRecipe(null)}
                   className="p-1.5 rounded-full hover:bg-slate-200/50 transition-colors"
                 >
-                  <X className="w-4 h-4 text-slate-500" />
+                  <X className="w-4 h-4 text-slate-505" />
                 </button>
               </div>
 
@@ -756,7 +756,7 @@ export default function RecipesPage() {
                   <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-6 text-center">
                     <AlertTriangle className="w-8 h-8 text-amber-500 mx-auto mb-3" />
                     <h4 className="text-base font-bold text-slate-800 uppercase tracking-wider">Formula Under Active Testing</h4>
-                    <p className="text-base text-slate-500 font-light mt-1.5 max-w-sm mx-auto leading-relaxed">
+                    <p className="text-sm text-slate-500 font-light mt-1.5 max-w-sm mx-auto leading-relaxed">
                       We are currently tuning hydration ratios and fermentation times for this live prebiotic culture. Draft will unlock in the next system push.
                     </p>
                   </div>
@@ -771,7 +771,7 @@ export default function RecipesPage() {
                         </h4>
                         <ul className="space-y-2">
                           {selectedRecipe.ingredients.map((ing, i) => (
-                            <li key={i} className="text-base text-slate-700 font-light leading-relaxed flex items-start gap-1.5">
+                            <li key={i} className="text-sm text-slate-700 font-light leading-relaxed flex items-start gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F]/30 mt-1.5 flex-shrink-0" />
                               <span>{ing}</span>
                             </li>
@@ -786,8 +786,8 @@ export default function RecipesPage() {
                         </h4>
                         <ol className="space-y-3">
                           {selectedRecipe.steps.map((step, i) => (
-                            <li key={i} className="text-base text-slate-700 font-light leading-relaxed flex items-start gap-2.5">
-                              <span className="font-semibold text-[#2A7F7F] text-base w-4 flex-shrink-0">
+                            <li key={i} className="text-sm text-slate-700 font-light leading-relaxed flex items-start gap-2.5">
+                              <span className="font-semibold text-[#2A7F7F] text-sm w-4 flex-shrink-0">
                                 {i + 1}.
                               </span>
                               <span>{step}</span>
@@ -806,7 +806,7 @@ export default function RecipesPage() {
                               <Eye className="w-3.5 h-3.5 text-slate-400" />
                               Sensory Cues
                             </h5>
-                            <p className="text-base text-slate-600 font-light leading-relaxed">
+                            <p className="text-sm text-slate-600 font-light leading-relaxed">
                               {selectedRecipe.sensoryCues}
                             </p>
                           </div>
@@ -817,7 +817,7 @@ export default function RecipesPage() {
                               <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
                               If it goes wrong
                             </h5>
-                            <p className="text-base text-amber-800 font-light leading-relaxed">
+                            <p className="text-sm text-amber-800 font-light leading-relaxed">
                               {selectedRecipe.troubleshooting}
                             </p>
                           </div>
@@ -834,7 +834,7 @@ export default function RecipesPage() {
                         <h5 className="text-sm font-bold text-[#2A7F7F] uppercase tracking-widest mb-1">
                           Why this heals
                         </h5>
-                        <p className="text-base text-[#2A7F7F] font-medium leading-relaxed italic">
+                        <p className="text-sm text-[#2A7F7F] font-medium leading-relaxed italic">
                           "{selectedRecipe.whyHeals}"
                         </p>
                       </div>
