@@ -64,7 +64,7 @@ export default function InnerFamilyPage() {
       </header>
 
       {/* Inner Nav Tabs */}
-      <div className="flex items-center gap-2 px-6 py-3 border-b border-black/[0.03] bg-white/20 select-none">
+      <div className="flex items-center gap-2 px-6 py-3 border-b border-black/[0.03] bg-white/20 select-none overflow-x-auto whitespace-nowrap scrollbar-none">
         <button
           className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg bg-[#2A7F7F]/10 text-[#2A7F7F] border border-[#2A7F7F]/10 cursor-pointer"
         >
@@ -81,6 +81,12 @@ export default function InnerFamilyPage() {
           className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
         >
           Presentation
+        </button>
+        <button
+          onClick={() => router.push("/inner/thinking")}
+          className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+        >
+          Thinking
         </button>
       </div>
 

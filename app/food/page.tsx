@@ -99,7 +99,7 @@ export default function FoodPage() {
     if (tab === "movement") {
       router.push("/movement");
     } else if (tab === "thinking") {
-      router.push("/thinking");
+      router.push("/inner/thinking");
     } else if (tab === "food") {
       router.push("/food");
     }

@@ -14,7 +14,9 @@ import {
   Flame, 
   Waves,
   RefreshCw,
-  Dumbbell
+  Dumbbell,
+  Moon,
+  RotateCcw
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { 
@@ -41,6 +43,40 @@ export default function MovementPage() {
   const router = useRouter();
   const [activeStepId, setActiveStepId] = useState<string>("joints");
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
+
+  // Rest Timer (Do Nothing Break) / Boredom on Purpose
+  const [restTimeLeft, setRestTimeLeft] = useState(300);
+  const [isRestTimerRunning, setIsRestTimerRunning] = useState(false);
+
+  // Rest Timer Tick
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isRestTimerRunning && restTimeLeft > 0) {
+      interval = setInterval(() => {
+        setRestTimeLeft(prev => prev - 1);
+      }, 1000);
+    } else if (restTimeLeft === 0) {
+      setIsRestTimerRunning(false);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRestTimerRunning, restTimeLeft]);
+
+  const toggleRestTimer = () => {
+    setIsRestTimerRunning(!isRestTimerRunning);
+  };
+
+  const resetRestTimer = () => {
+    setIsRestTimerRunning(false);
+    setRestTimeLeft(300);
+  };
+
+  const formatRestTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
   
   // Parallax scroll logic for Seamless Weave floating SVGs
   const { scrollYProgress } = useScroll();
@@ -66,7 +102,7 @@ export default function MovementPage() {
     if (tab === "movement") {
       router.push("/movement");
     } else if (tab === "thinking") {
-      router.push("/thinking");
+      router.push("/inner/thinking");
     } else if (tab === "food") {
       router.push("/food");
     }
@@ -951,6 +987,129 @@ export default function MovementPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ==================== RECOVERY & REGULATION SECTION ==================== */}
+        <div className="glassmorphic rounded-3xl p-6 sm:p-8 relative overflow-hidden mb-12 border border-[#2A7F7F]/10 hover:border-[#2A7F7F]/20 transition-all duration-500 shadow-[0_8px_30px_rgb(42,127,127,0.01)] mt-12">
+          <div className="absolute top-[-20%] left-[-10%] w-48 h-48 bg-[#2A7F7F]/5 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="mb-8">
+            <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
+              <Waves className="w-3.5 h-3.5" />
+              Autopilot Engine
+            </span>
+            <h3 className="text-lg sm:text-2xl font-light text-slate-900">
+              Recovery & <span className="font-semibold text-slate-950">Regulation Protocols</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-400 font-light mt-1.5 leading-relaxed">
+              Recovery is not passive waiting; it is active adaptation. These protocols regulate your nervous system and rebuild cellular capability.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            {/* The protocols list */}
+            <div className="lg:col-span-2 flex flex-col gap-4">
+              {/* Protocol 1: Sleep */}
+              <div className="bg-white/40 border border-black/[0.02] hover:border-[#2A7F7F]/20 rounded-2xl p-5 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded mt-0.5">
+                    01
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 font-bold">Sleep & Tissue Repair</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                      Target 7–9 hours of dark, cold sleep. The ultimate performance enhancer. Growth hormone release peaks during deep slow-wave sleep, repairing physical micro-tears.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Protocol 2: Rest Days */}
+              <div className="bg-white/40 border border-black/[0.02] hover:border-[#2A7F7F]/20 rounded-2xl p-5 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded mt-0.5">
+                    02
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 font-bold">Structured Rest Days</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                      Training is stress; rest is when you build. Allow 1-2 days weekly with zero load-bearing calisthenics. Keep walking for active lymphatic drainage.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Protocol 3: Breathwork */}
+              <div className="bg-white/40 border border-black/[0.02] hover:border-[#2A7F7F]/20 rounded-2xl p-5 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded mt-0.5">
+                    03
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 font-bold">Vagal Breathwork (4-4-8)</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                      Inhale for 4 seconds, hold for 4 seconds, exhale slowly for 8 seconds. Repeating this 10 times signals safety to the amygdala and down-regulates cortisol.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Protocol 4: NSDR / Yoga-Nidra */}
+              <div className="bg-white/40 border border-black/[0.02] hover:border-[#2A7F7F]/20 rounded-2xl p-5 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded mt-0.5">
+                    04
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 font-bold">Non-Sleep Deep Rest (NSDR)</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                      A 20-minute guided relaxation or body scan to achieve high-level parasympathetic recovery. Restores baseline dopamine and clears brain fog without actual sleep.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Boredom/Meditation Timer (Do Nothing Corner) */}
+            <div className="bg-white/50 border border-[#2A7F7F]/15 rounded-2xl p-5 flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+              <div>
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F]">
+                    Boredom-On-Purpose
+                  </span>
+                  <Moon className="w-4 h-4 text-[#2A7F7F]" />
+                </div>
+                <h4 className="text-sm font-semibold text-slate-900">The Do-Nothing Corner</h4>
+                <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
+                  Train your brain to sit with zero inputs (no screen, no text, no audio) for 5 minutes. Clear the cognitive queue.
+                </p>
+              </div>
+
+              <div className="bg-[#2A7F7F]/5 p-4 rounded-xl border border-[#2A7F7F]/10 space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Countdown</span>
+                  <span className="text-sm font-bold text-slate-900 tabular-nums">
+                    {formatRestTime(restTimeLeft)}
+                  </span>
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={toggleRestTimer}
+                    className="flex-1 py-1.5 rounded-lg bg-[#2A7F7F] text-white text-[11px] font-bold hover:bg-[#1e5c5c] transition-colors cursor-pointer"
+                  >
+                    {isRestTimerRunning ? "Pause" : "Start"}
+                  </button>
+                  <button
+                    onClick={resetRestTimer}
+                    className="p-1.5 rounded-lg bg-slate-200/60 text-slate-600 hover:bg-slate-200 transition-all cursor-pointer flex items-center justify-center"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

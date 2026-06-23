@@ -21,7 +21,7 @@ import {
   Moon,
   Coffee
 } from "lucide-react";
-import Navbar, { NavTab } from "@/components/Navbar";
+
 import { 
   MENTAL_MODELS, 
   VOICE_SECTIONS, 
@@ -90,10 +90,6 @@ export default function ThinkingPage() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  // Rest Timer (Do Nothing Break)
-  const [restTimeLeft, setRestTimeLeft] = useState(300);
-  const [isRestTimerRunning, setIsRestTimerRunning] = useState(false);
-
   // Daily Reps State
   const [currentThinkingRepIdx, setCurrentThinkingRepIdx] = useState(0);
 
@@ -119,30 +115,9 @@ export default function ThinkingPage() {
     };
   }, [isTimerRunning, timeLeft]);
 
-  // Rest Timer Tick
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (isRestTimerRunning && restTimeLeft > 0) {
-      interval = setInterval(() => {
-        setRestTimeLeft(prev => prev - 1);
-      }, 1000);
-    } else if (restTimeLeft === 0) {
-      setIsRestTimerRunning(false);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isRestTimerRunning, restTimeLeft]);
 
-  const handleTabChange = (tab: NavTab) => {
-    if (tab === "movement") {
-      router.push("/movement");
-    } else if (tab === "thinking") {
-      router.push("/thinking");
-    } else if (tab === "food") {
-      router.push("/food");
-    }
-  };
+
+
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -159,14 +134,7 @@ export default function ThinkingPage() {
     setTimeLeft(25 * 60);
   };
 
-  const toggleRestTimer = () => {
-    setIsRestTimerRunning(!isRestTimerRunning);
-  };
 
-  const resetRestTimer = () => {
-    setIsRestTimerRunning(false);
-    setRestTimeLeft(300);
-  };
 
   // Circular SVG Progress calculation
   const totalSeconds = 25 * 60;
@@ -288,22 +256,50 @@ export default function ThinkingPage() {
         </svg>
       </motion.div>
 
-      {/* Navigation */}
-      <Navbar activeTab="thinking" setActiveTab={handleTabChange} />
+      {/* Inner Room Nav Header */}
+      <header className="flex items-center justify-between px-6 h-16 bg-[#F7F6F2]/85 backdrop-blur-md border-b border-black/[0.03] sticky top-0 z-40 select-none">
+        <button
+          onClick={() => router.push("/")}
+          className="flex items-center gap-2 text-xs font-semibold text-[#2A7F7F] hover:text-[#1e5c5c] transition-all cursor-pointer"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Public Layer
+        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-[9px] uppercase tracking-widest text-slate-500 font-medium">Inner Room</span>
+          <div className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F] animate-pulse" />
+        </div>
+      </header>
+
+      {/* Inner Nav Tabs */}
+      <div className="flex items-center gap-2 px-6 py-3 border-b border-black/[0.03] bg-white/20 select-none overflow-x-auto whitespace-nowrap scrollbar-none">
+        <button
+          onClick={() => router.push("/inner/family")}
+          className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+        >
+          Family & Home
+        </button>
+        <button
+          onClick={() => router.push("/inner/visionary")}
+          className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+        >
+          Visionary
+        </button>
+        <button
+          onClick={() => router.push("/inner/presentation")}
+          className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+        >
+          Presentation
+        </button>
+        <button
+          className="text-[10px] uppercase tracking-wider font-bold px-4 py-2 rounded-lg bg-[#2A7F7F]/10 text-[#2A7F7F] border border-[#2A7F7F]/10 cursor-pointer"
+        >
+          Thinking
+        </button>
+      </div>
 
       {/* ==================== MAIN CANVAS ==================== */}
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 pb-28 md:pb-16 z-10 relative">
-        
-        {/* Back Link for Desktop */}
-        <div className="hidden md:flex items-center mb-6">
-          <button 
-            onClick={() => router.push("/")}
-            className="flex items-center gap-2 text-sm font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home OS Dashboard
-          </button>
-        </div>
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-16 z-10 relative">
 
         {/* ==================== HERO HEADER ==================== */}
         <motion.div 
@@ -835,51 +831,10 @@ export default function ThinkingPage() {
           </div>
         </div>
 
-        {/* ==================== THE REST CORNER & DAILY REP ==================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 border-t border-black/[0.03] pt-12">
-          
-          {/* Do Nothing Corner */}
-          <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
-                  The Rest / Do-Nothing Corner
-                </span>
-                <Moon className="w-4 h-4 text-[#2A7F7F]" />
-              </div>
-              <h4 className="text-sm font-semibold text-slate-900">Boredom-on-Purpose</h4>
-              <p className="text-sm text-slate-500 font-light leading-relaxed mt-1">
-                Train your brain to sit with zero inputs (no screen, no text, no audio) for 5 minutes. Protect empty buffers.
-              </p>
-            </div>
-
-            <div className="flex items-center justify-between mt-4 bg-black/[0.01] p-3 rounded-2xl border border-black/[0.01]">
-              <div className="flex flex-col">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Countdown</span>
-                <span className="text-base font-semibold text-slate-900 tabular-nums">
-                  {formatTime(restTimeLeft)}
-                </span>
-              </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={toggleRestTimer}
-                  className="px-4 py-1.5 rounded-xl bg-[#2A7F7F] text-white text-xs font-semibold hover:bg-[#1e5c5c] transition-colors cursor-pointer"
-                >
-                  {isRestTimerRunning ? "Pause" : "Start Break"}
-                </button>
-                <button
-                  onClick={resetRestTimer}
-                  className="p-1.5 rounded-xl bg-slate-200/60 text-slate-600 hover:bg-slate-200 transition-all cursor-pointer"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          </div>
-
+        {/* ==================== DAILY REP ==================== */}
+        <div className="mb-16 mt-12 border-t border-black/[0.03] pt-12 flex justify-center">
           {/* Daily Thinking Rep */}
-          <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
+          <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px] w-full max-w-lg">
             <div>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
@@ -901,7 +856,6 @@ export default function ThinkingPage() {
               Draw Another Rep
             </button>
           </div>
-
         </div>
 
       </main>

@@ -52,16 +52,6 @@ export default function HomeHub() {
       icon: Activity,
       color: "from-blue-500/10 to-indigo-500/10",
       accent: "#3B82F6"
-    },
-    {
-      id: "thinking",
-      title: "Thinking",
-      sub: "Rest",
-      desc: "Cultivating mental clarity, logic-checking framework libraries, and high-fidelity speech mechanics.",
-      path: "/thinking",
-      icon: BrainCircuit,
-      color: "from-purple-500/10 to-pink-500/10",
-      accent: "#8B5CF6"
     }
   ];
 
@@ -113,12 +103,12 @@ export default function HomeHub() {
             Trelis Life Hub
           </span>
           <h1 className="text-xl sm:text-2xl md:text-3xl font-light text-slate-800 leading-relaxed tracking-wide px-2">
-            "I'm not an expert. I'm one ordinary person rebuilding himself — food, body, and mind — using what's already proven. <span className="font-semibold text-slate-950">This is me, showing my work.</span>"
+            "I'm not an expert. I'm one ordinary person rebuilding himself — body and food — using what's already proven. <span className="font-semibold text-slate-950">This is me, showing my work.</span>"
           </h1>
         </motion.div>
 
-        {/* 3 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+        {/* 2 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
           {cards.map((card, idx) => {
             const Icon = card.icon;
             return (
@@ -134,7 +124,7 @@ export default function HomeHub() {
                 {/* Background soft gradient based on card color */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none`} />
                 
-                {/* Animated vector motif representation instead of images that may not exist */}
+                {/* Animated vector motif representation */}
                 <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-10 group-hover:opacity-20 transition-all duration-500 transform group-hover:scale-110 pointer-events-none">
                   <Icon className="w-full h-full stroke-[1.2]" />
                 </div>
