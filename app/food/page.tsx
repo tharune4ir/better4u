@@ -168,7 +168,7 @@ export default function FoodPage() {
         <div className="hidden md:flex items-center mb-6">
           <button 
             onClick={() => router.push("/")}
-            className="flex items-center gap-2 text-xs font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
+            className="flex items-center gap-2 text-sm font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home Hub</span>
@@ -177,14 +177,14 @@ export default function FoodPage() {
 
         {/* Hero Section */}
         <div className="mb-10 text-center md:text-left">
-          <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
+          <span className="text-sm tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
             <Sparkles className="w-3 h-3 text-[#2A7F7F]" />
             Building from scratch
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-slate-900 tracking-tight">
             The Food <span className="font-semibold text-slate-950">Wing</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-light mt-3 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-500 font-light mt-3 max-w-2xl leading-relaxed">
             A practical, grain-first nourishing routine. Completely vegetarian, gluten-free, and fluid milk-free, designed to foster natural microbiome variety.
           </p>
         </div>
@@ -200,17 +200,17 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-md">
                   Habits & Formula
                 </span>
                 <Clock className="w-4 h-4 text-slate-400" />
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">Daily Plate & Rhythm</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 The core plates formula (grains, legumes, ferments) and structural rules like the overnight eating gap.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-[#2A7F7F] font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-[#2A7F7F] font-semibold">
               <span>Open habits detail</span>
               <ChevronRight className="w-4 h-4" />
             </div>
@@ -224,19 +224,19 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-md">
                   Diversity Tracker
                 </span>
                 <div className="flex items-center gap-1.5 bg-[#2A7F7F]/5 px-2 py-0.5 rounded-full border border-[#2A7F7F]/10">
-                  <span className="text-[9px] font-bold text-[#2A7F7F]">{checkedPlants.length}/30</span>
+                  <span className="text-sm font-bold text-[#2A7F7F]">{checkedPlants.length}/30</span>
                 </div>
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">30+ Plants Engine</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 A weekly checklist of whole grains, seeds, vegetables, and herbs. Eat variety to feed different microbes.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-[#2A7F7F] font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-[#2A7F7F] font-semibold">
               <span>Track weekly items</span>
               <ChevronRight className="w-4 h-4" />
             </div>
@@ -250,7 +250,7 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-md">
                   Daily Probiotics
                 </span>
                 <div className="flex gap-1">
@@ -260,11 +260,11 @@ export default function FoodPage() {
                 </div>
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">3-Ferments Logger</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 Log servings of cultured foods at morning, noon, and evening slots to introduce live beneficial bacteria.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-[#2A7F7F] font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-[#2A7F7F] font-semibold">
               <span>Log daily ferments</span>
               <ChevronRight className="w-4 h-4" />
             </div>
@@ -278,17 +278,17 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-md">
                   Kitchen Inventory
                 </span>
                 <ShoppingBag className="w-4 h-4 text-slate-400" />
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">Pantry & Staples</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 Checklist of grains, starters, seeds, and digestive spices to keep stocked for gut-friendly cooking.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-[#2A7F7F] font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-[#2A7F7F] font-semibold">
               <span>View staples inventory</span>
               <ChevronRight className="w-4 h-4" />
             </div>
@@ -302,17 +302,17 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-md">
                   Cooking Skills
                 </span>
                 <BookOpen className="w-4 h-4 text-slate-400" />
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">Kitchen Foundations</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 The 12 vital building blocks for cooking from scratch, from boiling millets to setting curd.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-[#2A7F7F] font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-[#2A7F7F] font-semibold">
               <span>Review 12 rules</span>
               <ChevronRight className="w-4 h-4" />
             </div>
@@ -326,17 +326,17 @@ export default function FoodPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[9px] font-bold text-amber-800 bg-amber-500/5 border border-amber-500/10 px-2 py-0.5 rounded-md">
+                <span className="text-sm font-bold text-amber-800 bg-amber-500/5 border border-amber-500/10 px-2.5 py-1 rounded-md">
                   Recipe Book
                 </span>
                 <Flame className="w-4 h-4 text-amber-500" />
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">The Recipe Hub</h3>
-              <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+              <p className="text-base text-slate-500 font-light leading-relaxed">
                 Step-by-step formulas for all main dishes, beverages, and traditional ferments. Completely searchable and filtered.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-[10px] text-amber-700 font-semibold">
+            <div className="mt-6 pt-4 border-t border-black/[0.02] flex items-center justify-between text-sm text-amber-700 font-semibold">
               <span>Browse 20+ recipes</span>
               <ChevronRight className="w-4 h-4 animate-pulse" />
             </div>
@@ -345,7 +345,6 @@ export default function FoodPage() {
         </div>
 
       </main>
-
       {/* ==================== SHEETS / OVERLAY PORTALS (Framer Motion) ==================== */}
       <AnimatePresence>
         {activeSheet && (
@@ -370,7 +369,7 @@ export default function FoodPage() {
             >
               {/* Header */}
               <div className="px-6 py-5 border-b border-black/[0.03] flex items-center justify-between bg-white/40">
-                <h3 className="text-sm font-semibold text-slate-950 uppercase tracking-wide">
+                <h3 className="text-base font-semibold text-slate-955 uppercase tracking-wide">
                   {activeSheet === "habits" && "Daily Habits & Plate"}
                   {activeSheet === "plants" && "The 30+ Plants Engine"}
                   {activeSheet === "ferments" && "The 3-Ferments Logger"}
@@ -381,44 +380,43 @@ export default function FoodPage() {
                   onClick={() => setActiveSheet(null)}
                   className="p-1.5 rounded-full hover:bg-slate-200/50 transition-colors"
                 >
-                  <X className="w-4 h-4 text-slate-500" />
+                  <X className="w-4 h-4 text-slate-505" />
                 </button>
               </div>
 
               {/* Body */}
               <div className="flex-1 overflow-y-auto p-6 space-y-8 pb-10">
-                
-                {/* 1. HABITS SHEET */}
+                                 {/* 1. HABITS SHEET */}
                 {activeSheet === "habits" && (
                   <div className="space-y-6">
                     {/* The 12-14 hr rule */}
                     <div className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-5 space-y-2">
                       <div className="flex items-center gap-2 text-slate-900">
                         <Clock className="w-4 h-4 text-[#2A7F7F]" />
-                        <h4 className="text-xs font-semibold">The 12-14 Hour Overnight Gap</h4>
+                        <h4 className="text-sm font-semibold">The 12-14 Hour Overnight Gap</h4>
                       </div>
-                      <p className="text-[11px] text-slate-600 font-light leading-relaxed">
-                        Keep a strict 12-to-14 hour overnight fasting gap. Eating early dinners and late breakfasts gives your gut walls and digestve sweeps quiet time to rest, restore, and clear out waste.
+                      <p className="text-base text-slate-650 font-light leading-relaxed">
+                        Keep a strict 12-to-14 hour overnight fasting gap. Eating early dinners and late breakfasts gives your gut walls and digestive sweeps quiet time to rest, restore, and clear out waste.
                       </p>
                     </div>
 
                     {/* Plate Formula */}
                     <div className="space-y-3">
-                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">The Daily Plate Formula</h4>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">The Daily Plate Formula</h4>
                       <div className="bg-white border border-black/[0.02] rounded-2xl p-5 space-y-4">
-                        <div className="flex justify-between items-center text-xs pb-3 border-b border-slate-100">
+                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
                           <span className="font-light text-slate-500">Millet / Grain Base</span>
                           <span className="font-medium text-slate-900">1 part</span>
                         </div>
-                        <div className="flex justify-between items-center text-xs pb-3 border-b border-slate-100">
+                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
                           <span className="font-light text-slate-500">Moong / Legume Protein</span>
                           <span className="font-medium text-slate-900">1 part</span>
                         </div>
-                        <div className="flex justify-between items-center text-xs pb-3 border-b border-slate-100">
+                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
                           <span className="font-light text-slate-500">Colourful Cooked Veg</span>
                           <span className="font-medium text-slate-900">2 parts</span>
                         </div>
-                        <div className="flex justify-between items-center text-xs">
+                        <div className="flex justify-between items-center text-sm">
                           <span className="font-light text-slate-500">Live Ferment + Seed Sprinkle</span>
                           <span className="font-medium text-[#2A7F7F]">1 serving + 1 tbsp</span>
                         </div>
@@ -427,14 +425,14 @@ export default function FoodPage() {
 
                     {/* When X, eat Y Quick-Help */}
                     <div className="space-y-3">
-                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">When X, Eat Y (Quick Help)</h4>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">When X, Eat Y (Quick Help)</h4>
                       <div className="space-y-2">
                         {QUICK_HELP_GUIDE.map((item, idx) => (
                           <div key={idx} className="bg-white/60 border border-black/[0.02] rounded-xl p-4 space-y-1">
-                            <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/10 inline-block">
+                            <span className="text-sm font-bold uppercase tracking-wider text-amber-700 bg-amber-500/5 px-2.5 py-1 rounded border border-amber-500/10 inline-block">
                               {item.condition}
                             </span>
-                            <p className="text-[11px] text-slate-700 font-light leading-relaxed mt-1">
+                            <p className="text-base text-slate-700 font-light leading-relaxed mt-1">
                               {item.solution}
                             </p>
                           </div>
@@ -443,28 +441,27 @@ export default function FoodPage() {
                     </div>
                   </div>
                 )}
-
-                {/* 2. PLANTS SHEET */}
+                 {/* 2. PLANTS SHEET */}
                 {activeSheet === "plants" && (
                   <div className="space-y-6">
                     <div className="flex justify-between items-center bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-5">
                       <div>
-                        <h4 className="text-xs font-semibold text-slate-900">Diversity Target: 30 Plants/Week</h4>
-                        <p className="text-[10px] text-slate-500 font-light mt-1">Check items off as you consume them this week.</p>
+                        <h4 className="text-sm font-semibold text-slate-900">Diversity Target: 30 Plants/Week</h4>
+                        <p className="text-sm text-slate-500 font-light mt-1">Check items off as you consume them this week.</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-xl font-extralight text-[#2A7F7F]">{checkedPlants.length}</span>
-                        <span className="text-[10px] text-slate-400 block">points</span>
+                        <span className="text-2xl font-extralight text-[#2A7F7F]">{checkedPlants.length}</span>
+                        <span className="text-sm text-slate-400 block">points</span>
                       </div>
                     </div>
 
                     {/* Plant category buttons */}
-                    <div className="flex flex-wrap gap-1 border-b border-black/[0.03] pb-3">
+                    <div className="flex flex-wrap gap-1.5 border-b border-black/[0.03] pb-3">
                       {PLANT_CATEGORIES.map(cat => (
                         <button
                           key={cat.id}
                           onClick={() => setSelectedPlantCategory(cat.id)}
-                          className={`px-3 py-1 rounded-xl text-[10px] font-medium transition-all ${
+                          className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all ${
                             selectedPlantCategory === cat.id
                               ? "bg-[#2A7F7F] text-white"
                               : "bg-white/50 border border-black/[0.02] text-slate-600 hover:bg-white"
@@ -489,7 +486,7 @@ export default function FoodPage() {
                                 : "bg-white/40 border-black/[0.02] hover:border-black/[0.06]"
                             }`}
                           >
-                            <span className={`text-[11px] font-light ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
+                            <span className={`text-base font-light ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
                               {item}
                             </span>
                             <div className={`w-4.5 h-4.5 rounded border flex items-center justify-center flex-shrink-0 transition-all ${
@@ -505,18 +502,17 @@ export default function FoodPage() {
                     </div>
                   </div>
                 )}
-
-                {/* 3. FERMENTS LOGGER SHEET */}
+                 {/* 3. FERMENTS LOGGER SHEET */}
                 {activeSheet === "ferments" && (
                   <div className="space-y-6">
                     <div className="flex justify-between items-center border-b border-black/[0.03] pb-4">
                       <div>
-                        <h4 className="text-xs font-semibold text-slate-900">Daily Probiotics Load</h4>
-                        <p className="text-[10px] text-slate-400 font-light mt-0.5">Aim for 3 distinct cultured servings daily.</p>
+                        <h4 className="text-sm font-semibold text-slate-900">Daily Probiotics Load</h4>
+                        <p className="text-sm text-slate-400 font-light mt-0.5">Aim for 3 distinct cultured servings daily.</p>
                       </div>
                       <button
                         onClick={() => setLoggedFerments({ morning: null, afternoon: null, evening: null })}
-                        className="text-[9px] uppercase tracking-widest text-[#2A7F7F] font-bold border border-[#2A7F7F]/20 rounded-lg px-2.5 py-1 hover:bg-[#2A7F7F]/5 transition-colors"
+                        className="text-sm uppercase tracking-widest text-[#2A7F7F] font-bold border border-[#2A7F7F]/20 rounded-lg px-2.5 py-1 hover:bg-[#2A7F7F]/5 transition-colors"
                       >
                         Reset Slots
                       </button>
@@ -529,7 +525,7 @@ export default function FoodPage() {
                         return (
                           <div key={slot} className="bg-white border border-black/[0.02] rounded-2xl p-4 flex flex-col justify-between min-h-[110px] relative">
                             <div className="flex justify-between items-center mb-2">
-                              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">
+                              <span className="text-sm uppercase tracking-widest text-slate-400 font-bold">
                                 {index === 0 && "1. Morning Slot"}
                                 {index === 1 && "2. Afternoon Slot"}
                                 {index === 2 && "3. Evening Slot"}
@@ -540,24 +536,24 @@ export default function FoodPage() {
                             {loggedVal ? (
                               <div className="flex justify-between items-center">
                                 <div>
-                                  <h4 className="text-xs font-semibold text-slate-950 flex items-center gap-1.5">
+                                  <h4 className="text-sm font-semibold text-slate-950 flex items-center gap-1.5">
                                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                                     {loggedVal}
                                   </h4>
                                 </div>
                                 <button
                                   onClick={() => setShowLogSelector(showLogSelector === slot ? null : slot)}
-                                  className="text-[9px] font-bold text-[#2A7F7F] hover:underline"
+                                  className="text-sm font-bold text-[#2A7F7F] hover:underline"
                                 >
                                   Edit
                                 </button>
                               </div>
                             ) : (
                               <div className="flex justify-between items-center">
-                                <span className="text-[11px] text-slate-400 italic">No ferment logged</span>
+                                <span className="text-base text-slate-400 italic">No ferment logged</span>
                                 <button
                                   onClick={() => setShowLogSelector(showLogSelector === slot ? null : slot)}
-                                  className="text-[10px] bg-[#2A7F7F] text-white px-3 py-1 rounded-lg font-medium hover:bg-[#1e5c5c] transition-colors"
+                                  className="text-sm bg-[#2A7F7F] text-white px-3.5 py-1.5 rounded-lg font-medium hover:bg-[#1e5c5c] transition-colors"
                                 >
                                   Choose
                                 </button>
@@ -571,11 +567,11 @@ export default function FoodPage() {
                                   <button
                                     key={idx}
                                     onClick={() => logFerment(slot, item.name)}
-                                    className="text-left px-2 py-1.5 rounded-lg text-[10px] text-slate-700 hover:bg-[#2A7F7F]/10 hover:text-[#2A7F7F] transition-colors flex justify-between items-center"
+                                    className="text-left px-2 py-1.5 rounded-lg text-sm text-slate-700 hover:bg-[#2A7F7F]/10 hover:text-[#2A7F7F] transition-colors flex justify-between items-center"
                                   >
                                     <span>{item.name}</span>
                                     {item.isLive && (
-                                      <span className="text-[8px] bg-emerald-500/10 text-emerald-700 px-1 py-0.2 rounded font-bold uppercase">
+                                      <span className="text-sm bg-emerald-500/10 text-emerald-700 px-1.5 py-0.5 rounded font-bold uppercase">
                                         Live
                                       </span>
                                     )}
@@ -589,18 +585,17 @@ export default function FoodPage() {
                     </div>
                   </div>
                 )}
-
-                {/* 4. PANTRY SHEET */}
+                 {/* 4. PANTRY SHEET */}
                 {activeSheet === "pantry" && (
                   <div className="space-y-6">
-                    <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+                    <p className="text-base text-slate-500 font-light leading-relaxed">
                       Keep these fundamental ingredients and starters in your kitchen to cook grain-first gut-friendly recipes on autopilot.
                     </p>
 
                     <div className="space-y-6">
                       {PANTRY_STAPLES.map((cat, cIdx) => (
                         <div key={cIdx} className="space-y-2">
-                          <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{cat.category}</h4>
+                          <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">{cat.category}</h4>
                           <div className="grid grid-cols-1 gap-1.5">
                             {cat.items.map((item, iIdx) => {
                               const isChecked = checkedPantryItems.includes(item);
@@ -614,7 +609,7 @@ export default function FoodPage() {
                                       : "bg-white/40 border-black/[0.02] hover:border-black/[0.06]"
                                   }`}
                                 >
-                                  <span className={`text-[11px] font-light ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
+                                  <span className={`text-base font-light ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
                                     {item}
                                   </span>
                                   <div className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-all ${
@@ -633,11 +628,10 @@ export default function FoodPage() {
                     </div>
                   </div>
                 )}
-
-                {/* 5. FOUNDATIONS SHEET */}
+                 {/* 5. FOUNDATIONS SHEET */}
                 {activeSheet === "foundations" && (
                   <div className="space-y-4">
-                    <p className="text-[11px] text-slate-500 font-light leading-relaxed mb-4">
+                    <p className="text-base text-slate-500 font-light leading-relaxed mb-4">
                       The 12 primary cooking guidelines and preparation blueprints for a grain-based diet.
                     </p>
                     
@@ -645,13 +639,13 @@ export default function FoodPage() {
                       {KITCHEN_FOUNDATIONS.map((f) => (
                         <div key={f.id} className="bg-white border border-black/[0.02] rounded-2xl p-4.5 space-y-1">
                           <div className="flex items-center justify-between">
-                            <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                            <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded">
                               {f.id}
                             </span>
-                            <span className="text-slate-300 font-light text-[10px]">Rule</span>
+                            <span className="text-slate-300 font-light text-sm">Rule</span>
                           </div>
-                          <h4 className="text-xs font-semibold text-slate-900 mt-1">{f.title}</h4>
-                          <p className="text-[11px] text-slate-500 font-light leading-relaxed mt-1">
+                          <h4 className="text-sm font-semibold text-slate-900 mt-1">{f.title}</h4>
+                          <p className="text-base text-slate-500 font-light leading-relaxed mt-1">
                             {f.instruction}
                           </p>
                         </div>
@@ -667,7 +661,7 @@ export default function FoodPage() {
       </AnimatePresence>
 
       {/* Simple wordmark footer */}
-      <footer className="w-full text-center py-8 pb-10 text-[10px] tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 relative z-10">
+      <footer className="w-full text-center py-8 pb-10 text-sm tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 relative z-10">
         BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>

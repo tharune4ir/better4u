@@ -228,7 +228,7 @@ export default function MovementPage() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center md:text-left mb-12"
         >
-          <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
+          <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
             <Activity className="w-3.5 h-3.5 animate-pulse" />
             Phase 3: The Movement Wing (Body Pillar)
           </span>
@@ -249,7 +249,7 @@ export default function MovementPage() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div>
-              <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mb-1.5">
+              <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mb-1.5">
                 8-Month Horizon
               </span>
               <h2 className="text-xl sm:text-2xl font-light text-slate-900">
@@ -260,8 +260,8 @@ export default function MovementPage() {
             {/* Overall physical capability score */}
             <div className="flex items-center gap-3 bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3.5 py-2 rounded-2xl self-start sm:self-auto">
               <div className="text-right leading-tight">
-                <p className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">Overall Progress</p>
-                <p className="text-[9px] text-slate-400">Capability checklist</p>
+                <p className="text-xs font-bold text-slate-700 uppercase tracking-wider">Overall Progress</p>
+                <p className="text-xs text-slate-400">Capability checklist</p>
               </div>
               <div className="text-lg font-bold text-[#2A7F7F]">
                 {Math.round((bodyMarkers.filter(Boolean).length / 10) * 100)}%
@@ -409,16 +409,16 @@ export default function MovementPage() {
               
               {/* Ring Labels Legend */}
               <div className="flex gap-3 justify-center mt-3 flex-wrap">
-                <span className="text-[8px] flex items-center gap-1 font-bold text-slate-600">
+                <span className="text-xs flex items-center gap-1 font-bold text-slate-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F]" /> STRENGTH
                 </span>
-                <span className="text-[8px] flex items-center gap-1 font-bold text-slate-600">
+                <span className="text-xs flex items-center gap-1 font-bold text-slate-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0d9488]" /> MOBILITY
                 </span>
-                <span className="text-[8px] flex items-center gap-1 font-bold text-slate-600">
+                <span className="text-xs flex items-center gap-1 font-bold text-slate-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0f766e]" /> ENDURANCE
                 </span>
-                <span className="text-[8px] flex items-center gap-1 font-bold text-slate-600">
+                <span className="text-xs flex items-center gap-1 font-bold text-slate-600">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#86EFAC]" /> RECOVERY
                 </span>
               </div>
@@ -448,7 +448,7 @@ export default function MovementPage() {
                       {marker.label}
                     </p>
                   </div>
-                  <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                  <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                     marker.cat === "strength" 
                       ? "bg-teal-50 text-teal-800 border border-teal-100" 
                       : marker.cat === "mobility"
@@ -466,7 +466,7 @@ export default function MovementPage() {
 
           {/* Arrival Line Footer */}
           <div className="mt-8 pt-6 border-t border-black/[0.03] text-center">
-            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
+            <span className="text-xs text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
             <p className="text-xs sm:text-sm text-[#2A7F7F] font-semibold italic max-w-xl mx-auto leading-relaxed">
               "A lean, strong, supple, durable body that does whatever my life asks — built at home, naturally, and kept for life."
             </p>
@@ -479,7 +479,7 @@ export default function MovementPage() {
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F]">
               Movement First Principles
             </h3>
-            <span className="text-[9px] text-slate-400 font-light hidden sm:inline">
+            <span className="text-xs text-slate-400 font-light hidden sm:inline">
               Swipe horizontal to explore
             </span>
           </div>
@@ -492,15 +492,15 @@ export default function MovementPage() {
                 className="snap-center shrink-0 w-[260px] sm:w-auto glassmorphic rounded-2xl p-5 flex flex-col justify-between min-h-[170px] border-black/[0.03] hover:border-[#2A7F7F]/30 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div>
-                  <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
+                  <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
                     0{p.number}
                   </span>
-                  <h4 className="text-xs font-semibold text-slate-900 mt-3">{p.title}</h4>
-                  <p className="text-[9px] text-[#2A7F7F] font-medium tracking-wide uppercase mt-0.5">
+                  <h4 className="text-sm font-semibold text-slate-900 mt-3">{p.title}</h4>
+                  <p className="text-xs text-[#2A7F7F] font-medium tracking-wide uppercase mt-0.5">
                     {p.subtitle}
                   </p>
                 </div>
-                <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-4">
+                <p className="text-sm text-slate-500 font-light leading-relaxed mt-4">
                   {p.description}
                 </p>
               </div>
@@ -520,13 +520,13 @@ export default function MovementPage() {
                     Morning Flow Player
                     <Flame className="w-4 h-4 text-orange-500 animate-pulse" />
                   </h3>
-                  <p className="text-[10px] text-slate-400 font-light">
+                  <p className="text-xs text-slate-400 font-light">
                     Click each step to load targeted joint indicators and regressions.
                   </p>
                 </div>
 
                 {/* Completion counter */}
-                <span className="text-[10px] text-slate-500 bg-white/60 border border-black/[0.03] px-2.5 py-1 rounded-full font-medium">
+                <span className="text-xs text-slate-500 bg-white/60 border border-black/[0.03] px-2.5 py-1 rounded-full font-medium">
                   {completedSteps.length} / {MORNING_SESSION_FLOW.length} Completed
                 </span>
               </div>
@@ -562,25 +562,25 @@ export default function MovementPage() {
                           {isCompleted ? (
                             <CheckCircle2 className="w-3 h-3 stroke-[2.5]" />
                           ) : (
-                            <span className="text-[9px] font-bold text-slate-400 group-hover:text-[#2A7F7F]">
+                            <span className="text-xs font-bold text-slate-400 group-hover:text-[#2A7F7F]">
                               {step.partNumber}
                             </span>
                           )}
                         </div>
 
                         <div>
-                          <h4 className={`text-xs font-semibold tracking-wide transition-colors ${
+                          <h4 className={`text-sm font-semibold tracking-wide transition-colors ${
                             isActive ? "text-slate-950 font-bold" : "text-slate-700"
                           }`}>
                             {step.partTitle}
                           </h4>
-                          <span className="text-[9px] text-slate-400 font-light">
+                          <span className="text-xs text-slate-400 font-light">
                             {step.duration} • {step.exercises.length} movements
                           </span>
                         </div>
                       </div>
 
-                      <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${
+                      <ChevronRight className={`w-4 h-4 flex-shrink-0 transition-transform duration-300 ${
                         isActive ? "text-[#2A7F7F] translate-x-1" : "text-slate-300 group-hover:text-slate-400"
                       }`} />
                     </div>
@@ -592,7 +592,7 @@ export default function MovementPage() {
               {completedSteps.length > 0 && (
                 <button
                   onClick={() => setCompletedSteps([])}
-                  className="mt-6 text-[9px] uppercase tracking-widest text-[#2A7F7F] font-bold inline-flex items-center gap-1 hover:opacity-80 cursor-pointer"
+                  className="mt-6 text-xs uppercase tracking-widest text-[#2A7F7F] font-bold inline-flex items-center gap-1 hover:opacity-80 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
                   Reset Session Flow
@@ -606,7 +606,7 @@ export default function MovementPage() {
             
             {/* SVG Anatomy Visualizer */}
             <div className="glassmorphic rounded-3xl p-6 flex flex-col items-center justify-center min-h-[220px] relative overflow-hidden">
-              <span className="absolute top-4 left-6 text-[9px] font-bold uppercase tracking-widest text-slate-400">
+              <span className="absolute top-4 left-6 text-xs font-bold uppercase tracking-widest text-slate-400">
                 Kinetic Target Map
               </span>
               
@@ -733,7 +733,7 @@ export default function MovementPage() {
                 {activeStep.focusJoints.map((j, i) => (
                   <span 
                     key={i} 
-                    className="text-[8px] font-bold uppercase tracking-wider text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded"
+                    className="text-xs font-bold uppercase tracking-wider text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded"
                   >
                     {j}
                   </span>
@@ -743,32 +743,32 @@ export default function MovementPage() {
 
             {/* Step Breakdown Card */}
             <div className="glassmorphic rounded-3xl p-6">
-              <h4 className="text-[9px] font-bold uppercase tracking-widest text-[#2A7F7F] mb-1">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F] mb-1">
                 Active Step Protocol
               </h4>
               <h3 className="text-sm font-semibold text-slate-900 mb-3">
                 {activeStep.partTitle}
               </h3>
-              <p className="text-[10px] sm:text-xs text-slate-500 font-light leading-relaxed mb-4">
+              <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed mb-4">
                 {activeStep.description}
               </p>
 
               <div className="border-t border-black/[0.03] pt-4 flex flex-col gap-3">
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                   Target Movements
                 </span>
                 
                 <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
                   {activeStep.exercises.map((ex, idx) => (
                     <div key={idx} className="flex flex-col gap-0.5">
-                      <span className="text-[10px] font-bold text-slate-800 flex items-center gap-1">
+                      <span className="text-sm font-bold text-slate-800 flex items-center gap-1">
                         <span className="w-1 h-1 rounded-full bg-[#2A7F7F]" />
                         {ex.name}
                       </span>
-                      <span className="text-[10px] text-slate-500 font-light leading-snug">
+                      <span className="text-xs text-slate-500 font-light leading-snug">
                         {ex.details}
                       </span>
-                      <span className="text-[9px] text-[#2A7F7F] font-medium leading-none italic mt-0.5">
+                      <span className="text-xs text-[#2A7F7F] font-medium leading-none italic mt-0.5">
                         Regression: {ex.regression}
                       </span>
                     </div>
@@ -787,11 +787,11 @@ export default function MovementPage() {
           <div className="mb-6">
             <h3 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-1.5">
               Home Strength Progression Ladder
-              <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+              <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
                 Calisthenics
               </span>
             </h3>
-            <p className="text-[10px] sm:text-xs text-slate-400 font-light mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-400 font-light mt-0.5">
               A structured home progression framework across 6 key movement patterns. Master each level before advancing.
             </p>
           </div>
@@ -802,7 +802,7 @@ export default function MovementPage() {
               <button
                 key={pattern}
                 onClick={() => setActiveLadderPattern(pattern)}
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-medium tracking-wide transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-medium tracking-wide transition-all cursor-pointer ${
                   activeLadderPattern === pattern
                     ? "bg-[#2A7F7F] text-white shadow-sm"
                     : "bg-white/60 border border-black/[0.03] text-slate-600 hover:bg-white"
@@ -879,15 +879,15 @@ export default function MovementPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
                       {step.level}
                     </span>
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                       Step {index + 1}
                     </span>
                   </div>
-                  <h4 className="text-xs font-semibold text-slate-900 mt-2">{step.name}</h4>
-                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-1">
+                  <h4 className="text-sm font-semibold text-slate-900 mt-2">{step.name}</h4>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed mt-1">
                     {step.detail}
                   </p>
                 </div>
@@ -905,7 +905,7 @@ export default function MovementPage() {
               Ancient Simple Tools
               <Dumbbell className="w-4 h-4 text-[#2A7F7F]" />
             </h3>
-            <p className="text-[10px] sm:text-xs text-slate-400 font-light mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-400 font-light mt-0.5">
               Swinging and hanging. Tools that prioritize joint decompression and rotational athletic power.
             </p>
           </div>
@@ -919,30 +919,30 @@ export default function MovementPage() {
                 <div>
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#2A7F7F] transition-colors">
+                      <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#2A7F7F] transition-colors">
                         {tool.name}
                       </h4>
                       {tool.nativeName && (
-                        <span className="text-[8px] uppercase tracking-widest text-[#2A7F7F] font-bold">
+                        <span className="text-xs uppercase tracking-widest text-[#2A7F7F] font-bold">
                           {tool.nativeName}
                         </span>
                       )}
                     </div>
                   </div>
-                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mb-6">
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-6">
                     {tool.description}
                   </p>
                 </div>
 
                 <div className="border-t border-black/[0.03] pt-4">
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">
                     Key Adaptations
                   </span>
                   <div className="flex flex-col gap-1.5">
                     {tool.benefits.map((b, bIdx) => (
                       <div key={bIdx} className="flex items-center gap-1.5">
                         <span className="w-1 h-1 rounded-full bg-[#2A7F7F]" />
-                        <span className="text-[9px] text-slate-700 font-light">{b}</span>
+                        <span className="text-xs text-slate-700 font-light">{b}</span>
                       </div>
                     ))}
                   </div>
@@ -955,7 +955,7 @@ export default function MovementPage() {
       </main>
 
       {/* Simple Footer */}
-      <footer className="w-full text-center py-8 pb-28 md:pb-8 text-[10px] tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
+      <footer className="w-full text-center py-8 pb-28 md:pb-8 text-xs tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
         BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>

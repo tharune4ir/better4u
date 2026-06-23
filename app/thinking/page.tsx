@@ -298,7 +298,7 @@ export default function ThinkingPage() {
         <div className="hidden md:flex items-center mb-6">
           <button 
             onClick={() => router.push("/")}
-            className="flex items-center gap-2 text-xs font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
+            className="flex items-center gap-2 text-sm font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home OS Dashboard
@@ -312,14 +312,14 @@ export default function ThinkingPage() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center md:text-left mb-10"
         >
-          <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
+          <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4">
             <Brain className="w-3.5 h-3.5" />
             Phase 4: The Thinking Wing (Mind Pillar)
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-slate-900 tracking-tight leading-none">
             Attention & <span className="font-semibold text-slate-950">Mental Clarity.</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-light mt-3 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-500 font-light mt-3 max-w-xl leading-relaxed">
             A minimalist library and console dedicated to first-principles thinking, cognitive de-biasing, and articulate vocal mechanics.
           </p>
         </motion.div>
@@ -333,7 +333,7 @@ export default function ThinkingPage() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div>
-              <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mb-1.5">
+              <span className="text-xs tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1 mb-1.5">
                 8-Month Horizon
               </span>
               <h2 className="text-xl sm:text-2xl font-light text-slate-900">
@@ -343,7 +343,7 @@ export default function ThinkingPage() {
             
             {/* Illuminated Stars counter */}
             <div className="flex items-center gap-3 bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3.5 py-2 rounded-2xl self-start sm:self-auto">
-              <span className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">Stars Lit</span>
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Stars Lit</span>
               <div className="text-lg font-bold text-[#2A7F7F]">
                 {mindMarkers.filter(Boolean).length} / 10
               </div>
@@ -508,8 +508,8 @@ export default function ThinkingPage() {
               </svg>
 
               <div className="text-center mt-2 relative z-10">
-                <span className="text-[9px] text-slate-500 font-light block">Attention Constellation</span>
-                <span className="text-[10px] font-bold text-slate-300 block mt-0.5 tracking-wide">
+                <span className="text-xs text-slate-500 font-light block">Attention Constellation</span>
+                <span className="text-xs font-bold text-slate-300 block mt-0.5 tracking-wide">
                   {mindMarkers.filter(Boolean).length === 10 
                     ? "Full Illumination" 
                     : `${mindMarkers.filter(Boolean).length} Star Nodes Active`}
@@ -523,11 +523,7 @@ export default function ThinkingPage() {
                 <button
                   key={idx}
                   onClick={() => toggleMindMarker(idx)}
-                  className={`w-full text-left p-3.5 rounded-2xl border transition-all duration-300 flex items-center gap-3 cursor-pointer ${
-                    mindMarkers[idx]
-                      ? "bg-[#2A7F7F]/5 border-[#2A7F7F]/30 shadow-[0_4px_20px_rgba(42,127,127,0.02)]"
-                      : "bg-white/50 border-black/[0.03] hover:border-black/[0.08]"
-                  }`}
+                  className="w-full text-left p-3.5 rounded-2xl border transition-all duration-300 flex items-center gap-3 cursor-pointer bg-white/50 border-black/[0.03] hover:border-black/[0.08]"
                 >
                   <div className={`w-5 h-5 rounded-lg border flex items-center justify-center flex-shrink-0 transition-all ${
                     mindMarkers[idx]
@@ -537,19 +533,11 @@ export default function ThinkingPage() {
                     {mindMarkers[idx] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                   </div>
                   <div className="flex-1">
-                    <p className={`text-xs font-light leading-snug ${mindMarkers[idx] ? "text-slate-900 font-normal" : "text-slate-600"}`}>
+                    <p className={`text-sm font-light leading-relaxed ${mindMarkers[idx] ? "text-slate-900 font-normal" : "text-slate-600"}`}>
                       {marker.label}
                     </p>
                   </div>
-                  <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                    marker.type === "mental" 
-                      ? "bg-purple-100 text-purple-800 border border-purple-200" 
-                      : marker.type === "voice"
-                      ? "bg-blue-100 text-blue-800 border border-blue-200"
-                      : marker.type === "health"
-                      ? "bg-amber-100 text-amber-800 border border-amber-200"
-                      : "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                  }`}>
+                  <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                     {marker.type}
                   </span>
                 </button>
@@ -559,8 +547,8 @@ export default function ThinkingPage() {
 
           {/* Arrival Line Footer */}
           <div className="mt-8 pt-6 border-t border-black/[0.03] text-center">
-            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
-            <p className="text-xs sm:text-sm text-[#2A7F7F] font-semibold italic max-w-xl mx-auto leading-relaxed">
+            <span className="text-xs text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
+            <p className="text-sm sm:text-base text-[#2A7F7F] font-semibold italic max-w-xl mx-auto leading-relaxed">
               "A quieted, focused mind that sees reality clearly, communicates directly, and operates without cognitive friction."
             </p>
           </div>
@@ -571,7 +559,7 @@ export default function ThinkingPage() {
           
           {/* CARD 1: Deep Focus Block Timer */}
           <div className="glassmorphic rounded-3xl p-6 flex flex-col items-center justify-between min-h-[220px] relative overflow-hidden">
-            <span className="absolute top-4 left-6 text-[9px] font-bold uppercase tracking-widest text-slate-400">
+            <span className="absolute top-4 left-6 text-xs font-bold uppercase tracking-widest text-slate-400">
               Deep Focus Block
             </span>
 
@@ -606,7 +594,7 @@ export default function ThinkingPage() {
                 <span className="text-xl font-semibold text-slate-900 tabular-nums leading-none">
                   {formatTime(timeLeft)}
                 </span>
-                <span className="text-[8px] text-slate-400 font-light uppercase tracking-wider mt-1">
+                <span className="text-xs text-slate-400 font-light uppercase tracking-wider mt-1">
                   {isTimerRunning ? "Quiet Mode" : "Ready"}
                 </span>
               </div>
@@ -632,10 +620,10 @@ export default function ThinkingPage() {
           {/* CARD 2: Clarity Console */}
           <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
             <div className="flex justify-between items-center mb-3">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
                 Clarity Console
               </span>
-              <span className="text-[9px] font-bold text-[#2A7F7F] uppercase tracking-wider bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
+              <span className="text-xs font-bold text-[#2A7F7F] uppercase tracking-wider bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
                 State: {clarityValue}/10
               </span>
             </div>
@@ -644,12 +632,12 @@ export default function ThinkingPage() {
               value={clarityText}
               onChange={(e) => setClarityText(e.target.value)}
               placeholder="What is the primary truth or task of today?"
-              className="w-full flex-1 bg-transparent text-slate-900 text-xs sm:text-sm font-light placeholder-slate-400 focus:outline-none resize-none min-h-[70px] pt-1"
+              className="w-full flex-1 bg-transparent text-slate-900 text-sm sm:text-base font-light placeholder-slate-400 focus:outline-none resize-none min-h-[70px] pt-1"
             />
 
             {/* Slider */}
             <div className="mt-4 pt-4 border-t border-black/[0.03]">
-              <div className="flex justify-between text-[8px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">
+              <div className="flex justify-between text-xs text-slate-400 font-bold uppercase tracking-widest mb-1.5">
                 <span>Cognitive Load</span>
                 <span>Absolute Focus</span>
               </div>
@@ -673,7 +661,7 @@ export default function ThinkingPage() {
               <h2 className="text-lg font-light text-slate-900">
                 Open Forge <span className="font-semibold text-slate-950">Mental Frameworks</span>
               </h2>
-              <p className="text-[10px] text-slate-400 font-light mt-0.5">
+              <p className="text-xs text-slate-400 font-light mt-0.5">
                 Baseline logical models to filter information intake and decisions.
               </p>
             </div>
@@ -689,13 +677,13 @@ export default function ThinkingPage() {
               >
                 <div>
                   <div className="flex justify-between items-start">
-                    <span className="text-[9px] text-[#2A7F7F] font-bold uppercase tracking-widest bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
+                    <span className="text-xs text-[#2A7F7F] font-bold uppercase tracking-widest bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10">
                       {model.subtitle}
                     </span>
                     <HelpCircle className="w-3.5 h-3.5 text-slate-300 group-hover:text-[#2A7F7F] transition-colors" />
                   </div>
-                  <h4 className="text-xs font-semibold text-slate-900 mt-3">{model.title}</h4>
-                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-2">
+                  <h4 className="text-sm font-semibold text-slate-900 mt-3">{model.title}</h4>
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mt-2">
                     {model.description}
                   </p>
                 </div>
@@ -716,10 +704,10 @@ export default function ThinkingPage() {
           <p className="text-sm sm:text-base font-light text-slate-900 italic max-w-2xl mx-auto leading-relaxed">
             "{NEUROPLASTICITY_SUMMARY.quote}"
           </p>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#2A7F7F] block mt-4">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F] block mt-4">
             The Neuroplasticity Core
           </span>
-          <p className="text-[10px] sm:text-xs text-slate-500 font-light mt-1 max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-500 font-light mt-1 max-w-lg mx-auto leading-relaxed">
             {NEUROPLASTICITY_SUMMARY.description}
           </p>
         </motion.div>
@@ -730,7 +718,7 @@ export default function ThinkingPage() {
             <h2 className="text-lg font-light text-slate-900">
               Curiosity OS <span className="font-semibold text-slate-950">Learning Principles</span>
             </h2>
-            <p className="text-[10px] text-slate-400 font-light mt-0.5">
+            <p className="text-xs text-slate-400 font-light mt-0.5">
               The 7 pillars of efficient self-education. Let interest guide and iterate against reality.
             </p>
           </div>
@@ -743,12 +731,12 @@ export default function ThinkingPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
                       0{p.id}
                     </span>
                   </div>
-                  <h4 className="text-xs font-semibold text-slate-900 mt-3">{p.title}</h4>
-                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-2">
+                  <h4 className="text-sm font-semibold text-slate-900 mt-3">{p.title}</h4>
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mt-2">
                     {p.detail}
                   </p>
                 </div>
@@ -763,7 +751,7 @@ export default function ThinkingPage() {
             <h2 className="text-lg font-light text-slate-900">
               The Voice <span className="font-semibold text-slate-950">Masterclass</span>
             </h2>
-            <p className="text-[10px] text-slate-400 font-light mt-0.5">
+            <p className="text-xs text-slate-400 font-light mt-0.5">
               Rules of high-fidelity, articulate vocal structure and posture.
             </p>
           </div>
@@ -772,13 +760,13 @@ export default function ThinkingPage() {
             {VOICE_SECTIONS.map((section, sIdx) => (
               <div key={sIdx} className="border-b border-black/[0.03] pb-10 last:border-0 last:pb-0">
                 <div className="mb-6">
-                  <span className="text-[9px] uppercase tracking-widest text-[#2A7F7F] font-bold">
+                  <span className="text-xs uppercase tracking-widest text-[#2A7F7F] font-bold">
                     Section 0{sIdx + 1}
                   </span>
                   <h3 className="text-base font-semibold text-slate-950 mt-1">
                     {section.title}
                   </h3>
-                  <p className="text-[10px] text-slate-400 font-light">
+                  <p className="text-xs text-slate-400 font-light">
                     {section.subtitle}
                   </p>
                 </div>
@@ -790,7 +778,7 @@ export default function ThinkingPage() {
                       className="bg-white/40 border border-black/[0.02] rounded-2xl p-5 flex flex-col justify-between hover:border-[#2A7F7F]/20 transition-all duration-300"
                     >
                       <div>
-                        <h4 className="text-xs font-semibold text-slate-900 mb-4 flex items-center gap-1.5">
+                        <h4 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-1.5">
                           <Mic className="w-3.5 h-3.5 text-[#2A7F7F] flex-shrink-0" />
                           {rule.title}
                         </h4>
@@ -798,7 +786,7 @@ export default function ThinkingPage() {
                           {rule.tips.map((tip, tIdx) => (
                             <div key={tIdx} className="flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F] mt-1.5 flex-shrink-0" />
-                              <span className="text-[10px] text-slate-600 font-light leading-relaxed">
+                              <span className="text-xs text-slate-600 font-light leading-relaxed">
                                 {tip}
                               </span>
                             </div>
@@ -819,7 +807,7 @@ export default function ThinkingPage() {
             <h2 className="text-lg font-light text-slate-900">
               Vocabulary & <span className="font-semibold text-slate-950">Resolution</span>
             </h2>
-            <p className="text-[10px] text-slate-400 font-light mt-0.5">
+            <p className="text-xs text-slate-400 font-light mt-0.5">
               Clarity is higher resolution. Calibrate your lens through these three lantern stations.
             </p>
           </div>
@@ -832,13 +820,13 @@ export default function ThinkingPage() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded">
                       Station 0{station.id}
                     </span>
                     <Compass className="w-4 h-4 text-[#2A7F7F]" />
                   </div>
-                  <h4 className="text-xs font-semibold text-slate-900">{station.title}</h4>
-                  <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-2">
+                  <h4 className="text-sm font-semibold text-slate-900">{station.title}</h4>
+                  <p className="text-sm text-slate-500 font-light leading-relaxed mt-2">
                     {station.detail}
                   </p>
                 </div>
@@ -854,20 +842,20 @@ export default function ThinkingPage() {
           <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
             <div>
               <div className="flex justify-between items-center mb-4">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
                   The Rest / Do-Nothing Corner
                 </span>
                 <Moon className="w-4 h-4 text-[#2A7F7F]" />
               </div>
-              <h4 className="text-xs font-semibold text-slate-900">Boredom-on-Purpose</h4>
-              <p className="text-[10px] text-slate-500 font-light leading-relaxed mt-1">
+              <h4 className="text-sm font-semibold text-slate-900">Boredom-on-Purpose</h4>
+              <p className="text-sm text-slate-500 font-light leading-relaxed mt-1">
                 Train your brain to sit with zero inputs (no screen, no text, no audio) for 5 minutes. Protect empty buffers.
               </p>
             </div>
 
             <div className="flex items-center justify-between mt-4 bg-black/[0.01] p-3 rounded-2xl border border-black/[0.01]">
               <div className="flex flex-col">
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Countdown</span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Countdown</span>
                 <span className="text-base font-semibold text-slate-900 tabular-nums">
                   {formatTime(restTimeLeft)}
                 </span>
@@ -876,7 +864,7 @@ export default function ThinkingPage() {
               <div className="flex gap-2">
                 <button
                   onClick={toggleRestTimer}
-                  className="px-4 py-1.5 rounded-xl bg-[#2A7F7F] text-white text-[10px] font-semibold hover:bg-[#1e5c5c] transition-colors cursor-pointer"
+                  className="px-4 py-1.5 rounded-xl bg-[#2A7F7F] text-white text-xs font-semibold hover:bg-[#1e5c5c] transition-colors cursor-pointer"
                 >
                   {isRestTimerRunning ? "Pause" : "Start Break"}
                 </button>
@@ -894,20 +882,20 @@ export default function ThinkingPage() {
           <div className="glassmorphic rounded-3xl p-6 flex flex-col justify-between min-h-[220px]">
             <div>
               <div className="flex justify-between items-center mb-4">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
                   Daily Thinking Rep
                 </span>
                 <Shuffle className="w-4 h-4 text-[#2A7F7F]" />
               </div>
-              <h4 className="text-xs font-semibold text-slate-900">Logical Sanity Check</h4>
-              <p className="text-[11px] text-[#2A7F7F] italic leading-relaxed mt-3">
+              <h4 className="text-sm font-semibold text-slate-900">Logical Sanity Check</h4>
+              <p className="text-sm text-[#2A7F7F] italic leading-relaxed mt-3">
                 "{DAILY_THINKING_REPS[currentThinkingRepIdx]}"
               </p>
             </div>
 
             <button
               onClick={() => setCurrentThinkingRepIdx((prev) => (prev + 1) % DAILY_THINKING_REPS.length)}
-              className="w-full py-2.5 mt-4 rounded-xl border border-black/[0.04] bg-white/40 hover:bg-white text-[10px] font-semibold text-slate-700 tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full py-2.5 mt-4 rounded-xl border border-black/[0.04] bg-white/40 hover:bg-white text-xs font-semibold text-slate-700 tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5"
             >
               <Shuffle className="w-3 h-3 text-[#2A7F7F]" />
               Draw Another Rep
@@ -919,7 +907,7 @@ export default function ThinkingPage() {
       </main>
 
       {/* Simple Footer */}
-      <footer className="w-full text-center py-8 pb-28 md:pb-8 text-[10px] tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
+      <footer className="w-full text-center py-8 pb-28 md:pb-8 text-xs tracking-widest text-slate-400 font-light select-none relative z-10 border-t border-black/[0.02] bg-white/20">
         BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>

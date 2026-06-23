@@ -572,13 +572,13 @@ export default function RecipesPage() {
       <header className="sticky top-0 z-45 w-full h-20 border-b border-black/[0.03] bg-[#F7F6F2]/75 backdrop-blur-md flex items-center justify-between px-6 md:px-12 select-none">
         <button 
           onClick={() => router.push("/food")}
-          className="flex items-center gap-2 text-xs font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
+          className="flex items-center gap-2 text-sm font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Food Wing</span>
         </button>
         <div className="text-right">
-          <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full">
+          <span className="text-sm tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full">
             Phase 3 Draft
           </span>
         </div>
@@ -590,7 +590,7 @@ export default function RecipesPage() {
           <h1 className="text-3xl sm:text-4xl font-extralight text-slate-900 tracking-tight">
             The Gut-Healing <span className="font-semibold text-slate-950">Recipe Hub</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-light mt-2 max-w-2xl">
+          <p className="text-sm sm:text-base text-slate-500 font-light mt-2 max-w-2xl leading-relaxed">
             Simple, gluten-free, vegetarian recipes structured to make gut-friendly cooking completely automatic and beginner-proof.
           </p>
         </div>
@@ -604,7 +604,7 @@ export default function RecipesPage() {
               placeholder="Search recipes, ingredients, tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-white/60 backdrop-blur-sm border border-black/[0.04] rounded-2xl text-sm font-light text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2A7F7F]/40 focus:bg-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
+              className="w-full pl-11 pr-4 py-3 bg-white/60 backdrop-blur-sm border border-black/[0.04] rounded-2xl text-base font-light text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2A7F7F]/40 focus:bg-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
             />
           </div>
 
@@ -624,7 +624,7 @@ export default function RecipesPage() {
               <button
                 key={chip.id}
                 onClick={() => setActiveFilter(chip.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-[10px] font-medium tracking-wide transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3.5 py-1.5 rounded-xl text-sm font-medium tracking-wide transition-all cursor-pointer whitespace-nowrap ${
                   activeFilter === chip.id
                     ? "bg-[#2A7F7F] text-white shadow-sm"
                     : "bg-white/60 border border-black/[0.03] text-slate-600 hover:bg-white"
@@ -657,19 +657,19 @@ export default function RecipesPage() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-3.5">
-                    <span className="text-[9px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                    <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded-md">
                       {recipe.id}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-light flex items-center gap-1">
+                    <span className="text-sm text-slate-400 font-light flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {recipe.prepTime}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-semibold text-slate-900 mb-2.5">
-                    {recipe.title} {recipe.comingSoon && <span className="text-[9px] font-normal text-amber-600">(Soon)</span>}
+                  <h3 className="text-base font-semibold text-slate-900 mb-2.5">
+                    {recipe.title} {recipe.comingSoon && <span className="text-sm font-normal text-amber-600">(Soon)</span>}
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-light leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-base text-slate-500 font-light leading-relaxed mb-4 line-clamp-2">
                     {recipe.ingredients.slice(0, 3).join(", ")}...
                   </p>
                 </div>
@@ -677,12 +677,12 @@ export default function RecipesPage() {
                 <div className="mt-4 pt-3.5 border-t border-black/[0.02] flex items-center justify-between">
                   <div className="flex gap-1 overflow-hidden">
                     {recipe.tags.slice(0, 2).map((tag, i) => (
-                      <span key={i} className="text-[8px] text-slate-400 bg-slate-100 border border-slate-200/50 px-1.5 py-0.2 rounded">
+                      <span key={i} className="text-sm text-slate-400 bg-slate-100 border border-slate-200/50 px-2 py-0.5 rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <span className="text-[10px] text-[#2A7F7F] font-semibold flex items-center gap-0.5 hover:translate-x-0.5 transition-transform">
+                  <span className="text-sm text-[#2A7F7F] font-semibold flex items-center gap-0.5 hover:translate-x-0.5 transition-transform">
                     {recipe.comingSoon ? "Locked" : "Cook"}
                     <ChevronRight className="w-3.5 h-3.5" />
                   </span>
@@ -694,7 +694,7 @@ export default function RecipesPage() {
 
         {filteredRecipes.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-xs text-slate-400 font-light">No recipes found matching your query.</p>
+            <p className="text-base text-slate-400 font-light">No recipes found matching your query.</p>
           </div>
         )}
       </main>
@@ -723,10 +723,10 @@ export default function RecipesPage() {
               {/* Modal Header */}
               <div className="px-6 py-5 border-b border-black/[0.03] flex items-center justify-between bg-white/40">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-[10px] font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded-md">
+                  <span className="text-sm font-bold text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded-md">
                     {selectedRecipe.id}
                   </span>
-                  <span className="text-xs text-slate-400 font-light flex items-center gap-1">
+                  <span className="text-sm text-slate-400 font-light flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
                     {selectedRecipe.prepTime}
                   </span>
@@ -742,10 +742,10 @@ export default function RecipesPage() {
               {/* Modal Body */}
               <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
                 <div>
-                  <h2 className="text-xl font-semibold text-slate-950 mb-3">{selectedRecipe.title}</h2>
+                  <h2 className="text-xl font-semibold text-slate-955 mb-3">{selectedRecipe.title}</h2>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedRecipe.tags.map((tag, i) => (
-                      <span key={i} className="text-[9px] font-bold uppercase tracking-wider text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-md">
+                      <span key={i} className="text-sm font-bold uppercase tracking-wider text-[#2A7F7F] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-0.5 rounded-md">
                         {tag}
                       </span>
                     ))}
@@ -755,8 +755,8 @@ export default function RecipesPage() {
                 {selectedRecipe.comingSoon ? (
                   <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-6 text-center">
                     <AlertTriangle className="w-8 h-8 text-amber-500 mx-auto mb-3" />
-                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Formula Under Active Testing</h4>
-                    <p className="text-[11px] text-slate-500 font-light mt-1.5 max-w-sm mx-auto leading-relaxed">
+                    <h4 className="text-base font-bold text-slate-800 uppercase tracking-wider">Formula Under Active Testing</h4>
+                    <p className="text-base text-slate-500 font-light mt-1.5 max-w-sm mx-auto leading-relaxed">
                       We are currently tuning hydration ratios and fermentation times for this live prebiotic culture. Draft will unlock in the next system push.
                     </p>
                   </div>
@@ -765,13 +765,13 @@ export default function RecipesPage() {
                     {/* Ingredients & Steps */}
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                       <div className="md:col-span-2 space-y-3">
-                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                           <BookOpen className="w-3.5 h-3.5" />
                           Ingredients
                         </h4>
                         <ul className="space-y-2">
                           {selectedRecipe.ingredients.map((ing, i) => (
-                            <li key={i} className="text-[11px] sm:text-xs text-slate-700 font-light leading-relaxed flex items-start gap-1.5">
+                            <li key={i} className="text-base text-slate-700 font-light leading-relaxed flex items-start gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F]/30 mt-1.5 flex-shrink-0" />
                               <span>{ing}</span>
                             </li>
@@ -780,14 +780,14 @@ export default function RecipesPage() {
                       </div>
 
                       <div className="md:col-span-3 space-y-3">
-                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                           <Flame className="w-3.5 h-3.5" />
                           Instructions
                         </h4>
                         <ol className="space-y-3">
                           {selectedRecipe.steps.map((step, i) => (
-                            <li key={i} className="text-[11px] sm:text-xs text-slate-700 font-light leading-relaxed flex items-start gap-2.5">
-                              <span className="font-semibold text-[#2A7F7F] text-[10px] sm:text-xs w-4 flex-shrink-0">
+                            <li key={i} className="text-base text-slate-700 font-light leading-relaxed flex items-start gap-2.5">
+                              <span className="font-semibold text-[#2A7F7F] text-base w-4 flex-shrink-0">
                                 {i + 1}.
                               </span>
                               <span>{step}</span>
@@ -802,22 +802,22 @@ export default function RecipesPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-black/[0.03] pt-5">
                         {selectedRecipe.sensoryCues && (
                           <div className="bg-slate-100/50 border border-black/[0.02] rounded-2xl p-4">
-                            <h5 className="text-[9px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1 mb-1.5">
+                            <h5 className="text-sm font-bold text-slate-505 uppercase tracking-widest flex items-center gap-1 mb-1.5">
                               <Eye className="w-3.5 h-3.5 text-slate-400" />
                               Sensory Cues
                             </h5>
-                            <p className="text-[11px] text-slate-600 font-light leading-relaxed">
+                            <p className="text-base text-slate-600 font-light leading-relaxed">
                               {selectedRecipe.sensoryCues}
                             </p>
                           </div>
                         )}
                         {selectedRecipe.troubleshooting && (
                           <div className="bg-amber-500/[0.03] border border-amber-500/10 rounded-2xl p-4">
-                            <h5 className="text-[9px] font-bold text-amber-700 uppercase tracking-widest flex items-center gap-1 mb-1.5">
+                            <h5 className="text-sm font-bold text-amber-700 uppercase tracking-widest flex items-center gap-1 mb-1.5">
                               <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
                               If it goes wrong
                             </h5>
-                            <p className="text-[11px] text-amber-800 font-light leading-relaxed">
+                            <p className="text-base text-amber-800 font-light leading-relaxed">
                               {selectedRecipe.troubleshooting}
                             </p>
                           </div>
@@ -831,10 +831,10 @@ export default function RecipesPage() {
                         <Heart className="w-4 h-4 text-[#2A7F7F] fill-[#2A7F7F]/10" />
                       </div>
                       <div>
-                        <h5 className="text-[9px] font-bold text-[#2A7F7F] uppercase tracking-widest mb-1">
+                        <h5 className="text-sm font-bold text-[#2A7F7F] uppercase tracking-widest mb-1">
                           Why this heals
                         </h5>
-                        <p className="text-[11px] text-[#2A7F7F] font-medium leading-relaxed italic">
+                        <p className="text-base text-[#2A7F7F] font-medium leading-relaxed italic">
                           "{selectedRecipe.whyHeals}"
                         </p>
                       </div>
@@ -848,7 +848,7 @@ export default function RecipesPage() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="w-full text-center py-8 pb-10 text-[10px] tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 mt-auto">
+      <footer className="w-full text-center py-8 pb-10 text-sm tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 mt-auto">
         BUILT IN THE OPEN. ONE REP AT A TIME.
       </footer>
     </div>
