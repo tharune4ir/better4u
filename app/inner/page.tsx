@@ -227,7 +227,7 @@ export default function InnerUnlockPage() {
         <h1 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-[#2A7F7F] uppercase mb-2">
           Inner Room
         </h1>
-        <p className="text-[10px] font-semibold tracking-widest text-slate-500 uppercase mb-8 h-4">
+        <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase mb-8 h-4">
           {statusText}
         </p>
 
@@ -249,7 +249,7 @@ export default function InnerUnlockPage() {
 
           <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center gap-4 border-b border-[#2A7F7F]/25 pb-2 z-10 pointer-events-none">
             {password.length === 0 ? (
-              <span className="text-[11px] font-light tracking-[0.15em] text-slate-400 transition-all duration-300">
+              <span className="text-xs font-light tracking-[0.15em] text-slate-400 transition-all duration-300">
                 passcode
               </span>
             ) : (
@@ -274,7 +274,7 @@ export default function InnerUnlockPage() {
         <button
           onClick={handleSubmit}
           disabled={isUnlocking || password.length === 0}
-          className="mt-8 text-[10px] uppercase tracking-widest text-slate-400 hover:text-[#2A7F7F] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          className="mt-8 text-xs uppercase tracking-widest text-slate-400 hover:text-[#2A7F7F] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
         >
           Enter →
         </button>

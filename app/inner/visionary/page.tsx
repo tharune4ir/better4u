@@ -68,14 +68,14 @@ export default function InnerVisionaryPage() {
           <div className="absolute top-[10%] left-[20%] w-72 h-72 bg-[#2A7F7F]/3 rounded-full blur-[100px] pointer-events-none" />
 
           <div className="text-center mb-10">
-            <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-2">
+            <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1.5 rounded-full inline-flex items-center gap-1.5 mb-3">
               <ShoppingBag className="w-3 h-3" />
               The Vision Showcase
             </span>
             <h2 className="text-xl sm:text-2xl font-light text-slate-900">
               Future Physical <span className="font-semibold text-slate-850">FMCG Formulations</span>
             </h2>
-            <p className="text-[10px] text-slate-500 font-light mt-1 max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-slate-500 font-light mt-2 max-w-md mx-auto leading-relaxed">
               Turning private kitchen research and trial formulas into clean, zero-compromise bottled gut products.
             </p>
           </div>
@@ -100,32 +100,32 @@ export default function InnerVisionaryPage() {
               </div>
 
               <div>
-                <span className="text-[8px] font-bold uppercase tracking-widest text-[#2A7F7F] block mb-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#2A7F7F] block mb-1.5">
                   {activeProduct.patentStatus}
                 </span>
-                <h3 className="text-base font-semibold text-slate-900 mb-1">{activeProduct.name}</h3>
-                <p className="text-xs text-[#2A7F7F] font-medium italic mb-3">{activeProduct.tagline}</p>
-                <p className="text-[10px] sm:text-xs text-slate-500 font-light leading-relaxed mb-5">
+                <h3 className="text-lg font-semibold text-slate-900 mb-1">{activeProduct.name}</h3>
+                <p className="text-sm text-[#2A7F7F] font-medium italic mb-3">{activeProduct.tagline}</p>
+                <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed mb-5">
                   {activeProduct.description}
                 </p>
 
                 {/* Locked Ingredients */}
                 <div className="bg-slate-100/50 border border-black/[0.03] rounded-xl p-4 relative overflow-hidden flex flex-col justify-center min-h-[90px] backdrop-blur-sm">
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
                     Formulation Ingredients
                   </span>
                   <div className="flex flex-wrap gap-1.5 filter blur-[3.5px] select-none opacity-40">
                     {activeProduct.ingredients.map((ing, idx) => (
                       <span
                         key={idx}
-                        className="text-[9px] text-slate-500 bg-white/60 border border-black/[0.03] px-2.5 py-1 rounded-full font-light"
+                        className="text-xs text-slate-500 bg-white/60 border border-black/[0.03] px-2.5 py-1 rounded-full font-light"
                       >
                         {ing}
                       </span>
                     ))}
                   </div>
                   <div className="absolute inset-0 bg-white/10 flex items-center justify-center z-10">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#2A7F7F] bg-white/95 border border-[#2A7F7F]/15 px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2A7F7F] bg-white/95 border border-[#2A7F7F]/15 px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                       <Lock className="w-2.5 h-2.5" />
                       Formulation Locked
                     </span>
@@ -200,7 +200,7 @@ export default function InnerVisionaryPage() {
           <h3 className="text-lg font-light text-slate-700 mb-2">
             More coming — this grows over time.
           </h3>
-          <p className="text-xs text-slate-400 font-light max-w-sm mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-400 font-light max-w-sm mx-auto leading-relaxed">
             Additional formulations, kitchen trial logs, and product evolution entries will appear here as they move from experimentation to formulation lock.
           </p>
         </motion.div>

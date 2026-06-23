@@ -100,7 +100,7 @@ export default function InnerFamilyPage() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-slate-900 tracking-tight leading-none">
             The Ground We <span className="font-semibold text-slate-800">Stand On.</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-light mt-3 max-w-xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-500 font-light mt-3 max-w-xl leading-relaxed">
             The background engine. Handyman logs, kitchen system engineering, and financial runway discipline to preserve the baseline.
           </p>
         </motion.div>
@@ -114,7 +114,7 @@ export default function InnerFamilyPage() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div>
-              <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-0.5 rounded-full inline-flex items-center gap-1 mb-1.5">
+              <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-full inline-flex items-center gap-1 mb-1.5">
                 8-Month Horizon
               </span>
               <h2 className="text-xl sm:text-2xl font-light text-slate-900">
@@ -122,7 +122,7 @@ export default function InnerFamilyPage() {
               </h2>
             </div>
             <div className="flex items-center gap-3 bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3.5 py-2 rounded-2xl self-start sm:self-auto">
-              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Foundation Integrity</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Foundation Integrity</span>
               <div className="text-lg font-bold text-[#2A7F7F]">
                 {Math.round((homeMarkers.filter(Boolean).length / 4) * 100)}%
               </div>
@@ -150,7 +150,7 @@ export default function InnerFamilyPage() {
                 >
                   {homeMarkers[idx] && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
-                <p className={`text-xs font-light leading-snug ${homeMarkers[idx] ? "text-slate-800 font-normal" : "text-slate-500"}`}>
+                <p className={`text-sm font-light leading-relaxed ${homeMarkers[idx] ? "text-slate-800 font-normal" : "text-slate-500"}`}>
                   {marker.label}
                 </p>
               </button>
@@ -159,8 +159,8 @@ export default function InnerFamilyPage() {
 
           {/* Arrival Line */}
           <div className="mt-8 pt-6 border-t border-black/[0.03] text-center">
-            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
-            <p className="text-xs sm:text-sm text-[#2A7F7F] font-semibold italic max-w-xl mx-auto leading-relaxed">
+            <span className="text-xs text-slate-400 uppercase tracking-widest font-bold block mb-2">Arrival Line</span>
+            <p className="text-sm sm:text-base text-[#2A7F7F] font-semibold italic max-w-xl mx-auto leading-relaxed">
               &quot;The ground beneath me is solid, calm, and self-running — so I can build everything else on top of it.&quot;
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function InnerFamilyPage() {
         {/* Blueprint Logs */}
         <div className="mb-16">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-[#2A7F7F]">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[#2A7F7F]">
               Systems & Task Logs
             </h3>
             <div className="flex flex-wrap gap-1.5 bg-slate-200/50 p-1 rounded-xl border border-black/[0.03]">
@@ -177,7 +177,7 @@ export default function InnerFamilyPage() {
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`text-[9px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  className={`text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                     filter === cat
                       ? "bg-[#2A7F7F] text-white shadow-sm"
                       : "text-slate-500 hover:text-slate-800"
@@ -197,14 +197,14 @@ export default function InnerFamilyPage() {
               >
                 <div>
                   <div className="flex justify-between items-start mb-3">
-                    <span className="text-[8px] uppercase tracking-widest font-semibold text-[#2A7F7F] bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10 flex items-center gap-1">
+                    <span className="text-[10px] uppercase tracking-widest font-semibold text-[#2A7F7F] bg-[#2A7F7F]/5 px-2 py-0.5 rounded border border-[#2A7F7F]/10 flex items-center gap-1">
                       {log.category === "handyman" && <Wrench className="w-2.5 h-2.5" />}
                       {log.category === "kitchen" && <Layers className="w-2.5 h-2.5" />}
                       {log.category === "runway-admin" && <Database className="w-2.5 h-2.5" />}
                       {log.category === "runway-admin" ? "Runway/Admin" : log.category === "kitchen" ? "Kitchen" : "Handyman"}
                     </span>
                     <span
-                      className={`text-[8px] uppercase tracking-wider font-bold px-2 py-0.5 rounded border flex items-center gap-1 ${
+                      className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded border flex items-center gap-1 ${
                         log.status === "completed"
                           ? "bg-emerald-50 text-emerald-600 border-emerald-100"
                           : "bg-amber-50 text-amber-600 border-amber-100"
@@ -214,18 +214,18 @@ export default function InnerFamilyPage() {
                       {log.status === "completed" ? "Completed" : "In Progress"}
                     </span>
                   </div>
-                  <h4 className="text-xs font-semibold text-slate-800">{log.title}</h4>
-                  <p className="text-[10px] text-slate-500 font-light mt-1.5 leading-relaxed">{log.description}</p>
+                  <h4 className="text-sm font-semibold text-slate-900">{log.title}</h4>
+                  <p className="text-xs sm:text-sm text-slate-500 font-light mt-2 leading-relaxed">{log.description}</p>
                 </div>
                 {log.details && (
                   <div className="border-t border-black/[0.03] pt-3 mt-4">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1.5">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
                       Sub-tasks & Safety Notes
                     </span>
-                    <ul className="flex flex-col gap-1">
+                    <ul className="flex flex-col gap-1.5">
                       {log.details.map((detail, dIdx) => (
-                        <li key={dIdx} className="text-[9px] text-slate-600 font-light flex items-start gap-1.5">
-                          <span className="w-1 h-1 rounded-full bg-[#2A7F7F] mt-1.5 flex-shrink-0" />
+                        <li key={dIdx} className="text-xs sm:text-sm text-slate-600 font-light flex items-start gap-1.5">
+                          <span className="w-1 h-1 rounded-full bg-[#2A7F7F] mt-2 flex-shrink-0" />
                           <span>{detail}</span>
                         </li>
                       ))}

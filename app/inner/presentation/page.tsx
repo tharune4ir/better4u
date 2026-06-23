@@ -97,12 +97,12 @@ export default function InnerPresentationPage() {
               <User className="w-4 h-4 text-[#2A7F7F]" />
             </div>
             <div>
-              <span className="text-[8px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Chapter 01</span>
+              <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Chapter 01</span>
               <h2 className="text-lg font-semibold text-slate-900">Who I Am & Capability Proof</h2>
             </div>
           </div>
 
-          <div className="space-y-4 text-xs text-slate-650 font-light leading-relaxed">
+          <div className="space-y-4 text-sm text-slate-650 font-light leading-relaxed">
             <p>
               I am an builder committed to systems design, engineering full-stack digital architectures (like this entire Trelis platform) and structuring physical operating frameworks.
             </p>
@@ -111,12 +111,12 @@ export default function InnerPresentationPage() {
             </p>
             <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-black/[0.03]">
               <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02]">
-                <span className="text-[9px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Web Dev & Systems</span>
-                <p className="text-[10px] text-slate-500">React, Next.js architecture, state synchronization, dynamic design protocols.</p>
+                <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1.5">Web Dev & Systems</span>
+                <p className="text-xs sm:text-sm text-slate-500">React, Next.js architecture, state synchronization, dynamic design protocols.</p>
               </div>
               <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02]">
-                <span className="text-[9px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Physical Execution</span>
-                <p className="text-[10px] text-slate-500">Formulating prebiotics, constructing fitness regimens, daily habit automation.</p>
+                <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1.5">Physical Execution</span>
+                <p className="text-xs sm:text-sm text-slate-500">Formulating prebiotics, constructing fitness regimens, daily habit automation.</p>
               </div>
             </div>
           </div>
@@ -137,13 +137,13 @@ export default function InnerPresentationPage() {
               <Heart className="w-4 h-4 text-[#2A7F7F]" />
             </div>
             <div>
-              <span className="text-[8px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Chapter 02</span>
+              <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Chapter 02</span>
               <h2 className="text-lg font-semibold text-slate-900">The &quot;Doctor-Lag&quot; Thesis</h2>
             </div>
           </div>
 
-          <div className="space-y-4 text-xs text-slate-650 font-light leading-relaxed">
-            <p className="text-sm font-light text-slate-800 italic border-l-2 border-[#2A7F7F]/40 pl-4 py-1">
+          <div className="space-y-4 text-sm text-slate-650 font-light leading-relaxed">
+            <p className="text-base font-light text-slate-800 italic border-l-2 border-[#2A7F7F]/40 pl-4 py-1">
               &quot;Your physical state today is a lagging reflection of the actions you committed to 3 to 6 months ago. When clinical indicators flag an issue, they are diagnosing the past.&quot;
             </p>
             <p>
@@ -168,12 +168,12 @@ export default function InnerPresentationPage() {
               <Activity className="w-4 h-4 text-[#2A7F7F]" />
             </div>
             <div>
-              <span className="text-[8px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Chapter 03</span>
+              <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Chapter 03</span>
               <h2 className="text-lg font-semibold text-slate-900">The 8-Month Infinite Health Blueprint</h2>
             </div>
           </div>
 
-          <div className="space-y-6 text-xs text-slate-650 font-light leading-relaxed">
+          <div className="space-y-6 text-sm text-slate-650 font-light leading-relaxed">
             <p>
               This structured protocol operates across three distinct biological wings designed to build an unbreakable physical foundation over a focused 8-month horizon:
             </p>
@@ -182,8 +182,8 @@ export default function InnerPresentationPage() {
               <div className="flex gap-4">
                 <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/10 border border-[#2A7F7F]/10 w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0">01</span>
                 <div>
-                  <h4 className="text-xs font-semibold text-slate-800">The Food Wing (Prebiotic Engine)</h4>
-                  <p className="text-[10px] text-slate-500 mt-1">
+                  <h4 className="text-sm font-semibold text-slate-900 mb-1">The Food Wing (Prebiotic Engine)</h4>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mt-1">
                     Transitioning to prebiotic-dense, grain-first, and wild-fermented fuels. This restores mucosal barrier lining, optimizes nutrient extraction, and stabilizes glycemic variability.
                   </p>
                 </div>
@@ -192,8 +192,8 @@ export default function InnerPresentationPage() {
               <div className="flex gap-4">
                 <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/10 border border-[#2A7F7F]/10 w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0">02</span>
                 <div>
-                  <h4 className="text-xs font-semibold text-slate-800">The Movement Wing (Durable Chassis)</h4>
-                  <p className="text-[10px] text-slate-500 mt-1">
+                  <h4 className="text-sm font-semibold text-slate-900 mb-1">The Movement Wing (Durable Chassis)</h4>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mt-1">
                     Building shoulder mobility, kinetic chain integrity, and lean resilience using progressive bodyweight exercises, rings, and structured macebell swing protocols.
                   </p>
                 </div>
@@ -202,8 +202,8 @@ export default function InnerPresentationPage() {
               <div className="flex gap-4">
                 <span className="text-xs font-bold text-[#2A7F7F] bg-[#2A7F7F]/10 border border-[#2A7F7F]/10 w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0">03</span>
                 <div>
-                  <h4 className="text-xs font-semibold text-slate-800">The Thinking Wing (Cognitive Buffer)</h4>
-                  <p className="text-[10px] text-slate-500 mt-1">
+                  <h4 className="text-sm font-semibold text-slate-900 mb-1">The Thinking Wing (Cognitive Buffer)</h4>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mt-1">
                     Mitigating stress-induced neuro-exhaustion via Non-Sleep Deep Rest (NSDR), regular boredom-on-purpose sessions, clear language formulation, and daily logical framework calibration.
                   </p>
                 </div>
@@ -225,12 +225,12 @@ export default function InnerPresentationPage() {
               <TrendingUp className="w-4 h-4 text-[#2A7F7F]" />
             </div>
             <div>
-              <span className="text-[8px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Chapter 04</span>
+              <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Chapter 04</span>
               <h2 className="text-lg font-semibold text-slate-900">The Brand Plan: Bottling the Future</h2>
             </div>
           </div>
 
-          <div className="space-y-4 text-xs text-slate-650 font-light leading-relaxed">
+          <div className="space-y-4 text-sm text-slate-650 font-light leading-relaxed">
             <p>
               Trelis is not designed to stay a personal log. The kitchen experimentation and formulation trials represent initial R&D for a future physical consumer brand.
             </p>
@@ -238,17 +238,17 @@ export default function InnerPresentationPage() {
               The long-term roadmap aims to transition these private gut-friendly prebiotic mixtures and fermented concoctions into zero-compromise, clean physical goods (such as Gut-Spark mixtures or prebiotic blends) to build a scalable and sustainable wellness engine.
             </p>
             <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02] mt-4">
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block mb-2">Roadmap Target Milestones</span>
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2">Roadmap Target Milestones</span>
               <div className="space-y-2">
-                <div className="flex justify-between items-center text-[10px] text-slate-600 border-b border-black/[0.03] pb-1.5">
+                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 border-b border-black/[0.03] pb-1.5">
                   <span>Phase 1: Personal Formulation Lock</span>
                   <span className="text-[#2A7F7F] font-semibold">Active</span>
                 </div>
-                <div className="flex justify-between items-center text-[10px] text-slate-600 border-b border-black/[0.03] pb-1.5">
+                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 border-b border-black/[0.03] pb-1.5">
                   <span>Phase 2: Local Kitchen Production Trial</span>
                   <span>Months 4–6</span>
                 </div>
-                <div className="flex justify-between items-center text-[10px] text-slate-600">
+                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600">
                   <span>Phase 3: Brand Launch & Distribution</span>
                   <span>Month 8+</span>
                 </div>
@@ -270,40 +270,40 @@ export default function InnerPresentationPage() {
               <DollarSign className="w-4 h-4 text-[#2A7F7F]" />
             </div>
             <div>
-              <span className="text-[8px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Chapter 05</span>
+              <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Chapter 05</span>
               <h2 className="text-lg font-semibold text-slate-900">Runway & Financial Ask</h2>
             </div>
           </div>
 
-          <div className="space-y-5 text-xs text-slate-650 font-light leading-relaxed">
+          <div className="space-y-5 text-sm text-slate-650 font-light leading-relaxed">
             <p>
               To maintain the integrity of this build sequence, financial parameters are tightly managed under a strict weekly budget cap, ensuring zero resource wastage.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02] text-center">
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Horizon</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Horizon</span>
                 <span className="text-sm font-semibold text-slate-800">8 Months</span>
               </div>
               <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02] text-center">
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Weekly Cap</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Weekly Cap</span>
                 <span className="text-sm font-semibold text-[#2A7F7F]">Strict limit</span>
               </div>
               <div className="bg-slate-200/30 p-4 rounded-2xl border border-black/[0.02] text-center">
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Administration</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Administration</span>
                 <span className="text-sm font-semibold text-slate-800">Clean Entity</span>
               </div>
             </div>
 
             <div className="bg-slate-200/35 p-4 rounded-2xl border border-black/[0.02] space-y-3">
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block">The Ask Details</span>
-              <p className="text-[10px] text-slate-650">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">The Ask Details</span>
+              <p className="text-xs sm:text-sm text-slate-650">
                 1. <strong>Strict Capital Stewardship:</strong> Execute runway preservation by maintaining low baseline costs.
               </p>
-              <p className="text-[10px] text-slate-650">
+              <p className="text-xs sm:text-sm text-slate-650">
                 2. <strong>Administrative Independence:</strong> Quiet background operation to allow full focus on system creation and physical formulation trials.
               </p>
-              <p className="text-[10px] text-slate-650">
+              <p className="text-xs sm:text-sm text-slate-650">
                 3. <strong>Long-Term Alignment:</strong> Trusting the 8-month structure to deliver the locked consumer formulations.
               </p>
             </div>
