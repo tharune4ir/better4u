@@ -69,11 +69,11 @@ export default function InnerUnlockPage() {
   return (
     <div
       onClick={handleContainerClick}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0a09] overflow-hidden select-none cursor-pointer px-4 sm:px-6"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F7F6F2] overflow-hidden select-none cursor-pointer px-4 sm:px-6"
     >
-      {/* Ambient Deep Amber Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-gradient-to-tr from-amber-700/15 to-orange-900/10 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] bg-gradient-to-tr from-stone-800/20 to-amber-800/5 rounded-full blur-[100px] sm:blur-[120px] pointer-events-none" />
+      {/* Ambient Soft Teal/Teal-Green Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-gradient-to-tr from-[#2A7F7F]/8 to-[#81cbcb]/4 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] bg-gradient-to-tr from-[#2A7F7F]/4 to-[#1e5c5c]/2 rounded-full blur-[100px] sm:blur-[120px] pointer-events-none" />
 
       {/* Lock Container */}
       <motion.div
@@ -116,20 +116,20 @@ export default function InnerUnlockPage() {
             {/* Lantern top hook */}
             <path
               d="M60,5 C60,5 55,10 55,18 L65,18 C65,10 60,5 60,5"
-              stroke="#d97706"
+              stroke="#2A7F7F"
               strokeWidth="2"
               strokeLinecap="round"
               fill="none"
-              opacity="0.6"
+              opacity="0.75"
             />
 
             {/* Lantern cage frame */}
             <path
               d="M35,30 L85,30 L90,45 L90,110 C90,120 82,130 72,130 L48,130 C38,130 30,120 30,110 L30,45 Z"
-              stroke="#d97706"
+              stroke="#2A7F7F"
               strokeWidth="1.5"
               fill="none"
-              opacity="0.4"
+              opacity="0.5"
             />
 
             {/* Lantern top plate */}
@@ -139,11 +139,11 @@ export default function InnerUnlockPage() {
               width="54"
               height="6"
               rx="2"
-              fill="#92400e"
-              fillOpacity="0.6"
+              fill="#1e5c5c"
+              fillOpacity="0.8"
             />
 
-            {/* Inner glow flame — the "deeper" amber */}
+            {/* Inner glow flame — brand teal */}
             <AnimatePresence>
               {!isUnlocking && (
                 <motion.ellipse
@@ -154,7 +154,7 @@ export default function InnerUnlockPage() {
                   fill="url(#flameGlow)"
                   initial={{ opacity: 0.6, scale: 0.9 }}
                   animate={{
-                    opacity: [0.5, 0.8, 0.5],
+                    opacity: [0.6, 0.9, 0.6],
                     scale: [0.9, 1.05, 0.9],
                     ry: [26, 30, 26],
                   }}
@@ -185,9 +185,9 @@ export default function InnerUnlockPage() {
             </AnimatePresence>
 
             {/* Lantern vertical bars */}
-            <line x1="42" y1="35" x2="42" y2="125" stroke="#92400e" strokeWidth="1" opacity="0.3" />
-            <line x1="60" y1="31" x2="60" y2="128" stroke="#92400e" strokeWidth="1" opacity="0.25" />
-            <line x1="78" y1="35" x2="78" y2="125" stroke="#92400e" strokeWidth="1" opacity="0.3" />
+            <line x1="42" y1="35" x2="42" y2="125" stroke="#1e5c5c" strokeWidth="1" opacity="0.25" />
+            <line x1="60" y1="31" x2="60" y2="128" stroke="#1e5c5c" strokeWidth="1" opacity="0.2" />
+            <line x1="78" y1="35" x2="78" y2="125" stroke="#1e5c5c" strokeWidth="1" opacity="0.25" />
 
             {/* Lantern base */}
             <rect
@@ -196,8 +196,8 @@ export default function InnerUnlockPage() {
               width="44"
               height="6"
               rx="2"
-              fill="#92400e"
-              fillOpacity="0.5"
+              fill="#1e5c5c"
+              fillOpacity="0.7"
             />
 
             {/* Lock keyhole in the center */}
@@ -209,25 +209,25 @@ export default function InnerUnlockPage() {
               }
               style={{ transformOrigin: "60px 95px" }}
             >
-              <circle cx="60" cy="90" r="6" fill="#1c1917" stroke="#d97706" strokeWidth="1" opacity="0.8" />
-              <rect x="58" y="94" width="4" height="10" rx="1" fill="#1c1917" opacity="0.8" />
+              <circle cx="60" cy="90" r="6" fill="#F7F6F2" stroke="#2A7F7F" strokeWidth="1" opacity="0.95" />
+              <rect x="58" y="94" width="4" height="10" rx="1" fill="#2A7F7F" opacity="0.95" />
             </motion.g>
 
             <defs>
               <radialGradient id="flameGlow" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.9" />
-                <stop offset="40%" stopColor="#d97706" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#92400e" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#81cbcb" stopOpacity="0.95" />
+                <stop offset="50%" stopColor="#2A7F7F" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#1e5c5c" stopOpacity="0.1" />
               </radialGradient>
             </defs>
           </svg>
         </motion.div>
 
         {/* Title */}
-        <h1 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-amber-600/80 uppercase mb-2">
+        <h1 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-[#2A7F7F] uppercase mb-2">
           Inner Room
         </h1>
-        <p className="text-[10px] font-medium tracking-widest text-stone-500 uppercase mb-8 h-4">
+        <p className="text-[10px] font-semibold tracking-widest text-slate-500 uppercase mb-8 h-4">
           {statusText}
         </p>
 
@@ -247,9 +247,9 @@ export default function InnerUnlockPage() {
             autoFocus
           />
 
-          <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center gap-4 border-b border-amber-700/25 pb-2 z-10 pointer-events-none">
+          <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center gap-4 border-b border-[#2A7F7F]/25 pb-2 z-10 pointer-events-none">
             {password.length === 0 ? (
-              <span className="text-[11px] font-light tracking-[0.15em] text-stone-600/60 transition-all duration-300">
+              <span className="text-[11px] font-light tracking-[0.15em] text-slate-400 transition-all duration-300">
                 passcode
               </span>
             ) : (
@@ -259,14 +259,14 @@ export default function InnerUnlockPage() {
                     key={i}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="w-2.5 h-2.5 rounded-full bg-amber-600"
+                    className="w-2.5 h-2.5 rounded-full bg-[#2A7F7F]"
                   />
                 ))}
               </div>
             )}
 
             {/* Blinking Caret */}
-            <div className="w-[2px] h-4 bg-amber-600 custom-cursor" />
+            <div className="w-[2px] h-4 bg-[#2A7F7F] custom-cursor" />
           </div>
         </div>
 
@@ -274,7 +274,7 @@ export default function InnerUnlockPage() {
         <button
           onClick={handleSubmit}
           disabled={isUnlocking || password.length === 0}
-          className="mt-8 text-[10px] uppercase tracking-widest text-stone-500 hover:text-amber-500 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          className="mt-8 text-[10px] uppercase tracking-widest text-slate-400 hover:text-[#2A7F7F] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
         >
           Enter →
         </button>
