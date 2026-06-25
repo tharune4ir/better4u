@@ -43,11 +43,7 @@ next-env.d.ts
 # custom exclusions
 /content/
 /content/**/*.md
-TRELIS_LIFE_BUILD_STATE.md
-TRELIS_LIFE_PHASE2_MASTER_STATE.md
 /all_logo_files/
-Gut_Pillar_Recipe_Bible_v2.md
-Exhaustive_Content_Log.md
 
 
 
