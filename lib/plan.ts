@@ -1,4 +1,4 @@
-import rawPlan from "@/content/superhuman_plan.json";
+import rawPlan from "@/data/superhuman_plan.json";
 import { SuperhumanPlan, DayPlan, Recipe, FoodItem, BodyWorkout, MindActivity } from "./plan-types";
 
 // Cast the imported JSON to our full type
