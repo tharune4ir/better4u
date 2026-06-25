@@ -23,9 +23,13 @@ import {
   ShoppingBag,
   ListTodo,
   TrendingUp,
-  Apple
+  Apple,
+  Search
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
+import { getTodayDay, getFoodUniverse, resolveRecipe, FlattenedFoodItem, plan } from "@/lib/plan";
+import { useLocalStore } from "@/lib/log-store";
+import { DIVERSITY_TARGET_PUBLIC } from "@/lib/config";
 import { 
   GUT_PRINCIPLES, 
   PLANT_CATEGORIES, 
@@ -71,19 +75,44 @@ export default function FoodPage() {
   // Sheet States
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
 
+  // Store and Plan Data
+  const { isHydrated, getWeekPlants, togglePlant, resetWeekPlants, getFermentsToday, logFerment } = useLocalStore();
+  const todayDay = getTodayDay();
+  const foodUniverse = React.useMemo(() => getFoodUniverse(), []);
+  
+  // Iso week calc
+  const getIsoWeek = () => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+    const week1 = new Date(d.getFullYear(), 0, 4);
+    const weekNum = 1 + Math.round(((d.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    return `${d.getFullYear()}-W${weekNum}`;
+  };
+  const currentWeekKey = getIsoWeek();
+  const checkedPlantsSet = isHydrated ? getWeekPlants(currentWeekKey) : new Set<string>();
+  const checkedPlantsCount = checkedPlantsSet.size;
+
   // 30+ Plants active category state
-  const [selectedPlantCategory, setSelectedPlantCategory] = useState<string>("gourds");
+  const [selectedPlantCategory, setSelectedPlantCategory] = useState<string>("all");
+  const [plantSearch, setPlantSearch] = useState("");
   
-  // Diversity counter (simulated/active checkmarks)
-  const [checkedPlants, setCheckedPlants] = useState<string[]>([]);
-  
-  // 3-Ferments Logger State
-  const [loggedFerments, setLoggedFerments] = useState<{ [key: string]: string | null }>({
-    morning: null,
-    afternoon: null,
-    evening: null
-  });
+  // 3-Ferments Logger State (Local state since the user wants daily slots, wait log-store has getFermentsToday)
+  // Let's use local state for the selector UI
   const [showLogSelector, setShowLogSelector] = useState<string | null>(null);
+
+  // For ferments, we'll store slot data in local storage or just keep local state
+  // Using simple local state for slots since the store only has getFermentsToday count
+  const [loggedFerments, setLoggedFerments] = useState<{ [key: string]: string | null }>({
+    morning: null, afternoon: null, evening: null
+  });
+  
+  useEffect(() => {
+    if (isHydrated) {
+      const count = Object.values(loggedFerments).filter(Boolean).length;
+      logFerment(todayDay.date, count);
+    }
+  }, [loggedFerments, isHydrated, todayDay.date]);
 
   // Pantry checkbox state
   const [checkedPantryItems, setCheckedPantryItems] = useState<string[]>([]);
@@ -100,15 +129,15 @@ export default function FoodPage() {
       router.push("/movement");
     } else if (tab === "thinking") {
       router.push("/inner/thinking");
+    } else if (tab === "timeline") {
+      router.push("/timeline");
     } else if (tab === "food") {
       router.push("/food");
     }
   };
 
-  const togglePlantChecked = (plant: string) => {
-    setCheckedPlants(prev => 
-      prev.includes(plant) ? prev.filter(p => p !== plant) : [...prev, plant]
-    );
+  const handleTogglePlant = (id: string) => {
+    togglePlant(currentWeekKey, id);
   };
 
   const togglePantryChecked = (item: string) => {
@@ -117,12 +146,28 @@ export default function FoodPage() {
     );
   };
 
-  const logFerment = (slot: string, fermentName: string) => {
+  const handleLogFerment = (slot: string, fermentName: string) => {
     setLoggedFerments(prev => ({ ...prev, [slot]: fermentName }));
     setShowLogSelector(null);
   };
 
-  const activePlantCat = PLANT_CATEGORIES.find(c => c.id === selectedPlantCategory) || PLANT_CATEGORIES[0];
+  const meal1Recipe = resolveRecipe(todayDay.ideal.meal1.recipe_id);
+  const meal2Recipe = resolveRecipe(todayDay.ideal.meal2.recipe_id);
+
+  // Group food universe by category
+  const categoriesMap = new Map<string, FlattenedFoodItem[]>();
+  foodUniverse.forEach(item => {
+    if (!categoriesMap.has(item.category)) categoriesMap.set(item.category, []);
+    categoriesMap.get(item.category)!.push(item);
+  });
+  const allCategories = Array.from(categoriesMap.keys());
+  
+  const filteredPlants = foodUniverse.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(plantSearch.toLowerCase()) || 
+                          (item.local_name && item.local_name.toLowerCase().includes(plantSearch.toLowerCase()));
+    const matchesCat = selectedPlantCategory === "all" || item.category === selectedPlantCategory;
+    return matchesSearch && matchesCat;
+  });
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden">
@@ -228,7 +273,7 @@ export default function FoodPage() {
                   Diversity Tracker
                 </span>
                 <div className="flex items-center gap-1.5 bg-[#2A7F7F]/5 px-2 py-0.5 rounded-full border border-[#2A7F7F]/10">
-                  <span className="text-sm font-bold text-[#2A7F7F]">{checkedPlants.length}/30</span>
+                  <span className="text-sm font-bold text-[#2A7F7F]">{checkedPlantsCount}/{DIVERSITY_TARGET_PUBLIC}</span>
                 </div>
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-2">30+ Plants Engine</h3>
@@ -400,25 +445,18 @@ export default function FoodPage() {
                       </p>
                     </div>
 
-                    {/* Plate Formula */}
                     <div className="space-y-3">
-                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">The Daily Plate Formula</h4>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Today's Plate (Meal 1 & 2)</h4>
                       <div className="bg-white border border-black/[0.02] rounded-2xl p-5 space-y-4">
-                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
-                          <span className="font-light text-slate-500">Millet / Grain Base</span>
-                          <span className="font-medium text-slate-900">1 part</span>
+                        <div className="flex flex-col text-sm pb-3 border-b border-slate-100">
+                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Meal 1</span>
+                          <span className="font-medium text-slate-900">{todayDay.ideal.meal1.name}</span>
+                          {meal1Recipe && <span className="text-xs text-slate-400 mt-1">{meal1Recipe.ingredients.join(', ')}</span>}
                         </div>
-                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
-                          <span className="font-light text-slate-500">Moong / Legume Protein</span>
-                          <span className="font-medium text-slate-900">1 part</span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm pb-3 border-b border-slate-100">
-                          <span className="font-light text-slate-500">Colourful Cooked Veg</span>
-                          <span className="font-medium text-slate-900">2 parts</span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="font-light text-slate-500">Live Ferment + Seed Sprinkle</span>
-                          <span className="font-medium text-[#2A7F7F]">1 serving + 1 tbsp</span>
+                        <div className="flex flex-col text-sm pb-3 border-b border-slate-100">
+                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Meal 2</span>
+                          <span className="font-medium text-slate-900">{todayDay.ideal.meal2.name}</span>
+                          {meal2Recipe && <span className="text-xs text-slate-400 mt-1">{meal2Recipe.ingredients.join(', ')}</span>}
                         </div>
                       </div>
                     </div>
@@ -446,53 +484,78 @@ export default function FoodPage() {
                   <div className="space-y-6">
                     <div className="flex justify-between items-center bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-5">
                       <div>
-                        <h4 className="text-sm font-semibold text-slate-900">Diversity Target: 30 Plants/Week</h4>
+                        <h4 className="text-sm font-semibold text-slate-900">Diversity Target: {DIVERSITY_TARGET_PUBLIC}+ Plants/Week</h4>
                         <p className="text-xs text-slate-500 font-light mt-1">Check items off as you consume them this week.</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-2xl font-extralight text-[#2A7F7F]">{checkedPlants.length}</span>
+                        <span className="text-2xl font-extralight text-[#2A7F7F]">{checkedPlantsCount}</span>
                         <span className="text-xs text-slate-400 block">points</span>
                       </div>
                     </div>
 
+                    {/* Search and Reset */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="relative flex-1">
+                        <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          placeholder="Search plants..."
+                          value={plantSearch}
+                          onChange={(e) => setPlantSearch(e.target.value)}
+                          className="w-full pl-9 pr-4 py-2 rounded-xl border border-black/[0.05] bg-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2A7F7F]/30"
+                        />
+                      </div>
+                      <button 
+                        onClick={() => resetWeekPlants(currentWeekKey)}
+                        className="text-xs font-semibold text-red-600 bg-red-50 px-3 py-2 rounded-xl"
+                      >
+                        Reset Week
+                      </button>
+                    </div>
+
                     {/* Plant category buttons */}
-                    <div className="flex flex-wrap gap-1.5 border-b border-black/[0.03] pb-3">
-                      {PLANT_CATEGORIES.map(cat => (
+                    <div className="flex overflow-x-auto gap-1.5 border-b border-black/[0.03] pb-3 scrollbar-none whitespace-nowrap">
+                      <button
+                        onClick={() => setSelectedPlantCategory("all")}
+                        className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all flex-shrink-0 ${
+                          selectedPlantCategory === "all" ? "bg-[#2A7F7F] text-white" : "bg-white/50 border border-black/[0.02] text-slate-600 hover:bg-white"
+                        }`}
+                      >
+                        All Plants
+                      </button>
+                      {allCategories.map(cat => (
                         <button
-                          key={cat.id}
-                          onClick={() => setSelectedPlantCategory(cat.id)}
-                          className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all ${
-                            selectedPlantCategory === cat.id
-                              ? "bg-[#2A7F7F] text-white"
-                              : "bg-white/50 border border-black/[0.02] text-slate-600 hover:bg-white"
+                          key={cat}
+                          onClick={() => setSelectedPlantCategory(cat)}
+                          className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all flex-shrink-0 ${
+                            selectedPlantCategory === cat ? "bg-[#2A7F7F] text-white" : "bg-white/50 border border-black/[0.02] text-slate-600 hover:bg-white"
                           }`}
                         >
-                          {cat.name}
+                          {cat.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                         </button>
                       ))}
                     </div>
 
                     {/* Plant items checklist */}
-                    <div className="grid grid-cols-1 gap-2">
-                      {activePlantCat.items.map((item, idx) => {
-                        const isChecked = checkedPlants.includes(item);
+                    <div className="grid grid-cols-1 gap-2 max-h-[400px] overflow-y-auto pr-2">
+                      {filteredPlants.map((item, idx) => {
+                        const isChecked = checkedPlantsSet.has(item.id);
                         return (
                           <button
                             key={idx}
-                            onClick={() => togglePlantChecked(item)}
+                            onClick={() => handleTogglePlant(item.id)}
                             className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between cursor-pointer ${
-                              isChecked
-                                ? "bg-[#2A7F7F]/5 border-[#2A7F7F]/30"
-                                : "bg-white/40 border-black/[0.02] hover:border-black/[0.06]"
+                              isChecked ? "bg-[#2A7F7F]/5 border-[#2A7F7F]/30" : "bg-white/40 border-black/[0.02] hover:border-black/[0.06]"
                             }`}
                           >
-                            <span className={`text-sm font-light ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
-                              {item}
-                            </span>
+                            <div>
+                              <span className={`text-sm font-light block ${isChecked ? "text-slate-900 font-normal" : "text-slate-700"}`}>
+                                {item.name} {item.local_name && <span className="text-xs text-slate-400">({item.local_name})</span>}
+                              </span>
+                              <span className="text-[10px] text-slate-400 uppercase tracking-widest">{item.role}</span>
+                            </div>
                             <div className={`w-4.5 h-4.5 rounded border flex items-center justify-center flex-shrink-0 transition-all ${
-                              isChecked
-                                ? "bg-[#2A7F7F] border-[#2A7F7F] text-white"
-                                : "border-slate-300 bg-white"
+                              isChecked ? "bg-[#2A7F7F] border-[#2A7F7F] text-white" : "border-slate-300 bg-white"
                             }`}>
                               {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                             </div>
@@ -563,18 +626,16 @@ export default function FoodPage() {
                             {/* Dropdown overlay */}
                             {showLogSelector === slot && (
                               <div className="absolute top-12 left-0 right-0 max-h-[160px] overflow-y-auto bg-[#F7F6F2] border border-black/[0.08] shadow-lg rounded-xl p-2 z-50 flex flex-col gap-1">
-                                {FERMENT_CATEGORIES.flatMap(cat => cat.items).map((item, idx) => (
+                                {Object.keys(plan.fermented.items).map((itemName, idx) => (
                                   <button
                                     key={idx}
-                                    onClick={() => logFerment(slot, item.name)}
+                                    onClick={() => handleLogFerment(slot, itemName)}
                                     className="text-left px-2 py-1.5 rounded-lg text-xs text-slate-700 hover:bg-[#2A7F7F]/10 hover:text-[#2A7F7F] transition-colors flex justify-between items-center"
                                   >
-                                    <span>{item.name}</span>
-                                    {item.isLive && (
-                                      <span className="text-xs bg-emerald-500/10 text-emerald-700 px-1.5 py-0.5 rounded font-bold uppercase">
-                                        Live
-                                      </span>
-                                    )}
+                                    <span>{itemName}</span>
+                                    <span className="text-xs bg-emerald-500/10 text-emerald-700 px-1.5 py-0.5 rounded font-bold uppercase">
+                                      {plan.fermented.items[itemName as keyof typeof plan.fermented.items]}
+                                    </span>
                                   </button>
                                 ))}
                               </div>

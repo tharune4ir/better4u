@@ -8,10 +8,11 @@ import {
   Apple, 
   Activity, 
   BrainCircuit, 
-  Sparkle
+  Sparkle,
+  Compass
 } from "lucide-react";
 
-export type NavTab = "food" | "movement" | "thinking";
+export type NavTab = "food" | "movement" | "thinking" | "timeline";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -39,6 +40,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
+    { id: "timeline" as NavTab, label: "Journey", sub: "Today", icon: Compass },
     { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
     { id: "movement" as NavTab, label: "Movement", sub: "Build", icon: Activity },
   ];
