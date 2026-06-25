@@ -456,8 +456,15 @@ export default function FoodPage() {
                         <div className="flex flex-col text-sm pb-3 border-b border-slate-100">
                           <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Meal 2</span>
                           <span className="font-medium text-slate-900">{todayDay.ideal.meal2.name}</span>
+                          <span className="text-xs text-amber-600 mt-1 font-medium">{todayDay.ideal.meal2.note}</span>
                           {meal2Recipe && <span className="text-xs text-slate-400 mt-1">{meal2Recipe.ingredients.join(', ')}</span>}
                         </div>
+                        {todayDay.ideal.live_ferment && (
+                          <div className="flex flex-col text-sm pt-2">
+                            <span className="font-light text-[#2A7F7F] uppercase text-[10px] tracking-widest mb-1 font-bold">Today's Live Ferment</span>
+                            <span className="font-medium text-slate-900">{todayDay.ideal.live_ferment}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -625,19 +632,38 @@ export default function FoodPage() {
 
                             {/* Dropdown overlay */}
                             {showLogSelector === slot && (
-                              <div className="absolute top-12 left-0 right-0 max-h-[160px] overflow-y-auto bg-[#F7F6F2] border border-black/[0.08] shadow-lg rounded-xl p-2 z-50 flex flex-col gap-1">
-                                {Object.keys(plan.fermented.items).map((itemName, idx) => (
-                                  <button
-                                    key={idx}
-                                    onClick={() => handleLogFerment(slot, itemName)}
-                                    className="text-left px-2 py-1.5 rounded-lg text-xs text-slate-700 hover:bg-[#2A7F7F]/10 hover:text-[#2A7F7F] transition-colors flex justify-between items-center"
-                                  >
-                                    <span>{itemName}</span>
-                                    <span className="text-xs bg-emerald-500/10 text-emerald-700 px-1.5 py-0.5 rounded font-bold uppercase">
-                                      {plan.fermented.items[itemName as keyof typeof plan.fermented.items]}
-                                    </span>
-                                  </button>
-                                ))}
+                              <div className="absolute top-12 left-0 right-0 max-h-[220px] overflow-y-auto bg-[#F7F6F2] border border-black/[0.08] shadow-lg rounded-xl p-2 z-50 flex flex-col gap-1">
+                                <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 px-2 pt-1 pb-1">Live Probiotics (Counts toward target)</div>
+                                {Object.keys(plan.fermented.live_probiotic).map((itemName, idx) => {
+                                  const item = plan.fermented.live_probiotic[itemName];
+                                  return (
+                                    <button
+                                      key={`live-${idx}`}
+                                      onClick={() => handleLogFerment(slot, item.name)}
+                                      className="text-left px-2 py-1.5 rounded-lg text-xs text-slate-700 hover:bg-[#2A7F7F]/10 hover:text-[#2A7F7F] transition-colors flex justify-between items-center"
+                                    >
+                                      <span>{item.name}</span>
+                                      <span className="text-[10px] bg-emerald-500/10 text-emerald-700 px-1.5 py-0.5 rounded font-bold uppercase">
+                                        Live
+                                      </span>
+                                    </button>
+                                  );
+                                })}
+                                <div className="text-[10px] font-bold uppercase tracking-widest text-amber-700 px-2 pt-3 pb-1 border-t border-black/[0.05] mt-1">Cooked Ferments (Prebiotics)</div>
+                                {Object.keys(plan.fermented.fermented_cooked_not_live).map((itemName, idx) => {
+                                  const item = plan.fermented.fermented_cooked_not_live[itemName];
+                                  return (
+                                    <div
+                                      key={`cooked-${idx}`}
+                                      className="px-2 py-1.5 rounded-lg text-xs text-slate-500 flex flex-col gap-0.5 opacity-70"
+                                    >
+                                      <span className="font-medium">{item.name}</span>
+                                      <span className="text-[9px] text-amber-700 uppercase font-bold tracking-wider">
+                                        Cooked — Pair with live ferment
+                                      </span>
+                                    </div>
+                                  );
+                                })}
                               </div>
                             )}
                           </div>

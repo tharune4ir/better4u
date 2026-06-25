@@ -3,17 +3,18 @@
     "title": "THARUN — THE SUPERHUMAN 250 (Block 1: Days 1–84 / Weeks 1–12)",
     "owner": "Tharun",
     "location": "Anantapur (special items sourced from Bangalore / online when worth it)",
-    "start_date": "2026-06-26",
+    "start_date": "2026-06-29",
     "block": "Days 1–84 of 250",
-    "eating_window": "~12:00–18:30 (2 meals, food finished earlier in the day = lower inflammation)",
+    "eating_window": "09:00–15:00 (early window — finish eating by ~3 PM)",
     "anchors": [
-      "Wake 07:00 every day (non-negotiable)",
-      "Asleep by 23:00",
-      "10–20 min morning sunlight daily"
+      "WAKE: ~07:00. Hydrate, move, sunlight.",
+      "EAT: 09:00–15:00. The forge is closed early to let the gut rest.",
+      "RECOVER: ~18:00 Psyllium husk.",
+      "SLEEP: 23:00. Dim lights, disconnect, repair."
     ],
     "non_negotiables_daily": [
       "Wake 07:00",
-      "Morning light",
+      "Eat within the 09:00–15:00 window.",
       "Psyllium husk",
       "2 nourishing meals",
       "1 fermented serving (build to 2)",
@@ -23,14 +24,29 @@
       "5-min breathwork",
       "Touch-toes flexibility"
     ],
-    "version": "1.0",
+    "version": "1.1",
     "change_log": [
       {
         "date": "2026-06-26",
         "change": "Initial 84-day plan created."
+      },
+      {
+        "date": "2026-06-25",
+        "change": "Re-anchor to Monday 2026-06-29, add D-Day, update daily timings, and fix fermented model."
       }
     ],
-    "how_dynamic_works": "Any item (a new supplement, a new fermented food, a new exercise) can be inserted from any week. Add it to the relevant library + append to change_log + reference it from that day forward. The schema is built for this."
+    "how_dynamic_works": "Any item (a new supplement, a new fermented food, a new exercise) can be inserted from any week. Add it to the relevant library + append to change_log + reference it from that day forward. The schema is built for this.",
+    "d_day": {
+      "date": "2027-03-06",
+      "name": "Maha Shivaratri",
+      "label": "D-Day"
+    },
+    "total_days": 251,
+    "block1_end": {
+      "day": 84,
+      "date": "2026-09-20",
+      "label": "33rd birthday — Block 1 checkpoint"
+    }
   },
   "principles": {
     "four_workhorses": {
@@ -635,17 +651,17 @@
       "Drink immediately before it thickens.",
       "Chase with another glass of water."
     ],
-    "when": "Morning, fasted (~07:30). Optional 2nd dose before dinner on heavier days.",
+    "when": "Evening, around/after 18:00 (during the fasting evening), in a large glass of water + chase with more water.",
     "why": "Soluble fibre that regularises the gut, feeds microbes, and gently binds and carries out waste."
   },
   "fermented": {
-    "priority": "TOP PRIORITY (Workhorse #4).",
+    "priority": "TOP PRIORITY (live cultures).",
     "ramp": {
-      "weeks_1_2": "1 serving/day (start with the gentlest: curd or buttermilk).",
-      "weeks_3_6": "Build toward 2 servings/day (add idli/dosa, overnight rice).",
-      "weeks_7_12": "2 servings/day, rotating across the list for diversity."
+      "weeks_1_2": "1 live serving/day",
+      "weeks_3_6": "build to 2/day",
+      "weeks_7_12": "2/day, rotate for diversity"
     },
-    "items": {
+    "live_probiotic": {
       "curd": {
         "name": "Homemade curd (perugu)",
         "note": "Set fresh daily from boiled-then-cooled milk + 1 tsp starter. Gentlest probiotic.",
@@ -661,31 +677,31 @@
         "note": "Cooked rice soaked overnight in water; next morning add curd, salt, sometimes onion. A traditional AP gut superfood, rich in probiotics & B-vitamins.",
         "gentle": true
       },
-      "idli": {
-        "name": "Idli (fermented rice+urad batter)",
-        "note": "Steamed, light, naturally fermented. Excellent dinner.",
+      "beet_carrot_kanji": {
+        "name": "Beet–carrot kanji (lacto-fermented drink)",
+        "note": "Non-dairy live ferment; introduce gradually (gut-friendly amounts).",
         "gentle": true
       },
-      "dosa": {
-        "name": "Dosa (same batter)",
-        "note": "Thin, cooked on tawa with a little ghee/oil.",
+      "rice_kanji": {
+        "name": "Fermented rice kanji",
+        "note": "Cooling, non-dairy, probiotic.",
         "gentle": true
       },
-      "ragi_ambali": {
-        "name": "Ragi ambali (fermented finger-millet porridge)",
-        "note": "Ragi flour fermented overnight, cooked thin with buttermilk. Cooling, probiotic, mineral-rich.",
-        "gentle": true
-      },
-      "mild_pickle": {
-        "name": "Mild homemade pickle (small)",
-        "note": "A teaspoon for flavour — keep oil & chilli low.",
-        "gentle": false
-      },
-      "kefir_optional": {
-        "name": "Milk kefir (optional, sourced)",
-        "note": "Stronger probiotic; introduce slowly once curd is well tolerated.",
+      "water_kefir": {
+        "name": "Water kefir (optional, sourced)",
+        "note": "Strong non-dairy probiotic; ramp slowly.",
         "gentle": false,
         "source": "sourced"
+      }
+    },
+    "fermented_cooked_not_live": {
+      "idli": {
+        "name": "Idli",
+        "note": "Batter is fermented but it's STEAMED — heat removes most live cultures. Great pre-digested, prebiotic food, but pair it with a LIVE ferment (curd/buttermilk) to get probiotics."
+      },
+      "dosa": {
+        "name": "Dosa",
+        "note": "Same — fermented then cooked. Excellent food; not a live-culture source. Serve with a live ferment side."
       }
     }
   },
@@ -1711,18 +1727,17 @@
   },
   "daily_template": {
     "07:00": "Wake. Big glass warm water. Open curtains.",
-    "07:10": "10–20 min morning sunlight + easy movement (this is also part of Zone-2 on walk days).",
-    "07:30": "Psyllium husk in a large glass of water (then a 2nd glass).",
-    "07:45": "Black coffee OR ginger–jeera water. Deep-core/pelvic set #1. 5-min breathwork.",
-    "08:30": "Main workout for the day's type (see body_program). Or active recovery on B/G days.",
-    "09:30": "Fasted morning water: moringa / amla / guava-leaf tea (rotate).",
-    "12:00": "MEAL 1 (lunch): soaked nuts first → main plate → fruit (small) → curd/fermented. Take B12 capsule after. (Thursdays: D3 too.)",
-    "13:00": "CCF tea, sipped warm.",
-    "16:00": "Optional: guava-leaf tea / warm water. Touch-toes flexibility.",
-    "18:00": "MEAL 2 (dinner, fermented-forward): finish eating by ~18:30.",
-    "19:30": "Mind video (today's activity). Optional CCF/warm water.",
+    "07:10": "10–20 min morning sunlight + easy movement.",
+    "07:30": "Black coffee OR ginger–jeera water. Deep-core/pelvic set #1. 5-min breathwork.",
+    "07:45": "Main workout for the day's type (or active recovery on B/G days).",
+    "09:00": "MEAL 1 (break-fast): soaked nuts first → plate → small fruit → live ferment. B12 capsule after. (Thursdays: D3 too, with fat).",
+    "09:30": "CCF tea, warm.",
+    "12:30": "Optional within-window: fruit/buttermilk + a fasted-style herbal water earlier (moringa/amla/guava-leaf at ~08:00).",
+    "14:30": "MEAL 2: fermented-forward + a live ferment. Finish eating by ~15:00.",
+    "18:00": "Psyllium husk in a large glass of water (+ second glass).",
+    "19:30": "Mind video (today's activity).",
     "20:30": "Evening magnesium soak (3–4×/week). Deep-core/pelvic set #2.",
-    "22:30": "Wind-down: dim lights, no screens, light stretch/breath.",
+    "22:30": "Wind-down, dim lights, light stretch/breath.",
     "23:00": "Sleep."
   },
   "scoring": {
@@ -1771,14 +1786,14 @@
       "days": [
         {
           "day": 1,
-          "date": "2026-06-26",
-          "weekday": "Friday",
+          "date": "2026-06-29",
+          "weekday": "Monday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -1790,22 +1805,22 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
+                "Incline/knee push-ups 3×6–8",
                 "Sit-to-stand squats 3×10",
+                "Band rows 3×12",
                 "Glute bridge 3×12",
-                "Calf raises 3×15",
-                "Wall-sit 3×20s",
-                "Single-leg balance 3×20s/side",
-                "Side-lying leg raises 3×12/side"
+                "Plank 3×20s",
+                "Dead bug 3×8/side"
               ]
             },
             "daily_addons": [
@@ -1826,7 +1841,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -1861,14 +1877,14 @@
         },
         {
           "day": 2,
-          "date": "2026-06-27",
-          "weekday": "Saturday",
+          "date": "2026-06-30",
+          "weekday": "Tuesday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -1880,21 +1896,20 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall plank → wall hold (chest-to-wall) 3×15s",
-                "Pike hold (feet on floor) 3×20s",
-                "Shoulder taps (incline) 3×8/side",
-                "Light full-body circuit ×2 (squat+push+row)",
-                "Crow-pose prep 3×10s"
+                "Full-body mobility flow 10 min",
+                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
+                "Zone-2 walk 20–25 min (nasal-breathing pace)",
+                "Deep-core: bird-dog 3×8/side"
               ]
             },
             "daily_addons": [
@@ -1914,7 +1929,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -1949,14 +1965,14 @@
         },
         {
           "day": 3,
-          "date": "2026-06-28",
-          "weekday": "Sunday",
+          "date": "2026-07-01",
+          "weekday": "Wednesday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -1972,15 +1988,18 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Long easy walk 30–40 min (outdoors, morning light)",
-                "Box breathing 10 min",
-                "Full relaxation / yoga nidra 10 min"
+                "Band lat pulldown 3×12",
+                "Band/dumbbell rows 3×12",
+                "Mudgar/DB front raise (light) 3×10",
+                "Suitcase carry (DB) 3×20 m",
+                "Dead-hang from bar 3×10–15s",
+                "Hollow tuck hold 3×15s"
               ]
             },
             "daily_addons": [
@@ -2001,7 +2020,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -2036,14 +2056,14 @@
         },
         {
           "day": 4,
-          "date": "2026-06-29",
-          "weekday": "Monday",
+          "date": "2026-07-02",
+          "weekday": "Thursday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -2059,18 +2079,17 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Incline/knee push-ups 3×6–8",
-                "Sit-to-stand squats 3×10",
-                "Band rows 3×12",
-                "Glute bridge 3×12",
-                "Plank 3×20s",
-                "Dead bug 3×8/side"
+                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
+                "Skipping: 5×20s easy / 40s rest",
+                "Brisk walk 15 min",
+                "Touch-toes progression"
               ]
             },
             "daily_addons": [
@@ -2091,7 +2110,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -2126,14 +2146,14 @@
         },
         {
           "day": 5,
-          "date": "2026-06-30",
-          "weekday": "Tuesday",
+          "date": "2026-07-03",
+          "weekday": "Friday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -2149,16 +2169,18 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Full-body mobility flow 10 min",
-                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
-                "Zone-2 walk 20–25 min (nasal-breathing pace)",
-                "Deep-core: bird-dog 3×8/side"
+                "Sit-to-stand squats 3×10",
+                "Glute bridge 3×12",
+                "Calf raises 3×15",
+                "Wall-sit 3×20s",
+                "Single-leg balance 3×20s/side",
+                "Side-lying leg raises 3×12/side"
               ]
             },
             "daily_addons": [
@@ -2178,7 +2200,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -2213,14 +2236,14 @@
         },
         {
           "day": 6,
-          "date": "2026-07-01",
-          "weekday": "Wednesday",
+          "date": "2026-07-04",
+          "weekday": "Saturday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -2236,18 +2259,17 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band lat pulldown 3×12",
-                "Band/dumbbell rows 3×12",
-                "Mudgar/DB front raise (light) 3×10",
-                "Suitcase carry (DB) 3×20 m",
-                "Dead-hang from bar 3×10–15s",
-                "Hollow tuck hold 3×15s"
+                "Wall plank → wall hold (chest-to-wall) 3×15s",
+                "Pike hold (feet on floor) 3×20s",
+                "Shoulder taps (incline) 3×8/side",
+                "Light full-body circuit ×2 (squat+push+row)",
+                "Crow-pose prep 3×10s"
               ]
             },
             "daily_addons": [
@@ -2268,7 +2290,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -2303,14 +2326,14 @@
         },
         {
           "day": 7,
-          "date": "2026-07-02",
-          "weekday": "Thursday",
+          "date": "2026-07-05",
+          "weekday": "Sunday",
           "week": 1,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -2326,17 +2349,15 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
-                "Skipping: 5×20s easy / 40s rest",
-                "Brisk walk 15 min",
-                "Touch-toes progression"
+                "Long easy walk 30–40 min (outdoors, morning light)",
+                "Box breathing 10 min",
+                "Full relaxation / yoga nidra 10 min"
               ]
             },
             "daily_addons": [
@@ -2356,7 +2377,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -2398,14 +2420,14 @@
       "days": [
         {
           "day": 8,
-          "date": "2026-07-03",
-          "weekday": "Friday",
+          "date": "2026-07-06",
+          "weekday": "Monday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -2421,18 +2443,18 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
+                "Incline/knee push-ups 3×6–8",
                 "Sit-to-stand squats 3×10",
+                "Band rows 3×12",
                 "Glute bridge 3×12",
-                "Calf raises 3×15",
-                "Wall-sit 3×20s",
-                "Single-leg balance 3×20s/side",
-                "Side-lying leg raises 3×12/side"
+                "Plank 3×20s",
+                "Dead bug 3×8/side"
               ]
             },
             "daily_addons": [
@@ -2453,7 +2475,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -2488,14 +2511,14 @@
         },
         {
           "day": 9,
-          "date": "2026-07-04",
-          "weekday": "Saturday",
+          "date": "2026-07-07",
+          "weekday": "Tuesday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -2507,21 +2530,20 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall plank → wall hold (chest-to-wall) 3×15s",
-                "Pike hold (feet on floor) 3×20s",
-                "Shoulder taps (incline) 3×8/side",
-                "Light full-body circuit ×2 (squat+push+row)",
-                "Crow-pose prep 3×10s"
+                "Full-body mobility flow 10 min",
+                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
+                "Zone-2 walk 20–25 min (nasal-breathing pace)",
+                "Deep-core: bird-dog 3×8/side"
               ]
             },
             "daily_addons": [
@@ -2541,7 +2563,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -2576,14 +2599,14 @@
         },
         {
           "day": 10,
-          "date": "2026-07-05",
-          "weekday": "Sunday",
+          "date": "2026-07-08",
+          "weekday": "Wednesday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -2595,19 +2618,22 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Long easy walk 30–40 min (outdoors, morning light)",
-                "Box breathing 10 min",
-                "Full relaxation / yoga nidra 10 min"
+                "Band lat pulldown 3×12",
+                "Band/dumbbell rows 3×12",
+                "Mudgar/DB front raise (light) 3×10",
+                "Suitcase carry (DB) 3×20 m",
+                "Dead-hang from bar 3×10–15s",
+                "Hollow tuck hold 3×15s"
               ]
             },
             "daily_addons": [
@@ -2628,7 +2654,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -2663,14 +2690,14 @@
         },
         {
           "day": 11,
-          "date": "2026-07-06",
-          "weekday": "Monday",
+          "date": "2026-07-09",
+          "weekday": "Thursday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -2686,18 +2713,17 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Incline/knee push-ups 3×6–8",
-                "Sit-to-stand squats 3×10",
-                "Band rows 3×12",
-                "Glute bridge 3×12",
-                "Plank 3×20s",
-                "Dead bug 3×8/side"
+                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
+                "Skipping: 5×20s easy / 40s rest",
+                "Brisk walk 15 min",
+                "Touch-toes progression"
               ]
             },
             "daily_addons": [
@@ -2718,7 +2744,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -2753,14 +2780,14 @@
         },
         {
           "day": 12,
-          "date": "2026-07-07",
-          "weekday": "Tuesday",
+          "date": "2026-07-10",
+          "weekday": "Friday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -2776,16 +2803,18 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Full-body mobility flow 10 min",
-                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
-                "Zone-2 walk 20–25 min (nasal-breathing pace)",
-                "Deep-core: bird-dog 3×8/side"
+                "Sit-to-stand squats 3×10",
+                "Glute bridge 3×12",
+                "Calf raises 3×15",
+                "Wall-sit 3×20s",
+                "Single-leg balance 3×20s/side",
+                "Side-lying leg raises 3×12/side"
               ]
             },
             "daily_addons": [
@@ -2805,7 +2834,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -2840,14 +2870,14 @@
         },
         {
           "day": 13,
-          "date": "2026-07-08",
-          "weekday": "Wednesday",
+          "date": "2026-07-11",
+          "weekday": "Saturday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -2863,18 +2893,17 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band lat pulldown 3×12",
-                "Band/dumbbell rows 3×12",
-                "Mudgar/DB front raise (light) 3×10",
-                "Suitcase carry (DB) 3×20 m",
-                "Dead-hang from bar 3×10–15s",
-                "Hollow tuck hold 3×15s"
+                "Wall plank → wall hold (chest-to-wall) 3×15s",
+                "Pike hold (feet on floor) 3×20s",
+                "Shoulder taps (incline) 3×8/side",
+                "Light full-body circuit ×2 (squat+push+row)",
+                "Crow-pose prep 3×10s"
               ]
             },
             "daily_addons": [
@@ -2895,7 +2924,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -2930,14 +2960,14 @@
         },
         {
           "day": 14,
-          "date": "2026-07-09",
-          "weekday": "Thursday",
+          "date": "2026-07-12",
+          "weekday": "Sunday",
           "week": 2,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -2953,17 +2983,15 @@
             },
             "fermented_target": "1 serving",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
-                "Skipping: 5×20s easy / 40s rest",
-                "Brisk walk 15 min",
-                "Touch-toes progression"
+                "Long easy walk 30–40 min (outdoors, morning light)",
+                "Box breathing 10 min",
+                "Full relaxation / yoga nidra 10 min"
               ]
             },
             "daily_addons": [
@@ -2983,7 +3011,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -3025,14 +3054,14 @@
       "days": [
         {
           "day": 15,
-          "date": "2026-07-10",
-          "weekday": "Friday",
+          "date": "2026-07-13",
+          "weekday": "Monday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -3048,18 +3077,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
+                "Incline/knee push-ups 3×6–8",
                 "Sit-to-stand squats 3×10",
+                "Band rows 3×12",
                 "Glute bridge 3×12",
-                "Calf raises 3×15",
-                "Wall-sit 3×20s",
-                "Single-leg balance 3×20s/side",
-                "Side-lying leg raises 3×12/side"
+                "Plank 3×20s",
+                "Dead bug 3×8/side"
               ]
             },
             "daily_addons": [
@@ -3080,7 +3109,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -3115,14 +3145,14 @@
         },
         {
           "day": 16,
-          "date": "2026-07-11",
-          "weekday": "Saturday",
+          "date": "2026-07-14",
+          "weekday": "Tuesday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -3138,17 +3168,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall plank → wall hold (chest-to-wall) 3×15s",
-                "Pike hold (feet on floor) 3×20s",
-                "Shoulder taps (incline) 3×8/side",
-                "Light full-body circuit ×2 (squat+push+row)",
-                "Crow-pose prep 3×10s"
+                "Full-body mobility flow 10 min",
+                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
+                "Zone-2 walk 20–25 min (nasal-breathing pace)",
+                "Deep-core: bird-dog 3×8/side"
               ]
             },
             "daily_addons": [
@@ -3168,7 +3197,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -3203,14 +3233,14 @@
         },
         {
           "day": 17,
-          "date": "2026-07-12",
-          "weekday": "Sunday",
+          "date": "2026-07-15",
+          "weekday": "Wednesday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -3222,19 +3252,22 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Long easy walk 30–40 min (outdoors, morning light)",
-                "Box breathing 10 min",
-                "Full relaxation / yoga nidra 10 min"
+                "Band lat pulldown 3×12",
+                "Band/dumbbell rows 3×12",
+                "Mudgar/DB front raise (light) 3×10",
+                "Suitcase carry (DB) 3×20 m",
+                "Dead-hang from bar 3×10–15s",
+                "Hollow tuck hold 3×15s"
               ]
             },
             "daily_addons": [
@@ -3255,7 +3288,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -3290,14 +3324,14 @@
         },
         {
           "day": 18,
-          "date": "2026-07-13",
-          "weekday": "Monday",
+          "date": "2026-07-16",
+          "weekday": "Thursday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -3309,22 +3343,21 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Incline/knee push-ups 3×6–8",
-                "Sit-to-stand squats 3×10",
-                "Band rows 3×12",
-                "Glute bridge 3×12",
-                "Plank 3×20s",
-                "Dead bug 3×8/side"
+                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
+                "Skipping: 5×20s easy / 40s rest",
+                "Brisk walk 15 min",
+                "Touch-toes progression"
               ]
             },
             "daily_addons": [
@@ -3345,7 +3378,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -3380,14 +3414,14 @@
         },
         {
           "day": 19,
-          "date": "2026-07-14",
-          "weekday": "Tuesday",
+          "date": "2026-07-17",
+          "weekday": "Friday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -3403,16 +3437,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Full-body mobility flow 10 min",
-                "Gentle yoga (cat-cow, child, cobra, down-dog) 10 min",
-                "Zone-2 walk 20–25 min (nasal-breathing pace)",
-                "Deep-core: bird-dog 3×8/side"
+                "Sit-to-stand squats 3×10",
+                "Glute bridge 3×12",
+                "Calf raises 3×15",
+                "Wall-sit 3×20s",
+                "Single-leg balance 3×20s/side",
+                "Side-lying leg raises 3×12/side"
               ]
             },
             "daily_addons": [
@@ -3432,7 +3468,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -3467,14 +3504,14 @@
         },
         {
           "day": 20,
-          "date": "2026-07-15",
-          "weekday": "Wednesday",
+          "date": "2026-07-18",
+          "weekday": "Saturday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -3490,18 +3527,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band lat pulldown 3×12",
-                "Band/dumbbell rows 3×12",
-                "Mudgar/DB front raise (light) 3×10",
-                "Suitcase carry (DB) 3×20 m",
-                "Dead-hang from bar 3×10–15s",
-                "Hollow tuck hold 3×15s"
+                "Wall plank → wall hold (chest-to-wall) 3×15s",
+                "Pike hold (feet on floor) 3×20s",
+                "Shoulder taps (incline) 3×8/side",
+                "Light full-body circuit ×2 (squat+push+row)",
+                "Crow-pose prep 3×10s"
               ]
             },
             "daily_addons": [
@@ -3522,7 +3558,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -3557,14 +3594,14 @@
         },
         {
           "day": 21,
-          "date": "2026-07-16",
-          "weekday": "Thursday",
+          "date": "2026-07-19",
+          "weekday": "Sunday",
           "week": 3,
           "phase": "P1",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -3580,17 +3617,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Full flexibility routine 12 min (hamstring, hip, shoulder, calf)",
-                "Skipping: 5×20s easy / 40s rest",
-                "Brisk walk 15 min",
-                "Touch-toes progression"
+                "Long easy walk 30–40 min (outdoors, morning light)",
+                "Box breathing 10 min",
+                "Full relaxation / yoga nidra 10 min"
               ]
             },
             "daily_addons": [
@@ -3610,7 +3645,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -3652,14 +3688,14 @@
       "days": [
         {
           "day": 22,
-          "date": "2026-07-17",
-          "weekday": "Friday",
+          "date": "2026-07-20",
+          "weekday": "Monday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -3675,18 +3711,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat (DB) 3×10",
-                "Hip thrust 3×12",
-                "Calf raises 3×18",
-                "Wall-sit 3×35s",
-                "Reverse lunge 3×8/side (controlled)",
-                "Balance 3×30s/side"
+                "Knee→full push-ups 3×8–10",
+                "Bodyweight squats 3×12",
+                "Band rows 3×15",
+                "Glute bridge (single-leg) 3×8/side",
+                "Plank 3×35s",
+                "Dead bug 3×10/side"
               ]
             },
             "daily_addons": [
@@ -3707,7 +3743,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -3742,14 +3779,14 @@
         },
         {
           "day": 23,
-          "date": "2026-07-18",
-          "weekday": "Saturday",
+          "date": "2026-07-21",
+          "weekday": "Tuesday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -3765,17 +3802,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand hold 3×20s",
-                "Pike push-ups 3×6",
-                "Shoulder taps 3×10/side",
-                "Light circuit ×2",
-                "Crow pose 3×10–15s"
+                "Mobility flow 10 min",
+                "Yoga 12 min (add low-lunge, pigeon)",
+                "Zone-2 walk 30 min",
+                "Bird-dog 3×10/side + side-plank 3×20s"
               ]
             },
             "daily_addons": [
@@ -3795,7 +3831,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -3830,14 +3867,14 @@
         },
         {
           "day": 24,
-          "date": "2026-07-19",
-          "weekday": "Sunday",
+          "date": "2026-07-22",
+          "weekday": "Wednesday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -3853,15 +3890,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 40 min",
-                "Box breathing 10 min",
-                "Yoga nidra 12 min"
+                "Band-assisted pull-ups 3×5",
+                "DB rows 3×12/side",
+                "Mudgar swings (light) 3×10",
+                "Farmer carry 3×30 m",
+                "Dead-hang 3×20–25s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -3882,7 +3922,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -3917,14 +3958,14 @@
         },
         {
           "day": 25,
-          "date": "2026-07-20",
-          "weekday": "Monday",
+          "date": "2026-07-23",
+          "weekday": "Thursday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -3936,22 +3977,20 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Knee→full push-ups 3×8–10",
-                "Bodyweight squats 3×12",
-                "Band rows 3×15",
-                "Glute bridge (single-leg) 3×8/side",
-                "Plank 3×35s",
-                "Dead bug 3×10/side"
+                "Flexibility 12 min",
+                "Skipping 6×30s / 45s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -3972,7 +4011,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -4007,14 +4047,14 @@
         },
         {
           "day": 26,
-          "date": "2026-07-21",
-          "weekday": "Tuesday",
+          "date": "2026-07-24",
+          "weekday": "Friday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -4026,20 +4066,22 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility flow 10 min",
-                "Yoga 12 min (add low-lunge, pigeon)",
-                "Zone-2 walk 30 min",
-                "Bird-dog 3×10/side + side-plank 3×20s"
+                "Goblet squat (DB) 3×10",
+                "Hip thrust 3×12",
+                "Calf raises 3×18",
+                "Wall-sit 3×35s",
+                "Reverse lunge 3×8/side (controlled)",
+                "Balance 3×30s/side"
               ]
             },
             "daily_addons": [
@@ -4059,7 +4101,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -4094,14 +4137,14 @@
         },
         {
           "day": 27,
-          "date": "2026-07-22",
-          "weekday": "Wednesday",
+          "date": "2026-07-25",
+          "weekday": "Saturday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -4117,18 +4160,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band-assisted pull-ups 3×5",
-                "DB rows 3×12/side",
-                "Mudgar swings (light) 3×10",
-                "Farmer carry 3×30 m",
-                "Dead-hang 3×20–25s",
-                "Hollow hold 3×20s"
+                "Wall handstand hold 3×20s",
+                "Pike push-ups 3×6",
+                "Shoulder taps 3×10/side",
+                "Light circuit ×2",
+                "Crow pose 3×10–15s"
               ]
             },
             "daily_addons": [
@@ -4149,7 +4191,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -4184,14 +4227,14 @@
         },
         {
           "day": 28,
-          "date": "2026-07-23",
-          "weekday": "Thursday",
+          "date": "2026-07-26",
+          "weekday": "Sunday",
           "week": 4,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -4207,16 +4250,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 12 min",
-                "Skipping 6×30s / 45s rest",
-                "Brisk walk 20 min"
+                "Easy walk 40 min",
+                "Box breathing 10 min",
+                "Yoga nidra 12 min"
               ]
             },
             "daily_addons": [
@@ -4236,7 +4278,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -4278,14 +4321,14 @@
       "days": [
         {
           "day": 29,
-          "date": "2026-07-24",
-          "weekday": "Friday",
+          "date": "2026-07-27",
+          "weekday": "Monday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -4301,18 +4344,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat (DB) 3×10",
-                "Hip thrust 3×12",
-                "Calf raises 3×18",
-                "Wall-sit 3×35s",
-                "Reverse lunge 3×8/side (controlled)",
-                "Balance 3×30s/side"
+                "Knee→full push-ups 3×8–10",
+                "Bodyweight squats 3×12",
+                "Band rows 3×15",
+                "Glute bridge (single-leg) 3×8/side",
+                "Plank 3×35s",
+                "Dead bug 3×10/side"
               ]
             },
             "daily_addons": [
@@ -4333,7 +4376,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -4368,14 +4412,14 @@
         },
         {
           "day": 30,
-          "date": "2026-07-25",
-          "weekday": "Saturday",
+          "date": "2026-07-28",
+          "weekday": "Tuesday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -4391,17 +4435,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand hold 3×20s",
-                "Pike push-ups 3×6",
-                "Shoulder taps 3×10/side",
-                "Light circuit ×2",
-                "Crow pose 3×10–15s"
+                "Mobility flow 10 min",
+                "Yoga 12 min (add low-lunge, pigeon)",
+                "Zone-2 walk 30 min",
+                "Bird-dog 3×10/side + side-plank 3×20s"
               ]
             },
             "daily_addons": [
@@ -4421,7 +4464,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -4456,14 +4500,14 @@
         },
         {
           "day": 31,
-          "date": "2026-07-26",
-          "weekday": "Sunday",
+          "date": "2026-07-29",
+          "weekday": "Wednesday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -4479,15 +4523,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 40 min",
-                "Box breathing 10 min",
-                "Yoga nidra 12 min"
+                "Band-assisted pull-ups 3×5",
+                "DB rows 3×12/side",
+                "Mudgar swings (light) 3×10",
+                "Farmer carry 3×30 m",
+                "Dead-hang 3×20–25s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -4508,7 +4555,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -4543,14 +4591,14 @@
         },
         {
           "day": 32,
-          "date": "2026-07-27",
-          "weekday": "Monday",
+          "date": "2026-07-30",
+          "weekday": "Thursday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -4566,18 +4614,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Knee→full push-ups 3×8–10",
-                "Bodyweight squats 3×12",
-                "Band rows 3×15",
-                "Glute bridge (single-leg) 3×8/side",
-                "Plank 3×35s",
-                "Dead bug 3×10/side"
+                "Flexibility 12 min",
+                "Skipping 6×30s / 45s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -4598,7 +4644,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -4633,14 +4680,14 @@
         },
         {
           "day": 33,
-          "date": "2026-07-28",
-          "weekday": "Tuesday",
+          "date": "2026-07-31",
+          "weekday": "Friday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -4652,20 +4699,22 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility flow 10 min",
-                "Yoga 12 min (add low-lunge, pigeon)",
-                "Zone-2 walk 30 min",
-                "Bird-dog 3×10/side + side-plank 3×20s"
+                "Goblet squat (DB) 3×10",
+                "Hip thrust 3×12",
+                "Calf raises 3×18",
+                "Wall-sit 3×35s",
+                "Reverse lunge 3×8/side (controlled)",
+                "Balance 3×30s/side"
               ]
             },
             "daily_addons": [
@@ -4685,7 +4734,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -4720,14 +4770,14 @@
         },
         {
           "day": 34,
-          "date": "2026-07-29",
-          "weekday": "Wednesday",
+          "date": "2026-08-01",
+          "weekday": "Saturday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -4739,22 +4789,21 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band-assisted pull-ups 3×5",
-                "DB rows 3×12/side",
-                "Mudgar swings (light) 3×10",
-                "Farmer carry 3×30 m",
-                "Dead-hang 3×20–25s",
-                "Hollow hold 3×20s"
+                "Wall handstand hold 3×20s",
+                "Pike push-ups 3×6",
+                "Shoulder taps 3×10/side",
+                "Light circuit ×2",
+                "Crow pose 3×10–15s"
               ]
             },
             "daily_addons": [
@@ -4775,7 +4824,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -4810,14 +4860,14 @@
         },
         {
           "day": 35,
-          "date": "2026-07-30",
-          "weekday": "Thursday",
+          "date": "2026-08-02",
+          "weekday": "Sunday",
           "week": 5,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -4833,16 +4883,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 12 min",
-                "Skipping 6×30s / 45s rest",
-                "Brisk walk 20 min"
+                "Easy walk 40 min",
+                "Box breathing 10 min",
+                "Yoga nidra 12 min"
               ]
             },
             "daily_addons": [
@@ -4862,7 +4911,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -4904,14 +4954,14 @@
       "days": [
         {
           "day": 36,
-          "date": "2026-07-31",
-          "weekday": "Friday",
+          "date": "2026-08-03",
+          "weekday": "Monday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -4927,18 +4977,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat (DB) 3×10",
-                "Hip thrust 3×12",
-                "Calf raises 3×18",
-                "Wall-sit 3×35s",
-                "Reverse lunge 3×8/side (controlled)",
-                "Balance 3×30s/side"
+                "Knee→full push-ups 3×8–10",
+                "Bodyweight squats 3×12",
+                "Band rows 3×15",
+                "Glute bridge (single-leg) 3×8/side",
+                "Plank 3×35s",
+                "Dead bug 3×10/side"
               ]
             },
             "daily_addons": [
@@ -4959,7 +5009,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -4994,14 +5045,14 @@
         },
         {
           "day": 37,
-          "date": "2026-08-01",
-          "weekday": "Saturday",
+          "date": "2026-08-04",
+          "weekday": "Tuesday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -5017,17 +5068,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand hold 3×20s",
-                "Pike push-ups 3×6",
-                "Shoulder taps 3×10/side",
-                "Light circuit ×2",
-                "Crow pose 3×10–15s"
+                "Mobility flow 10 min",
+                "Yoga 12 min (add low-lunge, pigeon)",
+                "Zone-2 walk 30 min",
+                "Bird-dog 3×10/side + side-plank 3×20s"
               ]
             },
             "daily_addons": [
@@ -5047,7 +5097,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -5082,14 +5133,14 @@
         },
         {
           "day": 38,
-          "date": "2026-08-02",
-          "weekday": "Sunday",
+          "date": "2026-08-05",
+          "weekday": "Wednesday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -5105,15 +5156,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 40 min",
-                "Box breathing 10 min",
-                "Yoga nidra 12 min"
+                "Band-assisted pull-ups 3×5",
+                "DB rows 3×12/side",
+                "Mudgar swings (light) 3×10",
+                "Farmer carry 3×30 m",
+                "Dead-hang 3×20–25s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -5134,7 +5188,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -5169,14 +5224,14 @@
         },
         {
           "day": 39,
-          "date": "2026-08-03",
-          "weekday": "Monday",
+          "date": "2026-08-06",
+          "weekday": "Thursday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -5192,18 +5247,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Knee→full push-ups 3×8–10",
-                "Bodyweight squats 3×12",
-                "Band rows 3×15",
-                "Glute bridge (single-leg) 3×8/side",
-                "Plank 3×35s",
-                "Dead bug 3×10/side"
+                "Flexibility 12 min",
+                "Skipping 6×30s / 45s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -5224,7 +5277,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -5259,14 +5313,14 @@
         },
         {
           "day": 40,
-          "date": "2026-08-04",
-          "weekday": "Tuesday",
+          "date": "2026-08-07",
+          "weekday": "Friday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -5282,16 +5336,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility flow 10 min",
-                "Yoga 12 min (add low-lunge, pigeon)",
-                "Zone-2 walk 30 min",
-                "Bird-dog 3×10/side + side-plank 3×20s"
+                "Goblet squat (DB) 3×10",
+                "Hip thrust 3×12",
+                "Calf raises 3×18",
+                "Wall-sit 3×35s",
+                "Reverse lunge 3×8/side (controlled)",
+                "Balance 3×30s/side"
               ]
             },
             "daily_addons": [
@@ -5311,7 +5367,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -5346,14 +5403,14 @@
         },
         {
           "day": 41,
-          "date": "2026-08-05",
-          "weekday": "Wednesday",
+          "date": "2026-08-08",
+          "weekday": "Saturday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -5365,22 +5422,21 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band-assisted pull-ups 3×5",
-                "DB rows 3×12/side",
-                "Mudgar swings (light) 3×10",
-                "Farmer carry 3×30 m",
-                "Dead-hang 3×20–25s",
-                "Hollow hold 3×20s"
+                "Wall handstand hold 3×20s",
+                "Pike push-ups 3×6",
+                "Shoulder taps 3×10/side",
+                "Light circuit ×2",
+                "Crow pose 3×10–15s"
               ]
             },
             "daily_addons": [
@@ -5401,7 +5457,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -5436,14 +5493,14 @@
         },
         {
           "day": 42,
-          "date": "2026-08-06",
-          "weekday": "Thursday",
+          "date": "2026-08-09",
+          "weekday": "Sunday",
           "week": 6,
           "phase": "P2",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -5455,20 +5512,19 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 12 min",
-                "Skipping 6×30s / 45s rest",
-                "Brisk walk 20 min"
+                "Easy walk 40 min",
+                "Box breathing 10 min",
+                "Yoga nidra 12 min"
               ]
             },
             "daily_addons": [
@@ -5488,7 +5544,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -5530,14 +5587,14 @@
       "days": [
         {
           "day": 43,
-          "date": "2026-08-07",
-          "weekday": "Friday",
+          "date": "2026-08-10",
+          "weekday": "Monday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -5553,18 +5610,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×12",
-                "Hip thrust (DB) 4×12",
-                "Step-ups 3×10/side",
-                "Wall-sit 3×50s",
-                "Bulgarian split (assisted) 3×8/side",
-                "Single-leg balance eyes-closed 3×20s"
+                "Full push-ups 4×10–12",
+                "Squats (tempo) 4×12",
+                "1-arm band row 3×12/side",
+                "Hip thrust (DB) 3×12",
+                "Plank 3×50s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -5585,7 +5642,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -5620,14 +5678,14 @@
         },
         {
           "day": 44,
-          "date": "2026-08-08",
-          "weekday": "Saturday",
+          "date": "2026-08-11",
+          "weekday": "Tuesday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -5643,17 +5701,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×30s",
-                "Pike push-ups 3×8",
-                "Wall handstand shoulder taps 3×4/side",
-                "Circuit ×3",
-                "Crow→tuck balance 3×15s"
+                "Mobility 10 min",
+                "Yoga 15 min (sun-salutation slow ×5)",
+                "Zone-2 walk 35–40 min",
+                "Side-plank 3×30s + Pallof press (band) 3×10/side"
               ]
             },
             "daily_addons": [
@@ -5673,7 +5730,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -5708,14 +5766,14 @@
         },
         {
           "day": 45,
-          "date": "2026-08-09",
-          "weekday": "Sunday",
+          "date": "2026-08-12",
+          "weekday": "Wednesday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -5731,15 +5789,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Band pull-ups 3×6 + 2 negatives",
+                "DB rows 4×12",
+                "Mudgar swings 3×12",
+                "Farmer carry 3×40 m",
+                "Dead-hang 3×30s",
+                "L-sit tuck 3×10s"
               ]
             },
             "daily_addons": [
@@ -5760,7 +5821,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -5795,14 +5857,14 @@
         },
         {
           "day": 46,
-          "date": "2026-08-10",
-          "weekday": "Monday",
+          "date": "2026-08-13",
+          "weekday": "Thursday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -5818,18 +5880,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Full push-ups 4×10–12",
-                "Squats (tempo) 4×12",
-                "1-arm band row 3×12/side",
-                "Hip thrust (DB) 3×12",
-                "Plank 3×50s",
-                "Hollow hold 3×20s"
+                "Flexibility 15 min",
+                "Skipping 8×30s / 30s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -5850,7 +5910,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -5885,14 +5946,14 @@
         },
         {
           "day": 47,
-          "date": "2026-08-11",
-          "weekday": "Tuesday",
+          "date": "2026-08-14",
+          "weekday": "Friday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -5908,16 +5969,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15 min (sun-salutation slow ×5)",
-                "Zone-2 walk 35–40 min",
-                "Side-plank 3×30s + Pallof press (band) 3×10/side"
+                "Goblet squat 4×12",
+                "Hip thrust (DB) 4×12",
+                "Step-ups 3×10/side",
+                "Wall-sit 3×50s",
+                "Bulgarian split (assisted) 3×8/side",
+                "Single-leg balance eyes-closed 3×20s"
               ]
             },
             "daily_addons": [
@@ -5937,7 +6000,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -5972,14 +6036,14 @@
         },
         {
           "day": 48,
-          "date": "2026-08-12",
-          "weekday": "Wednesday",
+          "date": "2026-08-15",
+          "weekday": "Saturday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -5995,18 +6059,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band pull-ups 3×6 + 2 negatives",
-                "DB rows 4×12",
-                "Mudgar swings 3×12",
-                "Farmer carry 3×40 m",
-                "Dead-hang 3×30s",
-                "L-sit tuck 3×10s"
+                "Wall handstand 3×30s",
+                "Pike push-ups 3×8",
+                "Wall handstand shoulder taps 3×4/side",
+                "Circuit ×3",
+                "Crow→tuck balance 3×15s"
               ]
             },
             "daily_addons": [
@@ -6027,7 +6090,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -6062,14 +6126,14 @@
         },
         {
           "day": 49,
-          "date": "2026-08-13",
-          "weekday": "Thursday",
+          "date": "2026-08-16",
+          "weekday": "Sunday",
           "week": 7,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -6081,20 +6145,19 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 8×30s / 30s rest",
-                "Brisk walk 20 min"
+                "Easy walk 45 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -6114,7 +6177,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -6156,14 +6220,14 @@
       "days": [
         {
           "day": 50,
-          "date": "2026-08-14",
-          "weekday": "Friday",
+          "date": "2026-08-17",
+          "weekday": "Monday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -6175,22 +6239,22 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×12",
-                "Hip thrust (DB) 4×12",
-                "Step-ups 3×10/side",
-                "Wall-sit 3×50s",
-                "Bulgarian split (assisted) 3×8/side",
-                "Single-leg balance eyes-closed 3×20s"
+                "Full push-ups 4×10–12",
+                "Squats (tempo) 4×12",
+                "1-arm band row 3×12/side",
+                "Hip thrust (DB) 3×12",
+                "Plank 3×50s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -6211,7 +6275,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -6246,14 +6311,14 @@
         },
         {
           "day": 51,
-          "date": "2026-08-15",
-          "weekday": "Saturday",
+          "date": "2026-08-18",
+          "weekday": "Tuesday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -6269,17 +6334,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×30s",
-                "Pike push-ups 3×8",
-                "Wall handstand shoulder taps 3×4/side",
-                "Circuit ×3",
-                "Crow→tuck balance 3×15s"
+                "Mobility 10 min",
+                "Yoga 15 min (sun-salutation slow ×5)",
+                "Zone-2 walk 35–40 min",
+                "Side-plank 3×30s + Pallof press (band) 3×10/side"
               ]
             },
             "daily_addons": [
@@ -6299,7 +6363,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -6334,14 +6399,14 @@
         },
         {
           "day": 52,
-          "date": "2026-08-16",
-          "weekday": "Sunday",
+          "date": "2026-08-19",
+          "weekday": "Wednesday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -6357,15 +6422,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Band pull-ups 3×6 + 2 negatives",
+                "DB rows 4×12",
+                "Mudgar swings 3×12",
+                "Farmer carry 3×40 m",
+                "Dead-hang 3×30s",
+                "L-sit tuck 3×10s"
               ]
             },
             "daily_addons": [
@@ -6386,7 +6454,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -6421,14 +6490,14 @@
         },
         {
           "day": 53,
-          "date": "2026-08-17",
-          "weekday": "Monday",
+          "date": "2026-08-20",
+          "weekday": "Thursday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -6444,18 +6513,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Full push-ups 4×10–12",
-                "Squats (tempo) 4×12",
-                "1-arm band row 3×12/side",
-                "Hip thrust (DB) 3×12",
-                "Plank 3×50s",
-                "Hollow hold 3×20s"
+                "Flexibility 15 min",
+                "Skipping 8×30s / 30s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -6476,7 +6543,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -6511,14 +6579,14 @@
         },
         {
           "day": 54,
-          "date": "2026-08-18",
-          "weekday": "Tuesday",
+          "date": "2026-08-21",
+          "weekday": "Friday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -6534,16 +6602,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15 min (sun-salutation slow ×5)",
-                "Zone-2 walk 35–40 min",
-                "Side-plank 3×30s + Pallof press (band) 3×10/side"
+                "Goblet squat 4×12",
+                "Hip thrust (DB) 4×12",
+                "Step-ups 3×10/side",
+                "Wall-sit 3×50s",
+                "Bulgarian split (assisted) 3×8/side",
+                "Single-leg balance eyes-closed 3×20s"
               ]
             },
             "daily_addons": [
@@ -6563,7 +6633,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -6598,14 +6669,14 @@
         },
         {
           "day": 55,
-          "date": "2026-08-19",
-          "weekday": "Wednesday",
+          "date": "2026-08-22",
+          "weekday": "Saturday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -6621,18 +6692,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band pull-ups 3×6 + 2 negatives",
-                "DB rows 4×12",
-                "Mudgar swings 3×12",
-                "Farmer carry 3×40 m",
-                "Dead-hang 3×30s",
-                "L-sit tuck 3×10s"
+                "Wall handstand 3×30s",
+                "Pike push-ups 3×8",
+                "Wall handstand shoulder taps 3×4/side",
+                "Circuit ×3",
+                "Crow→tuck balance 3×15s"
               ]
             },
             "daily_addons": [
@@ -6653,7 +6723,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -6688,14 +6759,14 @@
         },
         {
           "day": 56,
-          "date": "2026-08-20",
-          "weekday": "Thursday",
+          "date": "2026-08-23",
+          "weekday": "Sunday",
           "week": 8,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -6711,16 +6782,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 8×30s / 30s rest",
-                "Brisk walk 20 min"
+                "Easy walk 45 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -6740,7 +6810,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -6782,14 +6853,14 @@
       "days": [
         {
           "day": 57,
-          "date": "2026-08-21",
-          "weekday": "Friday",
+          "date": "2026-08-24",
+          "weekday": "Monday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -6801,22 +6872,22 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×12",
-                "Hip thrust (DB) 4×12",
-                "Step-ups 3×10/side",
-                "Wall-sit 3×50s",
-                "Bulgarian split (assisted) 3×8/side",
-                "Single-leg balance eyes-closed 3×20s"
+                "Full push-ups 4×10–12",
+                "Squats (tempo) 4×12",
+                "1-arm band row 3×12/side",
+                "Hip thrust (DB) 3×12",
+                "Plank 3×50s",
+                "Hollow hold 3×20s"
               ]
             },
             "daily_addons": [
@@ -6837,7 +6908,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -6872,14 +6944,14 @@
         },
         {
           "day": 58,
-          "date": "2026-08-22",
-          "weekday": "Saturday",
+          "date": "2026-08-25",
+          "weekday": "Tuesday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -6891,21 +6963,20 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×30s",
-                "Pike push-ups 3×8",
-                "Wall handstand shoulder taps 3×4/side",
-                "Circuit ×3",
-                "Crow→tuck balance 3×15s"
+                "Mobility 10 min",
+                "Yoga 15 min (sun-salutation slow ×5)",
+                "Zone-2 walk 35–40 min",
+                "Side-plank 3×30s + Pallof press (band) 3×10/side"
               ]
             },
             "daily_addons": [
@@ -6925,7 +6996,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -6960,14 +7032,14 @@
         },
         {
           "day": 59,
-          "date": "2026-08-23",
-          "weekday": "Sunday",
+          "date": "2026-08-26",
+          "weekday": "Wednesday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -6983,15 +7055,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Band pull-ups 3×6 + 2 negatives",
+                "DB rows 4×12",
+                "Mudgar swings 3×12",
+                "Farmer carry 3×40 m",
+                "Dead-hang 3×30s",
+                "L-sit tuck 3×10s"
               ]
             },
             "daily_addons": [
@@ -7012,7 +7087,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -7047,14 +7123,14 @@
         },
         {
           "day": 60,
-          "date": "2026-08-24",
-          "weekday": "Monday",
+          "date": "2026-08-27",
+          "weekday": "Thursday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -7070,18 +7146,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Full push-ups 4×10–12",
-                "Squats (tempo) 4×12",
-                "1-arm band row 3×12/side",
-                "Hip thrust (DB) 3×12",
-                "Plank 3×50s",
-                "Hollow hold 3×20s"
+                "Flexibility 15 min",
+                "Skipping 8×30s / 30s rest",
+                "Brisk walk 20 min"
               ]
             },
             "daily_addons": [
@@ -7102,7 +7176,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -7137,14 +7212,14 @@
         },
         {
           "day": 61,
-          "date": "2026-08-25",
-          "weekday": "Tuesday",
+          "date": "2026-08-28",
+          "weekday": "Friday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -7160,16 +7235,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15 min (sun-salutation slow ×5)",
-                "Zone-2 walk 35–40 min",
-                "Side-plank 3×30s + Pallof press (band) 3×10/side"
+                "Goblet squat 4×12",
+                "Hip thrust (DB) 4×12",
+                "Step-ups 3×10/side",
+                "Wall-sit 3×50s",
+                "Bulgarian split (assisted) 3×8/side",
+                "Single-leg balance eyes-closed 3×20s"
               ]
             },
             "daily_addons": [
@@ -7189,7 +7266,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -7224,14 +7302,14 @@
         },
         {
           "day": 62,
-          "date": "2026-08-26",
-          "weekday": "Wednesday",
+          "date": "2026-08-29",
+          "weekday": "Saturday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -7247,18 +7325,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Band pull-ups 3×6 + 2 negatives",
-                "DB rows 4×12",
-                "Mudgar swings 3×12",
-                "Farmer carry 3×40 m",
-                "Dead-hang 3×30s",
-                "L-sit tuck 3×10s"
+                "Wall handstand 3×30s",
+                "Pike push-ups 3×8",
+                "Wall handstand shoulder taps 3×4/side",
+                "Circuit ×3",
+                "Crow→tuck balance 3×15s"
               ]
             },
             "daily_addons": [
@@ -7279,7 +7356,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -7314,14 +7392,14 @@
         },
         {
           "day": 63,
-          "date": "2026-08-27",
-          "weekday": "Thursday",
+          "date": "2026-08-30",
+          "weekday": "Sunday",
           "week": 9,
           "phase": "P3",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -7337,16 +7415,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 8×30s / 30s rest",
-                "Brisk walk 20 min"
+                "Easy walk 45 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -7366,7 +7443,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -7408,14 +7486,14 @@
       "days": [
         {
           "day": 64,
-          "date": "2026-08-28",
-          "weekday": "Friday",
+          "date": "2026-08-31",
+          "weekday": "Monday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -7431,18 +7509,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×15",
-                "Hip thrust 4×12",
-                "Step-ups 4×10/side",
-                "Wall-sit 3×70s",
-                "Split squat 3×10/side",
-                "Deep-squat hold 3×30–45s"
+                "Push-ups 4×15–20 (toward 30–40 total)",
+                "Squats (paused) 4×15",
+                "Pull-up negatives 4×3–5",
+                "Hip thrust (DB) 4×12",
+                "Plank 3×70s",
+                "Hollow hold 3×30s"
               ]
             },
             "daily_addons": [
@@ -7463,7 +7541,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -7498,14 +7577,14 @@
         },
         {
           "day": 65,
-          "date": "2026-08-29",
-          "weekday": "Saturday",
+          "date": "2026-09-01",
+          "weekday": "Tuesday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -7517,21 +7596,20 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
-                "Pike push-ups 3×10",
-                "Handstand shoulder taps 3×6/side",
-                "Circuit ×3",
-                "Tuck-balance holds 3×20s"
+                "Mobility 10 min",
+                "Yoga 15–20 min (sun-salutation ×8)",
+                "Zone-2 walk 40–45 min",
+                "Side-plank 3×40s + Pallof 3×12/side"
               ]
             },
             "daily_addons": [
@@ -7551,7 +7629,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -7586,14 +7665,14 @@
         },
         {
           "day": 66,
-          "date": "2026-08-30",
-          "weekday": "Sunday",
+          "date": "2026-09-02",
+          "weekday": "Wednesday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -7605,19 +7684,22 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45–60 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Pull-up negatives→ 3–6 real pull-ups",
+                "DB rows 4×12",
+                "Mudgar swings (10 kg) 3×12",
+                "Heavy-ish carry 3×40 m",
+                "Dead-hang 3×40s",
+                "L-sit tuck 3×15s"
               ]
             },
             "daily_addons": [
@@ -7638,7 +7720,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -7673,14 +7756,14 @@
         },
         {
           "day": 67,
-          "date": "2026-08-31",
-          "weekday": "Monday",
+          "date": "2026-09-03",
+          "weekday": "Thursday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -7696,18 +7779,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Push-ups 4×15–20 (toward 30–40 total)",
-                "Squats (paused) 4×15",
-                "Pull-up negatives 4×3–5",
-                "Hip thrust (DB) 4×12",
-                "Plank 3×70s",
-                "Hollow hold 3×30s"
+                "Flexibility 15 min",
+                "Skipping 10×40s / 30s rest",
+                "Brisk walk 20–25 min"
               ]
             },
             "daily_addons": [
@@ -7728,7 +7809,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -7763,14 +7845,14 @@
         },
         {
           "day": 68,
-          "date": "2026-09-01",
-          "weekday": "Tuesday",
+          "date": "2026-09-04",
+          "weekday": "Friday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -7786,16 +7868,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15–20 min (sun-salutation ×8)",
-                "Zone-2 walk 40–45 min",
-                "Side-plank 3×40s + Pallof 3×12/side"
+                "Goblet squat 4×15",
+                "Hip thrust 4×12",
+                "Step-ups 4×10/side",
+                "Wall-sit 3×70s",
+                "Split squat 3×10/side",
+                "Deep-squat hold 3×30–45s"
               ]
             },
             "daily_addons": [
@@ -7815,7 +7899,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -7850,14 +7935,14 @@
         },
         {
           "day": 69,
-          "date": "2026-09-02",
-          "weekday": "Wednesday",
+          "date": "2026-09-05",
+          "weekday": "Saturday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -7873,18 +7958,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Pull-up negatives→ 3–6 real pull-ups",
-                "DB rows 4×12",
-                "Mudgar swings (10 kg) 3×12",
-                "Heavy-ish carry 3×40 m",
-                "Dead-hang 3×40s",
-                "L-sit tuck 3×15s"
+                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
+                "Pike push-ups 3×10",
+                "Handstand shoulder taps 3×6/side",
+                "Circuit ×3",
+                "Tuck-balance holds 3×20s"
               ]
             },
             "daily_addons": [
@@ -7905,7 +7989,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -7940,14 +8025,14 @@
         },
         {
           "day": 70,
-          "date": "2026-09-03",
-          "weekday": "Thursday",
+          "date": "2026-09-06",
+          "weekday": "Sunday",
           "week": 10,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -7963,16 +8048,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 10×40s / 30s rest",
-                "Brisk walk 20–25 min"
+                "Easy walk 45–60 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -7992,7 +8076,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -8034,14 +8119,14 @@
       "days": [
         {
           "day": 71,
-          "date": "2026-09-04",
-          "weekday": "Friday",
+          "date": "2026-09-07",
+          "weekday": "Monday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -8057,18 +8142,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×15",
-                "Hip thrust 4×12",
-                "Step-ups 4×10/side",
-                "Wall-sit 3×70s",
-                "Split squat 3×10/side",
-                "Deep-squat hold 3×30–45s"
+                "Push-ups 4×15–20 (toward 30–40 total)",
+                "Squats (paused) 4×15",
+                "Pull-up negatives 4×3–5",
+                "Hip thrust (DB) 4×12",
+                "Plank 3×70s",
+                "Hollow hold 3×30s"
               ]
             },
             "daily_addons": [
@@ -8089,7 +8174,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -8124,14 +8210,14 @@
         },
         {
           "day": 72,
-          "date": "2026-09-05",
-          "weekday": "Saturday",
+          "date": "2026-09-08",
+          "weekday": "Tuesday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -8147,17 +8233,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
-                "Pike push-ups 3×10",
-                "Handstand shoulder taps 3×6/side",
-                "Circuit ×3",
-                "Tuck-balance holds 3×20s"
+                "Mobility 10 min",
+                "Yoga 15–20 min (sun-salutation ×8)",
+                "Zone-2 walk 40–45 min",
+                "Side-plank 3×40s + Pallof 3×12/side"
               ]
             },
             "daily_addons": [
@@ -8177,7 +8262,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -8212,14 +8298,14 @@
         },
         {
           "day": 73,
-          "date": "2026-09-06",
-          "weekday": "Sunday",
+          "date": "2026-09-09",
+          "weekday": "Wednesday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -8231,19 +8317,22 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45–60 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Pull-up negatives→ 3–6 real pull-ups",
+                "DB rows 4×12",
+                "Mudgar swings (10 kg) 3×12",
+                "Heavy-ish carry 3×40 m",
+                "Dead-hang 3×40s",
+                "L-sit tuck 3×15s"
               ]
             },
             "daily_addons": [
@@ -8264,7 +8353,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -8299,14 +8389,14 @@
         },
         {
           "day": 74,
-          "date": "2026-09-07",
-          "weekday": "Monday",
+          "date": "2026-09-10",
+          "weekday": "Thursday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -8318,22 +8408,20 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Push-ups 4×15–20 (toward 30–40 total)",
-                "Squats (paused) 4×15",
-                "Pull-up negatives 4×3–5",
-                "Hip thrust (DB) 4×12",
-                "Plank 3×70s",
-                "Hollow hold 3×30s"
+                "Flexibility 15 min",
+                "Skipping 10×40s / 30s rest",
+                "Brisk walk 20–25 min"
               ]
             },
             "daily_addons": [
@@ -8354,7 +8442,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -8389,14 +8478,14 @@
         },
         {
           "day": 75,
-          "date": "2026-09-08",
-          "weekday": "Tuesday",
+          "date": "2026-09-11",
+          "weekday": "Friday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -8412,16 +8501,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15–20 min (sun-salutation ×8)",
-                "Zone-2 walk 40–45 min",
-                "Side-plank 3×40s + Pallof 3×12/side"
+                "Goblet squat 4×15",
+                "Hip thrust 4×12",
+                "Step-ups 4×10/side",
+                "Wall-sit 3×70s",
+                "Split squat 3×10/side",
+                "Deep-squat hold 3×30–45s"
               ]
             },
             "daily_addons": [
@@ -8441,7 +8532,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -8476,14 +8568,14 @@
         },
         {
           "day": 76,
-          "date": "2026-09-09",
-          "weekday": "Wednesday",
+          "date": "2026-09-12",
+          "weekday": "Saturday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -8499,18 +8591,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Pull-up negatives→ 3–6 real pull-ups",
-                "DB rows 4×12",
-                "Mudgar swings (10 kg) 3×12",
-                "Heavy-ish carry 3×40 m",
-                "Dead-hang 3×40s",
-                "L-sit tuck 3×15s"
+                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
+                "Pike push-ups 3×10",
+                "Handstand shoulder taps 3×6/side",
+                "Circuit ×3",
+                "Tuck-balance holds 3×20s"
               ]
             },
             "daily_addons": [
@@ -8531,7 +8622,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -8566,14 +8658,14 @@
         },
         {
           "day": 77,
-          "date": "2026-09-10",
-          "weekday": "Thursday",
+          "date": "2026-09-13",
+          "weekday": "Sunday",
           "week": 11,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -8589,16 +8681,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 10×40s / 30s rest",
-                "Brisk walk 20–25 min"
+                "Easy walk 45–60 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -8618,7 +8709,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -8660,14 +8752,14 @@
       "days": [
         {
           "day": 78,
-          "date": "2026-09-11",
-          "weekday": "Friday",
+          "date": "2026-09-14",
+          "weekday": "Monday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -8683,18 +8775,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "E",
-              "label": "E — Lower Body + Balance + Core",
+              "day_type": "A",
+              "label": "A — Full-Body Strength 1 (push + squat + core)",
               "workout": [
-                "Goblet squat 4×15",
-                "Hip thrust 4×12",
-                "Step-ups 4×10/side",
-                "Wall-sit 3×70s",
-                "Split squat 3×10/side",
-                "Deep-squat hold 3×30–45s"
+                "Push-ups 4×15–20 (toward 30–40 total)",
+                "Squats (paused) 4×15",
+                "Pull-up negatives 4×3–5",
+                "Hip thrust (DB) 4×12",
+                "Plank 3×70s",
+                "Hollow hold 3×30s"
               ]
             },
             "daily_addons": [
@@ -8715,7 +8807,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -8750,14 +8843,14 @@
         },
         {
           "day": 79,
-          "date": "2026-09-12",
-          "weekday": "Saturday",
+          "date": "2026-09-15",
+          "weekday": "Tuesday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -8773,17 +8866,16 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "F",
-              "label": "F — Handstand/Skill + Light Full-Body",
+              "day_type": "B",
+              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
               "workout": [
-                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
-                "Pike push-ups 3×10",
-                "Handstand shoulder taps 3×6/side",
-                "Circuit ×3",
-                "Tuck-balance holds 3×20s"
+                "Mobility 10 min",
+                "Yoga 15–20 min (sun-salutation ×8)",
+                "Zone-2 walk 40–45 min",
+                "Side-plank 3×40s + Pallof 3×12/side"
               ]
             },
             "daily_addons": [
@@ -8803,7 +8895,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -8838,14 +8931,14 @@
         },
         {
           "day": 80,
-          "date": "2026-09-13",
-          "weekday": "Sunday",
+          "date": "2026-09-16",
+          "weekday": "Wednesday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -8861,15 +8954,18 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "G",
-              "label": "G — Rest / Long easy walk + Breathwork",
+              "day_type": "C",
+              "label": "C — Pull + Grip + Mudgar + Core",
               "workout": [
-                "Easy walk 45–60 min",
-                "Breath 10 min",
-                "Yoga nidra 15 min"
+                "Pull-up negatives→ 3–6 real pull-ups",
+                "DB rows 4×12",
+                "Mudgar swings (10 kg) 3×12",
+                "Heavy-ish carry 3×40 m",
+                "Dead-hang 3×40s",
+                "L-sit tuck 3×15s"
               ]
             },
             "daily_addons": [
@@ -8890,7 +8986,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -8925,14 +9022,14 @@
         },
         {
           "day": 81,
-          "date": "2026-09-14",
-          "weekday": "Monday",
+          "date": "2026-09-17",
+          "weekday": "Thursday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -8944,22 +9041,20 @@
             "meal2": {
               "recipe_id": "D1",
               "name": "Idli + mild sambar",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)",
+              "Vitamin D3 (with a fat source)"
             ],
             "body": {
-              "day_type": "A",
-              "label": "A — Full-Body Strength 1 (push + squat + core)",
+              "day_type": "D",
+              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
               "workout": [
-                "Push-ups 4×15–20 (toward 30–40 total)",
-                "Squats (paused) 4×15",
-                "Pull-up negatives 4×3–5",
-                "Hip thrust (DB) 4×12",
-                "Plank 3×70s",
-                "Hollow hold 3×30s"
+                "Flexibility 15 min",
+                "Skipping 10×40s / 30s rest",
+                "Brisk walk 20–25 min"
               ]
             },
             "daily_addons": [
@@ -8980,7 +9075,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Homemade curd (perugu)"
           },
           "logged": {
             "followed_window": "",
@@ -9015,14 +9111,14 @@
         },
         {
           "day": 82,
-          "date": "2026-09-15",
-          "weekday": "Tuesday",
+          "date": "2026-09-18",
+          "weekday": "Friday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Moringa water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp pumpkin seeds",
             "meal1": {
@@ -9034,20 +9130,22 @@
             "meal2": {
               "recipe_id": "D2",
               "name": "Ghee dosa + moong chutney",
-              "note": "fermented-forward, finish by 18:30"
+              "note": "fermented-forward, finish by 18:30 + a live ferment side (curd/buttermilk)"
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "B",
-              "label": "B — Mobility + Yoga + Zone-2 walk + deep-core",
+              "day_type": "E",
+              "label": "E — Lower Body + Balance + Core",
               "workout": [
-                "Mobility 10 min",
-                "Yoga 15–20 min (sun-salutation ×8)",
-                "Zone-2 walk 40–45 min",
-                "Side-plank 3×40s + Pallof 3×12/side"
+                "Goblet squat 4×15",
+                "Hip thrust 4×12",
+                "Step-ups 4×10/side",
+                "Wall-sit 3×70s",
+                "Split squat 3×10/side",
+                "Deep-squat hold 3×30–45s"
               ]
             },
             "daily_addons": [
@@ -9067,7 +9165,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Buttermilk (majjiga)"
           },
           "logged": {
             "followed_window": "",
@@ -9102,14 +9201,14 @@
         },
         {
           "day": 83,
-          "date": "2026-09-16",
-          "weekday": "Wednesday",
+          "date": "2026-09-19",
+          "weekday": "Saturday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Amla water",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp sunflower seeds",
             "meal1": {
@@ -9125,18 +9224,17 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "C",
-              "label": "C — Pull + Grip + Mudgar + Core",
+              "day_type": "F",
+              "label": "F — Handstand/Skill + Light Full-Body",
               "workout": [
-                "Pull-up negatives→ 3–6 real pull-ups",
-                "DB rows 4×12",
-                "Mudgar swings (10 kg) 3×12",
-                "Heavy-ish carry 3×40 m",
-                "Dead-hang 3×40s",
-                "L-sit tuck 3×15s"
+                "Wall handstand 3×40s + free-balance attempts (against spotter/wall kick-up)",
+                "Pike push-ups 3×10",
+                "Handstand shoulder taps 3×6/side",
+                "Circuit ×3",
+                "Tuck-balance holds 3×20s"
               ]
             },
             "daily_addons": [
@@ -9157,7 +9255,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Overnight-fermented rice (saddi annam)"
           },
           "logged": {
             "followed_window": "",
@@ -9192,14 +9291,14 @@
         },
         {
           "day": 84,
-          "date": "2026-09-17",
-          "weekday": "Thursday",
+          "date": "2026-09-20",
+          "weekday": "Sunday",
           "week": 12,
           "phase": "P4",
           "ideal": {
-            "eating_window": "12:00–18:30",
+            "eating_window": "09:00–15:00",
             "on_waking": "Warm water + 10–20 min sunlight",
-            "psyllium": "1.5–2 tsp in a large glass of water (fasted ~07:30)",
+            "psyllium": "~18:00 (evening), 1–2 tsp in a big glass of water",
             "fasted_morning_water": "Guava-leaf tea",
             "nuts_seeds_core": "5–6 soaked almonds + 2 walnuts + 1 tsp flax + soaked chia, plus 1 tbsp watermelon seeds",
             "meal1": {
@@ -9215,16 +9314,15 @@
             },
             "fermented_target": "2 servings",
             "supplements": [
-              "Mylamin B12 complex (after lunch)",
-              "Vitamin D3 60k IU (after lunch, with fat) — Thursday"
+              "Mylamin B12 complex (after Meal 1)"
             ],
             "body": {
-              "day_type": "D",
-              "label": "D — Flexibility + Skipping/Walk intervals (Zone 2)",
+              "day_type": "G",
+              "label": "G — Rest / Long easy walk + Breathwork",
               "workout": [
-                "Flexibility 15 min",
-                "Skipping 10×40s / 30s rest",
-                "Brisk walk 20–25 min"
+                "Easy walk 45–60 min",
+                "Breath 10 min",
+                "Yoga nidra 15 min"
               ]
             },
             "daily_addons": [
@@ -9244,7 +9342,8 @@
               "CCF after lunch",
               "Optional guava-leaf/warm water evening"
             ],
-            "hydration": "2.5–3 L water across the day"
+            "hydration": "2.5–3 L water across the day",
+            "live_ferment": "Beet–carrot kanji"
           },
           "logged": {
             "followed_window": "",
@@ -9279,5 +9378,36 @@
         }
       ]
     }
-  ]
+  ],
+  "vision_board": {
+    "title": "WHY I RISE",
+    "kicker": "THE FORGE · DAILY PRIMING",
+    "quote": {
+      "text": "He who has a why to live for can bear almost any how.",
+      "author": "Friedrich Nietzsche"
+    },
+    "d_day": {
+      "date": "2027-03-06",
+      "name": "Maha Shivaratri",
+      "label": "D-Day"
+    },
+    "arrival_line": "A lean, strong, supple, durable body and a calm, clear, fearless mind — built at home, naturally, and kept for life.",
+    "manifesto": [
+      "I know my why. So I can bear any how.",
+      "I am rebuilding myself — gut, body, and mind — into the strongest, clearest, most alive version of me that has ever existed. Not someday. Now. Day by day, breath by breath, one kept promise at a time.",
+      "My gut is healing. With every meal I choose, trillions of allies grow stronger inside me. Inflammation quiets. Energy returns. My body grows lean, capable, durable — limbs strong, joints free, doing whatever my life asks. My mind grows calm like still water — focused, fearless, and finally my own.",
+      "I am not running from anything. I am building toward everything. I am becoming the proof of work — living evidence that a person can take all their suffering and forge it into strength. And as I rise, I lift the two people I love most with me — becoming the son who carries his parents, not the one who needs carrying.",
+      "Every hard year was the forge, lighting early. The burning is behind me. What is in front of me is the flight."
+    ],
+    "affirmations": [
+      "I am disciplined because I love who I am becoming.",
+      "I am patient. The tortoise wins. I do not reset — I resume.",
+      "I am calm, grounded, and clear.",
+      "I am strong, supple, and durable.",
+      "I am healing, whole, and at home in my own skin.",
+      "I am enough already — and I am becoming more.",
+      "I am the forge. I am the flight."
+    ],
+    "closing": "On the sixth of March, 2027 — Maha Shivaratri — I stand as the man I am building today. I can already feel him. I am already him. I rise. I forge. I become."
+  }
 }

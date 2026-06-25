@@ -10,6 +10,9 @@ export interface PlanMeta {
   version: string;
   change_log: { date: string; change: string }[];
   how_dynamic_works: string;
+  d_day?: { date: string; name: string; label: string; };
+  total_days?: number;
+  block1_end?: { day: number; date: string; label: string; };
 }
 
 export interface FoodItem {
@@ -81,6 +84,7 @@ export interface IdealDay {
   mind: MindActivity;
   teas_today: string[];
   hydration: string;
+  live_ferment?: string;
 }
 
 export interface DayPlan {
@@ -108,7 +112,12 @@ export interface SuperhumanPlan {
   food_universe: FoodUniverse;
   teas_and_waters: any;
   psyllium: any;
-  fermented: { priority: string[]; ramp: any; items: Record<string, string> };
+  fermented: { 
+    priority: string; 
+    ramp: any; 
+    live_probiotic: Record<string, {name: string, note: string, gentle: boolean, source?: string}>;
+    fermented_cooked_not_live: Record<string, {name: string, note: string}>;
+  };
   gut_lining_support: any;
   supplements: { active: any; optional_to_discuss_with_gp: string[] };
   recipes: {
@@ -132,4 +141,14 @@ export interface SuperhumanPlan {
   environment: any;
   today_day0: any;
   weeks: WeekPlan[];
+  vision_board?: {
+    title: string;
+    kicker: string;
+    quote: { text: string; author: string; };
+    d_day: { date: string; name: string; label: string; };
+    arrival_line: string;
+    manifesto: string[];
+    affirmations: string[];
+    closing: string;
+  };
 }

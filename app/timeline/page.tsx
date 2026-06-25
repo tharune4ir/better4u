@@ -13,6 +13,192 @@ import { plan, getAllDays, getTodayDay, getPhases, resolveRecipe } from "@/lib/p
 import { useLocalStore } from "@/lib/log-store";
 import { DayPlan } from "@/lib/plan-types";
 
+// Helper to calculate days between two dates
+const getDaysBetween = (startStr: string, endStr: string) => {
+  const start = new Date(startStr);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(endStr);
+  end.setHours(0, 0, 0, 0);
+  return Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+};
+
+// Vision Board Component
+const VisionBoard = ({ dayNumber }: { dayNumber: number }) => {
+  const vb = plan.vision_board;
+  const dDay = plan.meta.d_day;
+  const [affirmationIdx, setAffirmationIdx] = useState(0);
+
+  useEffect(() => {
+    if (!vb?.affirmations) return;
+    const interval = setInterval(() => {
+      setAffirmationIdx(prev => (prev + 1) % vb.affirmations.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [vb]);
+
+  if (!vb || !dDay) return null;
+
+  const todayStr = new Date().toISOString().split('T')[0];
+  const daysToDDay = getDaysBetween(todayStr, dDay.date);
+  const totalDays = plan.meta.total_days || 251;
+  const targetDays = 250; // As per the prompt 'Day X / 250'
+  const displayDay = dayNumber < 1 ? 0 : dayNumber;
+  const progressPercent = Math.min(Math.max((displayDay / targetDays) * 100, 0), 100);
+
+  return (
+    <div className="relative overflow-hidden bg-gradient-to-br from-[#1E293B] to-[#0F172A] rounded-3xl p-8 sm:p-12 mb-16 shadow-2xl text-white">
+      {/* Animated Backgrounds */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2A7F7F]/40 via-transparent to-transparent blur-3xl"
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-[50%] -right-[50%] w-[200%] h-[200%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/40 via-transparent to-transparent blur-3xl"
+        />
+      </div>
+
+      {/* Floating Embers */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-400/30 rounded-full blur-[1px]"
+            initial={{ 
+              y: "110%", 
+              x: `${Math.random() * 100}%`,
+              opacity: 0,
+              scale: Math.random() * 1 + 0.5
+            }}
+            animate={{ 
+              y: "-10%",
+              opacity: [0, 0.8, 0],
+              x: `${Math.random() * 100}%`
+            }}
+            transition={{ 
+              duration: Math.random() * 10 + 10, 
+              repeat: Infinity, 
+              ease: "linear",
+              delay: Math.random() * 10
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 space-y-12">
+        {/* Header */}
+        <div className="text-center space-y-3">
+          <div className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#4FD1C5]">
+            {vb.kicker}
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-white/90">
+            {vb.title}
+          </h2>
+        </div>
+
+        {/* Quote */}
+        <div className="text-center max-w-xl mx-auto border-y border-white/10 py-6">
+          <p className="text-lg sm:text-xl font-light text-slate-300 italic mb-2">"{vb.quote.text}"</p>
+          <p className="text-[10px] uppercase tracking-widest text-[#4FD1C5]/70">— {vb.quote.author}</p>
+        </div>
+
+        {/* Manifesto */}
+        <div className="max-w-2xl mx-auto space-y-6">
+          <div className="text-[10px] uppercase tracking-widest text-slate-400 text-center mb-8 font-medium">
+            Read this slowly. Feel it. Become it.
+          </div>
+          {vb.manifesto.map((paragraph, idx) => (
+            <motion.p 
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 + idx * 0.2 }}
+              className="text-base sm:text-lg text-slate-300 font-light leading-relaxed"
+            >
+              {paragraph}
+            </motion.p>
+          ))}
+        </div>
+
+        {/* Affirmations Carousel */}
+        <div className="max-w-xl mx-auto text-center h-16 flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={affirmationIdx}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.8 }}
+              className="text-xl sm:text-2xl font-medium text-[#4FD1C5]"
+            >
+              {vb.affirmations[affirmationIdx]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Closing */}
+        <div className="text-center max-w-xl mx-auto pt-6">
+          <p className="text-lg text-white/80 font-medium italic">
+            {vb.closing}
+          </p>
+        </div>
+
+        {/* Countdown Block */}
+        <div className="pt-8 border-t border-white/10 mt-8 flex flex-col items-center">
+          <div className="relative flex items-center justify-center mb-6">
+            <motion.div 
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-[#4FD1C5]/10 rounded-full blur-xl"
+            />
+            
+            {/* Progress Arc */}
+            <div className="relative w-48 h-48">
+              <svg className="w-full h-full transform -rotate-90">
+                <circle cx="96" cy="96" r="90" className="stroke-white/10" strokeWidth="4" fill="none" />
+                <circle 
+                  cx="96" cy="96" r="90" 
+                  className="stroke-[#4FD1C5] transition-all duration-1000 ease-out" 
+                  strokeWidth="4" 
+                  fill="none" 
+                  strokeLinecap="round"
+                  strokeDasharray={`${2 * Math.PI * 90}`}
+                  strokeDashoffset={`${2 * Math.PI * 90 * (1 - progressPercent / 100)}`}
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">
+                  {displayDay < 1 ? "Pre-Forge" : "Current"}
+                </span>
+                <span className="text-4xl font-light text-white">
+                  Day {displayDay}
+                </span>
+                <span className="text-sm font-light text-slate-400 mt-1">
+                  / {targetDays}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center space-y-2">
+            <div className="text-base font-medium text-white/90">
+              {daysToDDay} days to {dDay.name} <span className="opacity-50">·</span> {dDay.date}
+            </div>
+            {plan.meta.block1_end && (
+              <div className="text-xs text-[#4FD1C5]/80 font-medium bg-[#4FD1C5]/10 px-3 py-1 rounded-full inline-block">
+                Block 1 ends Day {plan.meta.block1_end.day} · {plan.meta.block1_end.date} · 33rd birthday
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Helper component for a Checkable Row
 const CheckRow = ({ 
   label, 
@@ -340,7 +526,7 @@ export default function TimelinePage() {
             Current Day
           </div>
           <div className="text-sm font-semibold text-slate-900">
-            Day {todayDay.day} <span className="text-slate-400 font-light">/ 84</span>
+            Day {todayDay.day} <span className="text-slate-400 font-light">/ 250</span>
           </div>
         </div>
         <button 
@@ -353,9 +539,14 @@ export default function TimelinePage() {
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 pb-32 z-10 relative space-y-16">
         
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-light text-slate-900 tracking-tight">The 84-Day Timeline</h1>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-light text-slate-900 tracking-tight">The Journey</h1>
           <p className="text-sm text-slate-500 font-light mt-2">{plan.meta.title}</p>
+        </div>
+
+        {/* Vision Board at the Top */}
+        <div id="vision-board">
+          <VisionBoard dayNumber={todayDay.day} />
         </div>
 
         {groupedByPhase.map((phase, pIdx) => (
@@ -436,8 +627,26 @@ export default function TimelinePage() {
                 </div>
               </div>
             ))}
+            {phase.phaseName.includes("4") && (
+              <div className="bg-[#2A7F7F] text-white p-6 rounded-3xl shadow-xl mt-8 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <h3 className="text-xl font-bold mb-2 relative z-10">🎂 33rd Birthday · Block 1 Complete!</h3>
+                <p className="text-sm text-white/80 relative z-10">You've reached Day 84. You've forged the foundation.</p>
+              </div>
+            )}
           </div>
         ))}
+        
+        {/* Capstone Marker for Day 251 */}
+        {plan.meta.d_day && (
+          <div className="mt-16 text-center space-y-4">
+            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1E293B] to-[#0F172A] rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+              <span className="text-2xl">🔱</span>
+            </div>
+            <h3 className="text-2xl font-light text-slate-900">{plan.meta.d_day.name} · D-Day</h3>
+            <p className="text-sm text-slate-500 font-medium uppercase tracking-widest">{plan.meta.d_day.date} — The Arrival</p>
+          </div>
+        )}
       </main>
     </div>
   );

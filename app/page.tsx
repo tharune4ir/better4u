@@ -14,12 +14,22 @@ import {
 import { getTodayDay, plan } from "@/lib/plan";
 import { useLocalStore } from "@/lib/log-store";
 
+const getDaysBetween = (startStr: string, endStr: string) => {
+  const start = new Date(startStr);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(endStr);
+  end.setHours(0, 0, 0, 0);
+  return Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+};
+
 export default function HomeHub() {
   const router = useRouter();
   const [time, setTime] = useState("");
   const { isHydrated, getDayLog } = useLocalStore();
   
   const todayDay = getTodayDay();
+  const todayStr = new Date().toISOString().split('T')[0];
+  const daysToDDay = plan.meta.d_day ? getDaysBetween(todayStr, plan.meta.d_day.date) : 0;
   
   const progress = React.useMemo(() => {
     if (!isHydrated) return 0;
@@ -136,8 +146,14 @@ export default function HomeHub() {
                 <span className="text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-3 py-1 rounded-full shadow-sm">
                   Today
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Day {todayDay.day} / 84
+                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                  Day {todayDay.day < 1 ? 0 : todayDay.day} / 250
+                  {plan.meta.d_day && (
+                    <span className="hidden sm:inline">
+                      <span className="mx-1.5 opacity-50">·</span>
+                      {daysToDDay} days to D-Day (6 Mar 2027)
+                    </span>
+                  )}
                 </span>
               </div>
               <h2 className="text-2xl font-semibold text-[#2A7F7F] mb-6 tracking-tight">
@@ -183,8 +199,16 @@ export default function HomeHub() {
                   <span className="text-lg font-bold text-slate-800">{Math.round(progress)}%</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#2A7F7F] group-hover:text-[#1e5c5c] transition-colors">
-                Open Timeline <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="flex flex-col gap-2 w-full mt-4">
+                <button
+                  onClick={(e) => { e.stopPropagation(); router.push("/timeline#vision-board"); }}
+                  className="flex items-center justify-center gap-1.5 w-full bg-[#2A7F7F]/10 hover:bg-[#2A7F7F]/20 text-[#2A7F7F] py-2 px-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-colors"
+                >
+                  <Sparkle className="w-3.5 h-3.5" /> Prime Me
+                </button>
+                <div className="flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors mt-2">
+                  Open Timeline <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </div>
           </div>
