@@ -39,7 +39,6 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
   const navItems = [
     { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
-    { id: "vault" as NavTab, label: "Vault", sub: "Unseal", icon: Lock },
   ];
 
   return (
