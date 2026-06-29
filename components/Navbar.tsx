@@ -6,11 +6,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { 
   Apple, 
-  Lock, 
   Sparkle
 } from "lucide-react";
 
-export type NavTab = "food" | "vault";
+export type NavTab = "food" | "product-lab";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -38,7 +37,8 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
+    { id: "food" as NavTab, label: "Food Wing", sub: "Cook", icon: Apple },
+    { id: "product-lab" as NavTab, label: "Product Lab", sub: "Concept SKUs", icon: Sparkle },
   ];
 
   return (
@@ -127,7 +127,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 onClick={() => setActiveTab(item.id)}
                 className="relative px-5 py-2.5 rounded-full flex flex-col items-center justify-center cursor-pointer min-h-[44px] group"
               >
-                {/* Active Slide Capsule */}
+                {/* Active Capsule Overlay */}
                 {isActive && (
                   <motion.div
                     layoutId="activeNavBackground"
