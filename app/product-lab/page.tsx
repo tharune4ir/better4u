@@ -92,7 +92,8 @@ const FrostedBottle = ({
   const fileMappings: Record<string, { front: string; back?: string }> = {
     lime: { front: "/all_image_files/product-lab/1.1_lime.jpeg", back: "/all_image_files/product-lab/1.2_lime.jpeg" },
     ginger: { front: "/all_image_files/product-lab/2.1_ginger.jpeg", back: "/all_image_files/product-lab/2.2_ginger.jpeg" },
-    berry: { front: "/all_image_files/product-lab/3.1_berry.jpeg", back: "/all_image_files/product-lab/3.2_berry.jpeg" },
+    spice: { front: "/all_image_files/product-lab/3.1_spice.jpeg", back: "/all_image_files/product-lab/3.2_spice.jpeg" },
+    berry: { front: "/all_image_files/product-lab/4.1_berry.jpeg", back: "/all_image_files/product-lab/4.2_berry.jpeg" },
   };
 
   const imageSrc = fileMappings[imagePlaceholder] 
@@ -460,14 +461,7 @@ export default function ProductLabPage() {
               imagePlaceholder="lime"
               isDetailed={true} 
             />
-            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-center w-full pointer-events-none">
-              <span className="text-[10px] tracking-widest text-slate-400 font-bold uppercase">Nimbu Sparkler Edition</span>
-              <div className="flex items-center justify-center gap-1 mt-1 text-[9px] text-[#2A7F7F] font-bold">
-                <span>TASTE-FIRST</span>
-                <span>•</span>
-                <span>GUT-FRIENDLY</span>
-              </div>
-            </div>
+
           </motion.div>
           
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-40">
