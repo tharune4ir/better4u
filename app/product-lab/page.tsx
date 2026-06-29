@@ -17,7 +17,9 @@ import {
   Award,
   ChevronDown,
   Volume2,
-  VolumeX
+  VolumeX,
+  RefreshCw,
+  Eye
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { MOCK_PRODUCTS, ProductSKU } from "@/lib/store-data";
@@ -143,7 +145,9 @@ const FrostedBottle = ({
             animate={{ opacity: 1, scale: 1 }}
             src={imageSrc} 
             alt={`ALIVE ${flavor}`}
-            className="w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)]"
+            className={`w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out origin-center pointer-events-auto ${
+              isDetailed && showBack ? "group-hover:scale-[2.8] cursor-zoom-in" : ""
+            }`}
           />
         ) : (
           /* Custom Frosted Glass Soda Bottle Vector Graphic */
@@ -214,6 +218,16 @@ export default function ProductLabPage() {
 
   // Back view toggle in modal
   const [modalShowBack, setModalShowBack] = useState(false);
+
+  // Track which product range cards are showing back view
+  const [flippedProducts, setFlippedProducts] = useState<Record<string, boolean>>({});
+
+  const toggleProductFlip = (productId: string) => {
+    setFlippedProducts(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
 
   // Video controller states
   const [isVideoMuted, setIsVideoMuted] = useState(true);
@@ -494,13 +508,17 @@ export default function ProductLabPage() {
                   >
                     
                     {/* Immersive Bottle Frame with Ambient color gradient backing */}
-                    <div className="w-full md:w-[45%] aspect-square flex items-center justify-center relative rounded-3xl overflow-hidden bg-[#F2F1EC] border border-black/[0.03] shadow-xs group cursor-pointer z-10">
+                    <div 
+                      onClick={() => toggleProductFlip(product.id)}
+                      className="w-full md:w-[45%] aspect-square flex items-center justify-center relative rounded-3xl overflow-hidden bg-[#F2F1EC] border border-black/[0.03] shadow-xs group cursor-pointer z-10"
+                    >
                       <div className="absolute inset-0 w-full h-full hover:scale-[1.03] transition-transform duration-700 ease-out z-10">
                         <FrostedBottle 
                           flavor={product.name} 
                           glowColor={product.glowColor} 
                           accentColor={product.accentColor} 
                           imagePlaceholder={product.imagePlaceholder}
+                          showBack={!!flippedProducts[product.id]}
                         />
                       </div>
 
@@ -508,6 +526,20 @@ export default function ProductLabPage() {
                       <div className="absolute top-4 left-4 text-[9px] tracking-widest text-slate-500 uppercase font-bold select-none opacity-85 z-20 bg-white/85 backdrop-blur-xs px-3 py-1 rounded-full border border-black/[0.03] shadow-3xs">
                         {product.replaces}
                       </div>
+
+                      {/* View Back Label Toggle Badge */}
+                      {["lime", "ginger", "spice", "berry"].includes(product.imagePlaceholder) && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleProductFlip(product.id);
+                          }}
+                          className="absolute bottom-4 right-4 z-20 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-md flex items-center gap-1.5"
+                        >
+                          <RefreshCw className="w-3 h-3 text-[#2A7F7F]" />
+                          <span>{flippedProducts[product.id] ? "Show Front" : "View Back Label"}</span>
+                        </button>
+                      )}
                     </div>
 
                     {/* Flavour copy/details side */}
@@ -742,7 +774,7 @@ export default function ProductLabPage() {
                   </span>
                 </div>
 
-                <div className="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mt-6">
+                <div className="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mt-6 overflow-hidden rounded-2xl bg-white border border-black/[0.04] shadow-xs relative group">
                   <FrostedBottle 
                     flavor={selectedProduct.name}
                     glowColor={selectedProduct.glowColor}
@@ -761,12 +793,20 @@ export default function ProductLabPage() {
 
                   {/* Flip Toggle Button */}
                   {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
-                    <button 
-                      onClick={() => setModalShowBack(!modalShowBack)}
-                      className="mt-2 px-4 py-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-3xs flex items-center gap-1 z-20"
-                    >
-                      <span>View {modalShowBack ? "Front" : "Back Label"}</span>
-                    </button>
+                    <div className="flex flex-col items-center gap-1.5">
+                      <button 
+                        onClick={() => setModalShowBack(!modalShowBack)}
+                        className="mt-2 px-4 py-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-3xs flex items-center gap-1 z-20"
+                      >
+                        <span>View {modalShowBack ? "Front" : "Back Label"}</span>
+                      </button>
+                      
+                      {modalShowBack && (
+                        <span className="text-[8px] text-slate-400 tracking-wider uppercase font-semibold select-none">
+                          *Hover bottle to zoom & read label
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
