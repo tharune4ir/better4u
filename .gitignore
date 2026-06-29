@@ -44,6 +44,7 @@ next-env.d.ts
 /content/
 /content/**/*.md
 /all_logo_files/
+/public/all_image_files/
 
 
 
