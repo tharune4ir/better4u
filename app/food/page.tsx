@@ -127,8 +127,8 @@ export default function FoodPage() {
 
   const handleTabChange = (tab: NavTab) => {
     setActiveTab(tab);
-    if (tab === "movement") {
-      router.push("/movement");
+    if (tab === "vault") {
+      router.push("/vault");
     } else if (tab === "food") {
       router.push("/food");
     }

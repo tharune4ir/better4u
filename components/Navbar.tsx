@@ -6,11 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { 
   Apple, 
-  Activity, 
+  Lock, 
   Sparkle
 } from "lucide-react";
 
-export type NavTab = "food" | "movement";
+export type NavTab = "food" | "vault";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -39,7 +39,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
   const navItems = [
     { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
-    { id: "movement" as NavTab, label: "Movement", sub: "Build", icon: Activity },
+    { id: "vault" as NavTab, label: "Vault", sub: "Unseal", icon: Lock },
   ];
 
   return (
@@ -173,4 +173,3 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
     </>
   );
 }
-
