@@ -452,7 +452,7 @@ export default function ProductLabPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 50, damping: 20, delay: 0.4 }}
-            className="w-64 h-64 sm:w-80 sm:h-80 mt-12 relative hover:scale-[1.02] transition-transform duration-300 rounded-3xl shadow-xl border border-black/[0.03] bg-white flex items-center justify-center p-2 z-10"
+            className="w-72 h-72 sm:w-[400px] sm:h-[400px] mt-12 relative hover:scale-[1.02] transition-transform duration-300 rounded-3xl shadow-2xl border border-black/[0.03] overflow-hidden bg-white z-10"
           >
             <FrostedBottle 
               flavor="LIME" 
@@ -461,7 +461,6 @@ export default function ProductLabPage() {
               imagePlaceholder="lime"
               isDetailed={true} 
             />
-
           </motion.div>
           
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-40">
@@ -495,9 +494,8 @@ export default function ProductLabPage() {
                   >
                     
                     {/* Immersive Bottle Frame with Ambient color gradient backing */}
-                    <div className="w-full md:w-[45%] flex items-center justify-center relative min-h-[340px] rounded-3xl overflow-hidden bg-slate-950/[0.01] border border-black/[0.01] p-6">
-                      <CarbonationBubbles color={product.accentColor} />
-                      <div className="w-56 h-56 sm:w-64 sm:h-64 hover:scale-[1.03] transition-transform duration-500 flex items-center justify-center bg-white/40 border border-black/[0.03] rounded-2xl shadow-sm p-1.5 z-10">
+                    <div className="w-full md:w-[45%] aspect-square flex items-center justify-center relative rounded-3xl overflow-hidden bg-[#F2F1EC] border border-black/[0.03] shadow-xs group cursor-pointer z-10">
+                      <div className="absolute inset-0 w-full h-full hover:scale-[1.03] transition-transform duration-700 ease-out z-10">
                         <FrostedBottle 
                           flavor={product.name} 
                           glowColor={product.glowColor} 
@@ -507,7 +505,7 @@ export default function ProductLabPage() {
                       </div>
 
                       {/* Ambient floating elements representing taste notes */}
-                      <div className="absolute top-4 left-6 text-[9px] tracking-widest text-slate-400 uppercase font-bold select-none opacity-40 z-20">
+                      <div className="absolute top-4 left-4 text-[9px] tracking-widest text-slate-500 uppercase font-bold select-none opacity-85 z-20 bg-white/85 backdrop-blur-xs px-3 py-1 rounded-full border border-black/[0.03] shadow-3xs">
                         {product.replaces}
                       </div>
                     </div>
@@ -760,7 +758,7 @@ export default function ProductLabPage() {
                   </div>
 
                   {/* Flip Toggle Button */}
-                  {["lime", "ginger", "berry"].includes(selectedProduct.imagePlaceholder) && (
+                  {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
                     <button 
                       onClick={() => setModalShowBack(!modalShowBack)}
                       className="mt-2 px-4 py-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-3xs flex items-center gap-1 z-20"
