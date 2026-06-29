@@ -212,6 +212,17 @@ export default function ProductLabPage() {
   // Cart State
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false);
+  const [orderedItems, setOrderedItems] = useState<CartItem[]>([]);
+  const [countdown, setCountdown] = useState(8);
+
+  const handlePlaceOrder = () => {
+    setOrderedItems([...cart]);
+    setIsCartOpen(false);
+    setShowSuccessScreen(true);
+    saveCart([]);
+    setCountdown(8);
+  };
 
   // Selected Product for Specs Modal
   const [selectedProduct, setSelectedProduct] = useState<ProductSKU | null>(null);
@@ -248,6 +259,13 @@ export default function ProductLabPage() {
 
   // Custom 6-Pack Box Builder State
   const [boxSlots, setBoxSlots] = useState<(ProductSKU | null)[]>([null, null, null, null, null, null]);
+  const [activeSlotIndex, setActiveSlotIndex] = useState<number | null>(null);
+
+  const swapSlotFlavor = (index: number, product: ProductSKU) => {
+    const newSlots = [...boxSlots];
+    newSlots[index] = product;
+    setBoxSlots(newSlots);
+  };
 
   // Load cart and box configuration on mount
   useEffect(() => {
@@ -268,6 +286,24 @@ export default function ProductLabPage() {
         .catch(err => console.warn("[ProductLabPage] Autoplay blocked or failed for background video:", err));
     }
   }, []);
+
+  // Countdown timer for auto-dismissing success screen
+  useEffect(() => {
+    if (!showSuccessScreen) return;
+    
+    const interval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setShowSuccessScreen(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [showSuccessScreen]);
 
   const saveCart = (newCart: CartItem[]) => {
     setCart(newCart);
@@ -622,23 +658,34 @@ export default function ProductLabPage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-6 gap-4 py-4">
                 {boxSlots.map((slot, index) => {
+                  const isActive = activeSlotIndex === index;
                   return (
                     <div 
                       key={index}
-                      className="aspect-[3/5] rounded-2xl border-2 border-dashed border-black/10 bg-white/20 flex flex-col items-center justify-center p-2 relative group transition-all duration-300 hover:border-black/25"
+                      onClick={() => setActiveSlotIndex(isActive ? null : index)}
+                      className={`aspect-[3/5] rounded-2xl border-2 ${
+                        isActive 
+                          ? "border-[#2A7F7F] bg-white/60 ring-2 ring-[#2A7F7F]/10" 
+                          : slot 
+                            ? "border-black/5 bg-white/40" 
+                            : "border-dashed border-black/10 bg-white/10"
+                      } flex flex-col items-center justify-center p-2 relative group transition-all duration-300 hover:border-black/25 cursor-pointer`}
                     >
                       {slot ? (
                         /* Filled Bottle Slot */
                         <div className="w-full h-full flex flex-col items-center justify-between py-2">
                           <button
-                            onClick={() => removeFromBox(index)}
-                            className="absolute -top-1.5 -right-1.5 p-1 bg-rose-500 text-white rounded-full cursor-pointer shadow-xs scale-0 group-hover:scale-100 transition-transform duration-200 z-20 hover:bg-rose-600"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeFromBox(index);
+                            }}
+                            className="absolute -top-1.5 -right-1.5 p-1 bg-rose-500 text-white rounded-full cursor-pointer shadow-md scale-100 sm:scale-0 sm:group-hover:scale-100 transition-transform duration-200 z-20 hover:bg-rose-600"
                           >
                             <X className="w-3 h-3" />
                           </button>
                           
                           {/* Mini Bottle Visualizer */}
-                          <div className="w-12 h-28 relative">
+                          <div className="w-full h-28 sm:h-24 relative flex items-center justify-center overflow-hidden">
                             <FrostedBottle 
                               flavor={slot.name} 
                               glowColor={slot.glowColor} 
@@ -647,21 +694,84 @@ export default function ProductLabPage() {
                             />
                           </div>
 
-                          <div className="text-center z-10">
+                          <div className="text-center z-10 select-none">
                             <span className="text-[9px] font-extrabold uppercase text-slate-800 tracking-wide block">{slot.name}</span>
                             <span className="text-[7px] text-slate-400 block tracking-widest font-light">₹60</span>
                           </div>
                         </div>
                       ) : (
                         /* Empty Slot */
-                        <div className="flex flex-col items-center justify-center text-center space-y-1 text-slate-400">
-                          <Plus className="w-5 h-5 opacity-40 animate-pulse" />
-                          <span className="text-[8px] font-bold tracking-widest uppercase opacity-55">Empty</span>
+                        <div className="flex flex-col items-center justify-center text-center space-y-1.5 text-slate-400 py-4 select-none">
+                          <Plus className="w-5 h-5 opacity-40 animate-pulse text-[#2A7F7F]" />
+                          <span className="text-[8px] font-bold tracking-widest uppercase opacity-55">Tap to Add</span>
+                        </div>
+                      )}
+
+                      {/* Swap & Remove Inline Overlay Menu */}
+                      {isActive && (
+                        <div 
+                          className="absolute inset-0 bg-slate-950/95 backdrop-blur-xs rounded-2xl p-2.5 flex flex-col justify-between z-30 transition-all duration-300 shadow-xl border border-white/10"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="flex items-center justify-between border-b border-white/10 pb-1">
+                            <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Select Flavor</span>
+                            <button 
+                              onClick={() => setActiveSlotIndex(null)}
+                              className="text-slate-400 hover:text-white p-0.5"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-1 py-1.5 flex-grow justify-center items-center">
+                            {MOCK_PRODUCTS.map(prod => (
+                              <button
+                                key={prod.id}
+                                onClick={() => {
+                                  swapSlotFlavor(index, prod);
+                                  setActiveSlotIndex(null);
+                                }}
+                                className="w-full py-1.5 rounded-lg border border-white/5 hover:border-white/20 bg-white/5 hover:bg-white/10 flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all"
+                              >
+                                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: prod.accentColor }} />
+                                <span className="text-[7px] font-bold text-white uppercase tracking-wider">{prod.name}</span>
+                              </button>
+                            ))}
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              removeFromBox(index);
+                              setActiveSlotIndex(null);
+                            }}
+                            className="w-full py-1 bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white rounded-lg text-[7px] font-bold tracking-widest uppercase cursor-pointer transition-colors flex items-center justify-center gap-1"
+                          >
+                            <Trash2 className="w-2.5 h-2.5" />
+                            <span>Remove</span>
+                          </button>
                         </div>
                       )}
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Segmented Crate Progress Bar */}
+              <div className="w-full flex gap-1.5 h-2 bg-black/5 rounded-full overflow-hidden mt-6 shadow-inner p-0.5">
+                {boxSlots.map((slot, i) => (
+                  <div 
+                    key={i}
+                    className={`flex-grow h-full rounded-full transition-all duration-500 ${
+                      slot 
+                        ? "" 
+                        : "bg-black/5"
+                    }`}
+                    style={{ 
+                      backgroundColor: slot ? slot.accentColor : undefined,
+                      boxShadow: slot ? `0 0 10px ${slot.glowColor}` : undefined
+                    }}
+                  />
+                ))}
               </div>
 
               {/* Box status bar */}
@@ -671,31 +781,38 @@ export default function ProductLabPage() {
                     Crate Configuration: {boxCount} / 6 Bottles
                   </span>
                   <span className="text-[10px] text-slate-400 font-light">
-                    {isBoxFull ? "Your tester pack is complete and ready to order." : "Select flavors above to fill your pack."}
+                    {isBoxFull ? "Your custom 6-pack is complete and ready to order." : "Click slots or select flavors below to fill your pack."}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-end">
                   {boxCount > 0 && (
                     <button
-                      onClick={() => setBoxSlots([null, null, null, null, null, null])}
-                      className="px-4 py-2 border border-black/10 hover:border-black/25 text-slate-500 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all cursor-pointer"
+                      onClick={() => {
+                        setBoxSlots([null, null, null, null, null, null]);
+                        setActiveSlotIndex(null);
+                      }}
+                      className="px-4 py-2 bg-white hover:bg-slate-50 border border-black/10 hover:border-black/25 text-slate-500 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all cursor-pointer shadow-3xs"
                     >
-                      Clear Pack
+                      Clear Crate
                     </button>
                   )}
-                  <button
+                  <motion.button
+                    whileHover={boxCount > 0 ? { scale: 1.02 } : {}}
+                    whileTap={boxCount > 0 ? { scale: 0.98 } : {}}
                     disabled={boxCount === 0}
                     onClick={addBoxToCart}
-                    className={`px-6 py-2.5 rounded-full text-[10px] font-bold tracking-wider uppercase transition-all flex items-center gap-2 cursor-pointer ${
-                      boxCount > 0
-                        ? "bg-[#2A7F7F] text-white hover:bg-[#1e5c5c] shadow-sm"
-                        : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                    className={`px-6 py-2.5 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer ${
+                      isBoxFull
+                        ? "bg-[#2A7F7F] text-white hover:bg-[#1e5c5c] shadow-md ring-4 ring-[#2A7F7F]/10 font-bold"
+                        : boxCount > 0
+                          ? "bg-slate-900 text-white hover:bg-slate-800 shadow-sm"
+                          : "bg-slate-200 text-slate-400 cursor-not-allowed border border-black/[0.02]"
                     }`}
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
                     <span>Add Box to Cart (₹{boxCount * 60})</span>
-                  </button>
+                  </motion.button>
                 </div>
               </div>
 
@@ -1001,8 +1118,8 @@ export default function ProductLabPage() {
                   </div>
 
                   <button
-                    onClick={() => alert("Checkouts are simulated on this prototype platform. Cart data stays local to your browser.")}
-                    className="w-full py-3 bg-[#2A7F7F] text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-[#1e5c5c] transition-all cursor-pointer text-center shadow-xs"
+                    onClick={handlePlaceOrder}
+                    className="w-full py-3 bg-[#2A7F7F] text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-[#1e5c5c] transition-all cursor-pointer text-center shadow-xs hover:scale-[1.01] active:scale-99"
                   >
                     Place Mock Order
                   </button>
@@ -1011,6 +1128,76 @@ export default function ProductLabPage() {
             </motion.div>
           </>
         )}
+        </AnimatePresence>
+
+        {/* FULLSCREEN MOCK PURCHASE SUCCESS OVERLAY */}
+        <AnimatePresence>
+          {showSuccessScreen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-[#F7F6F2] z-50 flex flex-col items-center justify-center p-4 overflow-y-auto"
+            >
+              {/* Ambient glowing background bubbles representing living cultures */}
+              <CarbonationBubbles color="rgba(42, 127, 127, 0.15)" />
+              
+              <motion.div 
+                initial={{ scale: 0.9, y: 20, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.9, y: 20, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                className="w-full max-w-md bg-white border border-black/[0.03] rounded-3xl p-8 text-center shadow-xl space-y-6 relative"
+              >
+                {/* Success Circle and Icon */}
+                <div className="w-16 h-16 rounded-full bg-[#2A7F7F]/10 border border-[#2A7F7F]/20 flex items-center justify-center mx-auto relative">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 15 }}
+                  >
+                    <Check className="w-8 h-8 text-[#2A7F7F]" />
+                  </motion.div>
+                  <div className="absolute inset-0 rounded-full border-2 border-[#2A7F7F] animate-ping opacity-25" />
+                </div>
+
+                {/* Success Messages */}
+                <div className="space-y-2">
+                  <span className="text-[10px] tracking-[0.25em] text-[#2A7F7F] font-bold uppercase">Mock Purchase Successful</span>
+                  <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
+                    Fermenting Your Crate
+                  </h2>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
+                    Your customized Alive probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
+                  </p>
+                </div>
+
+                {/* Summary of ordered items */}
+                <div className="bg-[#F7F6F2]/60 border border-black/[0.02] rounded-2xl p-4 text-left space-y-2 max-h-48 overflow-y-auto shadow-2xs">
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Crate Manifest</span>
+                  {orderedItems.map((item, idx) => (
+                    <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
+                      <span className="text-slate-800 font-medium">ALIVE · {item.product.name}</span>
+                      <span className="text-slate-500 font-bold">Qty: {item.quantity}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Status and timer */}
+                <div className="space-y-4 pt-2">
+                  <button
+                    onClick={() => setShowSuccessScreen(false)}
+                    className="w-full py-3 bg-[#2A7F7F] text-white hover:bg-[#1e5c5c] text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-98"
+                  >
+                    Return to Product Lab
+                  </button>
+                  <span className="text-[9px] text-slate-400 font-light block">
+                    Automatically returning in <span className="font-bold text-slate-600">{countdown}s</span>
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {/* Footer */}
