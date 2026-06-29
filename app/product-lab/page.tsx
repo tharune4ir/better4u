@@ -89,8 +89,6 @@ const FrostedBottle = ({
   isDetailed?: boolean;
   showBack?: boolean;
 }) => {
-  const [imageExists, setImageExists] = useState(false);
-
   const fileMappings: Record<string, { front: string; back?: string }> = {
     lime: { front: "/all_image_files/product-lab/1.1_lime.jpeg", back: "/all_image_files/product-lab/1.2_lime.jpeg" },
     ginger: { front: "/all_image_files/product-lab/2.1_ginger.jpeg", back: "/all_image_files/product-lab/2.2_ginger.jpeg" },
@@ -101,16 +99,7 @@ const FrostedBottle = ({
     ? (showBack ? (fileMappings[imagePlaceholder].back || fileMappings[imagePlaceholder].front) : fileMappings[imagePlaceholder].front)
     : "";
 
-  useEffect(() => {
-    if (!imageSrc) {
-      setImageExists(false);
-      return;
-    }
-    const img = new Image();
-    img.src = imageSrc;
-    img.onload = () => setImageExists(true);
-    img.onerror = () => setImageExists(false);
-  }, [imageSrc]);
+  const hasImage = !!imageSrc;
 
   const liquidColors: Record<string, string> = {
     lime: "linear-gradient(180deg, rgba(163, 230, 53, 0.35) 0%, rgba(42, 127, 127, 0.2) 100%)",
@@ -142,18 +131,18 @@ const FrostedBottle = ({
         }}
       />
 
-      <div className={`relative ${isDetailed ? "w-44 h-80" : "w-28 h-52"} flex items-center justify-center`}>
-        {imageExists ? (
+      <div className="relative w-full h-full flex items-center justify-center">
+        {hasImage ? (
           <motion.img 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             src={imageSrc} 
             alt={`ALIVE ${flavor}`}
-            className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)]"
+            className="w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)]"
           />
         ) : (
           /* Custom Frosted Glass Soda Bottle Vector Graphic */
-          <div className="w-full h-full relative flex flex-col items-center justify-end">
+          <div className={`${isDetailed ? "w-44 h-80" : "w-28 h-52"} relative flex flex-col items-center justify-end`}>
             
             {/* Crown Cap */}
             <div className="w-5 h-2.5 bg-gradient-to-r from-slate-400 to-slate-500 rounded-t-sm border-b border-slate-600 shadow-sm z-20 flex justify-around px-0.5">
@@ -351,8 +340,25 @@ export default function ProductLabPage() {
         <main className="flex-grow">
 
         {/* ==================== ACT 1: THE REVELATION (Cinematic Hero) ==================== */}
-        <section ref={heroRef} className="relative min-h-[90vh] w-full flex flex-col justify-center items-center px-4 py-16 text-center overflow-hidden z-10">
-          <CarbonationBubbles color="rgba(42, 127, 127, 0.15)" />
+        <section ref={heroRef} className="relative min-h-[92vh] w-full flex flex-col justify-center items-center px-4 py-16 text-center overflow-hidden z-10">
+          
+          {/* Background Ambient Cinematic Video */}
+          <div className="absolute inset-0 w-full h-full z-0 overflow-hidden select-none pointer-events-none">
+            <video 
+              ref={videoRef}
+              src="/all_image_files/product-lab/1_video1.mp4" 
+              className="w-full h-full object-cover opacity-[0.22] transition-opacity duration-1000"
+              loop
+              playsInline
+              autoPlay
+              muted={isVideoMuted}
+            />
+            {/* Vignette and blending overlays to merge loop edges and ensure crisp typography contrast */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F2]/20 via-[#F7F6F2]/75 to-[#F7F6F2] pointer-events-none" />
+            <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#F7F6F2]/50 pointer-events-none" />
+          </div>
+
+          <CarbonationBubbles color="rgba(42, 127, 127, 0.12)" />
           
           <div className="max-w-3xl space-y-8 relative z-10">
             <motion.span 
@@ -396,13 +402,22 @@ export default function ProductLabPage() {
                 <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
               </a>
 
-              <a 
-                href="#film"
-                className="px-6 py-3 bg-slate-900 text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-black hover:shadow-lg transition-all flex items-center gap-2 group cursor-pointer"
+              <button 
+                onClick={toggleMute}
+                className="px-6 py-3 bg-slate-900 text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-black hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                <span>Watch Film</span>
-              </a>
+                {isVideoMuted ? (
+                  <>
+                    <VolumeX className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                    <span>Unmute Film</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Mute Film</span>
+                  </>
+                )}
+              </button>
 
               <button 
                 onClick={() => setIsCartOpen(true)}
@@ -559,82 +574,6 @@ export default function ProductLabPage() {
           </div>
         </section>
 
-        {/* ==================== ACT 2.5: COMMERCIAL FILM PREMIERE ==================== */}
-        <section id="film" className="relative w-full z-10 py-24 px-4 sm:px-6 bg-slate-950 text-white overflow-hidden border-y border-white/[0.02]">
-          {/* Subtle background glow mapping to the lime green color */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(163,230,53,0.1)_0%,transparent_70%)] pointer-events-none z-0" />
-          <CarbonationBubbles color="rgba(163, 230, 53, 0.1)" />
-          
-          <div className="max-w-4xl mx-auto space-y-12 text-center relative z-10">
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-[0.3em] text-[#2A7F7F] font-bold uppercase bg-white/5 border border-white/10 px-4 py-1.5 rounded-full inline-block">
-                ALIVE ON FILM
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-extralight tracking-tight text-slate-100">
-                Taste the <span className="font-semibold text-white">living carbonation</span>
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-400 font-light max-w-md mx-auto leading-relaxed">
-                Experience the visual and acoustic depth of ALIVE. Unmute to hear the premium soundtrack and active carbonation sizzle.
-              </p>
-            </div>
-
-            {/* Cinematic Video Player Frame */}
-            <div className="max-w-3xl mx-auto aspect-video rounded-3xl overflow-hidden border border-white/10 bg-black shadow-2xl relative group">
-              <video 
-                ref={videoRef}
-                src="/all_image_files/product-lab/1_video1.mp4" 
-                className="w-full h-full object-cover cursor-pointer"
-                loop
-                playsInline
-                autoPlay
-                muted={isVideoMuted}
-                onClick={() => {
-                  if (videoRef.current) {
-                    if (videoRef.current.paused) {
-                      videoRef.current.play();
-                    } else {
-                      videoRef.current.pause();
-                    }
-                  }
-                }}
-              />
-              
-              {/* Bottom controls overlay */}
-              <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
-                <span className="text-[8px] sm:text-[9px] bg-black/60 backdrop-blur-md text-white/80 border border-white/10 px-3 py-1.5 rounded-full uppercase tracking-widest font-bold select-none">
-                  LIME EDITION · CONCEPT REEL
-                </span>
-
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleMute();
-                  }}
-                  className="pointer-events-auto bg-white text-slate-950 hover:bg-slate-100 px-4 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase flex items-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-95 animate-fade-in"
-                >
-                  {isVideoMuted ? (
-                    <>
-                      <VolumeX className="w-3.5 h-3.5" />
-                      <span>Unmute Audio</span>
-                    </>
-                  ) : (
-                    <>
-                      <Volume2 className="w-3.5 h-3.5" />
-                      <span>Mute Audio</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Pulsing "Sound On" notification at start */}
-              {isVideoMuted && (
-                <div className="absolute top-4 right-4 z-20 bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-full text-[8px] tracking-wider uppercase animate-pulse select-none">
-                  SOUND ON RECOMMENDED
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
 
         {/* ==================== ACT 3: THE EXPERIMENT (Interactive Custom Box Builder) ==================== */}
         <section className="relative w-full z-10 py-20 px-4 sm:px-6 bg-gradient-to-b from-transparent to-[#2A7F7F]/5 border-t border-black/[0.01]">
