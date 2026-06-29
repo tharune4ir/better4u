@@ -735,21 +735,23 @@ export default function ProductLabPage() {
               </button>
 
               {/* Left Panel: Bottle render */}
-              <div className="md:w-[40%] bg-slate-950/5 flex flex-col items-center justify-center p-8 border-r border-black/[0.03] min-h-[300px] relative overflow-hidden">
+              <div className="w-full md:w-[40%] bg-slate-950/5 flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-black/[0.03] relative">
                 <div className="absolute top-4 left-4">
                   <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-white/80 border border-black/[0.04] px-2.5 py-0.5 rounded-full select-none">
                     {selectedProduct.replaces}
                   </span>
                 </div>
 
-                <FrostedBottle 
-                  flavor={selectedProduct.name}
-                  glowColor={selectedProduct.glowColor}
-                  accentColor={selectedProduct.accentColor}
-                  imagePlaceholder={selectedProduct.imagePlaceholder}
-                  isDetailed={true}
-                  showBack={modalShowBack}
-                />
+                <div className="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mt-6">
+                  <FrostedBottle 
+                    flavor={selectedProduct.name}
+                    glowColor={selectedProduct.glowColor}
+                    accentColor={selectedProduct.accentColor}
+                    imagePlaceholder={selectedProduct.imagePlaceholder}
+                    isDetailed={true}
+                    showBack={modalShowBack}
+                  />
+                </div>
 
                 <div className="mt-4 text-center z-10 flex flex-col items-center gap-2">
                   <div>
@@ -843,8 +845,8 @@ export default function ProductLabPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-black/[0.04] flex items-center justify-between gap-4">
-                  <div className="text-[9px] text-slate-400 leading-normal font-light">
+                <div className="mt-8 pt-4 border-t border-black/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="text-[9px] text-slate-400 leading-normal font-light text-center sm:text-left">
                     *Packaged in custom 250ml inert glass bottles to preserve natural carbonation.
                   </div>
                   <button
@@ -852,9 +854,9 @@ export default function ProductLabPage() {
                       addToCart(selectedProduct);
                       setSelectedProduct(null);
                     }}
-                    className="px-5 py-2.5 bg-[#2A7F7F] text-white rounded-full text-[10px] font-bold tracking-wider uppercase hover:bg-[#1e5c5c] transition-all cursor-pointer flex items-center gap-2"
+                    className="w-full sm:w-auto px-6 py-3 bg-[#2A7F7F] text-white rounded-full text-[11px] font-bold tracking-wider uppercase hover:bg-[#1e5c5c] transition-all cursor-pointer flex items-center justify-center gap-2 flex-shrink-0 whitespace-nowrap shadow-sm"
                   >
-                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <ShoppingBag className="w-4 h-4" />
                     <span>Add to Cart</span>
                   </button>
                 </div>
