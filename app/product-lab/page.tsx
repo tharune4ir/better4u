@@ -461,21 +461,6 @@ export default function ProductLabPage() {
             </motion.div>
           </div>
 
-          {/* Large Floating Hero Bottle Mockup */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 50, damping: 20, delay: 0.4 }}
-            className="w-72 h-72 sm:w-[400px] sm:h-[400px] mt-12 relative hover:scale-[1.02] transition-transform duration-300 rounded-3xl shadow-2xl border border-black/[0.03] overflow-hidden bg-white z-10"
-          >
-            <FrostedBottle 
-              flavor="LIME" 
-              glowColor="rgba(163, 230, 53, 0.15)" 
-              accentColor="#2A7F7F" 
-              imagePlaceholder="lime"
-              isDetailed={true} 
-            />
-          </motion.div>
           
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-40">
             <span className="text-[8px] tracking-[0.2em] uppercase font-bold text-slate-400">Scroll to Explore</span>
