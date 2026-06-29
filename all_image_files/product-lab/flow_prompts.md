@@ -1,6 +1,6 @@
 # Google Flow Consistency Prompts
 
-These prompts are surgically designed to generate front and back shots for the other three flavors—**Ginger**, **Spice**, and **Berry**—while maintaining perfect visual consistency with the **Lime** reference images (`1.1_lime.jpeg` and `1.2_lime.jpeg`).
+These prompts are surgically designed to generate front and back shots for all flavors—**Lime**, **Ginger**, **Spice**, and **Berry**—while maintaining perfect visual consistency with the **Lime** reference images (`1.1_lime.jpeg` and `1.2_lime.jpeg`).
 
 ### How to use these in Google Flow:
 1. Set the aspect ratio to **1:1** (square) in the settings.
@@ -10,7 +10,16 @@ These prompts are surgically designed to generate front and back shots for the o
 
 ---
 
-## 1. Ginger
+## 1. Lime
+
+### Back Shot (Ref: `1.2_lime.jpeg`)
+```text
+Premium commercial product photography of a single modern Indian gut soda bottle named "ALIVE" (LIME variant), rotated to show only the back label. The bottle sits centered on the exact same coarse warm off-white limestone block as shown in the reference image. The sleek, cylindrical frosted glass bottle (Codd-neck style) shows a translucent, glowing pale lime-green liquid from behind. Printed directly on the back glass in small, perfectly legible, ultra-sharp minimal black text is a clean nutritional index grid: "Calories: 130", "Carbs: 0 g", "Sugar: 12.0 g", "Total Fat: 0 g", "Carbohydrate: 0 g", "Protein: 0 g", "Sodium: 0 g". Below it is a clean text block detailing the ingredients: "INGREDIENTS: PURE SPRING WATER, ORGANIC LIME JUICE (8%), RAW SUGAR, TRADITIONAL LIVE STARTER, ROASTED CUMIN (JEERA), BLACK SALT (KALA NAMAK), NATURAL ACTIVE PROBIOTICS. VEGETARIAN PRODUCT OF INDIA." Diffused studio lighting, 8k resolution, photorealistic, match composition and background tone of the reference image.
+```
+
+---
+
+## 2. Ginger
 
 ### Front Shot (Ref: `1.1_lime.jpeg`)
 ```text
@@ -24,7 +33,7 @@ Premium commercial product photography of a single modern Indian gut soda bottle
 
 ---
 
-## 2. Spice
+## 3. Spice
 
 ### Front Shot (Ref: `1.1_lime.jpeg`)
 ```text
@@ -38,7 +47,7 @@ Premium commercial product photography of a single modern Indian gut soda bottle
 
 ---
 
-## 3. Berry
+## 4. Berry
 
 ### Front Shot (Ref: `1.1_lime.jpeg`)
 ```text
