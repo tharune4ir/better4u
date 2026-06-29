@@ -70,7 +70,7 @@ export default function LandingHub() {
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden select-none font-sans text-slate-800">
       
       {/* Decorative Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.015)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.028)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.028)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none z-0" />
 
       {/* Scroll Progress Bar */}
       <motion.div 
