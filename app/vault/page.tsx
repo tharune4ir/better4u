@@ -154,89 +154,109 @@ export default function VaultPage() {
             initial={{ opacity: 1 }}
             exit={{ 
               opacity: 0,
-              scale: 1.03,
-              filter: "blur(12px)",
-              transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
+              scale: 1.05,
+              filter: "blur(8px)",
+              transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
             }}
             onClick={handleContainerClick}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1E2525] overflow-hidden select-none cursor-pointer px-4 sm:px-6"
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F7F6F2] overflow-hidden select-none cursor-pointer px-4 sm:px-6"
           >
-            {/* Ambient Ember-Teal Glows */}
-            <div className="absolute top-1/4 left-1/3 w-[300px] h-[300px] bg-[#2A7F7F]/10 rounded-full blur-[90px] pointer-events-none" />
-            <div className="absolute bottom-1/4 right-1/3 w-[350px] h-[350px] bg-amber-500/[0.04] rounded-full blur-[110px] pointer-events-none" />
+            {/* Ambient Background Glows */}
+            <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-gradient-to-tr from-[#2A7F7F]/15 to-emerald-200/10 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] bg-gradient-to-tr from-slate-200/20 to-[#2A7F7F]/5 rounded-full blur-[100px] sm:blur-[120px] pointer-events-none" />
 
+            {/* Lock Container */}
             <motion.div
               animate={isError ? {
-                x: [-12, 12, -9, 9, -5, 5, 0],
+                x: [-10, 10, -8, 8, -5, 5, 0],
                 transition: { duration: 0.5 }
               } : {}}
               className="flex flex-col items-center max-w-sm w-full px-6 text-center z-10"
             >
-              {/* Mechanical Safe Door Animation */}
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mb-8">
-                {/* Safe outer ring (Rotates based on passcode length or unsealing) */}
-                <motion.div 
-                  animate={isUnlocking ? { 
-                    rotate: 720, 
-                    scale: 0.9,
-                    transition: { duration: 1.5, ease: "easeInOut" } 
-                  } : { 
-                    rotate: passcode.length * 40 
-                  }}
-                  className="absolute w-44 h-44 sm:w-52 sm:h-52 rounded-full border-4 border-dashed border-[#2A7F7F]/40 flex items-center justify-center"
+              {/* Massive 3D-Style Glassmorphic Lock */}
+              <motion.div
+                animate={isUnlocking ? {
+                  scale: [1, 1.05, 0.95, 1],
+                  y: [0, -10, 5, 0],
+                  transition: { duration: 1, ease: "easeInOut" }
+                } : {
+                  y: [0, -8, 0],
+                  transition: { 
+                    duration: 5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }
+                }}
+                className="relative w-40 h-48 sm:w-48 sm:h-56 flex items-center justify-center mb-8 sm:mb-12"
+              >
+                {/* 1. Shackle (Lock Arch) */}
+                <svg
+                  viewBox="0 0 100 100"
+                  className="absolute top-0 w-28 h-28 sm:w-32 sm:h-32 overflow-visible"
                 >
-                  {/* Concentric tick marks inside outer ring */}
-                  <div className="w-36 h-36 rounded-full border border-[#2A7F7F]/20 flex items-center justify-center">
-                    <div className="w-28 h-28 rounded-full border-2 border-dotted border-amber-500/20" />
+                  <defs>
+                    <linearGradient id="vault-shackle-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#81cbcb" stopOpacity="0.9" />
+                      <stop offset="50%" stopColor="#2A7F7F" stopOpacity="0.75" />
+                      <stop offset="100%" stopColor="#1e5c5c" stopOpacity="0.9" />
+                    </linearGradient>
+                    <filter id="vault-shackle-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="4" stdDeviation="6" floodOpacity="0.08" />
+                    </filter>
+                  </defs>
+                  
+                  <motion.path
+                    d="M 20 60 A 30 30 0 0 1 80 60 L 80 80 L 70 80 L 70 60 A 20 20 0 0 0 30 60 L 30 80 L 20 80 Z"
+                    fill="url(#vault-shackle-grad)"
+                    filter="url(#vault-shackle-shadow)"
+                    initial={{ y: 0 }}
+                    animate={isUnlocking ? { y: -22, rotate: -4 } : { y: 0 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 120, 
+                      damping: 12,
+                      delay: 0.1
+                    }}
+                  />
+                </svg>
+
+                {/* 2. Lock Body (Glassmorphic Outer Frame) */}
+                <div className="absolute bottom-4 w-36 h-32 sm:w-40 sm:h-36 rounded-[24px] sm:rounded-[28px] glassmorphic p-[1px] shadow-2xl flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-white/40 pointer-events-none rounded-[24px] sm:rounded-[28px]" />
+                  <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 right-4 w-20 h-20 bg-gradient-to-br from-[#2A7F7F]/15 to-emerald-400/5 rounded-full blur-xl pointer-events-none" />
+
+                  {/* Inner Details: Keyhole Area */}
+                  <div className="relative flex flex-col items-center">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-slate-900/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),0_1px_2px_rgba(255,255,255,0.7)] flex items-center justify-center border border-white/20">
+                      <motion.div 
+                        animate={isUnlocking ? {
+                          scale: [1, 1.2, 0.9, 1],
+                          rotate: [0, 90, 90, 0],
+                          transition: { duration: 0.8 }
+                        } : {}}
+                        className="w-2.5 h-6 sm:w-3 sm:h-7 bg-slate-950 rounded-full relative flex items-center justify-center shadow-inner"
+                      >
+                        <div className="absolute top-0.5 sm:top-1 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-slate-950" />
+                        <div className="absolute bottom-0 w-[4px] sm:w-[5px] h-3.5 sm:h-4 bg-slate-950" />
+                      </motion.div>
+                    </div>
                   </div>
-                </motion.div>
+                </div>
 
-                {/* Counter-rotating mid ring */}
-                <motion.div
-                  animate={isUnlocking ? {
-                    rotate: -360,
-                    transition: { duration: 1.5, ease: "easeInOut" }
-                  } : {
-                    rotate: -passcode.length * 25
-                  }}
-                  className="absolute w-32 h-32 sm:w-36 sm:h-36 rounded-full border border-amber-500/30 flex items-center justify-center"
-                />
+                <div className="absolute -inset-2 rounded-full border border-black/[0.01] pointer-events-none" />
+              </motion.div>
 
-                {/* Solid Glassmorphic Safe Dial in Center */}
-                <motion.div 
-                  animate={isUnlocking ? {
-                    scale: [1, 1.1, 0.85, 1],
-                    transition: { duration: 1.5 }
-                  } : {}}
-                  className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-2xl flex items-center justify-center"
-                >
-                  {/* Glowing core indicator */}
-                  <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${
-                    isUnlocking ? "bg-[#2A7F7F]/30 border-[#2A7F7F] shadow-[0_0_15px_rgba(42,127,127,0.5)]" : 
-                    isError ? "bg-amber-500/20 border-amber-500" : "bg-white/5 border-white/10"
-                  }`}>
-                    {isUnlocking ? (
-                      <Unlock className="w-4 h-4 text-[#2A7F7F]" />
-                    ) : (
-                      <Lock className="w-4 h-4 text-slate-400" />
-                    )}
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Title & Description */}
-              <h2 className="text-xl sm:text-2xl font-light tracking-[0.3em] text-[#2A7F7F] uppercase mb-1">
+              {/* Title & Copy */}
+              <h1 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-[#2A7F7F] uppercase mb-2">
                 Trelis Vault
-              </h2>
-              <span className="text-[9px] tracking-widest text-amber-500/70 font-semibold uppercase mb-6">
-                FMCG BRAND PROTOTYPES
-              </span>
+              </h1>
               <p className="text-[10px] font-medium tracking-widest text-slate-400 uppercase mb-8 h-4">
-                {isUnlocking ? "Unsealing Chambers..." : isError ? "Access Refused" : "Verification Required"}
+                {isUnlocking ? "Decrypted" : isError ? "Access Denied" : "System Secured"}
               </p>
 
-              {/* Invisible input */}
-              <div className="relative w-44 sm:w-52 h-12 flex items-center justify-center">
+              {/* Invisible password input */}
+              <div className="relative w-40 sm:w-48 h-12 flex items-center justify-center">
                 <input
                   ref={inputRef}
                   type="password"
@@ -250,10 +270,11 @@ export default function VaultPage() {
                   autoFocus
                 />
 
-                <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center gap-4 border-b border-[#2A7F7F]/25 pb-2 z-10 pointer-events-none">
+                {/* Visual dots and cursor */}
+                <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center gap-4 border-b border-[#2A7F7F]/20 pb-2 z-10 pointer-events-none">
                   {passcode.length === 0 ? (
-                    <span className="text-xs font-light tracking-[0.2em] text-slate-500 transition-all duration-300">
-                      enter vault code
+                    <span className="text-[11px] font-light tracking-[0.15em] text-slate-400/80 transition-all duration-300">
+                      passcode
                     </span>
                   ) : (
                     <div className="flex items-center gap-3">
@@ -262,18 +283,15 @@ export default function VaultPage() {
                           key={i}
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
-                          className="w-2 h-2 rounded-full bg-amber-500"
+                          className="w-2.5 h-2.5 rounded-full bg-[#2A7F7F]"
                         />
                       ))}
                     </div>
                   )}
-                  <div className="w-[2px] h-4 bg-amber-500 custom-cursor" />
+
+                  <div className="w-[2px] h-4 bg-[#2A7F7F] custom-cursor" />
                 </div>
               </div>
-
-              <span className="text-[8px] text-slate-600 mt-16 tracking-widest uppercase">
-                Presentation Gate. No clinical claims.
-              </span>
             </motion.div>
           </motion.div>
         )}
