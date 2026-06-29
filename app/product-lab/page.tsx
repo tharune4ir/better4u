@@ -100,6 +100,10 @@ const FrostedBottle = ({
     : "";
 
   const hasImage = !!imageSrc;
+  
+  if (typeof window !== "undefined") {
+    console.log(`[FrostedBottle Debug] flavor: ${flavor}, imagePlaceholder: ${imagePlaceholder}, imageSrc: ${imageSrc}, hasImage: ${hasImage}`);
+  }
 
   const liquidColors: Record<string, string> = {
     lime: "linear-gradient(180deg, rgba(163, 230, 53, 0.35) 0%, rgba(42, 127, 127, 0.2) 100%)",
@@ -232,6 +236,7 @@ export default function ProductLabPage() {
 
   // Load cart and box configuration on mount
   useEffect(() => {
+    console.log("[ProductLabPage] Component mounted. Initializing video playback...");
     const savedCart = localStorage.getItem("trelis_lab_cart");
     if (savedCart) {
       try {
@@ -239,6 +244,13 @@ export default function ProductLabPage() {
       } catch (e) {
         console.error(e);
       }
+    }
+
+    // Force background video to play
+    if (videoRef.current) {
+      videoRef.current.play()
+        .then(() => console.log("[ProductLabPage] Background video started playing successfully."))
+        .catch(err => console.warn("[ProductLabPage] Autoplay blocked or failed for background video:", err));
     }
   }, []);
 
@@ -351,7 +363,7 @@ export default function ProductLabPage() {
               loop
               playsInline
               autoPlay
-              muted={isVideoMuted}
+              muted={true}
             />
             {/* Vignette and blending overlays to merge loop edges and ensure crisp typography contrast */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F2]/20 via-[#F7F6F2]/75 to-[#F7F6F2] pointer-events-none" />
