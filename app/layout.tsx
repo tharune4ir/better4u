@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LockScreen from "@/components/LockScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +21,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Trelis Life",
-  description: "A personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
+  description: "A grain-first, prebiotic-rich gut health food and body capability hub.",
   manifest: "/manifest.json",
   openGraph: {
     title: "Trelis Life",
-    description: "A personal operating system for nutrition, body kinetic movement, deep thinking, and visionary alignment.",
+    description: "A grain-first, prebiotic-rich gut health food and body capability hub.",
     images: [
       {
         url: "/logo-transparent.png",
@@ -54,9 +53,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#F7F6F2]">
-        <LockScreen>
-          {children}
-        </LockScreen>
+        {children}
       </body>
     </html>
   );

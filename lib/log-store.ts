@@ -2,38 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-export interface DayLog {
-  meal1: boolean;
-  meal2: boolean;
-  fermented: boolean;
-  nutsSeeds: boolean;
-  psyllium: boolean;
-  supplements: boolean;
-  workout: boolean;
-  mind: boolean;
-  sunlight: boolean;
-  breath: boolean;
-  sitz: boolean;
-  sleep: boolean;
-  note: string;
-}
-
-const DEFAULT_DAY_LOG: DayLog = {
-  meal1: false,
-  meal2: false,
-  fermented: false,
-  nutsSeeds: false,
-  psyllium: false,
-  supplements: false,
-  workout: false,
-  mind: false,
-  sunlight: false,
-  breath: false,
-  sitz: false,
-  sleep: false,
-  note: "",
-};
-
 // Custom event emitter for cross-component sync within the same window
 const storeListeners = new Set<() => void>();
 const notifyListeners = () => storeListeners.forEach((l) => l());
@@ -58,26 +26,6 @@ function setItem<T>(key: string, value: T): void {
   } catch (error) {
     console.warn(`Error setting localStorage key "${key}":`, error);
   }
-}
-
-// -----------------------------------------------------------------------------
-// Core functions for data access and mutation
-// -----------------------------------------------------------------------------
-
-export function getDayLog(dayNumber: number): DayLog {
-  const key = `trelis.v1.day.${dayNumber}`;
-  return getItem<DayLog>(key, DEFAULT_DAY_LOG);
-}
-
-export function setDayLog(dayNumber: number, partial: Partial<DayLog>): void {
-  const current = getDayLog(dayNumber);
-  const updated = { ...current, ...partial };
-  setItem(`trelis.v1.day.${dayNumber}`, updated);
-}
-
-export function toggleDayPillar(dayNumber: number, pillarKey: keyof Omit<DayLog, "note">): void {
-  const current = getDayLog(dayNumber);
-  setDayLog(dayNumber, { [pillarKey]: !current[pillarKey] });
 }
 
 export function getWeekPlants(isoWeekKey: string): Set<string> {
@@ -110,10 +58,6 @@ export function logFerment(dateIso: string, count: number): void {
   setItem(key, count);
 }
 
-// -----------------------------------------------------------------------------
-// React Hook for subscription
-// -----------------------------------------------------------------------------
-
 export function useLocalStore() {
   const [tick, setTick] = useState(0);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -129,10 +73,7 @@ export function useLocalStore() {
 
   return {
     isHydrated,
-    tick, // dependencies can rely on tick to re-render
-    getDayLog: useCallback((dayNumber: number) => getDayLog(dayNumber), [tick]),
-    setDayLog,
-    toggleDayPillar,
+    tick,
     getWeekPlants: useCallback((isoWeekKey: string) => getWeekPlants(isoWeekKey), [tick]),
     togglePlant,
     resetWeekPlants,

@@ -7,12 +7,10 @@ import { useRouter } from "next/navigation";
 import { 
   Apple, 
   Activity, 
-  BrainCircuit, 
-  Sparkle,
-  Compass
+  Sparkle
 } from "lucide-react";
 
-export type NavTab = "food" | "movement" | "thinking" | "timeline";
+export type NavTab = "food" | "movement";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -40,7 +38,6 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { id: "timeline" as NavTab, label: "Journey", sub: "Today", icon: Compass },
     { id: "food" as NavTab, label: "Food", sub: "Cook", icon: Apple },
     { id: "movement" as NavTab, label: "Movement", sub: "Build", icon: Activity },
   ];
@@ -63,12 +60,6 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           <Sparkle className="w-3.5 h-3.5 text-[#2A7F7F]" />
         </div>
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => router.push('/timeline#vision-board')}
-            className="flex items-center gap-1 text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2 py-1 rounded-md"
-          >
-            <Sparkle className="w-3 h-3" /> Prime
-          </button>
           <span className="text-xs font-semibold text-slate-700 tabular-nums">
             {time}
           </span>
@@ -168,12 +159,6 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
         {/* Right Side Info */}
         <div className="flex items-center gap-4 text-right">
-          <button 
-            onClick={() => router.push('/timeline#vision-board')}
-            className="hidden lg:flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 hover:bg-[#2A7F7F]/10 border border-[#2A7F7F]/10 px-3 py-1.5 rounded-full transition-colors"
-          >
-            <Sparkle className="w-3.5 h-3.5" /> Prime
-          </button>
           <div className="flex flex-col">
             <span className="text-xs font-semibold text-slate-700 tabular-nums">
               {time}
@@ -188,3 +173,4 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
     </>
   );
 }
+

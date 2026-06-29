@@ -21,8 +21,6 @@ import {
   ArrowRight
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
-import { getTodayDay, plan } from "@/lib/plan";
-import { useLocalStore } from "@/lib/log-store";
 import { 
   BODY_PRINCIPLES, 
   MORNING_SESSION_FLOW, 
@@ -105,8 +103,6 @@ export default function MovementPage() {
   const handleTabChange = (tab: NavTab) => {
     if (tab === "movement") {
       router.push("/movement");
-    } else if (tab === "thinking") {
-      router.push("/inner/thinking");
     } else if (tab === "food") {
       router.push("/food");
     }
@@ -119,11 +115,6 @@ export default function MovementPage() {
   };
 
   const activeStep = MORNING_SESSION_FLOW.find(s => s.id === activeStepId) || MORNING_SESSION_FLOW[0];
-
-  const todayDay = getTodayDay();
-  const { isHydrated, getDayLog, toggleDayPillar } = useLocalStore();
-  const log = isHydrated ? getDayLog(todayDay.day) : null;
-  const currentPhase = plan.weeks.find(w => w.week === todayDay.week);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden">
@@ -518,85 +509,7 @@ export default function MovementPage() {
           </div>
         </motion.div>
 
-        {/* ==================== TODAY'S SESSION PANEL ==================== */}
-        <div className="mb-12">
-          <div className="glassmorphic rounded-3xl p-6 sm:p-8 border border-[#2A7F7F]/20 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#2A7F7F]/10 to-transparent rounded-full blur-[80px] pointer-events-none group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-2.5 py-1 rounded-full inline-flex items-center gap-1.5 mb-2">
-                  <Activity className="w-3 h-3" /> Day {todayDay.day} Session
-                </span>
-                <h3 className="text-2xl font-bold text-slate-900">{todayDay.ideal.body.label}</h3>
-                <p className="text-sm text-slate-500 font-light mt-1">{currentPhase?.phase_name || `Phase ${todayDay.phase}`}</p>
-              </div>
-              <button 
-                onClick={() => router.push("/timeline")}
-                className="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#2A7F7F] hover:opacity-80 transition-opacity"
-              >
-                View Timeline <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Workout Checklist */}
-              <div className="space-y-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Protocol</h4>
-                <div className="bg-white/50 border border-black/[0.03] rounded-2xl p-4">
-                  <button
-                    onClick={() => toggleDayPillar(todayDay.day, "workout")}
-                    className="flex items-start gap-3 w-full text-left"
-                  >
-                    <div className="mt-0.5">
-                      {log?.workout ? (
-                        <CheckCircle2 className="w-5 h-5 text-[#2A7F7F]" />
-                      ) : (
-                        <Circle className="w-5 h-5 text-slate-300 group-hover:text-[#2A7F7F]/50 transition-colors" />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <span className={`text-sm font-semibold block mb-2 ${log?.workout ? 'text-slate-500 line-through' : 'text-slate-900'}`}>
-                        Complete {todayDay.ideal.body.label}
-                      </span>
-                      <ul className="list-disc pl-4 space-y-1.5">
-                        {todayDay.ideal.body.workout.map((w, i) => (
-                          <li key={i} className={`text-sm font-light ${log?.workout ? 'text-slate-400' : 'text-slate-600'}`}>{w}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Context Rules & Milestones */}
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Joint Smart Rules</h4>
-                  <ul className="space-y-2">
-                    {plan.body_program.joint_smart_rules.map((rule, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-slate-600 font-light">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2A7F7F] shrink-0 mt-1.5" />
-                        <span>{rule}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Phase Milestones</h4>
-                  <div className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-xl p-4">
-                    <ul className="space-y-1.5">
-                      {plan.body_program.milestones_day84.map((m, i) => (
-                        <li key={i} className="text-sm font-medium text-[#2A7F7F]">{m}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* ==================== THE FIRST PRINCIPLES DECK ==================== */}
         <div className="mb-12">

@@ -728,3 +728,34 @@ export const CORE_RECIPES: CoreRecipe[] = [
     whyHeals: "Classic carminatives that calm gas and cramping."
   }
 ];
+
+export interface FlattenedFoodItem {
+  id: string;
+  name: string;
+  local_name?: string;
+  role?: string;
+  category: string;
+}
+
+export function getPublicFoodUniverse(): FlattenedFoodItem[] {
+  const result: FlattenedFoodItem[] = [];
+  for (const cat of PLANT_CATEGORIES) {
+    for (const item of cat.items) {
+      const match = item.match(/^([^(]+)\s*(?:\(([^)]+)\))?$/);
+      const name = match ? match[1].trim() : item;
+      const local_name = match && match[2] ? match[2].trim() : undefined;
+      result.push({
+        id: item.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        name,
+        local_name,
+        category: cat.name
+      });
+    }
+  }
+  return result;
+}
+
+export function resolvePublicRecipe(id: string): CoreRecipe | undefined {
+  return CORE_RECIPES.find(r => r.id === id);
+}
+

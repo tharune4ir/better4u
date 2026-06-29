@@ -27,7 +27,6 @@ import {
   Search
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
-import { getTodayDay, getFoodUniverse, resolveRecipe, FlattenedFoodItem, plan } from "@/lib/plan";
 import { useLocalStore } from "@/lib/log-store";
 import { DIVERSITY_TARGET_PUBLIC } from "@/lib/config";
 import { 
@@ -37,7 +36,10 @@ import {
   KITCHEN_FOUNDATIONS,
   PlantCategory,
   FermentCategory,
-  KitchenFoundation
+  KitchenFoundation,
+  getPublicFoodUniverse,
+  resolvePublicRecipe,
+  FlattenedFoodItem
 } from "@/lib/food-data";
 
 // "When X, eat Y" Quick-Help Guide
@@ -77,8 +79,7 @@ export default function FoodPage() {
 
   // Store and Plan Data
   const { isHydrated, getWeekPlants, togglePlant, resetWeekPlants, getFermentsToday, logFerment } = useLocalStore();
-  const todayDay = getTodayDay();
-  const foodUniverse = React.useMemo(() => getFoodUniverse(), []);
+  const foodUniverse = React.useMemo(() => getPublicFoodUniverse(), []);
   
   // Iso week calc
   const getIsoWeek = () => {
@@ -110,9 +111,10 @@ export default function FoodPage() {
   useEffect(() => {
     if (isHydrated) {
       const count = Object.values(loggedFerments).filter(Boolean).length;
-      logFerment(todayDay.date, count);
+      const todayDateStr = new Date().toISOString().split('T')[0];
+      logFerment(todayDateStr, count);
     }
-  }, [loggedFerments, isHydrated, todayDay.date]);
+  }, [loggedFerments, isHydrated]);
 
   // Pantry checkbox state
   const [checkedPantryItems, setCheckedPantryItems] = useState<string[]>([]);
@@ -127,10 +129,6 @@ export default function FoodPage() {
     setActiveTab(tab);
     if (tab === "movement") {
       router.push("/movement");
-    } else if (tab === "thinking") {
-      router.push("/inner/thinking");
-    } else if (tab === "timeline") {
-      router.push("/timeline");
     } else if (tab === "food") {
       router.push("/food");
     }
@@ -151,8 +149,7 @@ export default function FoodPage() {
     setShowLogSelector(null);
   };
 
-  const meal1Recipe = resolveRecipe(todayDay.ideal.meal1.recipe_id);
-  const meal2Recipe = resolveRecipe(todayDay.ideal.meal2.recipe_id);
+
 
   // Group food universe by category
   const categoriesMap = new Map<string, FlattenedFoodItem[]>();
@@ -446,25 +443,23 @@ export default function FoodPage() {
                     </div>
 
                     <div className="space-y-3">
-                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Today's Plate (Meal 1 & 2)</h4>
+                      <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">The Daily Plate Formula</h4>
                       <div className="bg-white border border-black/[0.02] rounded-2xl p-5 space-y-4">
                         <div className="flex flex-col text-sm pb-3 border-b border-slate-100">
-                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Meal 1</span>
-                          <span className="font-medium text-slate-900">{todayDay.ideal.meal1.name}</span>
-                          {meal1Recipe && <span className="text-xs text-slate-400 mt-1">{meal1Recipe.ingredients.join(', ')}</span>}
+                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">First Meal (11 AM - 1 PM)</span>
+                          <span className="font-medium text-slate-900">Prebiotic Millet Crepe or Warm Porridge</span>
+                          <span className="text-xs text-slate-400 mt-1">E.g., Moong Pesarattu or Ragi Ambali. Rich in protein, minerals, and gentle soluble fiber.</span>
                         </div>
                         <div className="flex flex-col text-sm pb-3 border-b border-slate-100">
-                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Meal 2</span>
-                          <span className="font-medium text-slate-900">{todayDay.ideal.meal2.name}</span>
-                          <span className="text-xs text-amber-600 mt-1 font-medium">{todayDay.ideal.meal2.note}</span>
-                          {meal2Recipe && <span className="text-xs text-slate-400 mt-1">{meal2Recipe.ingredients.join(', ')}</span>}
+                          <span className="font-light text-slate-500 uppercase text-[10px] tracking-widest mb-1">Main Meal (6 PM - 8 PM)</span>
+                          <span className="font-medium text-slate-900">Grain-first Macro Plate</span>
+                          <span className="text-xs text-slate-400 mt-1">E.g., Universal Dal + seasonal vegetable Sabzi + unpolished Red/Brown Rice + raw prebiotic salad.</span>
                         </div>
-                        {todayDay.ideal.live_ferment && (
-                          <div className="flex flex-col text-sm pt-2">
-                            <span className="font-light text-[#2A7F7F] uppercase text-[10px] tracking-widest mb-1 font-bold">Today's Live Ferment</span>
-                            <span className="font-medium text-slate-900">{todayDay.ideal.live_ferment}</span>
-                          </div>
-                        )}
+                        <div className="flex flex-col text-sm pt-2">
+                          <span className="font-light text-[#2A7F7F] uppercase text-[10px] tracking-widest mb-1 font-bold">Live Probiotics</span>
+                          <span className="font-medium text-slate-900">Daily Cultured Serving</span>
+                          <span className="text-xs text-slate-400 mt-1">E.g., Home-set curd (Dahi), Spiced Neer-Mor (buttermilk), or fermented beet Kanji.</span>
+                        </div>
                       </div>
                     </div>
 
@@ -634,8 +629,7 @@ export default function FoodPage() {
                             {showLogSelector === slot && (
                               <div className="absolute top-12 left-0 right-0 max-h-[220px] overflow-y-auto bg-[#F7F6F2] border border-black/[0.08] shadow-lg rounded-xl p-2 z-50 flex flex-col gap-1">
                                 <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 px-2 pt-1 pb-1">Live Probiotics (Counts toward target)</div>
-                                {Object.keys(plan.fermented.live_probiotic).map((itemName, idx) => {
-                                  const item = plan.fermented.live_probiotic[itemName];
+                                {FERMENT_CATEGORIES.flatMap(cat => cat.items).filter(item => item.isLive).map((item, idx) => {
                                   return (
                                     <button
                                       key={`live-${idx}`}
@@ -650,8 +644,7 @@ export default function FoodPage() {
                                   );
                                 })}
                                 <div className="text-[10px] font-bold uppercase tracking-widest text-amber-700 px-2 pt-3 pb-1 border-t border-black/[0.05] mt-1">Cooked Ferments (Prebiotics)</div>
-                                {Object.keys(plan.fermented.fermented_cooked_not_live).map((itemName, idx) => {
-                                  const item = plan.fermented.fermented_cooked_not_live[itemName];
+                                {FERMENT_CATEGORIES.flatMap(cat => cat.items).filter(item => !item.isLive).map((item, idx) => {
                                   return (
                                     <div
                                       key={`cooked-${idx}`}
