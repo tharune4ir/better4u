@@ -1,0 +1,95 @@
+{
+  "name": "Trelis Life Design Tokens",
+  "version": "1.0.0",
+  "colors": {
+    "base": {
+      "paper": {
+        "hex": "#F7F6F2",
+        "description": "Warm off-white background resembling premium paper stock"
+      },
+      "ink": {
+        "hex": "#0F172A",
+        "description": "Deep slate for high-contrast primary text and title typography"
+      },
+      "brand_teal": {
+        "hex": "#2A7F7F",
+        "description": "Primary accent for buttons, borders, active navigation states"
+      }
+    },
+    "containers": {
+      "glass_bg": {
+        "rgba": "rgba(255, 255, 255, 0.45)",
+        "description": "Glassmorphic overlay container background"
+      },
+      "glass_border": {
+        "rgba": "rgba(0, 0, 0, 0.04)",
+        "description": "Micro thin boundary line separating cards and tiles"
+      },
+      "grid_lines": {
+        "rgba": "rgba(0, 0, 0, 0.028)",
+        "description": "Ambient layout grid line coloration"
+      }
+    },
+    "skus": {
+      "lime": {
+        "accent": "#A3E635",
+        "glow": "rgba(163, 230, 53, 0.15)",
+        "label": "Lime & Roasted Cumin Sparkler"
+      },
+      "ginger": {
+        "accent": "#F59E0B",
+        "glow": "rgba(245, 158, 11, 0.15)",
+        "label": "Bold Ginger & Citrus Tonic"
+      },
+      "spice": {
+        "accent": "#B45309",
+        "glow": "rgba(180, 83, 9, 0.15)",
+        "label": "Earthy Cumin & Mint Digestif"
+      },
+      "berry": {
+        "accent": "#8B5CF6",
+        "glow": "rgba(139, 92, 246, 0.15)",
+        "label": "Wild Jamun & Purple Fruit Sparkler"
+      }
+    }
+  },
+  "typography": {
+    "fonts": {
+      "sans": "Geist Sans, ui-sans-serif, system-ui, sans-serif",
+      "mono": "Geist Mono, ui-monospace, SFMono-Regular, monospace"
+    },
+    "micro_labels": {
+      "case": "uppercase",
+      "font_weight": "700",
+      "letter_spacing": "0.12em",
+      "font_size": "9px-11px"
+    },
+    "headings": {
+      "font_weight": "200",
+      "letter_spacing": "-0.02em",
+      "highlight_font_style": "italic font-semibold"
+    }
+  },
+  "spacing": {
+    "grid_unit": "48px",
+    "section_padding": "80px-96px",
+    "gutter": {
+      "mobile": "24px",
+      "desktop": "48px"
+    }
+  },
+  "motion": {
+    "bg_drift": {
+      "duration": "12s-15s",
+      "easing": "easeInOut"
+    },
+    "breathing_pulse": {
+      "duration": "6s",
+      "scale_range": [1.0, 1.06]
+    },
+    "reveal": {
+      "duration": "0.7s",
+      "y_offset": "15px"
+    }
+  }
+}
