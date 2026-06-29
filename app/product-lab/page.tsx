@@ -15,7 +15,9 @@ import {
   Info,
   Sparkles,
   Award,
-  ChevronDown
+  ChevronDown,
+  Volume2,
+  VolumeX
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { MOCK_PRODUCTS, ProductSKU } from "@/lib/store-data";
@@ -77,18 +79,33 @@ const FrostedBottle = ({
   glowColor, 
   accentColor, 
   imagePlaceholder,
-  isDetailed = false 
+  isDetailed = false,
+  showBack = false
 }: { 
   flavor: string; 
   glowColor: string; 
   accentColor: string; 
   imagePlaceholder: string;
   isDetailed?: boolean;
+  showBack?: boolean;
 }) => {
   const [imageExists, setImageExists] = useState(false);
-  const imageSrc = `/all_image_files/product_images/${imagePlaceholder}.png`;
+
+  const fileMappings: Record<string, { front: string; back?: string }> = {
+    lime: { front: "/all_image_files/product-lab/1.1_lime.jpeg", back: "/all_image_files/product-lab/1.2_lime.jpeg" },
+    ginger: { front: "/all_image_files/product-lab/2.1_ginger.jpeg", back: "/all_image_files/product-lab/2.2_ginger.jpeg" },
+    berry: { front: "/all_image_files/product-lab/3.1_berry.jpeg", back: "/all_image_files/product-lab/3.2_berry.jpeg" },
+  };
+
+  const imageSrc = fileMappings[imagePlaceholder] 
+    ? (showBack ? (fileMappings[imagePlaceholder].back || fileMappings[imagePlaceholder].front) : fileMappings[imagePlaceholder].front)
+    : "";
 
   useEffect(() => {
+    if (!imageSrc) {
+      setImageExists(false);
+      return;
+    }
     const img = new Image();
     img.src = imageSrc;
     img.onload = () => setImageExists(true);
@@ -200,6 +217,26 @@ export default function ProductLabPage() {
 
   // Selected Product for Specs Modal
   const [selectedProduct, setSelectedProduct] = useState<ProductSKU | null>(null);
+
+  // Back view toggle in modal
+  const [modalShowBack, setModalShowBack] = useState(false);
+
+  // Video controller states
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Reset modal view direction on product change
+  useEffect(() => {
+    setModalShowBack(false);
+  }, [selectedProduct]);
+
+  // Video mute/unmute action
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsVideoMuted(videoRef.current.muted);
+    }
+  };
 
   // Custom 6-Pack Box Builder State
   const [boxSlots, setBoxSlots] = useState<(ProductSKU | null)[]>([null, null, null, null, null, null]);
@@ -359,6 +396,14 @@ export default function ProductLabPage() {
                 <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
               </a>
 
+              <a 
+                href="#film"
+                className="px-6 py-3 bg-slate-900 text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-black hover:shadow-lg transition-all flex items-center gap-2 group cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                <span>Watch Film</span>
+              </a>
+
               <button 
                 onClick={() => setIsCartOpen(true)}
                 className="px-6 py-3 bg-white/60 border border-black/[0.04] text-slate-800 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all flex items-center gap-2 cursor-pointer"
@@ -379,16 +424,16 @@ export default function ProductLabPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 50, damping: 20, delay: 0.4 }}
-            className="w-48 h-80 mt-12 relative cursor-grab active:cursor-grabbing hover:scale-105 transition-transform duration-300"
+            className="w-64 h-64 sm:w-80 sm:h-80 mt-12 relative hover:scale-[1.02] transition-transform duration-300 rounded-3xl shadow-xl border border-black/[0.03] bg-white flex items-center justify-center p-2 z-10"
           >
             <FrostedBottle 
               flavor="LIME" 
-              glowColor="rgba(42, 127, 127, 0.25)" 
+              glowColor="rgba(163, 230, 53, 0.15)" 
               accentColor="#2A7F7F" 
               imagePlaceholder="lime"
               isDetailed={true} 
             />
-            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-center w-full pointer-events-none">
               <span className="text-[10px] tracking-widest text-slate-400 font-bold uppercase">Nimbu Sparkler Edition</span>
               <div className="flex items-center justify-center gap-1 mt-1 text-[9px] text-[#2A7F7F] font-bold">
                 <span>TASTE-FIRST</span>
@@ -429,9 +474,9 @@ export default function ProductLabPage() {
                   >
                     
                     {/* Immersive Bottle Frame with Ambient color gradient backing */}
-                    <div className="w-full md:w-[45%] flex items-center justify-center relative min-h-[320px] rounded-3xl overflow-hidden bg-slate-950/[0.01] border border-black/[0.01]">
+                    <div className="w-full md:w-[45%] flex items-center justify-center relative min-h-[340px] rounded-3xl overflow-hidden bg-slate-950/[0.01] border border-black/[0.01] p-6">
                       <CarbonationBubbles color={product.accentColor} />
-                      <div className="w-40 h-64 hover:scale-105 transition-transform duration-500">
+                      <div className="w-56 h-56 sm:w-64 sm:h-64 hover:scale-[1.03] transition-transform duration-500 flex items-center justify-center bg-white/40 border border-black/[0.03] rounded-2xl shadow-sm p-1.5 z-10">
                         <FrostedBottle 
                           flavor={product.name} 
                           glowColor={product.glowColor} 
@@ -441,7 +486,7 @@ export default function ProductLabPage() {
                       </div>
 
                       {/* Ambient floating elements representing taste notes */}
-                      <div className="absolute top-8 left-8 text-[9px] tracking-widest text-slate-400 uppercase font-bold select-none opacity-40">
+                      <div className="absolute top-4 left-6 text-[9px] tracking-widest text-slate-400 uppercase font-bold select-none opacity-40 z-20">
                         {product.replaces}
                       </div>
                     </div>
@@ -511,6 +556,83 @@ export default function ProductLabPage() {
               })}
             </div>
 
+          </div>
+        </section>
+
+        {/* ==================== ACT 2.5: COMMERCIAL FILM PREMIERE ==================== */}
+        <section id="film" className="relative w-full z-10 py-24 px-4 sm:px-6 bg-slate-950 text-white overflow-hidden border-y border-white/[0.02]">
+          {/* Subtle background glow mapping to the lime green color */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(163,230,53,0.1)_0%,transparent_70%)] pointer-events-none z-0" />
+          <CarbonationBubbles color="rgba(163, 230, 53, 0.1)" />
+          
+          <div className="max-w-4xl mx-auto space-y-12 text-center relative z-10">
+            <div className="space-y-4">
+              <span className="text-[10px] tracking-[0.3em] text-[#2A7F7F] font-bold uppercase bg-white/5 border border-white/10 px-4 py-1.5 rounded-full inline-block">
+                ALIVE ON FILM
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extralight tracking-tight text-slate-100">
+                Taste the <span className="font-semibold text-white">living carbonation</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 font-light max-w-md mx-auto leading-relaxed">
+                Experience the visual and acoustic depth of ALIVE. Unmute to hear the premium soundtrack and active carbonation sizzle.
+              </p>
+            </div>
+
+            {/* Cinematic Video Player Frame */}
+            <div className="max-w-3xl mx-auto aspect-video rounded-3xl overflow-hidden border border-white/10 bg-black shadow-2xl relative group">
+              <video 
+                ref={videoRef}
+                src="/all_image_files/product-lab/1_video1.mp4" 
+                className="w-full h-full object-cover cursor-pointer"
+                loop
+                playsInline
+                autoPlay
+                muted={isVideoMuted}
+                onClick={() => {
+                  if (videoRef.current) {
+                    if (videoRef.current.paused) {
+                      videoRef.current.play();
+                    } else {
+                      videoRef.current.pause();
+                    }
+                  }
+                }}
+              />
+              
+              {/* Bottom controls overlay */}
+              <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
+                <span className="text-[8px] sm:text-[9px] bg-black/60 backdrop-blur-md text-white/80 border border-white/10 px-3 py-1.5 rounded-full uppercase tracking-widest font-bold select-none">
+                  LIME EDITION · CONCEPT REEL
+                </span>
+
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleMute();
+                  }}
+                  className="pointer-events-auto bg-white text-slate-950 hover:bg-slate-100 px-4 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase flex items-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-95 animate-fade-in"
+                >
+                  {isVideoMuted ? (
+                    <>
+                      <VolumeX className="w-3.5 h-3.5" />
+                      <span>Unmute Audio</span>
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="w-3.5 h-3.5" />
+                      <span>Mute Audio</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Pulsing "Sound On" notification at start */}
+              {isVideoMuted && (
+                <div className="absolute top-4 right-4 z-20 bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-full text-[8px] tracking-wider uppercase animate-pulse select-none">
+                  SOUND ON RECOMMENDED
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
@@ -683,11 +805,24 @@ export default function ProductLabPage() {
                   accentColor={selectedProduct.accentColor}
                   imagePlaceholder={selectedProduct.imagePlaceholder}
                   isDetailed={true}
+                  showBack={modalShowBack}
                 />
 
-                <div className="mt-4 text-center z-10">
-                  <span className="text-xl font-light text-slate-900">₹{selectedProduct.price}</span>
-                  <span className="text-[9px] text-slate-400 block tracking-wider uppercase font-medium">Single 250ml Glass Bottle</span>
+                <div className="mt-4 text-center z-10 flex flex-col items-center gap-2">
+                  <div>
+                    <span className="text-xl font-light text-slate-900">₹{selectedProduct.price}</span>
+                    <span className="text-[9px] text-slate-400 block tracking-wider uppercase font-medium">Single 250ml Glass Bottle</span>
+                  </div>
+
+                  {/* Flip Toggle Button */}
+                  {["lime", "ginger", "berry"].includes(selectedProduct.imagePlaceholder) && (
+                    <button 
+                      onClick={() => setModalShowBack(!modalShowBack)}
+                      className="mt-2 px-4 py-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-3xs flex items-center gap-1 z-20"
+                    >
+                      <span>View {modalShowBack ? "Front" : "Back Label"}</span>
+                    </button>
+                  )}
                 </div>
               </div>
 
