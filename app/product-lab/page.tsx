@@ -568,6 +568,34 @@ export default function ProductLabPage() {
         
         <Navbar activeTab="product-lab" setActiveTab={handleTabChange} />
 
+      {/* Sticky Brand Selector for easy navigation while scrolling */}
+      <div className="sticky top-[64px] md:top-[80px] z-30 w-full bg-[#F7F6F2]/90 backdrop-blur-md border-b border-black/[0.03] py-3 flex items-center justify-center shadow-xs">
+        <div className="flex items-center justify-center gap-2 px-4 overflow-x-auto no-scrollbar max-w-full w-max">
+          {CONCEPT_BRANDS.map(brand => {
+            const isActive = activeBrand.id === brand.id;
+            return (
+              <button
+                key={brand.id}
+                onClick={() => {
+                  setActiveBrand(brand);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                style={{
+                  backgroundColor: isActive ? brand.accentColor : "transparent",
+                  color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.6)",
+                  border: isActive ? 'none' : '1px solid rgba(0,0,0,0.05)',
+                }}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
+                  isActive ? "shadow-md scale-[1.02]" : "hover:bg-slate-900/5 hover:text-slate-900 hover:border-black/10"
+                }`}
+              >
+                {brand.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
         <main className="flex-grow">
 
         {/* ==================== ACT 1: THE REVELATION (Cinematic Hero) ==================== */}
@@ -598,27 +626,7 @@ export default function ProductLabPage() {
           <CarbonationBubbles color={`${activeBrand.accentColor}20`} />
           
           <div className="max-w-3xl space-y-8 relative z-10">
-            {/* Concept Brand Selector Capsular Menu */}
-            <div className="flex items-center justify-center gap-1.5 p-1 bg-white/40 backdrop-blur-md border border-black/[0.04] rounded-full max-w-md mx-auto shadow-3xs select-none mb-6">
-              {CONCEPT_BRANDS.map(brand => {
-                const isActive = activeBrand.id === brand.id;
-                return (
-                  <button
-                    key={brand.id}
-                    onClick={() => setActiveBrand(brand)}
-                    style={{
-                      backgroundColor: isActive ? brand.accentColor : "transparent",
-                      color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.7)",
-                    }}
-                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-                      isActive ? "shadow-2xs scale-105" : "hover:bg-slate-900/5 hover:text-slate-900"
-                    }`}
-                  >
-                    {brand.name}
-                  </button>
-                );
-              })}
-            </div>
+            {/* Brand Title Animation */}
 
             <motion.span 
               key={`sub-${activeBrand.id}`}
@@ -822,11 +830,20 @@ export default function ProductLabPage() {
                       {/* Interactive Buttons */}
                       <div className="pt-4 flex items-center justify-center md:justify-start gap-4">
                         <button
-                          onClick={() => setSelectedProduct(product)}
-                          className="px-6 py-2.5 bg-slate-950 text-white hover:bg-slate-800 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all cursor-pointer shadow-xs flex items-center gap-2"
+                          onClick={() => addToCart(product)}
+                          className="px-6 py-2.5 text-white rounded-full text-[10px] font-bold tracking-widest uppercase transition-all shadow-md hover:shadow-lg hover:scale-[1.02] cursor-pointer flex items-center gap-2"
+                          style={{ backgroundColor: activeBrand.accentColor }}
                         >
-                          <span>Full Ingredients</span>
-                          <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
+                          <ShoppingBag className="w-3.5 h-3.5" />
+                          <span>Add Box (₹{product.price})</span>
+                        </button>
+                        
+                        <button
+                          onClick={() => setSelectedProduct(product)}
+                          className="px-5 py-2.5 bg-white/60 border border-black/[0.04] text-slate-700 hover:bg-white hover:shadow-sm rounded-full text-[10px] font-bold tracking-widest uppercase transition-all cursor-pointer flex items-center gap-2"
+                        >
+                          <span>Ingredients</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
