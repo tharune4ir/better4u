@@ -95,16 +95,52 @@ const FrostedBottle = ({
   brandFolder?: string;
   brandName?: string;
 }) => {
-  const fileMappings: Record<string, { front: string; back?: string }> = {
-    lime: { front: `/all_image_files/product-lab/${brandFolder}/1.1_lime.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/1.2_lime.jpeg` },
-    ginger: { front: `/all_image_files/product-lab/${brandFolder}/2.1_ginger.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/2.2_ginger.jpeg` },
-    spice: { front: `/all_image_files/product-lab/${brandFolder}/3.1_spice.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/3.2_spice.jpeg` },
-    berry: { front: `/all_image_files/product-lab/${brandFolder}/4.1_berry.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/4.2_berry.jpeg` },
-  };
+  // Determine dynamic image source paths based on folder structure
+  let frontSrc = "";
+  let backSrc = "";
 
-  const imageSrc = fileMappings[imagePlaceholder] 
-    ? (showBack ? (fileMappings[imagePlaceholder].back || fileMappings[imagePlaceholder].front) : fileMappings[imagePlaceholder].front)
-    : "";
+  if (brandFolder === "1_alive_concept_brand") {
+    const mappings: Record<string, { front: string; back: string }> = {
+      lime: { front: "1.1_lime.jpeg", back: "1.2_lime.jpeg" },
+      ginger: { front: "2.1_ginger.jpeg", back: "2.2_ginger.jpeg" },
+      spice: { front: "3.1_spice.jpeg", back: "3.2_spice.jpeg" },
+      berry: { front: "4.1_berry.jpeg", back: "4.2_berry.jpeg" }
+    };
+    const map = mappings[imagePlaceholder] || mappings.lime;
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${map.front}`;
+    backSrc = `/all_image_files/product-lab/${brandFolder}/${map.back}`;
+  } else if (brandFolder === "2_josh_concept_brand") {
+    const filenames: Record<string, string> = {
+      "kala-khatta": "1.1_kala-khatta.jpeg",
+      "masala-cola": "1.2_masala-cola.jpeg",
+      "gulab": "1.3_gulab.jpeg",
+      "santra": "1.4_santra.jpeg"
+    };
+    const file = filenames[imagePlaceholder] || "1.1_kala-khatta.jpeg";
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
+    backSrc = frontSrc;
+  } else if (brandFolder === "3_batch_concept brand") {
+    const filenames: Record<string, string> = {
+      "kanji": "1.1_kanji.jpeg",
+      "strawberry-kefir": "1.2_strawberry-kefir.jpeg",
+      "jamun-lime-kombucha": "1.3_jamun-mine-kombucha.jpeg"
+    };
+    const file = filenames[imagePlaceholder] || "1.1_kanji.jpeg";
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
+    backSrc = frontSrc;
+  } else if (brandFolder === "4_pulp_concept_brand") {
+    const filenames: Record<string, string> = {
+      "green-reset": "1.1_green-reset.jpeg",
+      "cacao-daily": "1.2_cacao-daily.jpeg",
+      "papaya-sunrise": "1.3_papaya-sunrise.jpeg",
+      "berry-beet": "1.4_berry-beet.jpeg"
+    };
+    const file = filenames[imagePlaceholder] || "1.1_green-reset.jpeg";
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
+    backSrc = frontSrc;
+  }
+
+  const imageSrc = showBack ? backSrc : frontSrc;
 
   const [imgSrc, setImgSrc] = useState(imageSrc);
 
@@ -122,8 +158,9 @@ const FrostedBottle = ({
       berry: { front: `/all_image_files/product-lab/${fallbackFolder}/4.1_berry.jpeg`, back: `/all_image_files/product-lab/${fallbackFolder}/4.2_berry.jpeg` },
     };
     
-    const fallbackSrc = fallbackMappings[imagePlaceholder]
-      ? (showBack ? (fallbackMappings[imagePlaceholder].back || fallbackMappings[imagePlaceholder].front) : fallbackMappings[imagePlaceholder].front)
+    const key = ["lime", "ginger", "spice", "berry"].includes(imagePlaceholder) ? imagePlaceholder : "lime";
+    const fallbackSrc = fallbackMappings[key]
+      ? (showBack ? (fallbackMappings[key].back || fallbackMappings[key].front) : fallbackMappings[key].front)
       : "";
 
     if (imgSrc !== fallbackSrc) {
@@ -256,31 +293,31 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     accentColor: "#2A7F7F"
   },
   {
-    id: "cultured",
-    name: "CULTURED",
-    subName: "CULTURED by Trelis",
-    folderName: "2_cultured_concept_brand",
-    heroTagline: "Artisanal wild-cultured gut soda",
-    heroDescription: "Slowly fermented with wild yeasts and organic botanicals. A rich, mature profile crafted to soothe the digestion and offer deep, earthy complexity.",
-    accentColor: "#8B5CF6"
+    id: "josh",
+    name: "JOSH",
+    subName: "JOSH by Trelis",
+    folderName: "2_josh_concept_brand",
+    heroTagline: "Prebiotic soda, full of life.",
+    heroDescription: "Shelf-stable prebiotic plant fiber in a sleek can, built to scale. Flavors sit in Indian-nostalgia soft-drink territory, offering 7g of prebiotic fiber to fuel your microbiome.",
+    accentColor: "#8E7C96"
   },
   {
-    id: "bio-liv",
-    name: "BIO-LIV",
-    subName: "BIO-LIV by Trelis",
-    folderName: "3_bio_liv_concept_brand",
-    heroTagline: "Advanced biological carbonation",
-    heroDescription: "Precision gut nutrition engineered for gut health. Replaces commercial sugary pops with targeted prebiotics, plant fiber, and active functional cultures.",
-    accentColor: "#84CC16"
+    id: "batch",
+    name: "BATCH",
+    subName: "BATCH by Trelis",
+    folderName: "3_batch_concept brand",
+    heroTagline: "Live ferments, made fresh daily.",
+    heroDescription: "Fresh, short-shelf-life elixirs made on-site and served in clear grab-and-go cups. Cloudy, active, and containing up to 5 billion live cultures across diverse probiotic strains.",
+    accentColor: "#A07E8C"
   },
   {
-    id: "soma-liv",
-    name: "SOMA-LIV",
-    subName: "SOMA-LIV by Trelis",
-    folderName: "4_soma_liv_concept_brand",
-    heroTagline: "Traditional botanical digestive sparkler",
-    heroDescription: "Inspired by ancient Indian health elixirs. Crafted with copper-distilled spring water, sun-dried spices, and living cultures for a clean post-meal ritual.",
-    accentColor: "#B45309"
+    id: "pulp",
+    name: "PULP",
+    subName: "PULP by Trelis",
+    folderName: "4_pulp_concept_brand",
+    heroTagline: "Whole food, blended for your gut.",
+    heroDescription: "Thick, meal-replacement gut smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round gut nutrition.",
+    accentColor: "#9DAE8C"
   }
 ];
 
@@ -293,7 +330,9 @@ export default function ProductLabPage() {
   const [videoSrc, setVideoSrc] = useState(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
 
   useEffect(() => {
-    setVideoSrc(`/all_image_files/product-lab/${activeBrand.folderName}/1_video1.mp4`);
+    // Reuse the high-quality loop video from the ALIVE folder to avoid 404 errors,
+    // and apply dynamic brand-color tint overlays in the template layout.
+    setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
   }, [activeBrand]);
 
   useEffect(() => {
@@ -522,9 +561,14 @@ export default function ProductLabPage() {
               autoPlay
               muted={true}
             />
+            {/* Dynamic brand-colored tint overlay to unify the background video with the active brand's color theme */}
+            <div 
+              className="absolute inset-0 transition-all duration-1000 z-10 pointer-events-none" 
+              style={{ backgroundColor: `${activeBrand.accentColor}12` }}
+            />
             {/* Vignette and blending overlays to merge loop edges and ensure crisp typography contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F2]/20 via-[#F7F6F2]/75 to-[#F7F6F2] pointer-events-none" />
-            <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#F7F6F2]/50 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F2]/20 via-[#F7F6F2]/75 to-[#F7F6F2] pointer-events-none z-20" />
+            <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#F7F6F2]/50 pointer-events-none z-20" />
           </div>
 
           <CarbonationBubbles color={`${activeBrand.accentColor}20`} />
@@ -644,16 +688,16 @@ export default function ProductLabPage() {
             <div className="text-center space-y-3 mb-16">
               <span className="text-[10px] tracking-[0.2em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>The Founding Range</span>
               <h2 className="text-3xl font-extralight text-slate-900 tracking-tight">
-                Four simple, <span className="font-semibold text-slate-950">sophisticated profiles</span>
+                {MOCK_PRODUCTS.filter(p => p.brandId === activeBrand.id).length === 3 ? "Three" : "Four"} simple, <span className="font-semibold text-slate-950">sophisticated profiles</span>
               </h2>
               <p className="text-xs text-slate-500 font-light max-w-md mx-auto leading-relaxed">
                 Replacing the carbonated drinks you already reach for, designed with real, local ingredients and live digestive cultures.
               </p>
             </div>
             
-            {/* The 4 Immersive Flavor Rows */}
+            {/* The Immersive Flavor Rows */}
             <div className="space-y-32">
-              {MOCK_PRODUCTS.map((product, idx) => {
+              {MOCK_PRODUCTS.filter(p => p.brandId === activeBrand.id).map((product, idx) => {
                 const isEven = idx % 2 === 0;
                 return (
                   <div 
@@ -865,7 +909,7 @@ export default function ProductLabPage() {
                           </div>
                           
                           <div className="grid grid-cols-2 gap-1 py-1.5 flex-grow justify-center items-center">
-                            {MOCK_PRODUCTS.map(prod => (
+                            {MOCK_PRODUCTS.filter(p => p.brandId === activeBrand.id).map(prod => (
                               <button
                                 key={prod.id}
                                 onClick={() => {
@@ -963,7 +1007,7 @@ export default function ProductLabPage() {
             {/* Quick Flavour Selector tray for box builder */}
             <div className="flex items-center justify-center gap-3 flex-wrap">
               <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest mr-2">Click to insert:</span>
-              {MOCK_PRODUCTS.map(product => (
+              {MOCK_PRODUCTS.filter(p => p.brandId === activeBrand.id).map(product => (
                 <button
                   key={product.id}
                   onClick={() => addToBox(product)}
@@ -1065,7 +1109,7 @@ export default function ProductLabPage() {
                       PRODUCT LEDGER
                     </span>
                     <h2 className="text-2xl font-extralight text-slate-900 mt-1">
-                      {activeBrand.name} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
+                      {selectedProduct.brandId.toUpperCase()} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
                     </h2>
                     <p className="text-xs text-slate-400 font-light mt-0.5 italic">
                       {selectedProduct.tagline}
@@ -1209,11 +1253,14 @@ export default function ProductLabPage() {
                       className="bg-white/50 border border-black/[0.02] rounded-2xl p-4 flex gap-3 items-center justify-between shadow-3xs"
                     >
                       <div className="flex-1">
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight">
-                          {activeBrand.name} · {item.product.name}
+                        <h4 className="text-xs font-bold text-slate-900 leading-tight flex items-center gap-1.5">
+                          <span className="text-[9px] tracking-widest font-black uppercase px-2 py-0.5 rounded-md bg-slate-950/5 text-slate-600 border border-black/[0.04]">
+                            {item.product.brandId.toUpperCase()}
+                          </span>
+                          <span>{item.product.name}</span>
                         </h4>
-                        <span className="text-[10px] text-slate-500 block mt-0.5">
-                          ₹{item.product.price} each · {item.product.badge.split(" ")[0]} {item.product.badge.split(" ")[1]}
+                        <span className="text-[10px] text-slate-500 block mt-1">
+                          ₹{item.product.price} each · {item.product.badge}
                         </span>
                       </div>
 
@@ -1323,7 +1370,12 @@ export default function ProductLabPage() {
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Crate Manifest</span>
                   {orderedItems.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
-                      <span className="text-slate-800 font-medium">{activeBrand.name} · {item.product.name}</span>
+                      <span className="text-slate-800 font-medium">
+                        <span className="text-[8px] font-black tracking-widest uppercase mr-1 bg-slate-950/5 text-slate-500 px-1 py-0.5 rounded">
+                          {item.product.brandId.toUpperCase()}
+                        </span>
+                        {item.product.name}
+                      </span>
                       <span className="text-slate-500 font-bold">Qty: {item.quantity}</span>
                     </div>
                   ))}
