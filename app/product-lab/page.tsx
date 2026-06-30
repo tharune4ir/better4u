@@ -926,30 +926,6 @@ export default function ProductLabPage() {
 
       </main>
 
-      {/* Floating Brand Dock for easy scrolling navigation */}
-      <div className="fixed bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[60] w-max max-w-[90vw] pointer-events-none">
-        <div className="flex items-center justify-center gap-1.5 p-1.5 bg-slate-950/85 backdrop-blur-md border border-white/10 rounded-full shadow-2xl overflow-x-auto no-scrollbar pointer-events-auto">
-          {CONCEPT_BRANDS.map(brand => {
-            const isActive = activeBrand.id === brand.id;
-            return (
-              <button
-                key={brand.id}
-                onClick={() => {
-                  setActiveBrand(brand);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`flex-shrink-0 px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
-                  isActive ? "bg-white text-black shadow-md scale-[1.02]" : "text-white/60 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {isActive && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: brand.accentColor }} />}
-                {brand.name}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
       {/* APPLE-STYLE INGREDIENTS SPEC SHEET OVERLAY */}
       <AnimatePresence>
         {selectedProduct && (

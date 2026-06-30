@@ -76,7 +76,13 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           return (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => {
+                if (isActive) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                  setActiveTab(item.id);
+                }
+              }}
               className="flex-1 h-full flex flex-col justify-center items-center min-h-[48px] cursor-pointer relative"
             >
               <div className={`p-1 rounded-full transition-all duration-300 ${
@@ -126,7 +132,13 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  if (isActive) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  } else {
+                    setActiveTab(item.id);
+                  }
+                }}
                 className="relative px-5 py-2.5 rounded-full flex flex-col items-center justify-center cursor-pointer min-h-[44px] group"
               >
                 {/* Active Capsule Overlay */}
