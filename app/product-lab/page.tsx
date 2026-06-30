@@ -958,12 +958,6 @@ export default function ProductLabPage() {
 
               {/* Left Panel: Bottle render (Edge-to-Edge) */}
               <div className="w-full md:w-[45%] bg-[#F2F1EC] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-black/[0.03] relative min-h-[300px] md:min-h-[100%] overflow-hidden">
-                {/* Category Pill */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="text-[9px] tracking-widest font-bold uppercase bg-white/90 backdrop-blur-md border border-black/[0.04] px-3 py-1 rounded-full shadow-sm" style={{ color: activeBrand.accentColor }}>
-                    {selectedProduct.replaces}
-                  </span>
-                </div>
                 
                 {/* Full Bleed Image Container */}
                 <div className="absolute inset-0 w-full h-full flex items-center justify-center group cursor-zoom-in hover:scale-105 transition-transform duration-700">
