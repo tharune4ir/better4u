@@ -414,9 +414,24 @@ export default function ProductLabPage() {
     const savedCart = localStorage.getItem("trelis_lab_cart");
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart));
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) {
+          const validated = parsed.map(item => {
+            if (!item || !item.product) return null;
+            // Map / find current fresh product definition to ensure all brand attributes exist
+            const freshProduct = MOCK_PRODUCTS.find(p => p.id === item.product.id);
+            if (freshProduct) {
+              return { ...item, product: freshProduct };
+            }
+            if (item.product.id && item.product.name) {
+              return item;
+            }
+            return null;
+          }).filter(Boolean) as CartItem[];
+          setCart(validated);
+        }
       } catch (e) {
-        console.error(e);
+        console.error("[ProductLabPage] Error parsing saved cart:", e);
       }
     }
 
@@ -762,15 +777,26 @@ export default function ProductLabPage() {
 
                       {/* Spec Badges */}
                       <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                        <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
-                          {product.specs.cfu}
-                        </span>
-                        <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
-                          {product.specs.sugar}
-                        </span>
-                        <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
-                          {product.specs.calories}
-                        </span>
+                        {product.specs.cfu && (
+                          <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
+                            {product.specs.cfu}
+                          </span>
+                        )}
+                        {product.specs.fiber && (
+                          <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
+                            {product.specs.fiber}
+                          </span>
+                        )}
+                        {product.specs.sugar && (
+                          <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
+                            {product.specs.sugar}
+                          </span>
+                        )}
+                        {product.specs.calories && (
+                          <span className="text-[10px] bg-white border border-black/[0.03] text-slate-700 px-3.5 py-1 rounded-full font-medium shadow-2xs">
+                            {product.specs.calories}
+                          </span>
+                        )}
                       </div>
 
                       {/* Taste Highlight Block */}
@@ -1109,7 +1135,7 @@ export default function ProductLabPage() {
                       PRODUCT LEDGER
                     </span>
                     <h2 className="text-2xl font-extralight text-slate-900 mt-1">
-                      {selectedProduct.brandId.toUpperCase()} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
+                      {selectedProduct.brandId?.toUpperCase() || "ALIVE"} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
                     </h2>
                     <p className="text-xs text-slate-400 font-light mt-0.5 italic">
                       {selectedProduct.tagline}
@@ -1131,10 +1157,17 @@ export default function ProductLabPage() {
                       <Info className="w-3.5 h-3.5" style={{ color: activeBrand.accentColor }} /> Nutritional Index
                     </h4>
                     <div className="grid grid-cols-2 gap-3 text-[11px]">
-                      <div>
-                        <span className="text-slate-400 font-light block">Active Cultures:</span>
-                        <span className="text-slate-800 font-bold">{selectedProduct.specs.cfu}</span>
-                      </div>
+                      {selectedProduct.specs.cfu ? (
+                        <div>
+                          <span className="text-slate-400 font-light block">Active Cultures:</span>
+                          <span className="text-slate-800 font-bold">{selectedProduct.specs.cfu}</span>
+                        </div>
+                      ) : selectedProduct.specs.fiber ? (
+                        <div>
+                          <span className="text-slate-400 font-light block">Dietary Fiber:</span>
+                          <span className="text-slate-800 font-bold">{selectedProduct.specs.fiber}</span>
+                        </div>
+                      ) : null}
                       <div>
                         <span className="text-slate-400 font-light block">Carbohydrate / Sugar:</span>
                         <span className="text-slate-800 font-medium">{selectedProduct.specs.sugar}</span>
@@ -1255,7 +1288,7 @@ export default function ProductLabPage() {
                       <div className="flex-1">
                         <h4 className="text-xs font-bold text-slate-900 leading-tight flex items-center gap-1.5">
                           <span className="text-[9px] tracking-widest font-black uppercase px-2 py-0.5 rounded-md bg-slate-950/5 text-slate-600 border border-black/[0.04]">
-                            {item.product.brandId.toUpperCase()}
+                            {item.product.brandId?.toUpperCase() || "ALIVE"}
                           </span>
                           <span>{item.product.name}</span>
                         </h4>
@@ -1372,7 +1405,7 @@ export default function ProductLabPage() {
                     <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
                       <span className="text-slate-800 font-medium">
                         <span className="text-[8px] font-black tracking-widest uppercase mr-1 bg-slate-950/5 text-slate-500 px-1 py-0.5 rounded">
-                          {item.product.brandId.toUpperCase()}
+                          {item.product.brandId?.toUpperCase() || "ALIVE"}
                         </span>
                         {item.product.name}
                       </span>
