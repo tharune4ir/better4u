@@ -82,7 +82,9 @@ const FrostedBottle = ({
   accentColor, 
   imagePlaceholder,
   isDetailed = false,
-  showBack = false
+  showBack = false,
+  brandFolder = "1_alive_concept_brand",
+  brandName = "ALIVE"
 }: { 
   flavor: string; 
   glowColor: string; 
@@ -90,19 +92,46 @@ const FrostedBottle = ({
   imagePlaceholder: string;
   isDetailed?: boolean;
   showBack?: boolean;
+  brandFolder?: string;
+  brandName?: string;
 }) => {
   const fileMappings: Record<string, { front: string; back?: string }> = {
-    lime: { front: "/all_image_files/product-lab/1.1_lime.jpeg", back: "/all_image_files/product-lab/1.2_lime.jpeg" },
-    ginger: { front: "/all_image_files/product-lab/2.1_ginger.jpeg", back: "/all_image_files/product-lab/2.2_ginger.jpeg" },
-    spice: { front: "/all_image_files/product-lab/3.1_spice.jpeg", back: "/all_image_files/product-lab/3.2_spice.jpeg" },
-    berry: { front: "/all_image_files/product-lab/4.1_berry.jpeg", back: "/all_image_files/product-lab/4.2_berry.jpeg" },
+    lime: { front: `/all_image_files/product-lab/${brandFolder}/1.1_lime.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/1.2_lime.jpeg` },
+    ginger: { front: `/all_image_files/product-lab/${brandFolder}/2.1_ginger.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/2.2_ginger.jpeg` },
+    spice: { front: `/all_image_files/product-lab/${brandFolder}/3.1_spice.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/3.2_spice.jpeg` },
+    berry: { front: `/all_image_files/product-lab/${brandFolder}/4.1_berry.jpeg`, back: `/all_image_files/product-lab/${brandFolder}/4.2_berry.jpeg` },
   };
 
   const imageSrc = fileMappings[imagePlaceholder] 
     ? (showBack ? (fileMappings[imagePlaceholder].back || fileMappings[imagePlaceholder].front) : fileMappings[imagePlaceholder].front)
     : "";
 
-  const hasImage = !!imageSrc;
+  const [imgSrc, setImgSrc] = useState(imageSrc);
+
+  useEffect(() => {
+    setImgSrc(imageSrc);
+  }, [imageSrc]);
+
+  const handleImageError = () => {
+    // If loading fails from a custom brand folder, gracefully fallback to the 1_alive_concept_brand folder
+    const fallbackFolder = "1_alive_concept_brand";
+    const fallbackMappings: Record<string, { front: string; back?: string }> = {
+      lime: { front: `/all_image_files/product-lab/${fallbackFolder}/1.1_lime.jpeg`, back: `/all_image_files/product-lab/${fallbackFolder}/1.2_lime.jpeg` },
+      ginger: { front: `/all_image_files/product-lab/${fallbackFolder}/2.1_ginger.jpeg`, back: `/all_image_files/product-lab/${fallbackFolder}/2.2_ginger.jpeg` },
+      spice: { front: `/all_image_files/product-lab/${fallbackFolder}/3.1_spice.jpeg`, back: `/all_image_files/product-lab/${fallbackFolder}/3.2_spice.jpeg` },
+      berry: { front: `/all_image_files/product-lab/${fallbackFolder}/4.1_berry.jpeg`, back: `/all_image_files/product-lab/${fallbackFolder}/4.2_berry.jpeg` },
+    };
+    
+    const fallbackSrc = fallbackMappings[imagePlaceholder]
+      ? (showBack ? (fallbackMappings[imagePlaceholder].back || fallbackMappings[imagePlaceholder].front) : fallbackMappings[imagePlaceholder].front)
+      : "";
+
+    if (imgSrc !== fallbackSrc) {
+      setImgSrc(fallbackSrc);
+    }
+  };
+
+  const hasImage = !!imgSrc;
   
   if (typeof window !== "undefined") {
     console.log(`[FrostedBottle Debug] flavor: ${flavor}, imagePlaceholder: ${imagePlaceholder}, imageSrc: ${imageSrc}, hasImage: ${hasImage}`);
@@ -143,8 +172,9 @@ const FrostedBottle = ({
           <motion.img 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            src={imageSrc} 
-            alt={`ALIVE ${flavor}`}
+            src={imgSrc} 
+            onError={handleImageError}
+            alt={`${brandName} ${flavor}`}
             className={`w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out origin-center pointer-events-auto ${
               isDetailed && showBack ? "group-hover:scale-[2.8] cursor-zoom-in" : ""
             }`}
@@ -177,7 +207,7 @@ const FrostedBottle = ({
               {/* Label */}
               <div className="z-10 text-center flex flex-col justify-between h-full w-full px-1">
                 <span className="text-[6px] tracking-[0.3em] text-white/60 font-bold uppercase">
-                  ALIVE
+                  {brandName}
                 </span>
 
                 <div className="my-auto">
@@ -205,9 +235,81 @@ const FrostedBottle = ({
   );
 };
 
+interface ConceptBrand {
+  id: string;
+  name: string;
+  subName: string;
+  folderName: string;
+  heroTagline: string;
+  heroDescription: string;
+  accentColor: string;
+}
+
+const CONCEPT_BRANDS: ConceptBrand[] = [
+  {
+    id: "alive",
+    name: "ALIVE",
+    subName: "ALIVE by Trelis",
+    folderName: "1_alive_concept_brand",
+    heroTagline: "A new state of living carbonation",
+    heroDescription: "We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active gut cultures inside premium frosted glass.",
+    accentColor: "#2A7F7F"
+  },
+  {
+    id: "cultured",
+    name: "CULTURED",
+    subName: "CULTURED by Trelis",
+    folderName: "2_cultured_concept_brand",
+    heroTagline: "Artisanal wild-cultured gut soda",
+    heroDescription: "Slowly fermented with wild yeasts and organic botanicals. A rich, mature profile crafted to soothe the digestion and offer deep, earthy complexity.",
+    accentColor: "#8B5CF6"
+  },
+  {
+    id: "bio-liv",
+    name: "BIO-LIV",
+    subName: "BIO-LIV by Trelis",
+    folderName: "3_bio_liv_concept_brand",
+    heroTagline: "Advanced biological carbonation",
+    heroDescription: "Precision gut nutrition engineered for gut health. Replaces commercial sugary pops with targeted prebiotics, plant fiber, and active functional cultures.",
+    accentColor: "#84CC16"
+  },
+  {
+    id: "soma-liv",
+    name: "SOMA-LIV",
+    subName: "SOMA-LIV by Trelis",
+    folderName: "4_soma_liv_concept_brand",
+    heroTagline: "Traditional botanical digestive sparkler",
+    heroDescription: "Inspired by ancient Indian health elixirs. Crafted with copper-distilled spring water, sun-dried spices, and living cultures for a clean post-meal ritual.",
+    accentColor: "#B45309"
+  }
+];
+
 export default function ProductLabPage() {
   const router = useRouter();
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Concept Brands State
+  const [activeBrand, setActiveBrand] = useState<ConceptBrand>(CONCEPT_BRANDS[0]);
+  const [videoSrc, setVideoSrc] = useState(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
+
+  useEffect(() => {
+    setVideoSrc(`/all_image_files/product-lab/${activeBrand.folderName}/1_video1.mp4`);
+  }, [activeBrand]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play()
+        .catch(err => console.warn("[ProductLabPage] Dynamic video play failed or was blocked:", err));
+    }
+  }, [videoSrc]);
+
+  const handleVideoError = () => {
+    const fallbackVideo = `/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`;
+    if (videoSrc !== fallbackVideo) {
+      setVideoSrc(fallbackVideo);
+    }
+  };
 
   // Cart State
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -394,7 +496,10 @@ export default function ProductLabPage() {
     <div className="flex flex-col min-h-screen bg-[#F7F6F2] relative overflow-hidden select-none">
       
       {/* Background ambient lighting */}
-      <div className="absolute top-0 inset-x-0 h-[1000px] bg-gradient-to-b from-[#2A7F7F]/5 via-transparent to-transparent pointer-events-none z-0" />
+      <div 
+        className="absolute top-0 inset-x-0 h-[1000px] pointer-events-none z-0 transition-all duration-1000" 
+        style={{ backgroundImage: `linear-gradient(to bottom, ${activeBrand.accentColor}0a, transparent)` }}
+      />
 
       <div className="flex flex-col min-h-screen">
         
@@ -409,7 +514,8 @@ export default function ProductLabPage() {
           <div className="absolute inset-0 w-full h-full z-0 overflow-hidden select-none pointer-events-none">
             <video 
               ref={videoRef}
-              src="/all_image_files/product-lab/1_video1.mp4" 
+              src={videoSrc} 
+              onError={handleVideoError}
               className="w-full h-full object-cover opacity-[0.22] transition-opacity duration-1000"
               loop
               playsInline
@@ -421,34 +527,60 @@ export default function ProductLabPage() {
             <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#F7F6F2]/50 pointer-events-none" />
           </div>
 
-          <CarbonationBubbles color="rgba(42, 127, 127, 0.12)" />
+          <CarbonationBubbles color={`${activeBrand.accentColor}20`} />
           
           <div className="max-w-3xl space-y-8 relative z-10">
+            {/* Concept Brand Selector Capsular Menu */}
+            <div className="flex items-center justify-center gap-1.5 p-1 bg-white/40 backdrop-blur-md border border-black/[0.04] rounded-full max-w-md mx-auto shadow-3xs select-none mb-6">
+              {CONCEPT_BRANDS.map(brand => {
+                const isActive = activeBrand.id === brand.id;
+                return (
+                  <button
+                    key={brand.id}
+                    onClick={() => setActiveBrand(brand)}
+                    style={{
+                      backgroundColor: isActive ? brand.accentColor : "transparent",
+                      color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.7)",
+                    }}
+                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                      isActive ? "shadow-2xs scale-105" : "hover:bg-slate-900/5 hover:text-slate-900"
+                    }`}
+                  >
+                    {brand.name}
+                  </button>
+                );
+              })}
+            </div>
+
             <motion.span 
+              key={`sub-${activeBrand.id}`}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[10px] tracking-[0.3em] text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block"
+              style={{ color: activeBrand.accentColor, borderColor: `${activeBrand.accentColor}25`, backgroundColor: `${activeBrand.accentColor}0c` }}
+              className="text-[10px] tracking-[0.3em] font-bold uppercase border px-4 py-1.5 rounded-full inline-block"
             >
-              ALIVE by Trelis
+              {activeBrand.subName}
             </motion.span>
             
             <motion.h1 
+              key={`title-${activeBrand.id}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-6xl font-extralight text-slate-900 tracking-tight leading-[1.1] px-4"
             >
-              A new state of <span className="font-semibold text-slate-950 block sm:inline">living carbonation</span>
+              {activeBrand.heroTagline}
             </motion.h1>
 
             <motion.p 
+              key={`desc-${activeBrand.id}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-sm sm:text-base text-slate-500 font-light max-w-xl mx-auto leading-relaxed px-2"
             >
-              We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active gut cultures inside premium frosted glass.
+              {activeBrand.heroDescription}
             </motion.p>
 
             <motion.div 
@@ -459,7 +591,8 @@ export default function ProductLabPage() {
             >
               <a 
                 href="#range"
-                className="px-6 py-3 bg-[#2A7F7F] text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-[#1e5c5c] hover:shadow-lg transition-all flex items-center gap-2 group cursor-pointer"
+                style={{ backgroundColor: activeBrand.accentColor }}
+                className="px-6 py-3 text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:brightness-95 hover:shadow-lg transition-all flex items-center gap-2 group cursor-pointer"
               >
                 <span>Explore the Range</span>
                 <ChevronRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
@@ -486,10 +619,10 @@ export default function ProductLabPage() {
                 onClick={() => setIsCartOpen(true)}
                 className="px-6 py-3 bg-white/60 border border-black/[0.04] text-slate-800 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-white hover:shadow-sm transition-all flex items-center gap-2 cursor-pointer"
               >
-                <ShoppingBag className="w-4 h-4 text-[#2A7F7F]" />
+                <ShoppingBag className="w-4 h-4" style={{ color: activeBrand.accentColor }} />
                 <span>Custom Tester Box</span>
                 {cartItemsCount > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-[#2A7F7F] text-white flex items-center justify-center text-[9px] font-bold">
+                  <span className="w-4 h-4 rounded-full text-white flex items-center justify-center text-[9px] font-bold" style={{ backgroundColor: activeBrand.accentColor }}>
                     {cartItemsCount}
                   </span>
                 )}
@@ -509,7 +642,7 @@ export default function ProductLabPage() {
           
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center space-y-3 mb-16">
-              <span className="text-[10px] tracking-[0.2em] text-[#2A7F7F] font-bold uppercase">The Founding Range</span>
+              <span className="text-[10px] tracking-[0.2em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>The Founding Range</span>
               <h2 className="text-3xl font-extralight text-slate-900 tracking-tight">
                 Four simple, <span className="font-semibold text-slate-950">sophisticated profiles</span>
               </h2>
@@ -540,6 +673,8 @@ export default function ProductLabPage() {
                           accentColor={product.accentColor} 
                           imagePlaceholder={product.imagePlaceholder}
                           showBack={!!flippedProducts[product.id]}
+                          brandFolder={activeBrand.folderName}
+                          brandName={activeBrand.name}
                         />
                       </div>
 
@@ -557,7 +692,7 @@ export default function ProductLabPage() {
                           }}
                           className="absolute bottom-4 right-4 z-20 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-md flex items-center gap-1.5"
                         >
-                          <RefreshCw className="w-3 h-3 text-[#2A7F7F]" />
+                          <RefreshCw className="w-3 h-3" style={{ color: activeBrand.accentColor }} />
                           <span>{flippedProducts[product.id] ? "Show Front" : "View Back Label"}</span>
                         </button>
                       )}
@@ -566,13 +701,13 @@ export default function ProductLabPage() {
                     {/* Flavour copy/details side */}
                     <div className="w-full md:w-[50%] space-y-6 text-center md:text-left">
                       <div className="space-y-2">
-                        <span className="text-[9px] font-bold text-[#2A7F7F] uppercase tracking-[0.2em] bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-block">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] border px-3 py-1 rounded-full inline-block" style={{ color: activeBrand.accentColor, borderColor: `${activeBrand.accentColor}20`, backgroundColor: `${activeBrand.accentColor}0a` }}>
                           {product.badge}
                         </span>
                         <h3 className="text-4xl font-extralight text-slate-900 tracking-tight">
-                          ALIVE <span className="font-semibold text-slate-950">{product.name}</span>
+                          {activeBrand.name} <span className="font-semibold text-slate-950">{product.name}</span>
                         </h3>
-                        <p className="text-xs text-[#2A7F7F] font-bold tracking-wider italic uppercase">
+                        <p className="text-xs font-bold tracking-wider italic uppercase" style={{ color: activeBrand.accentColor }}>
                           {product.tagline}
                         </p>
                       </div>
@@ -597,7 +732,7 @@ export default function ProductLabPage() {
                       {/* Taste Highlight Block */}
                       <div className="bg-white/40 border border-black/[0.02] rounded-2xl p-4 space-y-1.5 text-left shadow-2xs max-w-md mx-auto md:mx-0">
                         <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-1.5">
-                          <Award className="w-3.5 h-3.5 text-[#2A7F7F]" /> Taste-First Notes
+                          <Award className="w-3.5 h-3.5" style={{ color: activeBrand.accentColor }} /> Taste-First Notes
                         </h4>
                         <p className="text-[11px] text-slate-500 font-light leading-relaxed">
                           {product.tasteHighlight}
@@ -614,10 +749,10 @@ export default function ProductLabPage() {
                         </button>
                         <button
                           onClick={() => setSelectedProduct(product)}
-                          className="text-[10px] font-bold tracking-widest uppercase text-slate-400 hover:text-[#2A7F7F] transition-colors flex items-center gap-1.5"
+                          className="text-[10px] font-bold tracking-widest uppercase text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>Full Ingredients</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
                         </button>
                       </div>
 
@@ -633,11 +768,11 @@ export default function ProductLabPage() {
 
 
         {/* ==================== ACT 3: THE EXPERIMENT (Interactive Custom Box Builder) ==================== */}
-        <section className="relative w-full z-10 py-20 px-4 sm:px-6 bg-gradient-to-b from-transparent to-[#2A7F7F]/5 border-t border-black/[0.01]">
+        <section className="relative w-full z-10 py-20 px-4 sm:px-6 border-t border-black/[0.01] transition-all duration-1000" style={{ backgroundImage: `linear-gradient(to bottom, transparent, ${activeBrand.accentColor}05)` }}>
           <div className="max-w-4xl mx-auto space-y-12">
             
             <div className="text-center space-y-3">
-              <span className="text-[10px] tracking-[0.25em] text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block">
+              <span className="text-[10px] tracking-[0.25em] font-bold uppercase border px-4 py-1.5 rounded-full inline-block" style={{ color: activeBrand.accentColor, borderColor: `${activeBrand.accentColor}20`, backgroundColor: `${activeBrand.accentColor}0a` }}>
                 Interactive Customizer
               </span>
               <h2 className="text-3xl font-extralight text-slate-900 tracking-tight">
@@ -663,9 +798,13 @@ export default function ProductLabPage() {
                     <div 
                       key={index}
                       onClick={() => setActiveSlotIndex(isActive ? null : index)}
+                      style={{ 
+                        borderColor: isActive ? activeBrand.accentColor : undefined,
+                        boxShadow: isActive ? `0 0 0 2px ${activeBrand.accentColor}20` : undefined 
+                      }}
                       className={`aspect-[3/5] rounded-2xl border-2 ${
                         isActive 
-                          ? "border-[#2A7F7F] bg-white/60 ring-2 ring-[#2A7F7F]/10" 
+                          ? "bg-white/60" 
                           : slot 
                             ? "border-black/5 bg-white/40" 
                             : "border-dashed border-black/10 bg-white/10"
@@ -691,6 +830,8 @@ export default function ProductLabPage() {
                               glowColor={slot.glowColor} 
                               accentColor={slot.accentColor} 
                               imagePlaceholder={slot.imagePlaceholder} 
+                              brandFolder={activeBrand.folderName}
+                              brandName={activeBrand.name}
                             />
                           </div>
 
@@ -702,7 +843,7 @@ export default function ProductLabPage() {
                       ) : (
                         /* Empty Slot */
                         <div className="flex flex-col items-center justify-center text-center space-y-1.5 text-slate-400 py-4 select-none">
-                          <Plus className="w-5 h-5 opacity-40 animate-pulse text-[#2A7F7F]" />
+                          <Plus className="w-5 h-5 opacity-40 animate-pulse" style={{ color: activeBrand.accentColor }} />
                           <span className="text-[8px] font-bold tracking-widest uppercase opacity-55">Tap to Add</span>
                         </div>
                       )}
@@ -802,9 +943,10 @@ export default function ProductLabPage() {
                     whileTap={boxCount > 0 ? { scale: 0.98 } : {}}
                     disabled={boxCount === 0}
                     onClick={addBoxToCart}
+                    style={isBoxFull ? { backgroundColor: activeBrand.accentColor, boxShadow: `0 0 0 4px ${activeBrand.accentColor}1a` } : {}}
                     className={`px-6 py-2.5 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all flex items-center gap-2 cursor-pointer ${
                       isBoxFull
-                        ? "bg-[#2A7F7F] text-white hover:bg-[#1e5c5c] shadow-md ring-4 ring-[#2A7F7F]/10 font-bold"
+                        ? "text-white hover:brightness-95 shadow-md font-bold"
                         : boxCount > 0
                           ? "bg-slate-900 text-white hover:bg-slate-800 shadow-sm"
                           : "bg-slate-200 text-slate-400 cursor-not-allowed border border-black/[0.02]"
@@ -871,7 +1013,7 @@ export default function ProductLabPage() {
               {/* Left Panel: Bottle render */}
               <div className="w-full md:w-[40%] bg-slate-950/5 flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-black/[0.03] relative">
                 <div className="absolute top-4 left-4">
-                  <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-white/80 border border-black/[0.04] px-2.5 py-0.5 rounded-full select-none">
+                  <span className="text-[9px] tracking-widest font-bold uppercase bg-white/80 border border-black/[0.04] px-2.5 py-0.5 rounded-full select-none" style={{ color: activeBrand.accentColor }}>
                     {selectedProduct.replaces}
                   </span>
                 </div>
@@ -884,6 +1026,8 @@ export default function ProductLabPage() {
                     imagePlaceholder={selectedProduct.imagePlaceholder}
                     isDetailed={true}
                     showBack={modalShowBack}
+                    brandFolder={activeBrand.folderName}
+                    brandName={activeBrand.name}
                   />
                 </div>
 
@@ -917,11 +1061,11 @@ export default function ProductLabPage() {
               <div className="md:w-[60%] p-6 sm:p-8 overflow-y-auto flex flex-col justify-between">
                 <div className="space-y-6">
                   <div>
-                    <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase select-none">
+                    <span className="text-[9px] tracking-widest font-bold uppercase select-none" style={{ color: activeBrand.accentColor }}>
                       PRODUCT LEDGER
                     </span>
                     <h2 className="text-2xl font-extralight text-slate-900 mt-1">
-                      ALIVE <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
+                      {activeBrand.name} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
                     </h2>
                     <p className="text-xs text-slate-400 font-light mt-0.5 italic">
                       {selectedProduct.tagline}
@@ -940,7 +1084,7 @@ export default function ProductLabPage() {
                   {/* Nutrition Specs */}
                   <div className="bg-white/50 border border-black/[0.02] rounded-2xl p-4 space-y-3 shadow-3xs">
                     <h4 className="text-[10px] font-bold text-slate-950 uppercase tracking-widest flex items-center gap-1.5">
-                      <Info className="w-3.5 h-3.5 text-[#2A7F7F]" /> Nutritional Index
+                      <Info className="w-3.5 h-3.5" style={{ color: activeBrand.accentColor }} /> Nutritional Index
                     </h4>
                     <div className="grid grid-cols-2 gap-3 text-[11px]">
                       <div>
@@ -996,7 +1140,8 @@ export default function ProductLabPage() {
                       addToCart(selectedProduct);
                       setSelectedProduct(null);
                     }}
-                    className="w-full sm:w-auto px-6 py-3 bg-[#2A7F7F] text-white rounded-full text-[11px] font-bold tracking-wider uppercase hover:bg-[#1e5c5c] transition-all cursor-pointer flex items-center justify-center gap-2 flex-shrink-0 whitespace-nowrap shadow-sm"
+                    style={{ backgroundColor: activeBrand.accentColor }}
+                    className="w-full sm:w-auto px-6 py-3 text-white rounded-full text-[11px] font-bold tracking-wider uppercase hover:brightness-95 transition-all cursor-pointer flex items-center justify-center gap-2 flex-shrink-0 whitespace-nowrap shadow-sm"
                   >
                     <ShoppingBag className="w-4 h-4" />
                     <span>Add to Cart</span>
@@ -1034,7 +1179,7 @@ export default function ProductLabPage() {
               {/* Drawer Header */}
               <div className="p-6 border-b border-black/[0.04] flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <ShoppingBag className="w-5 h-5 text-[#2A7F7F]" />
+                  <ShoppingBag className="w-5 h-5" style={{ color: activeBrand.accentColor }} />
                   <h3 className="text-xs font-bold text-slate-800 uppercase tracking-widest">
                     Your Tester Pack
                   </h3>
@@ -1065,7 +1210,7 @@ export default function ProductLabPage() {
                     >
                       <div className="flex-1">
                         <h4 className="text-xs font-bold text-slate-900 leading-tight">
-                          ALIVE · {item.product.name}
+                          {activeBrand.name} · {item.product.name}
                         </h4>
                         <span className="text-[10px] text-slate-500 block mt-0.5">
                           ₹{item.product.price} each · {item.product.badge.split(" ")[0]} {item.product.badge.split(" ")[1]}
@@ -1119,7 +1264,8 @@ export default function ProductLabPage() {
 
                   <button
                     onClick={handlePlaceOrder}
-                    className="w-full py-3 bg-[#2A7F7F] text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-[#1e5c5c] transition-all cursor-pointer text-center shadow-xs hover:scale-[1.01] active:scale-99"
+                    style={{ backgroundColor: activeBrand.accentColor }}
+                    className="w-full py-3 text-white text-xs font-bold uppercase tracking-widest rounded-full hover:brightness-95 transition-all cursor-pointer text-center shadow-xs hover:scale-[1.01] active:scale-99"
                   >
                     Place Mock Order
                   </button>
@@ -1140,7 +1286,7 @@ export default function ProductLabPage() {
               className="fixed inset-0 bg-[#F7F6F2] z-50 flex flex-col items-center justify-center p-4 overflow-y-auto"
             >
               {/* Ambient glowing background bubbles representing living cultures */}
-              <CarbonationBubbles color="rgba(42, 127, 127, 0.15)" />
+              <CarbonationBubbles color={`${activeBrand.accentColor}25`} />
               
               <motion.div 
                 initial={{ scale: 0.9, y: 20, opacity: 0 }}
@@ -1150,25 +1296,25 @@ export default function ProductLabPage() {
                 className="w-full max-w-md bg-white border border-black/[0.03] rounded-3xl p-8 text-center shadow-xl space-y-6 relative"
               >
                 {/* Success Circle and Icon */}
-                <div className="w-16 h-16 rounded-full bg-[#2A7F7F]/10 border border-[#2A7F7F]/20 flex items-center justify-center mx-auto relative">
+                <div className="w-16 h-16 rounded-full border flex items-center justify-center mx-auto relative" style={{ backgroundColor: `${activeBrand.accentColor}1a`, borderColor: `${activeBrand.accentColor}33` }}>
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 15 }}
                   >
-                    <Check className="w-8 h-8 text-[#2A7F7F]" />
+                    <Check className="w-8 h-8" style={{ color: activeBrand.accentColor }} />
                   </motion.div>
-                  <div className="absolute inset-0 rounded-full border-2 border-[#2A7F7F] animate-ping opacity-25" />
+                  <div className="absolute inset-0 rounded-full border-2 animate-ping opacity-25" style={{ borderColor: activeBrand.accentColor }} />
                 </div>
 
                 {/* Success Messages */}
                 <div className="space-y-2">
-                  <span className="text-[10px] tracking-[0.25em] text-[#2A7F7F] font-bold uppercase">Mock Purchase Successful</span>
+                  <span className="text-[10px] tracking-[0.25em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>Mock Purchase Successful</span>
                   <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
                     Fermenting Your Crate
                   </h2>
                   <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
-                    Your customized Alive probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
+                    Your customized {activeBrand.name} probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
                   </p>
                 </div>
 
@@ -1177,7 +1323,7 @@ export default function ProductLabPage() {
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Crate Manifest</span>
                   {orderedItems.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
-                      <span className="text-slate-800 font-medium">ALIVE · {item.product.name}</span>
+                      <span className="text-slate-800 font-medium">{activeBrand.name} · {item.product.name}</span>
                       <span className="text-slate-500 font-bold">Qty: {item.quantity}</span>
                     </div>
                   ))}
@@ -1187,7 +1333,8 @@ export default function ProductLabPage() {
                 <div className="space-y-4 pt-2">
                   <button
                     onClick={() => setShowSuccessScreen(false)}
-                    className="w-full py-3 bg-[#2A7F7F] text-white hover:bg-[#1e5c5c] text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-98"
+                    style={{ backgroundColor: activeBrand.accentColor }}
+                    className="w-full py-3 text-white hover:brightness-95 text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-98"
                   >
                     Return to Product Lab
                   </button>

@@ -144,7 +144,7 @@ const FrostedBottle = ({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             src={imageSrc} 
-            alt={`ALIVE ${flavor}`}
+            alt={`LIVE SPARK ${flavor}`}
             className={`w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out origin-center pointer-events-auto ${
               isDetailed && showBack ? "group-hover:scale-[2.8] cursor-zoom-in" : ""
             }`}
@@ -176,8 +176,8 @@ const FrostedBottle = ({
 
               {/* Label */}
               <div className="z-10 text-center flex flex-col justify-between h-full w-full px-1">
-                <span className="text-[6px] tracking-[0.3em] text-white/60 font-bold uppercase">
-                  ALIVE
+                <span className="text-[5px] tracking-[0.2em] text-white/60 font-bold uppercase">
+                  LIVE SPARK
                 </span>
 
                 <div className="my-auto">
@@ -430,7 +430,7 @@ export default function ProductLabPage() {
               transition={{ duration: 0.6 }}
               className="text-[10px] tracking-[0.3em] text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block"
             >
-              ALIVE by Trelis
+              LIVE SPARK by Trelis
             </motion.span>
             
             <motion.h1 
@@ -570,7 +570,7 @@ export default function ProductLabPage() {
                           {product.badge}
                         </span>
                         <h3 className="text-4xl font-extralight text-slate-900 tracking-tight">
-                          ALIVE <span className="font-semibold text-slate-950">{product.name}</span>
+                          LIVE SPARK <span className="font-semibold text-slate-950">{product.name}</span>
                         </h3>
                         <p className="text-xs text-[#2A7F7F] font-bold tracking-wider italic uppercase">
                           {product.tagline}
@@ -921,7 +921,7 @@ export default function ProductLabPage() {
                       PRODUCT LEDGER
                     </span>
                     <h2 className="text-2xl font-extralight text-slate-900 mt-1">
-                      ALIVE <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
+                      LIVE SPARK <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
                     </h2>
                     <p className="text-xs text-slate-400 font-light mt-0.5 italic">
                       {selectedProduct.tagline}
@@ -1065,7 +1065,7 @@ export default function ProductLabPage() {
                     >
                       <div className="flex-1">
                         <h4 className="text-xs font-bold text-slate-900 leading-tight">
-                          ALIVE · {item.product.name}
+                          LIVE SPARK · {item.product.name}
                         </h4>
                         <span className="text-[10px] text-slate-500 block mt-0.5">
                           ₹{item.product.price} each · {item.product.badge.split(" ")[0]} {item.product.badge.split(" ")[1]}
@@ -1168,7 +1168,7 @@ export default function ProductLabPage() {
                     Fermenting Your Crate
                   </h2>
                   <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
-                    Your customized Alive probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
+                    Your customized Live Spark probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
                   </p>
                 </div>
 
@@ -1177,7 +1177,7 @@ export default function ProductLabPage() {
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Crate Manifest</span>
                   {orderedItems.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
-                      <span className="text-slate-800 font-medium">ALIVE · {item.product.name}</span>
+                      <span className="text-slate-800 font-medium">LIVE SPARK · {item.product.name}</span>
                       <span className="text-slate-500 font-bold">Qty: {item.quantity}</span>
                     </div>
                   ))}
