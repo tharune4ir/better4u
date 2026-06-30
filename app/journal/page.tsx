@@ -36,7 +36,7 @@ export default function JournalPage() {
             Coming Soon
           </span>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 tracking-tight font-serif italic">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight text-slate-900 tracking-tight">
             Journal
           </h1>
           

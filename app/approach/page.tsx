@@ -79,23 +79,24 @@ export default function ApproachPage() {
       <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-16 md:py-24 z-10 relative space-y-24">
         
         {/* 1. HERO */}
-        <section className="text-center md:text-left space-y-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 tracking-tight">
+        <section className="text-center space-y-6">
+          <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block">
+            The Approach
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-slate-900 leading-[1.15] px-2">
             The default is hurting us.
           </h1>
-          <p className="text-lg sm:text-xl text-slate-600 font-light leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
             In our cities a sugary soda or shake follows almost every meal — it's the default, and it's quietly wrecking our gut and energy.
           </p>
         </section>
 
         {/* 2. THE SHIFT */}
-        <section className="bg-white/40 glassmorphic p-8 md:p-12 rounded-[2rem] border border-[#2A7F7F]/10 shadow-[0_8px_30px_rgba(42,127,127,0.03)] text-center">
-          <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-4 text-slate-900">
-            We're not asking you to give it up.
+        <section className="bg-white/40 glassmorphic p-8 md:p-12 rounded-[2rem] border border-black/[0.03] shadow-[0_8px_40px_rgba(0,0,0,0.02)] text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-light tracking-tight mb-4 text-slate-900 leading-snug">
+            We're not asking you to give it up. <br className="hidden md:block" />
+            <span className="text-[#2A7F7F] font-medium">We're giving you the better-tasting swap.</span>
           </h2>
-          <h3 className="text-xl md:text-2xl font-light text-[#2A7F7F]">
-            We're giving you the better-tasting swap.
-          </h3>
         </section>
 
         {/* 3. THE SWAP */}
@@ -111,13 +112,13 @@ export default function ApproachPage() {
                 whileHover={{ y: -2 }}
                 className="flex flex-col bg-white/60 p-5 rounded-2xl border border-black/[0.03] shadow-sm group hover:shadow-md transition-all duration-300"
               >
-                <span className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">Instead of</span>
-                <span className="text-base text-slate-500 font-light line-through decoration-slate-300 mb-4">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Instead of</span>
+                <span className="text-sm sm:text-base text-slate-500 font-light line-through decoration-slate-300 mb-4">
                   {swap.instead}
                 </span>
                 
-                <span className="text-xs font-bold text-[#2A7F7F] uppercase tracking-widest mb-1 mt-auto">Reach for</span>
-                <span className="text-lg font-semibold text-slate-900">
+                <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest mb-1 mt-auto">Reach for</span>
+                <span className="text-base sm:text-lg font-bold text-slate-900">
                   {swap.reachFor}
                 </span>
               </motion.div>
@@ -154,34 +155,36 @@ export default function ApproachPage() {
         </section>
 
         {/* 5. BUILT IN THE OPEN */}
-        <section className="bg-slate-900 text-white p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#2A7F7F]/20 rounded-full blur-[80px] pointer-events-none" />
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div className="space-y-4 max-w-lg">
-              <div className="flex items-center gap-2">
-                <HeartHandshake className="w-5 h-5 text-emerald-400" />
-                <h3 className="text-sm font-bold tracking-widest uppercase text-emerald-400">Built in the Open</h3>
+        <section className="bg-white/60 p-8 md:p-12 rounded-[2.5rem] border border-black/[0.03] shadow-[0_8px_40px_rgba(0,0,0,0.02)] relative overflow-hidden text-center md:text-left">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#2A7F7F]/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-lg mx-auto md:mx-0">
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <HeartHandshake className="w-5 h-5 text-[#2A7F7F]" />
+                <h3 className="text-[10px] font-bold tracking-widest uppercase text-[#2A7F7F]">Built in the Open</h3>
               </div>
-              <p className="text-lg font-light leading-relaxed text-slate-300">
+              <p className="text-sm md:text-base font-light leading-relaxed text-slate-600">
                 We are a small, obsessed team making small batches and sharing everything as we go. We aren't a massive corporation—we're just building what we want to drink.
               </p>
             </div>
             
             {/* 6. BRIDGE CTA */}
-            <button 
-              onClick={() => router.push("/product-lab")}
-              className="flex-shrink-0 px-8 py-4 bg-emerald-400 hover:bg-emerald-300 text-slate-900 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-emerald-400/20 hover:scale-[1.02]"
-            >
-              <span>Meet the full range</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="flex justify-center md:justify-end w-full md:w-auto mt-4 md:mt-0">
+              <button 
+                onClick={() => router.push("/product-lab")}
+                className="px-8 py-3.5 bg-[#2A7F7F] hover:bg-[#1e5c5c] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-[0_4px_14px_rgba(42,127,127,0.3)] hover:shadow-[0_6px_20px_rgba(42,127,127,0.4)] group"
+              >
+                <span>Meet the full range</span>
+                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
         </section>
 
       </main>
 
       {/* Footer */}
-      <footer className="w-full text-center py-8 pb-10 text-xs tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 relative z-10">
+      <footer className="w-full text-center py-10 text-[10px] tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 relative z-10">
         BUILT IN THE OPEN. ONE BATCH AT A TIME.
       </footer>
     </div>

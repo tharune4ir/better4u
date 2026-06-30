@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { 
-  Apple, 
+  Leaf, 
   Sparkle,
   BookOpen
 } from "lucide-react";
@@ -38,7 +38,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { id: "approach" as NavTab, label: "The Approach", sub: "", icon: Apple },
+    { id: "approach" as NavTab, label: "The Approach", sub: "", icon: Leaf },
     { id: "product-lab" as NavTab, label: "Product Lab", sub: "THE RANGE", icon: Sparkle },
     { id: "journal" as NavTab, label: "Journal", sub: "Coming Soon", icon: BookOpen },
   ];
