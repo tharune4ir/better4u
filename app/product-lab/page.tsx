@@ -956,15 +956,17 @@ export default function ProductLabPage() {
                 <X className="w-4 h-4" />
               </button>
 
-              {/* Left Panel: Bottle render */}
-              <div className="w-full md:w-[40%] bg-slate-950/5 flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-black/[0.03] relative">
-                <div className="absolute top-4 left-4">
-                  <span className="text-[9px] tracking-widest font-bold uppercase bg-white/80 border border-black/[0.04] px-2.5 py-0.5 rounded-full select-none" style={{ color: activeBrand.accentColor }}>
+              {/* Left Panel: Bottle render (Edge-to-Edge) */}
+              <div className="w-full md:w-[45%] bg-[#F2F1EC] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-black/[0.03] relative min-h-[300px] md:min-h-[100%] overflow-hidden">
+                {/* Category Pill */}
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="text-[9px] tracking-widest font-bold uppercase bg-white/90 backdrop-blur-md border border-black/[0.04] px-3 py-1 rounded-full shadow-sm" style={{ color: activeBrand.accentColor }}>
                     {selectedProduct.replaces}
                   </span>
                 </div>
-
-                <div className="w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mt-6 overflow-hidden rounded-2xl bg-white border border-black/[0.04] shadow-xs relative group">
+                
+                {/* Full Bleed Image Container */}
+                <div className="absolute inset-0 w-full h-full flex items-center justify-center group cursor-zoom-in hover:scale-105 transition-transform duration-700">
                   <FrostedBottle 
                     flavor={selectedProduct.name}
                     glowColor={selectedProduct.glowColor}
@@ -978,45 +980,43 @@ export default function ProductLabPage() {
                   />
                 </div>
 
-                <div className="mt-4 text-center z-10 flex flex-col items-center gap-2">
-                  <div>
-                    <span className="text-xl font-light text-slate-900">₹{selectedProduct.price}</span>
-                    <span className="text-[9px] text-slate-400 block tracking-wider uppercase font-medium">Single 250ml Glass Bottle</span>
+                {/* Flip Toggle Button Overlaid */}
+                {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
+                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1.5 z-20">
+                    <button 
+                      onClick={() => setModalShowBack(!modalShowBack)}
+                      className="px-5 py-2 bg-black/60 backdrop-blur-md hover:bg-black/80 text-white rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-md flex items-center gap-1.5"
+                    >
+                      <span>View {modalShowBack ? "Front" : "Back Label"}</span>
+                    </button>
+                    {modalShowBack && (
+                      <span className="text-[8px] text-white/80 tracking-wider uppercase font-semibold select-none drop-shadow-md">
+                        *Tap bottle to zoom
+                      </span>
+                    )}
                   </div>
-
-                  {/* Flip Toggle Button */}
-                  {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
-                    <div className="flex flex-col items-center gap-1.5">
-                      <button 
-                        onClick={() => setModalShowBack(!modalShowBack)}
-                        className="mt-2 px-4 py-1.5 bg-white hover:bg-slate-50 text-slate-800 border border-black/[0.06] rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-3xs flex items-center gap-1 z-20"
-                      >
-                        <span>View {modalShowBack ? "Front" : "Back Label"}</span>
-                      </button>
-                      
-                      {modalShowBack && (
-                        <span className="text-[8px] text-slate-400 tracking-wider uppercase font-semibold select-none">
-                          *Hover bottle to zoom & read label
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
 
               {/* Right Panel: Spec details */}
               <div className="md:w-[60%] p-6 sm:p-8 overflow-y-auto flex flex-col justify-between">
                 <div className="space-y-6">
-                  <div>
-                    <span className="text-[9px] tracking-widest font-bold uppercase select-none" style={{ color: activeBrand.accentColor }}>
-                      PRODUCT DETAILS
-                    </span>
-                    <h2 className="text-2xl font-extralight text-slate-900 mt-1">
-                      {selectedProduct.brandId?.toUpperCase() || "ALIVE"} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
-                    </h2>
-                    <p className="text-xs text-slate-400 font-light mt-0.5 italic">
-                      {selectedProduct.tagline}
-                    </p>
+                  <div className="flex justify-between items-start gap-4">
+                    <div>
+                      <span className="text-[9px] tracking-widest font-bold uppercase select-none" style={{ color: activeBrand.accentColor }}>
+                        PRODUCT DETAILS
+                      </span>
+                      <h2 className="text-2xl font-extralight text-slate-900 mt-1">
+                        {selectedProduct.brandId?.toUpperCase() || "ALIVE"} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
+                      </h2>
+                      <p className="text-xs text-slate-400 font-light mt-0.5 italic">
+                        {selectedProduct.tagline}
+                      </p>
+                    </div>
+                    <div className="text-right flex-shrink-0 bg-white/60 border border-black/[0.03] rounded-xl px-4 py-2 shadow-3xs">
+                      <span className="text-2xl font-light text-slate-900 block leading-tight">₹{selectedProduct.price}</span>
+                      <span className="text-[8px] text-slate-400 tracking-wider uppercase font-bold">Single Box</span>
+                    </div>
                   </div>
 
                   <div className="space-y-2">
