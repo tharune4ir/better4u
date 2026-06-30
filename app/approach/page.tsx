@@ -37,6 +37,8 @@ export default function ApproachPage() {
     { instead: "Sugary lassi / yogurt drinks", reachFor: "BATCH · Strawberry Kefir" },
     { instead: "Green juice / skipped breakfast", reachFor: "PULP · Green Reset" },
     { instead: "Store kombucha / sugary tonics", reachFor: "BATCH · Kanji / Jamun-Lime Kombucha" },
+    { instead: "Instant coffee / sugary chai", reachFor: "STEEP · Filter Kaapi / Gut Chai" },
+    { instead: "Sugary granola bars / biscuits", reachFor: "GRIT · Millet & Date / Cacao Nib" },
   ];
 
   return (

@@ -259,7 +259,7 @@ export default function LandingHub() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* ALIVE */}
             <motion.div 
@@ -318,6 +318,36 @@ export default function LandingHub() {
               <p className="text-sm font-medium text-slate-700 mb-2">Gut smoothies.</p>
               <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> green juice, mango shakes, skipped breakfasts.
+              </p>
+            </motion.div>
+
+            {/* STEEP */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">STEEP</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Mug</span>
+              </div>
+              <p className="text-sm font-medium text-slate-700 mb-2">Hot gut-friendly brews.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary chai, instant coffee, after-dinner sweets.
+              </p>
+            </motion.div>
+
+            {/* GRIT */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">GRIT</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Bar</span>
+              </div>
+              <p className="text-sm font-medium text-slate-700 mb-2">Gut bars & bites.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary granola bars, biscuits, fried namkeen.
               </p>
             </motion.div>
 

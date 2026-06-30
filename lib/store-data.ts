@@ -473,5 +473,332 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
     tasteHighlight: "Berry-sweet over an earthy beet base; rich crimson, lightly tart, satisfying.",
     replaces: "green juice, mango shakes, skipped breakfasts",
     brandId: "pulp"
+  },
+  {
+    id: "batch-coconut-water-kefir",
+    name: "Coconut Water Kefir",
+    category: "Fresh Ferment",
+    tagline: "Tender coconut, gently alive.",
+    description: "A light, gently sparkling water kefir made fresh from tender coconut water and live kefir grains. Crisp, clean, and naturally fizzy — a vegan living ferment that drinks like a treat, not a tonic.",
+    badge: "2B Live Cultures",
+    price: 60,
+    imagePlaceholder: "coconut-water-kefir",
+    glowColor: "rgba(220, 230, 225, 0.15)",
+    accentColor: "#DCE6E1",
+    specs: {
+      cfu: "2 Billion Live Probiotic Cultures",
+      sugar: "3.5g per 100ml (natural coconut sugars, mostly consumed in fermentation)",
+      calories: "16 kcal per 100ml (approx 48 kcal per cup)",
+      benefits: "Light, hydrating vegan ferment that is gentle on the gut"
+    },
+    ingredients: [
+      "Tender Coconut Water",
+      "Live Water-Kefir Grains",
+      "Fresh Lime",
+      "Natural Coconut Solids"
+    ],
+    tasteHighlight: "Crisp tender-coconut with a soft natural fizz and a clean lime lift; pale, light, and refreshing.",
+    replaces: "Sugary packaged coconut drinks / Sweetened tender-coconut waters",
+    brandId: "batch"
+  },
+
+  // ==================== BRAND 5: STEEP ====================
+  {
+    id: "steep-kahwa",
+    name: "Kahwa",
+    category: "Hot Brew",
+    tagline: "The mountain digestif.",
+    description: "A fragrant Kashmiri green-tea kahwa brewed with saffron, cardamom, cinnamon, and crushed almond. A light, golden, after-meal brew that feels like a warm exhale.",
+    badge: "Polyphenol-Rich",
+    price: 60,
+    imagePlaceholder: "kahwa",
+    glowColor: "rgba(218, 165, 32, 0.15)",
+    accentColor: "#DAA520",
+    specs: {
+      sugar: "1.5g per 100ml (lightly honeyed)",
+      calories: "12 kcal per 100ml (approx 30 kcal per cup)",
+      benefits: "Antioxidant-rich; soothing after heavy meals"
+    },
+    ingredients: [
+      "Brewed Kashmiri Green Tea",
+      "Saffron",
+      "Green Cardamom",
+      "Cinnamon Bark",
+      "Crushed Almonds",
+      "Raw Honey"
+    ],
+    tasteHighlight: "Delicate floral-saffron green tea with warm spice and a soft nutty finish; light, fragrant, golden.",
+    replaces: "Sugary green-tea sachets / After-dinner sweets",
+    brandId: "steep"
+  },
+  {
+    id: "steep-gut-chai",
+    name: "Gut Chai",
+    category: "Hot Brew",
+    tagline: "Chai that's kind to your stomach.",
+    description: "A warming spiced chai brewed with whole spices over a prebiotic chicory-root base, with just a touch of jaggery instead of heavy sugar and milk. Familiar masala-chai comfort, gentler on digestion.",
+    badge: "5g Plant Fibre",
+    price: 60,
+    imagePlaceholder: "gut-chai",
+    glowColor: "rgba(205, 133, 63, 0.15)",
+    accentColor: "#CD853F",
+    specs: {
+      fiber: "5g Prebiotic Chicory Fiber",
+      sugar: "3.0g per 100ml (lightly jaggery-sweetened)",
+      calories: "22 kcal per 100ml (approx 55 kcal per cup)",
+      benefits: "Warming carminative spices ease digestion"
+    },
+    ingredients: [
+      "Brewed Assam Black Tea",
+      "Chicory Root Inulin",
+      "Fresh Ginger",
+      "Green Cardamom",
+      "Cinnamon",
+      "Clove",
+      "Black Pepper",
+      "A2 Milk (light)",
+      "Jaggery"
+    ],
+    tasteHighlight: "Warm, spiced, lightly sweet masala chai with a clean finish; comforting, never cloying.",
+    replaces: "Sugary milk chai / Instant tea premixes",
+    brandId: "steep"
+  },
+  {
+    id: "steep-golden-turmeric",
+    name: "Golden Turmeric",
+    category: "Hot Brew",
+    tagline: "The everyday comfort brew.",
+    description: "A soothing turmeric-and-ginger brew with black pepper and a prebiotic fibre base — the classic haldi comfort, modernised and lightly sweetened.",
+    badge: "Curcumin + Fibre",
+    price: 60,
+    imagePlaceholder: "golden-turmeric",
+    glowColor: "rgba(255, 165, 0, 0.15)",
+    accentColor: "#FFA500",
+    specs: {
+      fiber: "Fresh Curcumin + Prebiotic Fiber",
+      sugar: "2.5g per 100ml (light jaggery)",
+      calories: "20 kcal per 100ml (approx 50 kcal per cup)",
+      benefits: "Warming spices for everyday post-meal comfort"
+    },
+    ingredients: [
+      "Fresh Turmeric",
+      "Ginger",
+      "Black Pepper",
+      "Cinnamon",
+      "Chicory Fiber",
+      "A2 / Plant Milk",
+      "Light Jaggery"
+    ],
+    tasteHighlight: "Earthy turmeric-ginger warmth with a peppery edge; creamy, golden, soothing.",
+    replaces: "Sugary haldi-doodh mixes / Hot chocolate",
+    brandId: "steep"
+  },
+  {
+    id: "steep-filter-kaapi",
+    name: "Filter Kaapi",
+    category: "Hot Brew",
+    tagline: "Your kaapi, polyphenol-loaded.",
+    description: "Slow-brewed South Indian filter-coffee decoction, naturally polyphenol-rich, finished with a lighter milk-and-jaggery profile for everyday gut-friendly comfort.",
+    badge: "Polyphenol-Rich",
+    price: 60,
+    imagePlaceholder: "filter-kaapi",
+    glowColor: "rgba(139, 69, 19, 0.15)",
+    accentColor: "#8B4513",
+    specs: {
+      sugar: "2.0g per 100ml (light jaggery)",
+      calories: "24 kcal per 100ml (approx 60 kcal per cup)",
+      benefits: "Natural coffee polyphenols feed gut bacteria"
+    },
+    ingredients: [
+      "South Indian Filter Coffee Decoction (Arabica/Robusta + Chicory)",
+      "A2 Milk",
+      "Light Jaggery"
+    ],
+    tasteHighlight: "Bold, aromatic filter-coffee depth with a smooth, lightly sweet milk finish.",
+    replaces: "Instant coffee / Sugary café lattes",
+    brandId: "steep"
+  },
+  {
+    id: "steep-cocoa-spice",
+    name: "Cocoa Spice",
+    category: "Hot Brew",
+    tagline: "The hot chocolate your gut craves.",
+    description: "A rich, dark hot chocolate made with raw cacao — one of the most polyphenol-dense foods there is — plus warming spices and a prebiotic fibre base. Deep chocolate comfort with a fraction of the sugar of a sachet.",
+    badge: "Polyphenol-Rich",
+    price: 60,
+    imagePlaceholder: "cocoa-spice",
+    glowColor: "rgba(105, 105, 105, 0.15)",
+    accentColor: "#696969",
+    specs: {
+      fiber: "Polyphenol-Rich Raw Cacao",
+      sugar: "4.5g per 100ml (date + light jaggery)",
+      calories: "38 kcal per 100ml (approx 95 kcal per cup)",
+      benefits: "Cacao polyphenols feed gut bacteria; warming spices aid post-meal comfort"
+    },
+    ingredients: [
+      "Raw Cacao Powder",
+      "A2 / Plant Milk",
+      "Chicory Root Fiber",
+      "Dates",
+      "Cinnamon",
+      "A Pinch of Cardamom",
+      "A Pinch of Sea Salt",
+      "Light Jaggery"
+    ],
+    tasteHighlight: "Deep, dark, velvety chocolate with warm cinnamon and a whisper of sea salt; rich but clean, never sugary.",
+    replaces: "Sugary instant hot chocolate / Drinking-chocolate sachets",
+    brandId: "steep"
+  },
+
+  // ==================== BRAND 6: GRIT ====================
+  {
+    id: "grit-millet-date",
+    name: "Millet & Date",
+    category: "Gut Bar",
+    tagline: "The bar your gut actually wants.",
+    description: "A chewy whole-food bar of toasted millets, dates, and seeds, bound with prebiotic fibre. No refined sugar, no junk — just slow, real fuel for the hunger gap.",
+    badge: "7g Plant Fibre",
+    price: 60,
+    imagePlaceholder: "millet-date",
+    glowColor: "rgba(205, 170, 125, 0.15)",
+    accentColor: "#CDAA7D",
+    specs: {
+      fiber: "7g Dietary Fibre per bar",
+      sugar: "9g per bar (whole-date sugars)",
+      calories: "approx 180 kcal per 40g bar",
+      benefits: "Slow-release energy that feeds gut bacteria"
+    },
+    ingredients: [
+      "Foxtail & Ragi Millet",
+      "Dates",
+      "Almonds",
+      "Pumpkin Seeds",
+      "Flaxseed",
+      "Chicory Fibre",
+      "Cinnamon"
+    ],
+    tasteHighlight: "Chewy, nutty, date-sweet with a toasted-millet crunch.",
+    replaces: "Sugary granola/protein bars / Biscuits",
+    brandId: "grit"
+  },
+  {
+    id: "grit-cacao-nib",
+    name: "Cacao Nib",
+    category: "Gut Bar",
+    tagline: "Chocolate that feeds the good guys.",
+    description: "A rich dark-cacao bar with oats, almond butter, and crunchy cacao nibs — dessert satisfaction with real fibre and polyphenols.",
+    badge: "6g Plant Fibre",
+    price: 60,
+    imagePlaceholder: "cacao-nib",
+    glowColor: "rgba(139, 69, 19, 0.15)",
+    accentColor: "#8B4513",
+    specs: {
+      fiber: "6g Dietary Fibre per bar",
+      sugar: "8g per bar (date + minimal jaggery)",
+      calories: "approx 200 kcal per 40g bar",
+      benefits: "Polyphenol-rich; satisfies sweet cravings"
+    },
+    ingredients: [
+      "Rolled Oats",
+      "Dates",
+      "Raw Cacao",
+      "Cacao Nibs",
+      "Almond Butter",
+      "Flaxseed",
+      "Sea Salt"
+    ],
+    tasteHighlight: "Deep dark-chocolate over a salted-nutty base with crunchy nibs.",
+    replaces: "Chocolate bars / Sugary desserts",
+    brandId: "grit"
+  },
+  {
+    id: "grit-seed-spice",
+    name: "Seed & Spice",
+    category: "Gut Bar",
+    tagline: "Crunch with a conscience.",
+    description: "A crisp savory seed cracker baked with whole grains and digestive spices — the gut-friendly answer to fried namkeen and chips.",
+    badge: "Whole-Grain Fibre",
+    price: 60,
+    imagePlaceholder: "seed-spice",
+    glowColor: "rgba(218, 165, 32, 0.15)",
+    accentColor: "#DAA520",
+    specs: {
+      fiber: "5g Dietary Fibre per pack",
+      sugar: "1g sugar per pack",
+      calories: "approx 150 kcal per pack",
+      benefits: "Whole-grain fibre with digestion-friendly spices"
+    },
+    ingredients: [
+      "Foxtail Millet",
+      "Flaxseed",
+      "Sesame",
+      "Cumin",
+      "Ajwain",
+      "Black Pepper",
+      "Cold-Pressed Oil",
+      "Rock Salt"
+    ],
+    tasteHighlight: "Crisp, savory, and seedy with warm cumin-ajwain spice.",
+    replaces: "Fried namkeen / Potato chips",
+    brandId: "grit"
+  },
+  {
+    id: "grit-sattu-bite",
+    name: "Sattu Bite",
+    category: "Gut Bar",
+    tagline: "Old-school protein, gut-tuned.",
+    description: "A pressed bite of roasted chana (sattu), peanuts, and jaggery — high plant protein and fibre in a familiar Indian format.",
+    badge: "+Protein +Fibre",
+    price: 60,
+    imagePlaceholder: "sattu-bite",
+    glowColor: "rgba(210, 180, 140, 0.15)",
+    accentColor: "#D2B48C",
+    specs: {
+      fiber: "4g Fibre per bite",
+      sugar: "7g per bite (jaggery)",
+      calories: "approx 170 kcal per 40g",
+      benefits: "Plant protein + fibre for steady energy"
+    },
+    ingredients: [
+      "Roasted Chana (Sattu)",
+      "Peanuts",
+      "Jaggery",
+      "Sesame",
+      "Cardamom"
+    ],
+    tasteHighlight: "Toasty, nutty, lightly sweet with a hint of cardamom.",
+    replaces: "Sugary protein bars / Fried snacks",
+    brandId: "grit"
+  },
+  {
+    id: "grit-choc-hazelnut",
+    name: "Choc Hazelnut",
+    category: "Gut Bar",
+    tagline: "Fudgy, dark, and secretly good for you.",
+    description: "A fudgy, indulgent dark-chocolate and roasted-hazelnut bar bound with dates and prebiotic fibre, finished in a 70% dark-chocolate shell with flaky sea salt. Tastes like a treat, built like a gut food.",
+    badge: "6g Plant Fibre",
+    price: 60,
+    imagePlaceholder: "choc-hazelnut",
+    glowColor: "rgba(105, 105, 105, 0.15)",
+    accentColor: "#696969",
+    specs: {
+      fiber: "6g Dietary Fibre per bar",
+      sugar: "9g per bar (date sugars + minimal jaggery)",
+      calories: "approx 210 kcal per 40g bar",
+      benefits: "Polyphenol-rich dark cacao; satisfies the deepest chocolate craving"
+    },
+    ingredients: [
+      "Dates",
+      "Roasted Hazelnuts",
+      "Almond Butter",
+      "Raw Cacao",
+      "70% Dark Chocolate (coating)",
+      "Chicory Fibre",
+      "Flaxseed",
+      "Sea Salt"
+    ],
+    tasteHighlight: "A fudgy date-caramel centre with roasted-hazelnut crunch and the snap of a dark-chocolate shell finished with flaky sea salt.",
+    replaces: "Chocolate-hazelnut bars / Sugary candy bars",
+    brandId: "grit"
   }
 ];

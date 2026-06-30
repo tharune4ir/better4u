@@ -84,7 +84,8 @@ const FrostedBottle = ({
   isDetailed = false,
   showBack = false,
   brandFolder = "1_alive_concept_brand",
-  brandName = "ALIVE"
+  brandName = "ALIVE",
+  onZoom
 }: { 
   flavor: string; 
   glowColor: string; 
@@ -94,6 +95,7 @@ const FrostedBottle = ({
   showBack?: boolean;
   brandFolder?: string;
   brandName?: string;
+  onZoom?: (src: string) => void;
 }) => {
   // Determine dynamic image source paths based on folder structure
   let frontSrc = "";
@@ -123,7 +125,8 @@ const FrostedBottle = ({
     const filenames: Record<string, string> = {
       "kanji": "1.1_kanji.jpeg",
       "strawberry-kefir": "1.2_strawberry-kefir.jpeg",
-      "jamun-lime-kombucha": "1.3_jamun-mine-kombucha.jpeg"
+      "jamun-lime-kombucha": "1.3_jamun-mine-kombucha.jpeg",
+      "coconut-water-kefir": "1.4_coconut-water-kefir.jpeg"
     };
     const file = filenames[imagePlaceholder] || "1.1_kanji.jpeg";
     frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
@@ -136,6 +139,28 @@ const FrostedBottle = ({
       "berry-beet": "1.4_berry-beet.jpeg"
     };
     const file = filenames[imagePlaceholder] || "1.1_green-reset.jpeg";
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
+    backSrc = frontSrc;
+  } else if (brandFolder === "5_steep_concept_brand") {
+    const filenames: Record<string, string> = {
+      "kahwa": "1.1_kahwa.jpeg",
+      "gut-chai": "1.2_gut_chai.jpeg",
+      "golden-turmeric": "1.3_golden_turmeric.jpeg",
+      "filter-kaapi": "1.4_filter_kaapi.jpeg",
+      "cocoa-spice": "1.5_cocoa_spice.jpeg"
+    };
+    const file = filenames[imagePlaceholder] || "1.1_kahwa.jpeg";
+    frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
+    backSrc = frontSrc;
+  } else if (brandFolder === "6_grit_concept_brand") {
+    const filenames: Record<string, string> = {
+      "millet-date": "1.1_millet_date.jpeg",
+      "cacao-nib": "1.2_cacao_nib.jpeg",
+      "seed-spice": "1.3_seed_spice.jpeg",
+      "sattu-bite": "1.4_sattu_bite.jpeg",
+      "choc-hazelnut": "1.5_choc_hazelnut.jpeg"
+    };
+    const file = filenames[imagePlaceholder] || "1.1_millet_date.jpeg";
     frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
     backSrc = frontSrc;
   }
@@ -211,9 +236,10 @@ const FrostedBottle = ({
             animate={{ opacity: 1, scale: 1 }}
             src={imgSrc} 
             onError={handleImageError}
+            onClick={() => onZoom && onZoom(imgSrc)}
             alt={`${brandName} ${flavor}`}
             className={`w-full h-full object-cover rounded-2xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out origin-center pointer-events-auto ${
-              isDetailed && showBack ? "group-hover:scale-[2.8] cursor-zoom-in" : ""
+              onZoom ? "cursor-zoom-in" : (isDetailed && showBack ? "group-hover:scale-[2.8] cursor-zoom-in" : "")
             }`}
           />
         ) : (
@@ -318,6 +344,24 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     heroTagline: "Gut-loaded smoothies",
     heroDescription: "Thick, meal-replacement gut smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round gut nutrition.",
     accentColor: "#9DAE8C"
+  },
+  {
+    id: "steep",
+    name: "STEEP",
+    subName: "STEEP by Trelis",
+    folderName: "5_steep_concept_brand",
+    heroTagline: "Hot gut-friendly brews",
+    heroDescription: "After-meal soothing digestifs. Traditional hot beverages re-engineered to be rich in polyphenols and prebiotic fibers for a warm, gentle digestion finish.",
+    accentColor: "#DAA520"
+  },
+  {
+    id: "grit",
+    name: "GRIT",
+    subName: "GRIT by Trelis",
+    folderName: "6_grit_concept_brand",
+    heroTagline: "Gut bars & bites",
+    heroDescription: "Solid whole-food gut bars combining complex carbohydrates, whole grains, and prebiotics for sustained energy and zero refined sugar.",
+    accentColor: "#CDAA7D"
   }
 ];
 
@@ -330,9 +374,11 @@ export default function ProductLabPage() {
   const [videoSrc, setVideoSrc] = useState(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
 
   useEffect(() => {
-    // Reuse the high-quality loop video from the ALIVE folder to avoid 404 errors,
-    // and apply dynamic brand-color tint overlays in the template layout.
-    setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
+    if (activeBrand.id === "josh") {
+      setVideoSrc(`/all_image_files/product-lab/2_josh_concept_brand/Aluminium_can_opening_slow_motion_202606301659.mp4`);
+    } else {
+      setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
+    }
   }, [activeBrand]);
 
   useEffect(() => {
@@ -367,6 +413,9 @@ export default function ProductLabPage() {
 
   // Selected Product for Specs Modal
   const [selectedProduct, setSelectedProduct] = useState<ProductSKU | null>(null);
+
+  // Zoom state for full-screen 2K image inspection
+  const [zoomedImageSrc, setZoomedImageSrc] = useState<string | null>(null);
 
   // Back view toggle in modal
   const [modalShowBack, setModalShowBack] = useState(false);
@@ -736,6 +785,7 @@ export default function ProductLabPage() {
                           showBack={!!flippedProducts[product.id]}
                           brandFolder={activeBrand.folderName}
                           brandName={activeBrand.name}
+                          onZoom={setZoomedImageSrc}
                         />
                       </div>
 
@@ -904,6 +954,7 @@ export default function ProductLabPage() {
                               imagePlaceholder={slot.imagePlaceholder} 
                               brandFolder={activeBrand.folderName}
                               brandName={activeBrand.name}
+                              onZoom={setZoomedImageSrc}
                             />
                           </div>
 
@@ -1100,6 +1151,7 @@ export default function ProductLabPage() {
                     showBack={modalShowBack}
                     brandFolder={activeBrand.folderName}
                     brandName={activeBrand.name}
+                    onZoom={setZoomedImageSrc}
                   />
                 </div>
 
@@ -1356,6 +1408,41 @@ export default function ProductLabPage() {
             </motion.div>
           </>
         )}
+        </AnimatePresence>
+
+        {/* FULLSCREEN ZOOM IMAGE OVERLAY */}
+        <AnimatePresence>
+          {zoomedImageSrc && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setZoomedImageSrc(null)}
+                className="fixed inset-0 bg-slate-950/95 backdrop-blur-md cursor-zoom-out"
+              />
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                className="relative z-10 w-full max-w-4xl max-h-[90vh] flex items-center justify-center"
+              >
+                <button
+                  onClick={() => setZoomedImageSrc(null)}
+                  className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors flex items-center gap-2 cursor-pointer"
+                >
+                  <span className="text-[10px] uppercase font-bold tracking-widest">Close</span>
+                  <X className="w-5 h-5" />
+                </button>
+                <img 
+                  src={zoomedImageSrc} 
+                  alt="High-fidelity product view"
+                  className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+                />
+              </motion.div>
+            </div>
+          )}
         </AnimatePresence>
 
         {/* FULLSCREEN MOCK PURCHASE SUCCESS OVERLAY */}
