@@ -416,6 +416,7 @@ export default function ProductLabPage() {
 
   // Zoom state for full-screen 2K image inspection
   const [zoomedImageSrc, setZoomedImageSrc] = useState<string | null>(null);
+  const [isPanZoom, setIsPanZoom] = useState(false);
 
   // Back view toggle in modal
   const [modalShowBack, setModalShowBack] = useState(false);
@@ -1413,12 +1414,12 @@ export default function ProductLabPage() {
         {/* FULLSCREEN ZOOM IMAGE OVERLAY */}
         <AnimatePresence>
           {zoomedImageSrc && (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+            <div className={`fixed inset-0 z-[60] flex items-center justify-center ${isPanZoom ? 'overflow-auto items-start justify-start p-0' : 'p-4'}`}>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setZoomedImageSrc(null)}
+                onClick={() => { setZoomedImageSrc(null); setIsPanZoom(false); }}
                 className="fixed inset-0 bg-slate-950/95 backdrop-blur-md cursor-zoom-out"
               />
               <motion.div
@@ -1426,19 +1427,22 @@ export default function ProductLabPage() {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 10 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="relative z-10 w-full max-w-4xl max-h-[90vh] flex items-center justify-center"
+                className={`relative z-10 w-full flex items-center justify-center ${isPanZoom ? 'min-h-[150vh] min-w-[150vw]' : 'max-w-4xl max-h-[90vh]'}`}
               >
-                <button
-                  onClick={() => setZoomedImageSrc(null)}
-                  className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors flex items-center gap-2 cursor-pointer"
-                >
-                  <span className="text-[10px] uppercase font-bold tracking-widest">Close</span>
-                  <X className="w-5 h-5" />
-                </button>
+                {!isPanZoom && (
+                  <button
+                    onClick={() => { setZoomedImageSrc(null); setIsPanZoom(false); }}
+                    className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <span className="text-[10px] uppercase font-bold tracking-widest">Close</span>
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
                 <img 
                   src={zoomedImageSrc} 
                   alt="High-fidelity product view"
-                  className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+                  onClick={() => setIsPanZoom(!isPanZoom)}
+                  className={`${isPanZoom ? 'w-[150vw] h-auto max-w-none object-cover cursor-zoom-out' : 'w-auto h-auto max-w-full max-h-[85vh] object-contain cursor-zoom-in rounded-2xl shadow-2xl'} transition-all duration-300 select-none`}
                 />
               </motion.div>
             </div>
