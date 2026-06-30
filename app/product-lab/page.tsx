@@ -568,34 +568,6 @@ export default function ProductLabPage() {
         
         <Navbar activeTab="product-lab" setActiveTab={handleTabChange} />
 
-      {/* Sticky Brand Selector for easy navigation while scrolling */}
-      <div className="sticky top-[64px] md:top-[80px] z-30 w-full bg-[#F7F6F2]/90 backdrop-blur-md border-b border-black/[0.03] py-3 flex items-center justify-center shadow-xs">
-        <div className="flex items-center justify-center gap-2 px-4 overflow-x-auto no-scrollbar max-w-full w-max">
-          {CONCEPT_BRANDS.map(brand => {
-            const isActive = activeBrand.id === brand.id;
-            return (
-              <button
-                key={brand.id}
-                onClick={() => {
-                  setActiveBrand(brand);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                style={{
-                  backgroundColor: isActive ? brand.accentColor : "transparent",
-                  color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.6)",
-                  border: isActive ? 'none' : '1px solid rgba(0,0,0,0.05)',
-                }}
-                className={`flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
-                  isActive ? "shadow-md scale-[1.02]" : "hover:bg-slate-900/5 hover:text-slate-900 hover:border-black/10"
-                }`}
-              >
-                {brand.name}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
         <main className="flex-grow">
 
         {/* ==================== ACT 1: THE REVELATION (Cinematic Hero) ==================== */}
@@ -626,7 +598,27 @@ export default function ProductLabPage() {
           <CarbonationBubbles color={`${activeBrand.accentColor}20`} />
           
           <div className="max-w-3xl space-y-8 relative z-10">
-            {/* Brand Title Animation */}
+            {/* Concept Brand Selector Capsular Menu */}
+            <div className="flex items-center justify-center gap-1.5 p-1 bg-white/40 backdrop-blur-md border border-black/[0.04] rounded-full max-w-md mx-auto shadow-3xs select-none mb-6">
+              {CONCEPT_BRANDS.map(brand => {
+                const isActive = activeBrand.id === brand.id;
+                return (
+                  <button
+                    key={brand.id}
+                    onClick={() => setActiveBrand(brand)}
+                    style={{
+                      backgroundColor: isActive ? brand.accentColor : "transparent",
+                      color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.7)",
+                    }}
+                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                      isActive ? "shadow-2xs scale-105" : "hover:bg-slate-900/5 hover:text-slate-900"
+                    }`}
+                  >
+                    {brand.name}
+                  </button>
+                );
+              })}
+            </div>
 
             <motion.span 
               key={`sub-${activeBrand.id}`}
@@ -828,10 +820,10 @@ export default function ProductLabPage() {
                       </div>
 
                       {/* Interactive Buttons */}
-                      <div className="pt-4 flex items-center justify-center md:justify-start gap-4">
+                      <div className="pt-4 flex flex-col md:flex-row items-center justify-center md:justify-start gap-3">
                         <button
                           onClick={() => addToCart(product)}
-                          className="px-6 py-2.5 text-white rounded-full text-[10px] font-bold tracking-widest uppercase transition-all shadow-md hover:shadow-lg hover:scale-[1.02] cursor-pointer flex items-center gap-2"
+                          className="px-6 py-2.5 text-white rounded-full text-[10px] font-bold tracking-widest uppercase transition-all shadow-md hover:shadow-lg hover:scale-[1.02] cursor-pointer flex items-center gap-2 w-full md:w-auto justify-center"
                           style={{ backgroundColor: activeBrand.accentColor }}
                         >
                           <ShoppingBag className="w-3.5 h-3.5" />
@@ -840,10 +832,10 @@ export default function ProductLabPage() {
                         
                         <button
                           onClick={() => setSelectedProduct(product)}
-                          className="px-5 py-2.5 bg-white/60 border border-black/[0.04] text-slate-700 hover:bg-white hover:shadow-sm rounded-full text-[10px] font-bold tracking-widest uppercase transition-all cursor-pointer flex items-center gap-2"
+                          className="px-5 py-2.5 bg-slate-900/5 text-slate-700 hover:bg-slate-900/10 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all cursor-pointer flex items-center gap-2 w-full md:w-auto justify-center"
                         >
+                          <Info className="w-3.5 h-3.5" />
                           <span>Ingredients</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
@@ -933,6 +925,30 @@ export default function ProductLabPage() {
         </section>
 
       </main>
+
+      {/* Floating Brand Dock for easy scrolling navigation */}
+      <div className="fixed bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[60] w-max max-w-[90vw] pointer-events-none">
+        <div className="flex items-center justify-center gap-1.5 p-1.5 bg-slate-950/85 backdrop-blur-md border border-white/10 rounded-full shadow-2xl overflow-x-auto no-scrollbar pointer-events-auto">
+          {CONCEPT_BRANDS.map(brand => {
+            const isActive = activeBrand.id === brand.id;
+            return (
+              <button
+                key={brand.id}
+                onClick={() => {
+                  setActiveBrand(brand);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                  isActive ? "bg-white text-black shadow-md scale-[1.02]" : "text-white/60 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                {isActive && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: brand.accentColor }} />}
+                {brand.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
       {/* APPLE-STYLE INGREDIENTS SPEC SHEET OVERLAY */}
       <AnimatePresence>
