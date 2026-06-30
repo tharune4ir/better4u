@@ -51,7 +51,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Active Probiotics"
     ],
     tasteHighlight: "Bright, zesty citrus notes upfront with an earthy, warm cumin finish. Perfectly carbonated for a refreshing post-meal palette cleanser.",
-    replaces: "Nimbu Soda / Fresh Lime Soda",
+    replaces: "nimbu/goli soda & sweet colas",
     brandId: "alive"
   },
   {
@@ -80,7 +80,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Active Probiotics"
     ],
     tasteHighlight: "Fiery ginger spice that hits the back of the throat, balanced by clean carbonation and a refreshing citrus lift.",
-    replaces: "Goli Soda / Ginger Beer",
+    replaces: "nimbu/goli soda & sweet colas",
     brandId: "alive"
   },
   {
@@ -112,7 +112,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Active Probiotics"
     ],
     tasteHighlight: "Intensely savory, cooling mint aroma, followed by a tangy cumin and peppery pop. Designed to be enjoyed chilled right after a heavy lunch.",
-    replaces: "Masala Soda / Jaljeera",
+    replaces: "nimbu/goli soda & sweet colas",
     brandId: "alive"
   },
   {
@@ -141,7 +141,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Active Probiotics"
     ],
     tasteHighlight: "A juicy jamun flavor with a sophisticated, slightly astringent berry finish that leaves you craving the next sip.",
-    replaces: "Sugary Colas / Sweet Berry Sodas",
+    replaces: "nimbu/goli soda & sweet colas",
     brandId: "alive"
   },
 
@@ -174,7 +174,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Stevia Extract"
     ],
     tasteHighlight: "Tangy blackcurrant-meets-jamun with a salty-spiced edge, finished with a clean, lively fizz.",
-    replaces: "Kala-Khatta Gola / Dark Fruity Colas",
+    replaces: "cola, kala-khatta gola, orange/rose pops",
     brandId: "josh"
   },
   {
@@ -205,7 +205,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Lemon Juice"
     ],
     tasteHighlight: "Dark caramel cola spine lifted with warm Indian spices; deep, earthy, and satisfyingly low in sugar.",
-    replaces: "Mass-market Cola / Sweet Carbonated Colas",
+    replaces: "cola, kala-khatta gola, orange/rose pops",
     brandId: "josh"
   },
   {
@@ -234,7 +234,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Beet Juice (for color)"
     ],
     tasteHighlight: "Delicate Kashmiri rose with a hint of warm cardamom over bright carbonation; floral, soft, and fragrant.",
-    replaces: "Rose Sodas / Rooh-Afza-coded Drinks",
+    replaces: "cola, kala-khatta gola, orange/rose pops",
     brandId: "josh"
   },
   {
@@ -263,7 +263,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Beta-Carotene (for color)"
     ],
     tasteHighlight: "Bright Nagpur-orange zest with a gentle bitter-peel lift and a crisp, clean fizz.",
-    replaces: "Orange Sodas / Gold-Spot Nostalgia",
+    replaces: "cola, kala-khatta gola, orange/rose pops",
     brandId: "josh"
   },
 
@@ -294,7 +294,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Natural Cultures"
     ],
     tasteHighlight: "Tangy, earthy, mustard-bright fermented black-carrot & beet; brisk, savory, and bracingly probiotic.",
-    replaces: "Sugary Tonics / Store Kombucha",
+    replaces: "sugary tonics, store kombucha, lassi",
     brandId: "batch"
   },
   {
@@ -323,7 +323,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Bifidobacterium bifidum"
     ],
     tasteHighlight: "Creamy, lightly tart kefir with ripe strawberry; soft blush-pink, refreshing, and alive.",
-    replaces: "Sugary Yogurt Drinks / Lassi / Buttermilks",
+    replaces: "sugary tonics, store kombucha, lassi",
     brandId: "batch"
   },
   {
@@ -351,7 +351,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "SCOBY Culture"
     ],
     tasteHighlight: "Lively, lightly tart jamun-and-lime; gently sparkling, dry, and sophisticated.",
-    replaces: "Imported Kombucha / Hard Seltzer",
+    replaces: "sugary tonics, store kombucha, lassi",
     brandId: "batch"
   },
 
@@ -383,7 +383,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Cultured Probiotic Yogurt Base"
     ],
     tasteHighlight: "Thick, matte, opaque vivid green whole-food smoothie with a thin scatter of crunchy chia seeds at the top.",
-    replaces: "Cold-Pressed Green Juice / Skipped Breakfasts",
+    replaces: "green juice, mango shakes, skipped breakfasts",
     brandId: "pulp"
   },
   {
@@ -413,7 +413,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Cacao Nibs"
     ],
     tasteHighlight: "Thick, matte, opaque rich cacao-brown whole-food smoothie with a few cacao nibs scattered on top.",
-    replaces: "Sugary Chocolate Shakes / Heavy Desserts",
+    replaces: "green juice, mango shakes, skipped breakfasts",
     brandId: "pulp"
   },
   {
@@ -442,7 +442,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Cultured Yogurt Ferment Base"
     ],
     tasteHighlight: "Silky tropical papaya with a bright lime lift; naturally sweet, soft golden-orange, and smooth.",
-    replaces: "Seasonal Mango Shakes / Sugary Fruit Cups",
+    replaces: "green juice, mango shakes, skipped breakfasts",
     brandId: "pulp"
   },
   {
@@ -471,7 +471,7 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
       "Probiotic Curd Culture"
     ],
     tasteHighlight: "Berry-sweet over an earthy beet base; rich crimson, lightly tart, satisfying.",
-    replaces: "Sugary Berry Smoothies / Artificial Energy Drinks",
+    replaces: "green juice, mango shakes, skipped breakfasts",
     brandId: "pulp"
   }
 ];

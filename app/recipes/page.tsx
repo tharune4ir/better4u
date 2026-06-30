@@ -571,7 +571,7 @@ export default function RecipesPage() {
       {/* Header */}
       <header className="sticky top-0 z-45 w-full h-20 border-b border-black/[0.03] bg-[#F7F6F2]/75 backdrop-blur-md flex items-center justify-between px-6 md:px-12 select-none">
         <button 
-          onClick={() => router.push("/food")}
+          onClick={() => router.push("/approach")}
           className="flex items-center gap-2 text-sm font-semibold text-[#2A7F7F] hover:opacity-80 transition-all cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />

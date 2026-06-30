@@ -72,7 +72,7 @@ const PANTRY_STAPLES = [
 
 export default function FoodPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<NavTab>("food");
+  const [activeTab, setActiveTab] = useState<NavTab>("approach");
   
   // Sheet States
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
@@ -129,8 +129,10 @@ export default function FoodPage() {
     setActiveTab(tab);
     if (tab === "product-lab") {
       router.push("/product-lab");
-    } else if (tab === "food") {
-      router.push("/food");
+    } else if (tab === "approach") {
+      router.push("/approach");
+    } else if (tab === "journal") {
+      router.push("/journal");
     }
   };
 
@@ -202,7 +204,7 @@ export default function FoodPage() {
       </motion.div>
 
       {/* Sticky Header */}
-      <Navbar activeTab="food" setActiveTab={handleTabChange} />
+      <Navbar activeTab="approach" setActiveTab={handleTabChange} />
 
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-16 z-10 relative">
         

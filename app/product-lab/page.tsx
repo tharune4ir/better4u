@@ -75,7 +75,7 @@ const CarbonationBubbles = ({ color }: { color: string }) => {
   );
 };
 
-// 2. High-fidelity dynamic glassmorphic bottle renderer
+// 2. High-quality dynamic glassmorphic bottle renderer
 const FrostedBottle = ({ 
   flavor, 
   glowColor, 
@@ -288,7 +288,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "ALIVE",
     subName: "ALIVE by Trelis",
     folderName: "1_alive_concept_brand",
-    heroTagline: "A new state of living carbonation",
+    heroTagline: "The classics, re-fermented",
     heroDescription: "We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active gut cultures inside premium frosted glass.",
     accentColor: "#2A7F7F"
   },
@@ -297,7 +297,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "JOSH",
     subName: "JOSH by Trelis",
     folderName: "2_josh_concept_brand",
-    heroTagline: "Prebiotic soda, full of life.",
+    heroTagline: "Nostalgia, with prebiotics",
     heroDescription: "Shelf-stable prebiotic plant fiber in a sleek can, built to scale. Flavors sit in Indian-nostalgia soft-drink territory, offering 7g of prebiotic fiber to fuel your microbiome.",
     accentColor: "#8E7C96"
   },
@@ -306,7 +306,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "BATCH",
     subName: "BATCH by Trelis",
     folderName: "3_batch_concept brand",
-    heroTagline: "Live ferments, made fresh daily.",
+    heroTagline: "Fresh ferments, made daily",
     heroDescription: "Fresh, short-shelf-life elixirs made on-site and served in clear grab-and-go cups. Cloudy, active, and containing up to 5 billion live cultures across diverse probiotic strains.",
     accentColor: "#A07E8C"
   },
@@ -315,7 +315,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "PULP",
     subName: "PULP by Trelis",
     folderName: "4_pulp_concept_brand",
-    heroTagline: "Whole food, blended for your gut.",
+    heroTagline: "Gut-loaded smoothies",
     heroDescription: "Thick, meal-replacement gut smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round gut nutrition.",
     accentColor: "#9DAE8C"
   }
@@ -410,7 +410,7 @@ export default function ProductLabPage() {
 
   // Load cart and box configuration on mount
   useEffect(() => {
-    console.log("[ProductLabPage] Component mounted. Initializing video playback...");
+    console.log("[ProductLabPage] Component mounted. Setting up video playback...");
     const savedCart = localStorage.getItem("trelis_lab_cart");
     if (savedCart) {
       try {
@@ -539,10 +539,12 @@ export default function ProductLabPage() {
   const cartItemsCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleTabChange = (tab: NavTab) => {
-    if (tab === "food") {
-      router.push("/food");
+    if (tab === "approach") {
+      router.push("/approach");
     } else if (tab === "product-lab") {
       router.push("/product-lab");
+    } else if (tab === "journal") {
+      router.push("/journal");
     }
   };
 
@@ -701,12 +703,12 @@ export default function ProductLabPage() {
           
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center space-y-3 mb-16">
-              <span className="text-[10px] tracking-[0.2em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>The Founding Range</span>
+              <span className="text-[10px] tracking-[0.2em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>SMALL-BATCH RANGE</span>
               <h2 className="text-3xl font-extralight text-slate-900 tracking-tight">
-                {MOCK_PRODUCTS.filter(p => p.brandId === activeBrand.id).length === 3 ? "Three" : "Four"} simple, <span className="font-semibold text-slate-950">sophisticated profiles</span>
+                Four little brands. One idea: <span className="font-semibold text-slate-950">make the drinks you love, better for your gut.</span>
               </h2>
               <p className="text-xs text-slate-500 font-light max-w-md mx-auto leading-relaxed">
-                Replacing the carbonated drinks you already reach for, designed with real, local ingredients and live digestive cultures.
+                Small-batch sodas, fresh ferments, and smoothies — made to replace the unhealthy defaults.
               </p>
             </div>
             
@@ -1132,7 +1134,7 @@ export default function ProductLabPage() {
                 <div className="space-y-6">
                   <div>
                     <span className="text-[9px] tracking-widest font-bold uppercase select-none" style={{ color: activeBrand.accentColor }}>
-                      PRODUCT LEDGER
+                      PRODUCT DETAILS
                     </span>
                     <h2 className="text-2xl font-extralight text-slate-900 mt-1">
                       {selectedProduct.brandId?.toUpperCase() || "ALIVE"} <span className="font-semibold text-slate-950">{selectedProduct.name}</span>
@@ -1347,7 +1349,7 @@ export default function ProductLabPage() {
                     style={{ backgroundColor: activeBrand.accentColor }}
                     className="w-full py-3 text-white text-xs font-bold uppercase tracking-widest rounded-full hover:brightness-95 transition-all cursor-pointer text-center shadow-xs hover:scale-[1.01] active:scale-99"
                   >
-                    Place Mock Order
+                    Checkout
                   </button>
                 </div>
               )}
@@ -1389,18 +1391,18 @@ export default function ProductLabPage() {
 
                 {/* Success Messages */}
                 <div className="space-y-2">
-                  <span className="text-[10px] tracking-[0.25em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>Mock Purchase Successful</span>
+                  <span className="text-[10px] tracking-[0.25em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>Order Confirmed</span>
                   <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">
-                    Fermenting Your Crate
+                    Preparing Your Order
                   </h2>
                   <p className="text-xs text-slate-500 font-light leading-relaxed px-2">
-                    Your customized {activeBrand.name} probiotic soda pack has been locked in. We will prepare your batch and ship it within 24 hours.
+                    Your order of {activeBrand.name} has been confirmed. We will prepare your batch and ship it within 24 hours.
                   </p>
                 </div>
 
                 {/* Summary of ordered items */}
                 <div className="bg-[#F7F6F2]/60 border border-black/[0.02] rounded-2xl p-4 text-left space-y-2 max-h-48 overflow-y-auto shadow-2xs">
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Crate Manifest</span>
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Order Summary</span>
                   {orderedItems.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center text-[11px] border-b border-black/[0.02] pb-1.5 last:border-b-0 last:pb-0">
                       <span className="text-slate-800 font-medium">

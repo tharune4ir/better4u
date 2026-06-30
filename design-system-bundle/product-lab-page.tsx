@@ -383,10 +383,12 @@ export default function ProductLabPage() {
   const cartItemsCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleTabChange = (tab: NavTab) => {
-    if (tab === "food") {
-      router.push("/food");
+    if (tab === "approach") {
+      router.push("/approach");
     } else if (tab === "product-lab") {
       router.push("/product-lab");
+    } else if (tab === "journal") {
+      router.push("/journal");
     }
   };
 

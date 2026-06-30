@@ -6,10 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { 
   Apple, 
-  Sparkle
+  Sparkle,
+  BookOpen
 } from "lucide-react";
 
-export type NavTab = "food" | "product-lab";
+export type NavTab = "approach" | "product-lab" | "journal";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -37,8 +38,9 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { id: "food" as NavTab, label: "Food Wing", sub: "Cook", icon: Apple },
-    { id: "product-lab" as NavTab, label: "Product Lab", sub: "Concept SKUs", icon: Sparkle },
+    { id: "approach" as NavTab, label: "The Approach", sub: "", icon: Apple },
+    { id: "product-lab" as NavTab, label: "Product Lab", sub: "THE RANGE", icon: Sparkle },
+    { id: "journal" as NavTab, label: "Journal", sub: "Coming Soon", icon: BookOpen },
   ];
 
   return (

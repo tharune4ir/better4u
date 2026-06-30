@@ -7,24 +7,18 @@ import Image from "next/image";
 import { 
   Sparkle, 
   ArrowRight, 
-  Leaf, 
-  Flame, 
-  Layers, 
   ArrowDown, 
-  Check, 
-  Activity, 
-  Plus, 
-  ShieldCheck, 
-  HelpCircle,
-  Volume2,
-  ChevronDown
+  ChevronDown,
+  Droplets,
+  HeartPulse,
+  HeartHandshake,
+  Search,
+  Layers
 } from "lucide-react";
 
 export default function LandingHub() {
   const router = useRouter();
-  const [time, setTime] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [hoveredPhilosophy, setHoveredPhilosophy] = useState<"taste" | "science" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Check prefers-reduced-motion
@@ -34,23 +28,6 @@ export default function LandingHub() {
     const listener = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mediaQuery.addEventListener("change", listener);
     return () => mediaQuery.removeEventListener("change", listener);
-  }, []);
-
-  // System Time Clock
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        })
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
   }, []);
 
   // Scroll Progress Tracking
@@ -101,10 +78,10 @@ export default function LandingHub() {
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-3.5">
             <button 
-              onClick={() => router.push("/food")}
+              onClick={() => router.push("/approach")}
               className="px-5 py-2.5 bg-white/40 hover:bg-[#2A7F7F]/10 backdrop-blur-md border border-[#2A7F7F]/15 text-[#2A7F7F] hover:text-[#1e5c5c] rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-[0_2px_12px_rgba(42,127,127,0.01)] hover:shadow-[0_4px_20px_rgba(42,127,127,0.08)] hover:scale-[1.02]"
             >
-              <span>Food Wing</span>
+              <span>The Approach</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
             <button 
@@ -147,11 +124,11 @@ export default function LandingHub() {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  router.push("/food");
+                  router.push("/approach");
                 }}
                 className="w-full py-3 bg-white/60 border border-[#2A7F7F]/20 text-[#2A7F7F] rounded-full text-center text-xs font-semibold tracking-wider uppercase cursor-pointer"
               >
-                Food Wing
+                The Approach
               </button>
               <button
                 onClick={() => {
@@ -167,14 +144,14 @@ export default function LandingHub() {
         </AnimatePresence>
       </header>
 
-      {/* ==================== ACT 1: THE HOOK (HERO) ==================== */}
+      {/* ==================== 1. HERO ==================== */}
       <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 pt-20 overflow-hidden">
         
         {/* Soft Blurry Gradient Blobs */}
         <div className="absolute top-[25%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[20%] right-[-10%] w-[45vw] h-[45vw] bg-[#2A7F7F]/[0.04] rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Elegant Botanical Background SVG (Act 1 Graphic) */}
+        {/* Elegant Botanical Background SVG */}
         <motion.div
           style={reducedMotion ? {} : { scale: scaleHeroGraphic }}
           className="absolute right-[5%] bottom-[10%] w-[320px] h-[320px] md:w-[480px] md:h-[480px] opacity-10 md:opacity-[0.14] pointer-events-none z-0"
@@ -201,35 +178,32 @@ export default function LandingHub() {
           className="text-center max-w-4xl space-y-8 z-10 flex flex-col items-center"
         >
           <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block">
-            Trelis Life Hub
+            BUILT IN THE OPEN
           </span>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-slate-900 leading-[1.15] px-2 max-w-3xl">
-            It starts in the gut. <br />
-            And the gut is fixed at the <span className="font-semibold text-slate-950 italic">table</span>.
+            Gut-health that actually <span className="font-semibold text-slate-950 italic">tastes good</span>.
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-xl leading-relaxed">
-            Rebuilding microbiome diversity through a taste-first, prebiotic-rich whole food engine. Simplicity over clinical posture.
+            Trelis makes better-for-you versions of the drinks people reach for every day — familiar flavours, real fermentation, a lot less sugar.
           </p>
 
-          {/* Accent breathing ring */}
-          <motion.div 
-            animate={reducedMotion ? {} : {
-              scale: [1, 1.06, 1],
-              borderColor: ["rgba(42,127,127,0.15)", "rgba(42,127,127,0.35)", "rgba(42,127,127,0.15)"],
-              transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="w-16 h-16 rounded-full border border-[#2A7F7F]/20 flex items-center justify-center mt-6"
-          >
-            <motion.div 
-              animate={reducedMotion ? {} : {
-                scale: [1, 0.85, 1],
-                transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="w-2.5 h-2.5 rounded-full bg-[#2A7F7F]"
-            />
-          </motion.div>
+          <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+            <button 
+              onClick={() => router.push("/product-lab")}
+              className="px-8 py-3.5 bg-[#2A7F7F] hover:bg-[#1e5c5c] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-[0_4px_14px_rgba(42,127,127,0.3)] hover:shadow-[0_6px_20px_rgba(42,127,127,0.4)] hover:scale-[1.02]"
+            >
+              <span>See the drinks</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={() => router.push("/approach")}
+              className="px-8 py-3.5 bg-white/60 hover:bg-white text-slate-800 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 border border-slate-200 shadow-sm hover:shadow-md cursor-pointer"
+            >
+              <span>Why we exist</span>
+            </button>
+          </div>
 
           <div className="absolute bottom-10 flex flex-col items-center gap-1.5 opacity-60">
             <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Scroll to Discover</span>
@@ -239,382 +213,179 @@ export default function LandingHub() {
         </motion.div>
       </section>
 
-      {/* ==================== ACT 2: THE PROBLEM (MICROBIOME THEME) ==================== */}
-      <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 py-20 bg-white/40 border-y border-black/[0.01]">
-        
-        {/* Animated Microbiome Floating Bubbles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          <motion.div 
-            animate={reducedMotion ? {} : {
-              y: [0, -30, 0],
-              x: [0, 15, 0],
-              transition: { duration: 12, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="absolute top-1/4 left-[15%] w-16 h-16 rounded-full bg-emerald-500/[0.04] border border-emerald-500/10 flex items-center justify-center"
-          >
-            <div className="w-8 h-8 rounded-full bg-emerald-500/5" />
-          </motion.div>
-
-          <motion.div 
-            animate={reducedMotion ? {} : {
-              y: [0, 45, 0],
-              x: [0, -25, 0],
-              transition: { duration: 15, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="absolute bottom-1/4 right-[10%] w-24 h-24 rounded-full bg-[#2A7F7F]/[0.03] border border-[#2A7F7F]/10 flex items-center justify-center"
-          >
-            <div className="w-12 h-12 rounded-full bg-[#2A7F7F]/5" />
-          </motion.div>
-        </div>
-
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10 relative">
-          
-          <div className="space-y-6">
-            <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase block">
-              The Reality
-            </span>
-            <h2 className="text-3xl font-light tracking-tight text-slate-900 leading-tight">
-              Modern diet quietly <span className="font-semibold text-slate-950">erodes</span> our inner ecosystem.
-            </h2>
-            <p className="text-sm text-slate-500 font-light leading-relaxed">
-              Ultra-processed food structures, emulsifiers, and monoculture diets leave the microbiome starved. Science links this internal depletion directly to chronic energy declines, sleep issues, and low digestive resilience.
-            </p>
-            <p className="text-xs text-slate-400 font-light italic border-l border-slate-200 pl-4 mt-4">
-              "We have sacrificed biological complexity for commercial convenience."
-            </p>
-          </div>
-
-          {/* Staggered statistics with circular radial progress bars */}
-          <div className="space-y-6 bg-[#F7F6F2]/60 border border-black/[0.02] rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
-            
-            {/* Stat 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7 }}
-              className="flex items-center gap-5 pb-5 border-b border-black/[0.02]"
-            >
-              <div className="relative w-14 h-14 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
-                  <circle cx="28" cy="28" r="24" className="stroke-slate-200 fill-none" strokeWidth="3" />
-                  <motion.circle 
-                    cx="28" cy="28" r="24" 
-                    className="stroke-[#2A7F7F] fill-none" 
-                    strokeWidth="3.5" 
-                    strokeDasharray="150"
-                    initial={{ strokeDashoffset: 150 }}
-                    whileInView={{ strokeDashoffset: 150 - (150 * 0.70) }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-slate-700">70%</div>
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">Immune System Defense</h4>
-                <p className="text-[11px] text-slate-500 font-light mt-0.5">resides directly within the lining of the gut wall.</p>
-              </div>
-            </motion.div>
-
-            {/* Stat 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="flex items-center gap-5 pb-5 border-b border-black/[0.02]"
-            >
-              <div className="relative w-14 h-14 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
-                  <circle cx="28" cy="28" r="24" className="stroke-slate-200 fill-none" strokeWidth="3" />
-                  <motion.circle 
-                    cx="28" cy="28" r="24" 
-                    className="stroke-amber-500 fill-none" 
-                    strokeWidth="3.5" 
-                    strokeDasharray="150"
-                    initial={{ strokeDashoffset: 150 }}
-                    whileInView={{ strokeDashoffset: 150 - (150 * 0.90) }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-slate-700">90%</div>
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">Serotonin Synthesis</h4>
-                <p className="text-[11px] text-slate-500 font-light mt-0.5">of the body's serotonin is manufactured by gut microbes.</p>
-              </div>
-            </motion.div>
-
-            {/* Stat 3 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex items-center gap-5"
-            >
-              <div className="relative w-14 h-14 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
-                  <circle cx="28" cy="28" r="24" className="stroke-slate-200 fill-none" strokeWidth="3" />
-                  <motion.circle 
-                    cx="28" cy="28" r="24" 
-                    className="stroke-emerald-600 fill-none" 
-                    strokeWidth="3.5" 
-                    strokeDasharray="150"
-                    initial={{ strokeDashoffset: 150 }}
-                    whileInView={{ strokeDashoffset: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-slate-700">30+</div>
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">Plant Diversity Sweet Spot</h4>
-                <p className="text-[11px] text-slate-500 font-light mt-0.5">different plant species per week yields max microbiome diversity.</p>
-              </div>
-            </motion.div>
-
-          </div>
-
+      {/* ==================== 2. THE PROBLEM ==================== */}
+      <section className="relative w-full flex flex-col justify-center items-center px-6 py-24 bg-white/40 border-y border-black/[0.01]">
+        <div className="max-w-3xl mx-auto text-center space-y-8 z-10">
+          <HeartPulse className="w-8 h-8 text-[#2A7F7F] mx-auto opacity-80" />
+          <h2 className="text-3xl md:text-4xl font-light text-slate-900 tracking-tight leading-snug">
+            A sugary soda or shake follows almost every meal in our cities.
+          </h2>
+          <p className="text-base md:text-lg text-slate-500 font-light leading-relaxed max-w-2xl mx-auto">
+            It's the default and it harms the gut. Wellness answered with joyless powders and rules nobody keeps.
+          </p>
         </div>
       </section>
 
-      {/* ==================== ACT 3: THE INSIGHT (INTERACTIVE SLIDER) ==================== */}
-      <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 py-20 overflow-hidden">
-        
-        {/* Interactive Convergence Venn Overlay Background */}
-        <div className="absolute w-[400px] h-[400px] pointer-events-none opacity-[0.03] md:opacity-[0.06] z-0">
-          <svg viewBox="0 0 200 200" className="w-full h-full">
-            <circle cx="75" cy="100" r="60" fill="#2A7F7F" />
-            <circle cx="125" cy="100" r="60" fill="#F59E0B" />
-          </svg>
-        </div>
-
-        <div className="max-w-4xl w-full text-center space-y-10 z-10 relative">
+      {/* ==================== 3. THE INSIGHT ==================== */}
+      <section className="relative w-full flex flex-col justify-center items-center px-6 py-24 z-10">
+        <div className="max-w-4xl mx-auto bg-white/60 glassmorphic rounded-[2.5rem] p-8 md:p-16 border border-black/[0.03] shadow-[0_8px_40px_rgba(0,0,0,0.02)] text-center space-y-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#2A7F7F]/5 rounded-full blur-[80px] pointer-events-none" />
           
-          <div className="space-y-4">
-            <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase">
-              The Shift
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-slate-900 leading-tight">
-              No willpower. No dry cardboard bowls. <br />
-              Just <span className="font-semibold text-slate-950">crave-worthy</span> food that serves you.
-            </h2>
-            <p className="text-xs text-slate-500 font-light max-w-lg mx-auto">
-              Hover over each pillar below to see how our design philosophy brings them together.
-            </p>
-          </div>
-
-          {/* Interactive Split cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
-            
-            {/* Taste pillar */}
-            <motion.div 
-              onMouseEnter={() => setHoveredPhilosophy("taste")}
-              onMouseLeave={() => setHoveredPhilosophy(null)}
-              animate={{
-                scale: hoveredPhilosophy === "taste" ? 1.02 : hoveredPhilosophy === "science" ? 0.98 : 1,
-                borderColor: hoveredPhilosophy === "taste" ? "rgba(245,158,11,0.3)" : "rgba(0,0,0,0.02)",
-                opacity: hoveredPhilosophy === "science" ? 0.6 : 1,
-              }}
-              className="bg-white/40 border border-black/[0.02] rounded-3xl p-8 flex flex-col justify-between items-center text-center transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Flame background glow */}
-              {hoveredPhilosophy === "taste" && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 bg-amber-500/[0.02] pointer-events-none"
-                />
-              )}
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/5 flex items-center justify-center border border-amber-500/10 mb-4 transition-transform duration-500 group-hover:rotate-6">
-                <Flame className="w-6 h-6 text-amber-600 animate-pulse" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest">
-                  Taste-First Indulgence
-                </h4>
-                <p className="text-xs text-slate-500 font-light mt-3 leading-relaxed">
-                  Wild black-carrot tonics, warm spiced khichdi with pure cow ghee, and crisp buttermilk. Ferments and whole grains optimized for maximum sensory pleasure first.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Science pillar */}
-            <motion.div 
-              onMouseEnter={() => setHoveredPhilosophy("science")}
-              onMouseLeave={() => setHoveredPhilosophy(null)}
-              animate={{
-                scale: hoveredPhilosophy === "science" ? 1.02 : hoveredPhilosophy === "taste" ? 0.98 : 1,
-                borderColor: hoveredPhilosophy === "science" ? "rgba(42,127,127,0.3)" : "rgba(0,0,0,0.02)",
-                opacity: hoveredPhilosophy === "taste" ? 0.6 : 1,
-              }}
-              className="bg-white/40 border border-black/[0.02] rounded-3xl p-8 flex flex-col justify-between items-center text-center transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Leaf background glow */}
-              {hoveredPhilosophy === "science" && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 bg-[#2A7F7F]/[0.02] pointer-events-none"
-                />
-              )}
-              <div className="w-12 h-12 rounded-2xl bg-[#2A7F7F]/5 flex items-center justify-center border border-[#2A7F7F]/10 mb-4">
-                <Leaf className="w-6 h-6 text-[#2A7F7F]" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest">
-                  Scientific Rigor
-                </h4>
-                <p className="text-xs text-slate-500 font-light mt-3 leading-relaxed">
-                  Engineered around the modern gut protocol: 30+ weekly botanical species, polyphenol density, and prebiotic fiber variety to nurture a resilient ecosystem.
-                </p>
-              </div>
-            </motion.div>
-
-          </div>
-
-          <div className="pt-4 text-slate-400 text-xs font-light italic">
-            "We believe nourishment is not a test of endurance, but an art of flavor."
-          </div>
-
+          <Search className="w-8 h-8 text-[#2A7F7F] mx-auto" />
+          <h2 className="text-2xl md:text-3xl font-medium text-slate-900 tracking-tight leading-snug">
+            We didn't make another health drink — <br className="hidden md:block" />
+            we remade the drinks you already love, better.
+          </h2>
+          <p className="text-base md:text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+            Taste is how you get people to actually do the healthy thing.
+          </p>
         </div>
       </section>
 
-      {/* ==================== ACT 4: THE METHOD (INTERACTIVE GRID) ==================== */}
-      <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 py-20 bg-white/20 border-t border-black/[0.01]">
-        
-        <div className="max-w-4xl w-full space-y-12">
-          
-          <div className="text-center md:text-left space-y-2">
-            <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase">
-              The Method
-            </span>
-            <h2 className="text-3xl font-light tracking-tight text-slate-900">
-              The Trelis Food <span className="font-semibold text-slate-950">Engine</span>
+      {/* ==================== 4. THE UNIVERSE (Investor Money Slide) ==================== */}
+      <section className="relative w-full px-6 py-24 bg-white/30 border-y border-black/[0.02]">
+        <div className="max-w-5xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <span className="text-xs font-bold tracking-widest text-[#2A7F7F] uppercase">The Universe</span>
+            <h2 className="text-3xl md:text-4xl font-light text-slate-900 tracking-tight">
+              House of Trelis
             </h2>
-            <p className="text-xs text-slate-500 font-light max-w-md">
-              A comprehensive system of checklists, live logs, recipes, and foundations to make dietary diversity effortless.
+            <p className="text-base text-slate-500 font-light max-w-xl mx-auto">
+              Every time you'd reach for the unhealthy default, Trelis has the better-tasting version.
             </p>
           </div>
 
-          {/* Graphic representations inside cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            {/* Card: Plants */}
+            {/* ALIVE */}
             <motion.div 
-              whileHover={{ y: -4, borderColor: "rgba(42,127,127,0.2)" }}
-              className="bg-white/50 border border-black/[0.02] rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group"
+              whileHover={{ y: -4 }}
+              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
             >
-              <div className="absolute right-[-20px] top-[-20px] opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
-                <Leaf className="w-40 h-40 text-slate-800" />
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900">ALIVE</h3>
+                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Glass</span>
               </div>
-              <div className="z-10">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pillar 01</span>
-                  <Leaf className="w-4.5 h-4.5 text-[#2A7F7F]" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mt-5">
-                  30+ Weekly Plants Checklist
-                </h3>
-                <p className="text-xs text-slate-500 font-light mt-2 leading-relaxed">
-                  Log whole grains, seeds, greens, and spices. Monitor your category distribution (Grains, Fibers, Ferments) in real-time.
-                </p>
-              </div>
-              <div className="flex items-center gap-1.5 mt-6 text-[10px] font-bold text-[#2A7F7F] uppercase tracking-wider z-10">
-                <span>Check off plants</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </div>
+              <p className="text-lg font-medium text-slate-700 mb-2">Probiotic gut soda.</p>
+              <p className="text-sm text-slate-500 font-light">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> nimbu/goli soda & sweet colas.
+              </p>
             </motion.div>
 
-            {/* Card: Ferments */}
+            {/* JOSH */}
             <motion.div 
-              whileHover={{ y: -4, borderColor: "rgba(42,127,127,0.2)" }}
-              className="bg-white/50 border border-black/[0.02] rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group"
+              whileHover={{ y: -4 }}
+              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
             >
-              <div className="absolute right-[-20px] top-[-20px] opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
-                <Layers className="w-40 h-40 text-slate-800" />
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900">JOSH</h3>
+                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Can</span>
               </div>
-              <div className="z-10">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pillar 02</span>
-                  <Layers className="w-4.5 h-4.5 text-[#2A7F7F]" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mt-5">
-                  3 Daily Probiotics Logger
-                </h3>
-                <p className="text-xs text-slate-500 font-light mt-2 leading-relaxed">
-                  Track and log your daily live cultures. Structured slots make it easy to remember your morning kanji, noon buttermilk, and fermented dinners.
-                </p>
+              <p className="text-lg font-medium text-slate-700 mb-2">Prebiotic fizz.</p>
+              <p className="text-sm text-slate-500 font-light">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> cola, kala-khatta gola, orange/rose pops.
+              </p>
+            </motion.div>
+
+            {/* BATCH */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900">BATCH</h3>
+                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
               </div>
-              <div className="flex items-center gap-1.5 mt-6 text-[10px] font-bold text-[#2A7F7F] uppercase tracking-wider z-10">
-                <span>View daily logs</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <p className="text-lg font-medium text-slate-700 mb-2">Fresh ferments, made daily.</p>
+              <p className="text-sm text-slate-500 font-light">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary tonics, store kombucha, lassi.
+              </p>
+            </motion.div>
+
+            {/* PULP */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900">PULP</h3>
+                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
               </div>
+              <p className="text-lg font-medium text-slate-700 mb-2">Gut smoothies.</p>
+              <p className="text-sm text-slate-500 font-light">
+                <strong className="text-slate-800 font-medium">Replaces:</strong> green juice, mango shakes, skipped breakfasts.
+              </p>
             </motion.div>
 
           </div>
 
-          {/* Action button to enter food wing */}
-          <div className="flex justify-center pt-4">
-            <button
-              onClick={() => router.push("/food")}
-              className="px-6 py-3 bg-[#2A7F7F] text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-[#1e5c5c] hover:shadow-lg transition-all flex items-center gap-2.5 cursor-pointer group"
+          <div className="flex justify-center mt-8">
+            <button 
+              onClick={() => router.push("/product-lab")}
+              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-xl hover:scale-[1.02]"
             >
-              <span>Explore the Food Wing</span>
-              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+              <span>Explore the Universe</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
-
         </div>
       </section>
 
+      {/* ==================== 5. HOW WE WORK ==================== */}
+      <section className="relative w-full flex flex-col justify-center items-center px-6 py-24">
+        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
+              <HeartHandshake className="w-5 h-5 text-emerald-600" />
+            </div>
+            <h4 className="text-lg font-semibold text-slate-900">Built in the Open</h4>
+            <p className="text-sm text-slate-500 font-light leading-relaxed">
+              We make small batches and share everything as we go.
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
+              <Droplets className="w-5 h-5 text-emerald-600" />
+            </div>
+            <h4 className="text-lg font-semibold text-slate-900">Familiar Indian Flavours</h4>
+            <p className="text-sm text-slate-500 font-light leading-relaxed">
+              Nostalgic tastes you know, without the nasty additives.
+            </p>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
+              <Layers className="w-5 h-5 text-emerald-600" />
+            </div>
+            <h4 className="text-lg font-semibold text-slate-900">Less Sugar, More Plants</h4>
+            <p className="text-sm text-slate-500 font-light leading-relaxed">
+              Much less sugar. Packed with plant diversity and real ferments.
+            </p>
+          </div>
+        </div>
+      </section>
 
-
-      {/* ==================== ACT 6: THE VISION (CLEAN BRANDING - NO VAULT LINK) ==================== */}
-      <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 py-20 text-center">
+      {/* ==================== 6. VISION ==================== */}
+      <section className="relative w-full px-6 py-24 bg-slate-900 text-white rounded-t-[3rem] shadow-[0_-20px_40px_rgba(0,0,0,0.1)] overflow-hidden">
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#2A7F7F]/20 rounded-full blur-[100px] pointer-events-none" />
         
-        <div className="max-w-xl space-y-8 z-10 relative">
-          <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase">
-            The Vision
-          </span>
-          
-          <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
-            We are building a real-world, taste-first <span className="font-semibold text-slate-950">better-for-you food brand</span>. 
+        <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
+          <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-snug">
+            A better-for-you version of every drink you reach for, all day.
           </h2>
-
-          <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-            Transparently developed, clean-labeled, and focused on gut-friendly convenience staples. Built entirely in the open, one batch at a time.
-          </p>
-
-          {/* Custom minimal illustration of seeds/grain as section graphic */}
-          <div className="w-24 h-24 mx-auto opacity-30 mt-6">
-            <svg viewBox="0 0 100 100" className="w-full h-full stroke-slate-600 stroke-[1] fill-none">
-              <path d="M50,10 C60,40 50,70 50,90" />
-              {/* Leaves/grains branching off */}
-              <path d="M50,30 C58,25 62,30 50,45" />
-              <path d="M50,30 C42,25 38,30 50,45" />
-              <path d="M50,50 C58,45 62,50 50,65" />
-              <path d="M50,50 C42,45 38,50 50,65" />
-              <path d="M50,70 C58,65 62,70 50,85" />
-              <path d="M50,70 C42,65 38,70 50,85" />
-            </svg>
-          </div>
-
-          <div className="pt-8 border-t border-black/[0.04] max-w-xs mx-auto flex flex-col items-center">
-            <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">
-              AUTHENTIC PROGRESS
-            </span>
+          <div className="flex justify-center pt-8">
+            <button 
+              onClick={() => router.push("/product-lab")}
+              className="px-8 py-4 bg-emerald-400 hover:bg-emerald-300 text-slate-900 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-emerald-400/20 hover:scale-[1.02]"
+            >
+              <span>Explore the Product Lab</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
-
       </section>
 
-      {/* Footer */}
-      <footer className="w-full text-center py-10 text-[10px] tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 z-10">
+      {/* ==================== FOOTER ==================== */}
+      <footer className="w-full text-center py-8 bg-slate-950 text-xs tracking-widest text-slate-500 font-light select-none z-10">
         BUILT IN THE OPEN. ONE BATCH AT A TIME.
       </footer>
 
