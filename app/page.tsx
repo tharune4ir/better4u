@@ -189,7 +189,7 @@ export default function LandingHub() {
             Trelis makes better-for-you versions of the drinks people reach for every day — familiar flavours, real fermentation, a lot less sugar.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
             <button 
               onClick={() => router.push("/product-lab")}
               className="px-8 py-3.5 bg-[#2A7F7F] hover:bg-[#1e5c5c] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-[0_4px_14px_rgba(42,127,127,0.3)] hover:shadow-[0_6px_20px_rgba(42,127,127,0.4)] hover:scale-[1.02]"
@@ -205,22 +205,24 @@ export default function LandingHub() {
             </button>
           </div>
 
-          <div className="absolute bottom-10 flex flex-col items-center gap-1.5 opacity-60">
-            <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Scroll to Discover</span>
-            <ArrowDown className="w-3.5 h-3.5 text-slate-400 animate-bounce" />
-          </div>
-
         </motion.div>
+        
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-60 pointer-events-none">
+          <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Scroll to Discover</span>
+          <ArrowDown className="w-3.5 h-3.5 text-slate-400 animate-bounce" />
+        </div>
       </section>
 
       {/* ==================== 2. THE PROBLEM ==================== */}
       <section className="relative w-full flex flex-col justify-center items-center px-6 py-24 bg-white/40 border-y border-black/[0.01]">
-        <div className="max-w-3xl mx-auto text-center space-y-8 z-10">
-          <HeartPulse className="w-8 h-8 text-[#2A7F7F] mx-auto opacity-80" />
-          <h2 className="text-3xl md:text-4xl font-light text-slate-900 tracking-tight leading-snug">
+        <div className="max-w-4xl mx-auto text-center space-y-8 z-10 px-4">
+          <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase block">
+            The Default
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
             A sugary soda or shake follows almost every meal in our cities.
           </h2>
-          <p className="text-base md:text-lg text-slate-500 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
             It's the default and it harms the gut. Wellness answered with joyless powders and rules nobody keeps.
           </p>
         </div>
@@ -228,15 +230,15 @@ export default function LandingHub() {
 
       {/* ==================== 3. THE INSIGHT ==================== */}
       <section className="relative w-full flex flex-col justify-center items-center px-6 py-24 z-10">
-        <div className="max-w-4xl mx-auto bg-white/60 glassmorphic rounded-[2.5rem] p-8 md:p-16 border border-black/[0.03] shadow-[0_8px_40px_rgba(0,0,0,0.02)] text-center space-y-8 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-white/60 glassmorphic rounded-[2.5rem] p-8 md:p-12 border border-black/[0.03] shadow-[0_8px_40px_rgba(0,0,0,0.02)] text-center space-y-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#2A7F7F]/5 rounded-full blur-[80px] pointer-events-none" />
           
-          <Search className="w-8 h-8 text-[#2A7F7F] mx-auto" />
-          <h2 className="text-2xl md:text-3xl font-medium text-slate-900 tracking-tight leading-snug">
+          <Search className="w-6 h-6 text-[#2A7F7F] mx-auto opacity-70" />
+          <h2 className="text-xl sm:text-2xl font-light text-slate-900 leading-relaxed px-4">
             We didn't make another health drink — <br className="hidden md:block" />
             we remade the drinks you already love, better.
           </h2>
-          <p className="text-base md:text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
             Taste is how you get people to actually do the healthy thing.
           </p>
         </div>
@@ -246,11 +248,13 @@ export default function LandingHub() {
       <section className="relative w-full px-6 py-24 bg-white/30 border-y border-black/[0.02]">
         <div className="max-w-5xl mx-auto space-y-16">
           <div className="text-center space-y-4">
-            <span className="text-xs font-bold tracking-widest text-[#2A7F7F] uppercase">The Universe</span>
-            <h2 className="text-3xl md:text-4xl font-light text-slate-900 tracking-tight">
+            <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase">
+              The Universe
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
               House of Trelis
             </h2>
-            <p className="text-base text-slate-500 font-light max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
               Every time you'd reach for the unhealthy default, Trelis has the better-tasting version.
             </p>
           </div>
@@ -260,14 +264,14 @@ export default function LandingHub() {
             {/* ALIVE */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold tracking-tight text-slate-900">ALIVE</h3>
-                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Glass</span>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">ALIVE</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Glass</span>
               </div>
-              <p className="text-lg font-medium text-slate-700 mb-2">Probiotic gut soda.</p>
-              <p className="text-sm text-slate-500 font-light">
+              <p className="text-sm font-medium text-slate-700 mb-2">Probiotic gut soda.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> nimbu/goli soda & sweet colas.
               </p>
             </motion.div>
@@ -275,14 +279,14 @@ export default function LandingHub() {
             {/* JOSH */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold tracking-tight text-slate-900">JOSH</h3>
-                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Can</span>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">JOSH</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Can</span>
               </div>
-              <p className="text-lg font-medium text-slate-700 mb-2">Prebiotic fizz.</p>
-              <p className="text-sm text-slate-500 font-light">
+              <p className="text-sm font-medium text-slate-700 mb-2">Prebiotic fizz.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> cola, kala-khatta gola, orange/rose pops.
               </p>
             </motion.div>
@@ -290,14 +294,14 @@ export default function LandingHub() {
             {/* BATCH */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold tracking-tight text-slate-900">BATCH</h3>
-                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">BATCH</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
               </div>
-              <p className="text-lg font-medium text-slate-700 mb-2">Fresh ferments, made daily.</p>
-              <p className="text-sm text-slate-500 font-light">
+              <p className="text-sm font-medium text-slate-700 mb-2">Fresh ferments, made daily.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> sugary tonics, store kombucha, lassi.
               </p>
             </motion.div>
@@ -305,27 +309,27 @@ export default function LandingHub() {
             {/* PULP */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/70 p-8 rounded-3xl border border-black/[0.03] shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold tracking-tight text-slate-900">PULP</h3>
-                <span className="text-[10px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-3 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-slate-900">PULP</h3>
+                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
               </div>
-              <p className="text-lg font-medium text-slate-700 mb-2">Gut smoothies.</p>
-              <p className="text-sm text-slate-500 font-light">
+              <p className="text-sm font-medium text-slate-700 mb-2">Gut smoothies.</p>
+              <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> green juice, mango shakes, skipped breakfasts.
               </p>
             </motion.div>
 
           </div>
 
-          <div className="flex justify-center mt-8">
-            <button 
+          <div className="flex justify-center pt-8">
+            <button
               onClick={() => router.push("/product-lab")}
-              className="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-xl hover:scale-[1.02]"
+              className="px-6 py-3 bg-[#2A7F7F] text-white rounded-full text-xs font-semibold tracking-widest uppercase shadow-md hover:bg-[#1e5c5c] hover:shadow-lg transition-all flex items-center gap-2.5 cursor-pointer group"
             >
               <span>Explore the Universe</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
@@ -365,27 +369,45 @@ export default function LandingHub() {
       </section>
 
       {/* ==================== 6. VISION ==================== */}
-      <section className="relative w-full px-6 py-24 bg-slate-900 text-white rounded-t-[3rem] shadow-[0_-20px_40px_rgba(0,0,0,0.1)] overflow-hidden">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#2A7F7F]/20 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-center px-6 py-20 text-center">
         
-        <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
-          <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-snug">
+        <div className="max-w-xl space-y-8 z-10 relative">
+          <span className="text-[9px] tracking-widest text-[#2A7F7F] font-bold uppercase">
+            The Vision
+          </span>
+          
+          <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
             A better-for-you version of every drink you reach for, all day.
           </h2>
+
+          {/* Custom minimal illustration of seeds/grain as section graphic */}
+          <div className="w-24 h-24 mx-auto opacity-30 mt-6">
+            <svg viewBox="0 0 100 100" className="w-full h-full stroke-slate-600 stroke-[1] fill-none">
+              <path d="M50,10 C60,40 50,70 50,90" />
+              {/* Leaves/grains branching off */}
+              <path d="M50,30 C58,25 62,30 50,45" />
+              <path d="M50,30 C42,25 38,30 50,45" />
+              <path d="M50,50 C58,45 62,50 50,65" />
+              <path d="M50,50 C42,45 38,50 50,65" />
+              <path d="M50,70 C58,65 62,70 50,85" />
+              <path d="M50,70 C42,65 38,70 50,85" />
+            </svg>
+          </div>
+
           <div className="flex justify-center pt-8">
             <button 
               onClick={() => router.push("/product-lab")}
-              className="px-8 py-4 bg-emerald-400 hover:bg-emerald-300 text-slate-900 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-emerald-400/20 hover:scale-[1.02]"
+              className="px-6 py-3 bg-[#2A7F7F] hover:bg-[#1e5c5c] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-[0_4px_14px_rgba(42,127,127,0.3)] hover:shadow-[0_6px_20px_rgba(42,127,127,0.4)] group"
             >
               <span>Explore the Product Lab</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
       </section>
 
       {/* ==================== FOOTER ==================== */}
-      <footer className="w-full text-center py-8 bg-slate-950 text-xs tracking-widest text-slate-500 font-light select-none z-10">
+      <footer className="w-full text-center py-10 text-[10px] tracking-widest text-slate-400 font-light select-none border-t border-black/[0.02] bg-white/20 z-10">
         BUILT IN THE OPEN. ONE BATCH AT A TIME.
       </footer>
 
