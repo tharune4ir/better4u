@@ -56,7 +56,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 4 | 3.2 Academy UI (Dictionary/Lessons/Progress) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 5 | 4.1 LiteLLM gateway + fallbacks (seed 003) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 6 | 5.1 Handmade ReAct agent (seed 004) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☐ | ☐ | ☐ | |
+| 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☐ | ☐ | ☐ | |
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☐ | ☐ | ☐ | |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☐ | ☐ | ☐ | |
@@ -145,13 +145,13 @@ THE CONCEPT THAT CLICKED: Perceive-Plan-Act-Observe loops. Why native function-c
 STILL FUZZY: None.
 TERMS LEARNED: ReAct trace, tool schema, tool registry, max iterations, hallucinated tool call, native function calling.
 
-### Block 5.2 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 5.2 — Date: 2026-07-04 Hours: 0.5
+WHAT I BUILT: Refactored the agent loop into a LangGraph `StateGraph` with a `PostgresSaver` checkpointer connected to Supabase Postgres. Updated FastAPI POST `/chat` to run the graph and persist message state per `thread_id`.
+WHAT BROKE: `psycopg` connection URI parser failed to resolve the host due to a slash `/` in the database password. Additionally, `checkpointer.setup()` migrations failed because psycopg default connection pools wrap `CREATE INDEX CONCURRENTLY` inside transaction blocks.
+HOW I FIXED IT: Created a DSN string parser to convert the URI connection string to space-separated key-value parameters. Ran checkpointer setup using a temporary direct connection configured with `autocommit=True`.
+THE CONCEPT THAT CLICKED: Durable execution: checkpointers serializing and writing graph checkpoints to Postgres, allowing states to survive server crashes.
+STILL FUZZY: None.
+TERMS LEARNED: StateGraph, node, edge, reducer, checkpointer, thread.
 
 ### Block 6.1 — Date: ____ Hours: ____
 WHAT I BUILT:

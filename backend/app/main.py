@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Optional
+from langchain_core.messages import HumanMessage
 from app.settings import settings
 from app.llm.gateway import gateway
+from app.agents.core_agent import core_agent
 
 app = FastAPI(
     title="VIZIER API",
@@ -25,21 +28,29 @@ app.add_middleware(
 
 class ChatRequest(BaseModel):
     message: str
+    thread_id: Optional[str] = None
 
 @app.post("/chat")
 def chat(request: ChatRequest):
     """
-    Gateway chat endpoint. Accepts a user query, passes it to the fallback gateway,
-    and returns the resolved content and active provider details.
+    Gateway chat endpoint. Accepts a user query, passes it to the LangGraph core_agent,
+    which executes agent tool-loops dynamically, persisting state under the thread_id.
     """
-    messages = [
-        {"role": "user", "content": request.message}
-    ]
-    res = gateway.complete(messages)
+    thread_id = request.thread_id or "default-session"
+    config = {"configurable": {"thread_id": thread_id}}
+    
+    # Execute graph
+    result = core_agent.invoke(
+        {"messages": [HumanMessage(content=request.message)]},
+        config
+    )
+    
+    # Extract last message (final agent reply)
+    final_msg = result["messages"][-1]
+    
     return {
-        "reply": res["reply"],
-        "provider_used": res["provider_used"],
-        "model_used": res["model_used"]
+        "reply": final_msg.content,
+        "thread_id": thread_id
     }
 
 @app.get("/health")

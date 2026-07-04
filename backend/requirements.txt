@@ -5,3 +5,7 @@ pydantic-settings==2.3.3
 python-dotenv==1.0.1
 httpx==0.27.0
 litellm==1.42.0
+langgraph
+langchain-core
+langgraph-checkpoint-postgres
+psycopg-pool
