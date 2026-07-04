@@ -54,7 +54,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 2 | 2.2 FastAPI + first ping | ☑ | ☑ | ☑ | 2026-07-04 |
 | 3 | 3.1 Academy schema + seed (SQL 001–002) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 4 | 3.2 Academy UI (Dictionary/Lessons/Progress) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 5 | 4.1 LiteLLM gateway + fallbacks (seed 003) | ☐ | ☐ | ☐ | |
+| 5 | 4.1 LiteLLM gateway + fallbacks (seed 003) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 6 | 5.1 Handmade ReAct agent (seed 004) | ☐ | ☐ | ☐ | |
 | 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☐ | ☐ | ☐ | |
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☐ | ☐ | ☐ | |
@@ -129,13 +129,13 @@ THE CONCEPT THAT CLICKED: Next.js Client vs Server Component separation (`"use c
 STILL FUZZY: None.
 TERMS LEARNED: Components, Props, State, Server Component, Client Component, PostgREST, SQL Privileges.
 
-### Block 4.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 4.1 — Date: 2026-07-04 Hours: 0.5
+WHAT I BUILT: LiteLLM model gateway (`gateway.py`) with fallback chain (Gemini -> Groq -> OpenRouter -> Ollama), exponential backoff with random jitter, provider cooldowns, development caching on-disk, and token/cost logging. Exposed POST `/chat` FastAPI endpoint.
+WHAT BROKE: Database connection password contain slashes `/` which broke URI parsing, and git status was bloated tracking the entire `.venv/` due to a missing root `.gitignore`.
+HOW I FIXED IT: Connected using key-value psycopg parameters directly and cleaned brackets from `.env`. Added a root `.gitignore` and unstaged `.venv` to restore repository hygiene.
+THE CONCEPT THAT CLICKED: Token caching to preserve free-tier quotas and jitter to resolve concurrency spikes (thundering herd problem).
+STILL FUZZY: None.
+TERMS LEARNED: Rate Limit, Backoff, Jitter, Fallback Chain, Router, Cache Hit/Miss, Provider.
 
 ### Block 5.1 — Date: ____ Hours: ____
 WHAT I BUILT:
