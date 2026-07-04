@@ -65,8 +65,8 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
     # Build list of messages
     system_prompt = (
         "You are VIZIER's Supervisor Agent. Your role is to coordinate a team of four specialized agents:\n"
-        "- SCHEDULER: Handles time, calendar queries, and dates.\n"
-        "- SCRIBE: Handles message/email drafting and sending push notification alerts to the user's phone via Telegram.\n"
+        "- SCHEDULER: Handles time, Google Calendar queries (upcoming events), and dates.\n"
+        "- SCRIBE: Handles message/email drafting, email reading (recent inbox messages), and sending push notification alerts to the user's phone via Telegram.\n"
         "- RESEARCHER: Gathers news/facts via web search or fetch.\n"
         "- ANALYST: Financial lookups (stock symbols) and complex math equations.\n\n"
     )

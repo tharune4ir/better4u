@@ -61,7 +61,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☐ | ☐ | ☐ | |
+| 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☑ | ☑ | ☐ | 2026-07-04 |
 | 13 | 9.2 Write actions via proposal gate (mig 011) | ☐ | ☐ | ☐ | |
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☐ | ☐ | ☐ | |
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☐ | ☐ | ☐ | |
@@ -199,13 +199,23 @@ THE CONCEPT THAT CLICKED: Model Context Protocol (MCP) decoupling model hosting 
 STILL FUZZY: None.
 TERMS LEARNED: Model Context Protocol (MCP), MCP server, MCP client, stdio transport, tool poisoning, confused deputy, allowlist.
 
-### Block 9.1 — Date: ____ Hours: ____
-WHAT I BUILT:
+### Block 9.1 — Date: 2026-07-04 Hours: 1.0
+WHAT I BUILT: Google OAuth2 Installed App flow via `authorize.py` generating a `google_token.json` saved to `backend/secrets/`. Built `backend/app/google/auth.py` (credential loading/refresh) and `backend/app/google/readers.py` (Gmail `list_recent_emails` + Calendar `upcoming_events` tools). Wired both tools into the SCRIBE and SCHEDULER specialist agents respectively. Created `docs/11_google_oauth_lesson.md` with OAuth security concepts. Ran DB seed `013_google_oauth_seed.sql` to add lessons and dictionary terms.
 WHAT BROKE:
+1. `Error 403: access_denied` during OAuth consent — our Google Cloud app was in TESTING mode but the test user's account wasn't added as an approved tester.
+2. `tool_calls.args` Pydantic validation error — LLM returned `None` for tool call arguments instead of an empty JSON dict.
+3. `StructuredTool does not support sync invocation` — MCP tools from `langchain-mcp-adapters` are async-only, but LangGraph's `ToolNode` calls them synchronously.
+4. `AttributeError: 'dict' object has no attribute 'model_fields'` — `args_schema` on async MCP tools is a plain dict, not a Pydantic model.
+5. `TypeError: tool() got an unexpected keyword argument 'name'` — attempted `@lc_tool(name=...)` decorator syntax which is not supported.
 HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+1. Added the account as a Test User in Google Cloud → OAuth & Access → Test Users.
+2. Added `if tc_args is None: tc_args = {}` guard in `_bridge_to_langchain()` in `specialists.py`.
+3. Launched a persistent daemon thread running `asyncio.new_event_loop().run_forever()` and used `asyncio.run_coroutine_threadsafe()` to bridge async MCP tool calls to sync invocations.
+4. Switched from `args_schema.model_fields` to `hasattr(schema, 'model_fields')` conditional detection.
+5. Replaced `@lc_tool(name=...)` decorator with `StructuredTool.from_function(func=..., name=..., description=...)` factory.
+THE CONCEPT THAT CLICKED: OAuth2 Installed App Flow (offline `access_type` for refresh tokens, PKCE for public client security). Async bridge patterns for mixing sync (LangGraph ToolNode) and async (MCP stdio) code in the same process — using a persistent background event loop thread.
+STILL FUZZY: None.
+TERMS LEARNED: OAuth2, Authorization Code Flow, PKCE, refresh token, scope, consent screen, testing mode.
 
 ### Block 9.2 — Date: ____ Hours: ____
 WHAT I BUILT:

@@ -16,3 +16,7 @@ pymupdf
 sentence-transformers
 mcp
 langchain-mcp-adapters
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client

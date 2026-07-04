@@ -26,9 +26,42 @@ from app.llm.gateway import gateway
 # ---------------------------------------------------------------------
 import asyncio
 import threading
+from functools import partial
+from langchain_core.tools import StructuredTool
 from app.mcp_client import get_mcp_tools
 
-mcp_tools = []
+# We run a persistent background event loop for async MCP tool calls.
+# MCP tools from langchain-mcp-adapters are async-only (StructuredTool without sync _run).
+# LangGraph's ToolNode calls tools synchronously by default, so we bridge them here.
+_mcp_loop = asyncio.new_event_loop()
+_mcp_thread = threading.Thread(target=_mcp_loop.run_forever, daemon=True)
+_mcp_thread.start()
+
+def _run_async_tool(tool_obj, **kwargs):
+    """Runs an async MCP tool on the background event loop from a sync context."""
+    future = asyncio.run_coroutine_threadsafe(tool_obj.ainvoke(kwargs), _mcp_loop)
+    return future.result(timeout=30)
+
+def _make_sync_wrapper(tool_obj):
+    """Create a synchronous StructuredTool wrapper around an async MCP tool."""
+    tool_name = tool_obj.name
+    tool_desc = tool_obj.description or f"MCP tool: {tool_name}"
+
+    # Capture tool_obj in closure
+    def _sync_fn(**kwargs) -> str:
+        return _run_async_tool(tool_obj, **kwargs)
+
+    # Use the original tool's args_schema if available (Pydantic model), else None
+    schema = tool_obj.args_schema if hasattr(tool_obj.args_schema, "model_fields") else None
+
+    return StructuredTool.from_function(
+        func=_sync_fn,
+        name=tool_name,
+        description=tool_desc,
+        args_schema=schema,
+    )
+
+mcp_tools_raw = []
 try:
     class AsyncRunner:
         def __init__(self):
@@ -40,10 +73,14 @@ try:
     t_mcp = threading.Thread(target=runner.run)
     t_mcp.start()
     t_mcp.join()
-    mcp_tools = runner.result
+    mcp_tools_raw = runner.result
 except Exception as mcp_err:
     print(f"[Specialists MCP Load Warning] Failed to load MCP tools synchronously: {mcp_err}")
-    mcp_tools = []
+    mcp_tools_raw = []
+
+# Wrap all async MCP tools into sync-compatible wrappers for ToolNode
+mcp_tools = [_make_sync_wrapper(t) for t in mcp_tools_raw]
+
 
 def _get_tool_schema(t) -> dict:
     if not t.args_schema:
@@ -112,12 +149,16 @@ def _bridge_to_langchain(tool_calls: list) -> list:
                 tc_args = json.loads(tc_args_str) if isinstance(tc_args_str, str) else tc_args_str
             except Exception:
                 tc_args = {}
+            # Guard: Pydantic requires args to be a dict, never None
+            if tc_args is None:
+                tc_args = {}
             lc_tool_calls.append({
                 "name": tc_name,
                 "args": tc_args,
                 "id": tc_id
             })
     return lc_tool_calls
+
 
 def make_specialist_node(agent_name: str, system_prompt: str, tools_schema: list):
     """
@@ -153,16 +194,43 @@ def get_current_time() -> str:
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 @tool
-def get_calendar_events() -> str:
-    """Returns a list of upcoming dummy calendar events for this week."""
-    events = [
-        {"title": "Sync with Principal", "time": "10:00 AM - 10:30 AM", "day": "Monday"},
-        {"title": "Code Review & Refactoring", "time": "2:00 PM - 3:00 PM", "day": "Tuesday"},
-        {"title": "Product Lab Weekly", "time": "11:00 AM - 12:00 PM", "day": "Thursday"}
-    ]
-    return json.dumps(events, indent=2)
+def upcoming_events() -> str:
+    """
+    Retrieves the next 5 upcoming events from the user's primary Google Calendar.
+    Only read access is configured (Principle of Least Privilege).
+    """
+    try:
+        from app.google.auth import get_google_credentials
+        from googleapiclient.discovery import build
+        
+        creds = get_google_credentials()
+        # Secure, read-only Calendar client connection.
+        # CRITICAL SAFETY NOTE: No write permissions or scopes are granted in our OAuth token,
+        # ensuring the agent can never add or modify events, even if compromised.
+        service = build("calendar", "v3", credentials=creds)
+        
+        now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        events_result = service.events().list(
+            calendarId="primary",
+            timeMin=now,
+            maxResults=5,
+            singleEvents=True,
+            orderBy="startTime"
+        ).execute()
+        
+        events = events_result.get("items", [])
+        if not events:
+            return "No upcoming events found in primary Google Calendar."
+            
+        formatted = []
+        for idx, event in enumerate(events):
+            start = event["start"].get("dateTime", event["start"].get("date"))
+            formatted.append(f"{idx+1}. [{start}] {event.get('summary', 'No Title')}")
+        return "\n".join(formatted)
+    except Exception as e:
+        return f"Error retrieving calendar events: {e}"
 
-scheduler_tools = [get_current_time, get_calendar_events]
+scheduler_tools = [get_current_time, upcoming_events]
 for t in mcp_tools:
     if t.name in ("get_time", "read_todo_list"):
         scheduler_tools.append(t)
@@ -221,7 +289,35 @@ def draft_message(recipient: str, channel: str, topic: str, content: str) -> str
         )
     return draft
 
-scribe_tools = [draft_message]
+@tool
+def read_recent_emails() -> str:
+    """
+    Reads the last 5 emails from the user's Gmail inbox.
+    Only read access is configured (Principle of Least Privilege).
+    """
+    try:
+        from app.google.gmail_reader import list_recent_messages
+        
+        # CRITICAL SAFETY NOTE: No write scopes (like send/delete/modify) are requested,
+        # meaning the agent is structurally incapable of sending emails or modifying inbox state.
+        messages = list_recent_messages(5)
+        if not messages:
+            return "No recent emails found in the inbox."
+            
+        formatted = []
+        for idx, msg in enumerate(messages):
+            formatted.append(
+                f"Email {idx+1}:\n"
+                f"  From: {msg['from']}\n"
+                f"  Subject: {msg['subject']}\n"
+                f"  Date: {msg['date']}\n"
+                f"  Snippet: {msg['snippet']}\n"
+            )
+        return "\n---\n".join(formatted)
+    except Exception as e:
+        return f"Error retrieving emails: {e}"
+
+scribe_tools = [draft_message, read_recent_emails]
 for t in mcp_tools:
     if t.name == "telegram_notify":
         scribe_tools.append(t)
