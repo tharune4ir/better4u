@@ -29,6 +29,7 @@ class AgentState(TypedDict):
     messages: Annotated[Sequence[BaseMessage], add_messages]
     scratchpad: Dict[str, str]
     next_agent: str
+    visited: Annotated[list, lambda x, y: x + y]
 
 # Pydantic schema for structured routing decision
 class RouteDecision(BaseModel):
@@ -53,15 +54,9 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
         "- RESEARCHER: Gathers news/facts via web search or fetch.\n"
         "- ANALYST: Financial lookups (stock symbols) and complex math equations.\n\n"
         "Analyze the user request and scratchpad. If the query requires research, run RESEARCHER. "
-        "If it requires email drafting, run SCRIBE. If it requires multiple steps (e.g. research AAPL and then draft a message), "
-        "route to the first specialist first, then route to the next on the subsequent turn.\n"
-        "Current scratchpad status:\n" + json.dumps(state.get("scratchpad", {}), indent=2) + "\n\n"
-        "You MUST respond with a JSON object matching this schema:\n"
-        "{\n"
-        '  "next_agent": "SCHEDULER" | "SCRIBE" | "RESEARCHER" | "ANALYST" | "FINALIZE",\n'
-        '  "rationale": "Why you chose this agent",\n'
-        '  "task_brief": "Specific instructions for the specialist"\n'
-        "}"
+        "Choose FINALIZE when you have obtained all the necessary details to answer the user's prompt.\n\n"
+        "Scratchpad content:\n" + json.dumps(state.get("scratchpad", {}), indent=2) + "\n\n"
+        "Reply with a JSON object containing keys: 'next_agent', 'rationale', 'task_brief'. Only choose FINALIZE when all facts are gathered."
     )
     
     # Bridge messages to gateway format
@@ -93,10 +88,16 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
             task_brief="Synthesize final answer based on current information."
         )
 
-    print(f"\n[Supervisor Route] Choice: {decision.next_agent} | Rationale: {decision.rationale}")
+    chosen_agent = decision.next_agent
+    visited_list = state.get("visited") or []
+    if chosen_agent in visited_list:
+        print(f"\n[Supervisor Loop Guard] Agent '{chosen_agent}' has already been visited in: {visited_list}. Overriding choice to FINALIZE.")
+        chosen_agent = "FINALIZE"
+
+    print(f"\n[Supervisor Route] Choice: {chosen_agent} | Rationale: {decision.rationale}")
     
     # Store routing choice in next_agent state
-    return {"next_agent": decision.next_agent}
+    return {"next_agent": chosen_agent, "visited": [chosen_agent] if chosen_agent != "FINALIZE" else []}
 
 # =====================================================================
 # 3. SPECIALIST WRAPPER NODES (CREATING THE SUBGRAPH INTERFACE)
@@ -109,7 +110,7 @@ def run_scheduler(state: AgentState) -> Dict[str, Any]:
     })
     new_scratchpad = dict(state["scratchpad"])
     new_scratchpad["SCHEDULER"] = res["messages"][-1].content
-    new_msgs = res["messages"][len(state["messages"]):]
+    new_msgs = [res["messages"][-1]]
     return {
         "messages": new_msgs,
         "scratchpad": new_scratchpad,
@@ -124,7 +125,7 @@ def run_scribe(state: AgentState) -> Dict[str, Any]:
     })
     new_scratchpad = dict(state["scratchpad"])
     new_scratchpad["SCRIBE"] = res["messages"][-1].content
-    new_msgs = res["messages"][len(state["messages"]):]
+    new_msgs = [res["messages"][-1]]
     return {
         "messages": new_msgs,
         "scratchpad": new_scratchpad,
@@ -139,7 +140,7 @@ def run_researcher(state: AgentState) -> Dict[str, Any]:
     })
     new_scratchpad = dict(state["scratchpad"])
     new_scratchpad["RESEARCHER"] = res["messages"][-1].content
-    new_msgs = res["messages"][len(state["messages"]):]
+    new_msgs = [res["messages"][-1]]
     return {
         "messages": new_msgs,
         "scratchpad": new_scratchpad,
@@ -154,7 +155,7 @@ def run_analyst(state: AgentState) -> Dict[str, Any]:
     })
     new_scratchpad = dict(state["scratchpad"])
     new_scratchpad["ANALYST"] = res["messages"][-1].content
-    new_msgs = res["messages"][len(state["messages"]):]
+    new_msgs = [res["messages"][-1]]
     return {
         "messages": new_msgs,
         "scratchpad": new_scratchpad,
@@ -180,9 +181,6 @@ def finalize_response(state: AgentState) -> Dict[str, Any]:
     for m in state["messages"]:
         if isinstance(m, HumanMessage):
             gateway_messages.append({"role": "user", "content": m.content})
-        elif isinstance(m, AIMessage):
-            # Only append previous assistant messages that are not final answers
-            gateway_messages.append({"role": "assistant", "content": m.content})
 
     res = gateway.complete(gateway_messages)
     reply = res["reply"]

@@ -222,5 +222,40 @@ class ModelGateway:
 
         raise RuntimeError("VIZIER Model Gateway Error: All providers in fallback chain failed.")
 
+    def embed(self, texts: List[str]) -> List[List[float]]:
+        """
+        Generate 768-dimensional embeddings for a list of texts.
+        Prioritizes the Gemini embedding API (text-embedding-004) and falls back 
+        to local sentence-transformers (all-mpnet-base-v2) if offline.
+        """
+        primary_key = self.providers[0]["api_key"]
+        
+        # 1. Attempt Gemini Embedding
+        if primary_key:
+            try:
+                import litellm
+                litellm.api_key = primary_key
+                response = litellm.embedding(
+                    model="gemini/text-embedding-004",
+                    input=texts
+                )
+                embeddings = [data["embedding"] for data in response["data"]]
+                print(f"[Gateway Embed] Successfully embedded {len(texts)} chunks via Gemini API.")
+                return embeddings
+            except Exception as e:
+                print(f"[Gateway Embed Warning] Gemini embedding failed: {e}. Falling back to local SentenceTransformers...")
+        
+        # 2. Local Fallback
+        try:
+            from sentence_transformers import SentenceTransformer
+            print("[Gateway Embed] Loading local SentenceTransformer model 'all-mpnet-base-v2' (Dimension: 768)...")
+            model = SentenceTransformer("all-mpnet-base-v2")
+            embeddings = model.encode(texts)
+            print(f"[Gateway Embed] Successfully embedded {len(texts)} chunks via local model.")
+            return [e.tolist() for e in embeddings]
+        except Exception as local_err:
+            print(f"[Gateway Embed Error] Local SentenceTransformer fallback failed: {local_err}")
+            raise RuntimeError(f"Failed to generate embeddings: {local_err}")
+
 # Initialize global gateway instance
 gateway = ModelGateway()

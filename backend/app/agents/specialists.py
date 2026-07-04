@@ -248,7 +248,30 @@ def web_fetch(url: str) -> str:
     except Exception as e:
         return f"Error fetching url '{url}': {e}"
 
-researcher_tools = [web_search, web_fetch]
+@tool
+def search_my_documents(query: str) -> str:
+    """
+    Searches the principal's private document database (like blueprints, notes, and guidelines) 
+    for information matching the query.
+    """
+    try:
+        from app.rag.retrieve import search
+        docs = search(query, limit=3)
+        if not docs:
+            return f"No documents found matching the search query: '{query}'"
+        
+        formatted = []
+        for idx, doc in enumerate(docs):
+            formatted.append(
+                f"Document Match {idx+1}:\n"
+                f"Source: {doc['document_title']}\n"
+                f"Content:\n{doc['content']}\n"
+            )
+        return "\n---\n".join(formatted)
+    except Exception as e:
+        return f"Error searching private documents: {e}"
+
+researcher_tools = [web_search, web_fetch, search_my_documents]
 researcher_schema = [
     {
         "type": "function",
@@ -261,9 +284,10 @@ researcher_schema = [
 ]
 
 researcher_system_prompt = (
-    "You are VIZIER's RESEARCHER agent. You fetch information from the web. "
-    "Always perform a web search when looking up recent facts or news. "
-    "If a URL is provided, fetch its content using web_fetch. Be objective and cite URLs where possible."
+    "You are VIZIER's RESEARCHER agent. You fetch information from the web or your private knowledge base. "
+    "Always query your private documents (using search_my_documents) when asked about project blueprints, "
+    "local guidelines, or personal context. Perform a web search for general current facts or news. "
+    "Cite sources and document names where possible."
 )
 
 researcher_node = make_specialist_node("RESEARCHER", researcher_system_prompt, researcher_schema)

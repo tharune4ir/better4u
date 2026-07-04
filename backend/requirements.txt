@@ -12,4 +12,7 @@ psycopg-pool
 trafilatura
 duckduckgo-search
 yfinance
+pymupdf
+sentence-transformers
+
 

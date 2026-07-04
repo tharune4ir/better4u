@@ -58,7 +58,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 6 | 5.1 Handmade ReAct agent (seed 004) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☐ | ☐ | ☐ | |
+| 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☐ | ☐ | ☐ | |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☐ | ☐ | ☐ | |
 | 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☐ | ☐ | ☐ | |
@@ -161,13 +161,19 @@ THE CONCEPT THAT CLICKED: Hierarchical agent routing: supervisor delegating sequ
 STILL FUZZY: None.
 TERMS LEARNED: supervisor, subgraph, handoff, routing, structured output, scratchpad, SSE.
 
-### Block 7.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
+### Block 7.1 — Date: 2026-07-04 Hours: 0.75
+WHAT I BUILT: pgvector RAG pipeline on Supabase with HNSW and GIN indexes (`007_rag_schema.sql`). Document ingestion pipeline (`ingest.py`) with recursive chunker and PyMuPDF text parser. Hybrid Cosine and Full-Text GIN Index search (`retrieve.py`) merged via Reciprocal Rank Fusion (RRF). Integrated `search_my_documents` tool into the RESEARCHER specialist agent.
+WHAT BROKE: 
+1. Missing packages in virtual environment.
+2. Gemini API threw `Missing corresponding tool call` because raw tool messages and assistant tool calls leaked from subgraphs into parent supervisor history.
+3. `finalize_response` returned empty replies because the last message sent to the gateway was an `assistant` message.
 HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+1. Re-ran pip install directly.
+2. Refactored specialist graph runners to ONLY bubble up the final specialist text `AIMessage` to the parent graph's messages.
+3. Updated `finalize_response` to only pass the system prompt and the user's human messages (removing intermediate assistant messages), ensuring the last message is always a `user` message. Added a `visited` list loop-guard in `call_supervisor`.
+THE CONCEPT THAT CLICKED: Hierarchical agent isolation: specialist subgraphs should keep their raw tool messages private, only returning the final text reply to the supervisor. Chat LLM completion endpoints require the last message in history to be from the `user` to prevent empty completions.
+STILL FUZZY: None.
+TERMS LEARNED: pgvector, cosine distance, HNSW, tsvector, GIN index, Reciprocal Rank Fusion (RRF), RAG, recursive chunking.
 
 ### Block 7.2 — Date: ____ Hours: ____
 WHAT I BUILT:
