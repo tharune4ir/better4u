@@ -104,3 +104,109 @@ def config_check():
         "GEMINI_MODEL_CONFIGURED": settings.GEMINI_MODEL
     }
 
+# =====================================================================
+# MEMORIES ENDPOINTS
+# =====================================================================
+class MemoryCreateRequest(BaseModel):
+    kind: str
+    content: str
+    importance: int
+
+class MemoryUpdateRequest(BaseModel):
+    kind: str
+    content: str
+    importance: int
+
+@app.get("/memories")
+def get_memories(search: Optional[str] = None):
+    """
+    Get list of memories, optionally filtered by keyword search.
+    """
+    from app.rag.memory import parse_db_url_to_dsn
+    import psycopg
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            if search:
+                cur.execute(
+                    """
+                    SELECT id, kind, content, importance, created_at, last_accessed_at 
+                    FROM memories 
+                    WHERE content ILIKE %s 
+                    ORDER BY created_at DESC
+                    """,
+                    (f"%{search}%",)
+                )
+            else:
+                cur.execute(
+                    """
+                    SELECT id, kind, content, importance, created_at, last_accessed_at 
+                    FROM memories 
+                    ORDER BY created_at DESC
+                    """
+                )
+            rows = cur.fetchall()
+            memories = []
+            for r in rows:
+                memories.append({
+                    "id": str(r[0]),
+                    "kind": r[1],
+                    "content": r[2],
+                    "importance": r[3],
+                    "created_at": r[4].isoformat(),
+                    "last_accessed_at": r[5].isoformat()
+                })
+            return memories
+
+@app.post("/memories")
+def create_memory(req: MemoryCreateRequest):
+    """
+    Manually create a new memory and calculate its embedding vector.
+    """
+    from app.rag.memory import save_memory
+    memory_id = save_memory(kind=req.kind, content=req.content, importance=req.importance)
+    return {"status": "ok", "id": memory_id}
+
+@app.put("/memories/{memory_id}")
+def update_memory(memory_id: str, req: MemoryUpdateRequest):
+    """
+    Update memory content, kind, importance, and re-compute its embedding.
+    """
+    from app.rag.memory import parse_db_url_to_dsn
+    from app.llm.gateway import gateway
+    import psycopg
+    
+    try:
+        embedding = gateway.embed([req.content])[0]
+        embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+    except Exception as e:
+        print(f"[Memory System Error] Failed to generate embedding on update: {e}")
+        embedding_str = None
+        
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE memories 
+                SET kind = %s, content = %s, importance = %s, embedding = %s, last_accessed_at = now()
+                WHERE id = %s
+                """,
+                (req.kind, req.content, req.importance, embedding_str, memory_id)
+            )
+    return {"status": "ok"}
+
+@app.delete("/memories/{memory_id}")
+def delete_memory(memory_id: str):
+    """
+    Delete a memory by its UUID.
+    """
+    from app.rag.memory import parse_db_url_to_dsn
+    import psycopg
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM memories WHERE id = %s", (memory_id,))
+    return {"status": "ok"}
+
+

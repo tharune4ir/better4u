@@ -46,6 +46,22 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
     """
     Supervisor inspects messages and scratchpad history to route execution.
     """
+    user_query = ""
+    for m in reversed(state["messages"]):
+        if isinstance(m, HumanMessage):
+            user_query = m.content
+            break
+            
+    memories_str = ""
+    if user_query:
+        try:
+            from app.rag.memory import get_relevant_memories
+            mems = get_relevant_memories(user_query, limit=3)
+            if mems:
+                memories_str = "\n".join(f"- {m['content']} ({m['kind']})" for m in mems)
+        except Exception as e:
+            print(f"[Memory System Error] Failed to retrieve memories for supervisor: {e}")
+
     # Build list of messages
     system_prompt = (
         "You are VIZIER's Supervisor Agent. Your role is to coordinate a team of four specialized agents:\n"
@@ -53,6 +69,12 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
         "- SCRIBE: Handles message/email drafting (does NOT send them).\n"
         "- RESEARCHER: Gathers news/facts via web search or fetch.\n"
         "- ANALYST: Financial lookups (stock symbols) and complex math equations.\n\n"
+    )
+    
+    if memories_str:
+        system_prompt += f"What I know about my principal (relevant long-term memories):\n{memories_str}\n\n"
+
+    system_prompt += (
         "Analyze the user request and scratchpad. If the query requires research, run RESEARCHER. "
         "Choose FINALIZE when you have obtained all the necessary details to answer the user's prompt.\n\n"
         "Scratchpad content:\n" + json.dumps(state.get("scratchpad", {}), indent=2) + "\n\n"
@@ -170,9 +192,32 @@ def finalize_response(state: AgentState) -> Dict[str, Any]:
     Synthesizes the final output after specialists have populated the scratchpad.
     """
     print("[Agent Activity] Composing final summary...")
+    
+    user_query = ""
+    for m in reversed(state["messages"]):
+        if isinstance(m, HumanMessage):
+            user_query = m.content
+            break
+            
+    memories_str = ""
+    if user_query:
+        try:
+            from app.rag.memory import get_relevant_memories
+            mems = get_relevant_memories(user_query, limit=3)
+            if mems:
+                memories_str = "\n".join(f"- {m['content']} ({m['kind']})" for m in mems)
+        except Exception as e:
+            print(f"[Memory System Error] Failed to retrieve memories for finalizer: {e}")
+
     system_prompt = (
         "You are VIZIER's Supervisor Agent. Synthesize a unified, polished final answer "
         "incorporating details, drafts, or statistics retrieved by specialized agents from the scratchpad.\n\n"
+    )
+    
+    if memories_str:
+        system_prompt += f"Use these details about the user if relevant (from long-term memory):\n{memories_str}\n\n"
+
+    system_prompt += (
         "Scratchpad Content:\n" + json.dumps(state.get("scratchpad", {}), indent=2) + "\n\n"
         "Provide a direct response to the user's initial prompt. Do not mention the word 'scratchpad' or 'specialist' directly unless asked."
     )
@@ -193,6 +238,15 @@ def finalize_response(state: AgentState) -> Dict[str, Any]:
 def router_fn(state: AgentState) -> Literal["SCHEDULER", "SCRIBE", "RESEARCHER", "ANALYST", "FINALIZE"]:
     return state["next_agent"]
 
+def extract_memories_node(state: AgentState) -> Dict[str, Any]:
+    print("[Agent Activity] Running memory extraction node...")
+    try:
+        from app.rag.memory import extract_and_save_memories
+        extract_and_save_memories(state["messages"])
+    except Exception as e:
+        print(f"[Memory System Error] Failed in memory extraction node: {e}")
+    return {}
+
 # =====================================================================
 # 6. COMPILING THE SUPERVISOR GRAPH WITH CHECKPOINTER
 # =====================================================================
@@ -203,6 +257,7 @@ workflow.add_node("scribe_node", run_scribe)
 workflow.add_node("researcher_node", run_researcher)
 workflow.add_node("analyst_node", run_analyst)
 workflow.add_node("finalize_node", finalize_response)
+workflow.add_node("memory_node", extract_memories_node)
 
 workflow.add_edge(START, "supervisor")
 workflow.add_conditional_edges("supervisor", router_fn, {
@@ -217,7 +272,8 @@ workflow.add_edge("scheduler_node", "supervisor")
 workflow.add_edge("scribe_node", "supervisor")
 workflow.add_edge("researcher_node", "supervisor")
 workflow.add_edge("analyst_node", "supervisor")
-workflow.add_edge("finalize_node", END)
+workflow.add_edge("finalize_node", "memory_node")
+workflow.add_edge("memory_node", END)
 
 # Helper to build psycopg connection DSN
 def parse_db_url_to_dsn(url: str) -> str:

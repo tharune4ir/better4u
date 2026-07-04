@@ -247,15 +247,21 @@ class ModelGateway:
         
         # 2. Local Fallback
         try:
-            from sentence_transformers import SentenceTransformer
-            print("[Gateway Embed] Loading local SentenceTransformer model 'all-mpnet-base-v2' (Dimension: 768)...")
-            model = SentenceTransformer("all-mpnet-base-v2")
-            embeddings = model.encode(texts)
+            global _local_embed_model
+            if "_local_embed_model" not in globals() or _local_embed_model is None:
+                from sentence_transformers import SentenceTransformer
+                print("[Gateway Embed] Loading local SentenceTransformer model 'all-mpnet-base-v2' (Dimension: 768) into memory cache...")
+                _local_embed_model = SentenceTransformer("all-mpnet-base-v2")
+            
+            embeddings = _local_embed_model.encode(texts)
             print(f"[Gateway Embed] Successfully embedded {len(texts)} chunks via local model.")
             return [e.tolist() for e in embeddings]
         except Exception as local_err:
             print(f"[Gateway Embed Error] Local SentenceTransformer fallback failed: {local_err}")
             raise RuntimeError(f"Failed to generate embeddings: {local_err}")
+
+# Initialize global cache variable
+_local_embed_model = None
 
 # Initialize global gateway instance
 gateway = ModelGateway()

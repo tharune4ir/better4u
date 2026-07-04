@@ -59,7 +59,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 10 | 7.2 Long-term memory system (mig/seed 008) | ☐ | ☐ | ☐ | |
+| 10 | 7.2 Long-term memory system (mig/seed 008) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☐ | ☐ | ☐ | |
 | 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☐ | ☐ | ☐ | |
 | 13 | 9.2 Write actions via proposal gate (mig 011) | ☐ | ☐ | ☐ | |
@@ -175,13 +175,17 @@ THE CONCEPT THAT CLICKED: Hierarchical agent isolation: specialist subgraphs sho
 STILL FUZZY: None.
 TERMS LEARNED: pgvector, cosine distance, HNSW, tsvector, GIN index, Reciprocal Rank Fusion (RRF), RAG, recursive chunking.
 
-### Block 7.2 — Date: ____ Hours: ____
-WHAT I BUILT:
+### Block 7.2 — Date: 2026-07-04 Hours: 0.75
+WHAT I BUILT: Long-term memory system with the `memories` table and HNSW index in Supabase Postgres (`009_memory_schema.sql`). Structured LLM memory extraction, embedding storage, and vector retrieval functions in `memory.py`. Wired `call_supervisor` and `finalize_response` to inject relevant memories into prompts. Integrated a post-finalization `memory_node` in `supervisor.py`. Added GET, POST, PUT, and DELETE `/memories` REST API endpoints in `main.py`. Built a dark-mode Next.js `/memories` CRUD vault page (`web/app/memories/page.tsx`) with detailed memory transparency explanations. Created SQL seeds (`010_memory_seed.sql`) and markdown curriculum (`docs/09_memory_lesson.md`).
 WHAT BROKE:
+1. Subsequent HTTP calls to `/memories` timed out because instantiating `SentenceTransformer("all-mpnet-base-v2")` inside the memory extraction loop on every single call took 10+ seconds and blocked uvicorn's single thread.
+2. Lessons seed query threw a constraint exception due to `ON CONFLICT (title)` where the unique constraint was actually `(phase, order_index)`.
 HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+1. Cached the `SentenceTransformer` instance globally in `gateway.py` (`_local_embed_model = None`) to prevent loading weights from disk repeatedly.
+2. Updated the lessons conflict target to `(phase, order_index)`.
+THE CONCEPT THAT CLICKED: Memory taxonomy (semantic/episodic/procedural). Combining pre-turn vector memory recall with post-turn LLM memory extraction. The necessity of user-visible memory vault CRUD for safety, error correction, and trust/privacy alignment.
+STILL FUZZY: None.
+TERMS LEARNED: semantic memory, episodic memory, procedural memory, memory extraction, consolidation, importance scoring.
 
 ### Block 8.1 — Date: ____ Hours: ____
 WHAT I BUILT:
