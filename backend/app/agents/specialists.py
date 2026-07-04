@@ -21,6 +21,48 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from app.llm.gateway import gateway
 
+# ---------------------------------------------------------------------
+# MCP Tools Sync Loader
+# ---------------------------------------------------------------------
+import asyncio
+import threading
+from app.mcp_client import get_mcp_tools
+
+mcp_tools = []
+try:
+    class AsyncRunner:
+        def __init__(self):
+            self.result = []
+        def run(self):
+            self.result = asyncio.run(get_mcp_tools())
+            
+    runner = AsyncRunner()
+    t_mcp = threading.Thread(target=runner.run)
+    t_mcp.start()
+    t_mcp.join()
+    mcp_tools = runner.result
+except Exception as mcp_err:
+    print(f"[Specialists MCP Load Warning] Failed to load MCP tools synchronously: {mcp_err}")
+    mcp_tools = []
+
+def _get_tool_schema(t) -> dict:
+    if not t.args_schema:
+        parameters = {"type": "object", "properties": {}}
+    elif hasattr(t.args_schema, "model_json_schema"):
+        parameters = t.args_schema.model_json_schema()
+    elif hasattr(t.args_schema, "schema"):
+        parameters = t.args_schema.schema()
+    else:
+        parameters = {"type": "object", "properties": {}}
+    return {
+        "type": "function",
+        "function": {
+            "name": t.name,
+            "description": t.description or "",
+            "parameters": parameters
+        }
+    }
+
 # =====================================================================
 # 1. STATE STRUCTURE FOR SPECIALISTS (COMPATIBLE WITH PARENT STATE)
 # =====================================================================
@@ -121,16 +163,10 @@ def get_calendar_events() -> str:
     return json.dumps(events, indent=2)
 
 scheduler_tools = [get_current_time, get_calendar_events]
-scheduler_schema = [
-    {
-        "type": "function",
-        "function": {
-            "name": t.name,
-            "description": t.description,
-            "parameters": t.args_schema.schema() if t.args_schema else {"type": "object", "properties": {}}
-        }
-    } for t in scheduler_tools
-]
+for t in mcp_tools:
+    if t.name in ("get_time", "read_todo_list"):
+        scheduler_tools.append(t)
+scheduler_schema = [_get_tool_schema(t) for t in scheduler_tools]
 
 scheduler_system_prompt = (
     "You are VIZIER's SCHEDULER agent. You manage time-related queries, dates, and calendar events. "
@@ -186,21 +222,15 @@ def draft_message(recipient: str, channel: str, topic: str, content: str) -> str
     return draft
 
 scribe_tools = [draft_message]
-scribe_schema = [
-    {
-        "type": "function",
-        "function": {
-            "name": t.name,
-            "description": t.description,
-            "parameters": t.args_schema.schema() if t.args_schema else {"type": "object", "properties": {}}
-        }
-    } for t in scribe_tools
-]
+for t in mcp_tools:
+    if t.name == "telegram_notify":
+        scribe_tools.append(t)
+scribe_schema = [_get_tool_schema(t) for t in scribe_tools]
 
 scribe_system_prompt = (
     "You are VIZIER's SCRIBE agent. You specialize in drafting messages, emails, and social media posts. "
-    "Ensure all drafted text is clean, professional, and directly matches the user's intent. "
-    "Do NOT send messages yourself; only draft them and output the text."
+    "You also have a tool to send push notification alerts to the principal's phone via Telegram (telegram_notify). "
+    "Ensure all drafted text is clean, professional, and directly matches the user's intent."
 )
 
 scribe_node = make_specialist_node("SCRIBE", scribe_system_prompt, scribe_schema)

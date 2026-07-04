@@ -14,5 +14,5 @@ duckduckgo-search
 yfinance
 pymupdf
 sentence-transformers
-
-
+mcp
+langchain-mcp-adapters
