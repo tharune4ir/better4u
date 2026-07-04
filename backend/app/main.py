@@ -210,3 +210,131 @@ def delete_memory(memory_id: str):
     return {"status": "ok"}
 
 
+# =====================================================================
+# PROPOSALS ENDPOINTS (Block 9.2 — Write Actions via Proposal Gate)
+# These endpoints power the web Approval Inbox (built in Block 10.1).
+# The CLI reviewer (python -m app.actions.review) uses the same DB.
+# =====================================================================
+
+@app.get("/proposals")
+def get_proposals(status: Optional[str] = None):
+    """
+    List proposals, optionally filtered by status.
+    Status values: proposed, approved, rejected, executed, failed
+    """
+    import psycopg
+    import re
+    from app.settings import settings
+
+    def parse_db_url_to_dsn(url):
+        m = re.match(r"postgresql://([^:]+):(.+)@([^:]+):(\d+)/(.+)", url)
+        if not m:
+            return url
+        user, password, host, port, dbname = m.groups()
+        return f"dbname={dbname} user={user} password={password} host={host} port={port}"
+
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            if status:
+                cur.execute(
+                    """
+                    SELECT id, agent, action_type, payload, rationale, risk_tier, status,
+                           idempotency_key, created_at, decided_at, executed_at, result
+                    FROM proposed_actions
+                    WHERE status = %s
+                    ORDER BY created_at DESC
+                    """,
+                    (status,)
+                )
+            else:
+                cur.execute(
+                    """
+                    SELECT id, agent, action_type, payload, rationale, risk_tier, status,
+                           idempotency_key, created_at, decided_at, executed_at, result
+                    FROM proposed_actions
+                    ORDER BY created_at DESC
+                    LIMIT 50
+                    """
+                )
+            rows = cur.fetchall()
+            proposals = []
+            for r in rows:
+                proposals.append({
+                    "id": str(r[0]),
+                    "agent": r[1],
+                    "action_type": r[2],
+                    "payload": r[3],
+                    "rationale": r[4],
+                    "risk_tier": r[5],
+                    "status": r[6],
+                    "idempotency_key": r[7],
+                    "created_at": r[8].isoformat() if r[8] else None,
+                    "decided_at": r[9].isoformat() if r[9] else None,
+                    "executed_at": r[10].isoformat() if r[10] else None,
+                    "result": r[11],
+                })
+            return proposals
+
+
+@app.post("/proposals/{proposal_id}/approve")
+def approve_proposal(proposal_id: str):
+    """
+    Approve a pending proposal and immediately execute it.
+    Idempotency: if already executed, returns 'already_executed'.
+    """
+    import psycopg
+    import re
+    from datetime import datetime, timezone
+    from app.settings import settings
+    from app.actions.executors import execute_proposal
+
+    def parse_db_url_to_dsn(url):
+        m = re.match(r"postgresql://([^:]+):(.+)@([^:]+):(\d+)/(.+)", url)
+        if not m:
+            return url
+        user, password, host, port, dbname = m.groups()
+        return f"dbname={dbname} user={user} password={password} host={host} port={port}"
+
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE proposed_actions SET status='approved', decided_at=%s WHERE id=%s AND status='proposed'",
+                (datetime.now(timezone.utc), proposal_id)
+            )
+        conn.commit()
+
+    try:
+        result = execute_proposal(proposal_id)
+        return {"status": "executed", "result": result}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+@app.post("/proposals/{proposal_id}/reject")
+def reject_proposal(proposal_id: str):
+    """
+    Reject a pending proposal. Sets status to 'rejected'. Cannot be undone.
+    """
+    import psycopg
+    import re
+    from datetime import datetime, timezone
+    from app.settings import settings
+
+    def parse_db_url_to_dsn(url):
+        m = re.match(r"postgresql://([^:]+):(.+)@([^:]+):(\d+)/(.+)", url)
+        if not m:
+            return url
+        user, password, host, port, dbname = m.groups()
+        return f"dbname={dbname} user={user} password={password} host={host} port={port}"
+
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE proposed_actions SET status='rejected', decided_at=%s WHERE id=%s AND status='proposed'",
+                (datetime.now(timezone.utc), proposal_id)
+            )
+        conn.commit()
+    return {"status": "rejected", "proposal_id": proposal_id}

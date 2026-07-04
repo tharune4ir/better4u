@@ -4,12 +4,20 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 # SCOPES define the specific access permissions we are requesting from the user.
-# In accordance with the Principle of Least Privilege, we only request read-only scopes:
-# - gmail.readonly: allows reading emails and threads, but not sending, deleting, or modifying.
-# - calendar.readonly: allows viewing calendar events, but not creating or editing them.
+# Block 9.1 added read-only scopes. Block 9.2 extends to write scopes for the proposal system.
+# IMPORTANT: Having these scopes does NOT mean the agent can send freely.
+# The proposal gate in app/actions/ enforces that only APPROVED proposals get executed.
+# This is the critical distinction between "technically capable" and "safely permitted".
 SCOPES = [
-    "https://www.googleapis.com/auth/gmail.readonly",
-    "https://www.googleapis.com/auth/calendar.readonly"
+    # --- READ SCOPES (Block 9.1) ---
+    "https://www.googleapis.com/auth/gmail.readonly",        # Read emails
+    "https://www.googleapis.com/auth/calendar.readonly",     # Read calendar events
+
+    # --- WRITE SCOPES (Block 9.2) — all gated by human approval before execution ---
+    "https://www.googleapis.com/auth/gmail.send",            # Send emails (HIGH risk tier)
+    "https://www.googleapis.com/auth/gmail.modify",          # Label/archive emails (LOW risk tier)
+    "https://www.googleapis.com/auth/calendar.events",       # Create/modify calendar events (MEDIUM risk)
+    "https://www.googleapis.com/auth/tasks",                 # Create Google Tasks (LOW risk tier)
 ]
 
 # Paths for client configuration and generated credentials tokens.

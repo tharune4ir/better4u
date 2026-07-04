@@ -62,7 +62,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☑ | ☑ | ☐ | 2026-07-04 |
-| 13 | 9.2 Write actions via proposal gate (mig 011) | ☐ | ☐ | ☐ | |
+| 13 | 9.2 Write actions via proposal gate (mig 011) | ☑ | ☑ | ☐ | 2026-07-04 |
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☐ | ☐ | ☐ | |
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☐ | ☐ | ☐ | |
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☐ | ☐ | ☐ | |
@@ -217,13 +217,13 @@ THE CONCEPT THAT CLICKED: OAuth2 Installed App Flow (offline `access_type` for r
 STILL FUZZY: None.
 TERMS LEARNED: OAuth2, Authorization Code Flow, PKCE, refresh token, scope, consent screen, testing mode.
 
-### Block 9.2 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 9.2 — Date: 2026-07-04 Hours: 0.75
+WHAT I BUILT: Extended OAuth scopes to include gmail.send, gmail.modify, calendar.events, and tasks. Created `backend/app/actions/` package with `proposer.py` (the only write-action entry point for agents), `executors.py` (four action executors: send_email, create_calendar_event, create_task, label_email), and `review.py` (interactive CLI approval tool). Added PROPOSE-only tools to SCRIBE and SCHEDULER specialists — agents can never call executors directly (code-level enforcement). Added `/proposals` REST API endpoints to FastAPI. Created `014_proposed_actions.sql` migration, `015_actions_seed.sql` terms and lesson, and `docs/12_actions_lesson.md` curriculum.
+WHAT BROKE: N/A — built preventively from experience with Block 9.1. All imports verified clean before commit.
+HOW I FIXED IT: N/A
+THE CONCEPT THAT CLICKED: The propose→approve→execute pipeline is the production pattern for safe agentic AI. Code-level enforcement (Python import isolation) is categorically stronger than prompt-level rules because it cannot be bypassed by prompt injection. Idempotency keys guarantee at-most-once execution even when approval is clicked multiple times.
+STILL FUZZY: None.
+TERMS LEARNED: Proposal pattern, executor, idempotency key, risk tier, code-level enforcement, prompt-level enforcement, confused deputy.
 
 ### Block 10.1 — Date: ____ Hours: ____
 WHAT I BUILT:

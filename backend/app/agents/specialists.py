@@ -230,7 +230,76 @@ def upcoming_events() -> str:
     except Exception as e:
         return f"Error retrieving calendar events: {e}"
 
-scheduler_tools = [get_current_time, upcoming_events]
+# =====================================================================
+# SCHEDULER PROPOSE TOOLS (write-action proposals — human approval required)
+# =====================================================================
+@tool
+def propose_create_calendar_event(
+    title: str,
+    start_time: str,
+    end_time: str,
+    description: str,
+    rationale: str
+) -> str:
+    """
+    Proposes creating a Google Calendar event. Does NOT create it immediately.
+    A human must approve via 'python -m app.actions.review' first.
+    start_time and end_time must be ISO 8601 format e.g. '2026-07-05T10:00:00'.
+    Risk tier: MEDIUM (calendar events can be undone but affect scheduling).
+    """
+    try:
+        from app.actions.proposer import propose_action
+        proposal_id = propose_action(
+            agent="SCHEDULER",
+            action_type="create_calendar_event",
+            payload={
+                "title": title,
+                "start_time": start_time,
+                "end_time": end_time,
+                "description": description
+            },
+            risk_tier="medium",
+            rationale=rationale
+        )
+        return (
+            f"\u2705 Calendar event proposal created (ID: {proposal_id[:8]}...).\n"
+            f"Action: Create event '{title}' from {start_time} to {end_time}\n"
+            f"Risk: MEDIUM — requires your approval.\n"
+            f"To review: run 'python -m app.actions.review' in your backend terminal."
+        )
+    except Exception as e:
+        return f"Error creating calendar event proposal: {e}"
+
+
+@tool
+def propose_create_task(title: str, due_date: str, notes: str, rationale: str) -> str:
+    """
+    Proposes creating a Google Task. Does NOT create it immediately.
+    A human must approve via 'python -m app.actions.review' first.
+    due_date format: YYYY-MM-DD (e.g. '2026-07-10'). Leave empty if no specific date.
+    Risk tier: LOW (tasks are reversible and low-impact).
+    """
+    try:
+        from app.actions.proposer import propose_action
+        proposal_id = propose_action(
+            agent="SCHEDULER",
+            action_type="create_task",
+            payload={"title": title, "due_date": due_date, "notes": notes},
+            risk_tier="low",
+            rationale=rationale
+        )
+        return (
+            f"\u2705 Task proposal created (ID: {proposal_id[:8]}...).\n"
+            f"Action: Create task '{title}' due {due_date}\n"
+            f"Risk: LOW — requires your approval.\n"
+            f"To review: run 'python -m app.actions.review' in your backend terminal."
+        )
+    except Exception as e:
+        return f"Error creating task proposal: {e}"
+
+
+scheduler_tools = [get_current_time, upcoming_events, propose_create_calendar_event, propose_create_task]
+
 for t in mcp_tools:
     if t.name in ("get_time", "read_todo_list"):
         scheduler_tools.append(t)
@@ -238,7 +307,12 @@ scheduler_schema = [_get_tool_schema(t) for t in scheduler_tools]
 
 scheduler_system_prompt = (
     "You are VIZIER's SCHEDULER agent. You manage time-related queries, dates, and calendar events. "
-    "Use your tools when asked about upcoming events or time. Keep responses concise and factual."
+    "Use upcoming_events to check the calendar and get_current_time for the current time. "
+    "CRITICAL RULE: For any write action (creating events or tasks), you MUST use "
+    "propose_create_calendar_event or propose_create_task tools. NEVER claim to have created "
+    "an event or task without using these propose tools. Proposals require human approval before "
+    "execution — always tell the user their proposal ID and that they should run "
+    "'python -m app.actions.review' to approve it."
 )
 
 scheduler_node = make_specialist_node("SCHEDULER", scheduler_system_prompt, scheduler_schema)
@@ -317,7 +391,65 @@ def read_recent_emails() -> str:
     except Exception as e:
         return f"Error retrieving emails: {e}"
 
-scribe_tools = [draft_message, read_recent_emails]
+# =====================================================================
+# SCRIBE PROPOSE TOOLS (write-action proposals — human approval required)
+# Agents PROPOSE. Humans APPROVE. Executors ACT.
+# These tools NEVER import from executors.py — code-level enforcement.
+# =====================================================================
+@tool
+def propose_send_email(to: str, subject: str, body: str, rationale: str) -> str:
+    """
+    Proposes sending an email via Gmail. This does NOT send immediately.
+    A human must approve via 'python -m app.actions.review' before it is sent.
+    Risk tier: HIGH (emails are irreversible, real-world external actions).
+    """
+    try:
+        from app.actions.proposer import propose_action
+        proposal_id = propose_action(
+            agent="SCRIBE",
+            action_type="send_email",
+            payload={"to": to, "subject": subject, "body": body},
+            risk_tier="high",
+            rationale=rationale
+        )
+        return (
+            f"\u2705 Email draft proposal created (ID: {proposal_id[:8]}...).\n"
+            f"Action: Send email to '{to}' — Subject: '{subject}'\n"
+            f"Risk: HIGH — requires your approval.\n"
+            f"To review: run 'python -m app.actions.review' in your backend terminal."
+        )
+    except Exception as e:
+        return f"Error creating email proposal: {e}"
+
+
+@tool
+def propose_label_email(email_id: str, label_name: str, rationale: str) -> str:
+    """
+    Proposes applying a Gmail label to an email (e.g., IMPORTANT, STARRED, READ).
+    This does NOT modify the email immediately — requires human approval.
+    Risk tier: LOW (labels are reversible).
+    """
+    try:
+        from app.actions.proposer import propose_action
+        proposal_id = propose_action(
+            agent="SCRIBE",
+            action_type="label_email",
+            payload={"email_id": email_id, "label_name": label_name},
+            risk_tier="low",
+            rationale=rationale
+        )
+        return (
+            f"\u2705 Email label proposal created (ID: {proposal_id[:8]}...).\n"
+            f"Action: Apply label '{label_name}' to email {email_id[:12]}...\n"
+            f"Risk: LOW — requires your approval.\n"
+            f"To review: run 'python -m app.actions.review' in your backend terminal."
+        )
+    except Exception as e:
+        return f"Error creating label proposal: {e}"
+
+
+scribe_tools = [draft_message, read_recent_emails, propose_send_email, propose_label_email]
+
 for t in mcp_tools:
     if t.name == "telegram_notify":
         scribe_tools.append(t)
@@ -325,8 +457,12 @@ scribe_schema = [_get_tool_schema(t) for t in scribe_tools]
 
 scribe_system_prompt = (
     "You are VIZIER's SCRIBE agent. You specialize in drafting messages, emails, and social media posts. "
-    "You also have a tool to send push notification alerts to the principal's phone via Telegram (telegram_notify). "
-    "Ensure all drafted text is clean, professional, and directly matches the user's intent."
+    "You have a tool to send push notifications to the principal's phone via Telegram (telegram_notify). "
+    "You also have Gmail READ access (read_recent_emails) and WRITE tools for email actions. "
+    "CRITICAL RULE: For any write action (sending emails or labeling), you MUST use propose_send_email or "
+    "propose_label_email. NEVER attempt to send an email directly. "
+    "Proposals are reviewed by the human before execution — always tell the user their proposal ID and "
+    "that they should run 'python -m app.actions.review' to approve it."
 )
 
 scribe_node = make_specialist_node("SCRIBE", scribe_system_prompt, scribe_schema)
