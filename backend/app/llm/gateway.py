@@ -51,14 +51,15 @@ class ModelGateway:
             }
         ]
 
-    def _get_cache_key(self, messages: List[Dict[str, str]], model: str, tools: Optional[List[Dict[str, Any]]]) -> str:
+    def _get_cache_key(self, messages: List[Dict[str, str]], model: str, tools: Optional[List[Dict[str, Any]]] = None, **kwargs) -> str:
         """
         Generate a unique MD5 hash for the request payload.
         """
         payload = {
             "messages": messages,
             "model": model,
-            "tools": tools
+            "tools": tools,
+            "kwargs": kwargs
         }
         payload_str = json.dumps(payload, sort_keys=True)
         return hashlib.md5(payload_str.encode("utf-8")).hexdigest()
@@ -104,12 +105,12 @@ class ModelGateway:
         self.cooldowns[provider_name] = time.time() + duration
         print(f"\n[Gateway Cooldown] Cooldown applied to '{provider_name}' for {duration} seconds.")
 
-    def complete(self, messages: List[Dict[str, str]], tools: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+    def complete(self, messages: List[Dict[str, str]], tools: Optional[List[Dict[str, Any]]] = None, **kwargs) -> Dict[str, Any]:
         """
         Execute completions using the priority chain, retrying with backoff/jitter 
         and falling back on failures.
         """
-        cache_key = self._get_cache_key(messages, self.providers[0]["model"], tools)
+        cache_key = self._get_cache_key(messages, self.providers[0]["model"], tools, **kwargs)
         
         # 1. Lookup cache
         cached_res = self._lookup_cache(cache_key)
@@ -158,7 +159,8 @@ class ModelGateway:
                         model=model,
                         messages=messages,
                         tools=tools,
-                        temperature=0.2
+                        temperature=0.2,
+                        **kwargs
                     )
                     
                     elapsed = time.time() - start_time

@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Optional
+import json
 from langchain_core.messages import HumanMessage
 from app.settings import settings
 from app.llm.gateway import gateway
-from app.agents.core_agent import core_agent
+from app.agents.supervisor import supervisor_agent
 
 app = FastAPI(
     title="VIZIER API",
@@ -31,27 +33,38 @@ class ChatRequest(BaseModel):
     thread_id: Optional[str] = None
 
 @app.post("/chat")
-def chat(request: ChatRequest):
+async def chat(request: ChatRequest):
     """
-    Gateway chat endpoint. Accepts a user query, passes it to the LangGraph core_agent,
-    which executes agent tool-loops dynamically, persisting state under the thread_id.
+    Gateway chat endpoint. Accepts a user query, streams agent status transitions via SSE,
+    and returns the final synthesized agent message.
     """
-    thread_id = request.thread_id or "default-session"
-    config = {"configurable": {"thread_id": thread_id}}
-    
-    # Execute graph
-    result = core_agent.invoke(
-        {"messages": [HumanMessage(content=request.message)]},
-        config
-    )
-    
-    # Extract last message (final agent reply)
-    final_msg = result["messages"][-1]
-    
-    return {
-        "reply": final_msg.content,
-        "thread_id": thread_id
-    }
+    async def sse_generator():
+        thread_id = request.thread_id or "default-session"
+        config = {"configurable": {"thread_id": thread_id}}
+        inputs = {"messages": [HumanMessage(content=request.message)], "scratchpad": {}}
+        
+        try:
+            # Stream graph updates
+            for chunk in supervisor_agent.stream(inputs, config, stream_mode="updates"):
+                for node_name, state_update in chunk.items():
+                    if node_name == "supervisor":
+                        next_agent = state_update.get("next_agent", "FINALIZE")
+                        yield f"event: status\ndata: {json.dumps({'agent': 'SUPERVISOR', 'message': f'Routing to {next_agent}...'})}\n\n"
+                    elif node_name == "scheduler_node":
+                        yield f"event: status\ndata: {json.dumps({'agent': 'SCHEDULER', 'message': 'Scheduler is checking dates/calendar events...' })}\n\n"
+                    elif node_name == "scribe_node":
+                        yield f"event: status\ndata: {json.dumps({'agent': 'SCRIBE', 'message': 'Scribe is drafting message draft...' })}\n\n"
+                    elif node_name == "researcher_node":
+                        yield f"event: status\ndata: {json.dumps({'agent': 'RESEARCHER', 'message': 'Researcher is querying DuckDuckGo/fetching url...' })}\n\n"
+                    elif node_name == "analyst_node":
+                        yield f"event: status\ndata: {json.dumps({'agent': 'ANALYST', 'message': 'Analyst is running stock ticker queries/math...' })}\n\n"
+                    elif node_name == "finalize_node":
+                        final_msg = state_update["messages"][-1]
+                        yield f"event: message\ndata: {json.dumps({'reply': final_msg.content})}\n\n"
+        except Exception as e:
+            yield f"event: error\ndata: {json.dumps({'error': str(e)})}\n\n"
+            
+    return StreamingResponse(sse_generator(), media_type="text/event-stream")
 
 @app.get("/health")
 def health_check():

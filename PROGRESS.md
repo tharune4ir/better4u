@@ -57,7 +57,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 5 | 4.1 LiteLLM gateway + fallbacks (seed 003) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 6 | 5.1 Handmade ReAct agent (seed 004) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☐ | ☐ | ☐ | |
+| 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☐ | ☐ | ☐ | |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☐ | ☐ | ☐ | |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☐ | ☐ | ☐ | |
@@ -153,13 +153,13 @@ THE CONCEPT THAT CLICKED: Durable execution: checkpointers serializing and writi
 STILL FUZZY: None.
 TERMS LEARNED: StateGraph, node, edge, reducer, checkpointer, thread.
 
-### Block 6.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 6.1 — Date: 2026-07-04 Hours: 0.5
+WHAT I BUILT: Hierarchical Multi-Agent Supervisor coordination graph (`supervisor.py`) with 4 specialist subgraphs (`specialists.py`): Scheduler, Scribe, Researcher, Analyst. Integrated real web search (DuckDuckGo), text extraction (Trafilatura), and stock checks (yfinance). Exposed `/chat` streaming agent status updates over SSE.
+WHAT BROKE: `ModelGateway.complete()` lacked `**kwargs` support, raising a `TypeError` when we queried it with `response_format` for JSON outputs.
+HOW I FIXED IT: Refactored `gateway.py` to support `**kwargs` dynamically inside cache key hashing and `litellm.completion()` invocations.
+THE CONCEPT THAT CLICKED: Hierarchical agent routing: supervisor delegating sequentially to multiple specialists, accumulating facts in a shared scratchpad.
+STILL FUZZY: None.
+TERMS LEARNED: supervisor, subgraph, handoff, routing, structured output, scratchpad, SSE.
 
 ### Block 7.1 — Date: ____ Hours: ____
 WHAT I BUILT:

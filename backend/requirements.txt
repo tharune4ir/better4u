@@ -9,3 +9,7 @@ langgraph
 langchain-core
 langgraph-checkpoint-postgres
 psycopg-pool
+trafilatura
+duckduckgo-search
+yfinance
+
