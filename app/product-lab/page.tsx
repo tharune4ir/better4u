@@ -377,11 +377,7 @@ export default function ProductLabPage() {
   const [videoSrc, setVideoSrc] = useState(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
 
   useEffect(() => {
-    if (activeBrand.id === "josh") {
-      setVideoSrc(`/all_image_files/product-lab/2_josh_concept_brand/Aluminium_can_opening_slow_motion_202606301659.mp4`);
-    } else {
-      setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
-    }
+    setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
   }, [activeBrand]);
 
   useEffect(() => {
