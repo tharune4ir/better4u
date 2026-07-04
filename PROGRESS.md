@@ -60,7 +60,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☐ | ☐ | ☐ | |
+| 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☐ | ☐ | ☐ | |
 | 13 | 9.2 Write actions via proposal gate (mig 011) | ☐ | ☐ | ☐ | |
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☐ | ☐ | ☐ | |
@@ -187,13 +187,17 @@ THE CONCEPT THAT CLICKED: Memory taxonomy (semantic/episodic/procedural). Combin
 STILL FUZZY: None.
 TERMS LEARNED: semantic memory, episodic memory, procedural memory, memory extraction, consolidation, importance scoring.
 
-### Block 8.1 — Date: ____ Hours: ____
-WHAT I BUILT:
+### Block 8.1 — Date: 2026-07-04 Hours: 0.75
+WHAT I BUILT: A custom local MCP server (`vizier_utils_server.py`) using FastMCP exposing `get_time`, `telegram_notify` (Telegram bot push actions), and `read_todo_list`. Built `mcp_client.py` using `langchain-mcp-adapters` to dynamically start the server over stdio on-demand. Integrated the client into `specialists.py` to register MCP tools into subgraphs (`SCHEDULER` and `SCRIBE`). Wrote the MCP security overview (`docs/10_mcp_lesson.md`) and database migrations/seeds (`011_todos_schema.sql`, `012_mcp_seed.sql`).
 WHAT BROKE:
+1. `pip install` of `mcp` failed because the active FastAPI worker was locking `uvicorn.exe` inside `.venv/Scripts/`.
+2. Seed SQL threw column errors because `dictionary_terms` uses `beginner_definition`/`deep_definition` and `lessons` uses `body_markdown`.
 HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+1. Terminated the uvicorn process on port 8000, installed dependencies, and restarted the server.
+2. Formatted the dictionary terms and lesson content to match the exact database schema structures.
+THE CONCEPT THAT CLICKED: Model Context Protocol (MCP) decoupling model hosting from tool execution. JSON-RPC protocol transport layers (stdio vs HTTP SSE). Security threat vectors: confused deputy privilege abuse, indirect prompt injection (tool poisoning), and allowlists.
+STILL FUZZY: None.
+TERMS LEARNED: Model Context Protocol (MCP), MCP server, MCP client, stdio transport, tool poisoning, confused deputy, allowlist.
 
 ### Block 9.1 — Date: ____ Hours: ____
 WHAT I BUILT:
