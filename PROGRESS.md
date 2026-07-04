@@ -55,7 +55,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 3 | 3.1 Academy schema + seed (SQL 001–002) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 4 | 3.2 Academy UI (Dictionary/Lessons/Progress) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 5 | 4.1 LiteLLM gateway + fallbacks (seed 003) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 6 | 5.1 Handmade ReAct agent (seed 004) | ☐ | ☐ | ☐ | |
+| 6 | 5.1 Handmade ReAct agent (seed 004) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 7 | 5.2 LangGraph + Postgres checkpointer (seed 005) | ☐ | ☐ | ☐ | |
 | 8 | 6.1 Supervisor + 4 specialists + SSE (seed 006) | ☐ | ☐ | ☐ | |
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☐ | ☐ | ☐ | |
@@ -137,13 +137,13 @@ THE CONCEPT THAT CLICKED: Token caching to preserve free-tier quotas and jitter 
 STILL FUZZY: None.
 TERMS LEARNED: Rate Limit, Backoff, Jitter, Fallback Chain, Router, Cache Hit/Miss, Provider.
 
-### Block 5.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 5.1 — Date: 2026-07-04 Hours: 0.5
+WHAT I BUILT: A handmade ReAct agent loop (`handmade_react.py`) with a tool registry (safe AST calculator, time, weather). Implemented custom regex-based text parsing loop and a native function-calling loop.
+WHAT BROKE: Emojis in print logs threw `UnicodeEncodeError` in Windows cp1252 shells. Zero-argument tools failed with `TypeError` when called with empty input strings.
+HOW I FIXED IT: Removed console emojis, updated ReAct regex parser to match empty strings (`Action Input:\s*(.*)`), and validated function signature parameters using `inspect.signature`.
+THE CONCEPT THAT CLICKED: Perceive-Plan-Act-Observe loops. Why native function-calling schemas beat fragile, error-prone custom regex text-parsers.
+STILL FUZZY: None.
+TERMS LEARNED: ReAct trace, tool schema, tool registry, max iterations, hallucinated tool call, native function calling.
 
 ### Block 5.2 — Date: ____ Hours: ____
 WHAT I BUILT:

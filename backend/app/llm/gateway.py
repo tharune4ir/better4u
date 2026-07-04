@@ -82,6 +82,7 @@ class ModelGateway:
         """
         cache_path = os.path.join(self.cache_dir, f"{key}.json")
         try:
+            os.makedirs(self.cache_dir, exist_ok=True)
             with open(cache_path, "w", encoding="utf-8") as f:
                 json.dump(response_data, f, ensure_ascii=False, indent=2)
         except Exception as e:
