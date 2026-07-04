@@ -1,0 +1,41 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Node packages
+node_modules/
+npm-debug.log*
+
+# Next.js build output and cache
+.next/
+out/
+build/
+dist/
+
+# Local configuration and credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.backup
+*.backup.*
+
+# Local cache
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+.gemini/
+antigravity-ide/
