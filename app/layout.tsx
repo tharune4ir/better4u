@@ -22,11 +22,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Trelis Life",
-  description: "A grain-first, prebiotic-rich gut health food hub.",
+  description: "Better-for-you versions of everyday food and drinks, crafted with real ingredients and a lot less sugar.",
   manifest: "/manifest.json",
   openGraph: {
     title: "Trelis Life",
-    description: "A grain-first, prebiotic-rich gut health food hub.",
+    description: "Better-for-you versions of everyday food and drinks, crafted with real ingredients and a lot less sugar.",
     images: [
       {
         url: "/logo-transparent.png",

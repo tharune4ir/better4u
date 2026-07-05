@@ -37,7 +37,7 @@ export default function ApproachPage() {
     { instead: "Sugary lassi / yogurt drinks", reachFor: "BATCH · Strawberry Kefir" },
     { instead: "Green juice / skipped breakfast", reachFor: "PULP · Green Reset" },
     { instead: "Store kombucha / sugary tonics", reachFor: "BATCH · Kanji / Jamun-Lime Kombucha" },
-    { instead: "Instant coffee / sugary chai", reachFor: "STEEP · Filter Kaapi / Gut Chai" },
+    { instead: "Instant coffee / sugary chai", reachFor: "STEEP · Filter Kaapi / Spiced Chai" },
     { instead: "Sugary granola bars / biscuits", reachFor: "GRIT · Millet & Date / Cacao Nib" },
   ];
 
@@ -89,7 +89,7 @@ export default function ApproachPage() {
             The default is hurting us.
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
-            In our cities a sugary soda or shake follows almost every meal — it's the default, and it's quietly wrecking our gut and energy.
+            In our cities a sugary soda or shake follows almost every meal — it's the default, and it's quietly wrecking our health and energy.
           </p>
         </section>
 

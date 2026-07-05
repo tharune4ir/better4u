@@ -109,7 +109,7 @@ export default function JournalHubPage() {
                   First Batch
                 </h4>
                 <p className="text-sm text-slate-500 font-light leading-relaxed">
-                  21 simple recipes to start cooking for your gut — even if you've never cooked before.
+                  21 simple recipes to start cooking real food that actually tastes good — even if you've never cooked before.
                 </p>
                 <div className="pt-2 flex items-center gap-2 text-xs font-bold text-[#2A7F7F] uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
                   <span>Start Reading</span>

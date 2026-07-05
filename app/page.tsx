@@ -182,11 +182,11 @@ export default function LandingHub() {
           </span>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-slate-900 leading-[1.15] px-2 max-w-3xl">
-            Gut-health that actually <span className="font-semibold text-slate-950 italic">tastes good</span>.
+            Real food that actually <span className="font-semibold text-slate-950 italic">tastes good</span>.
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-xl leading-relaxed">
-            Trelis makes better-for-you versions of the drinks people reach for every day — familiar flavours, real fermentation, a lot less sugar.
+            Trelis makes better-for-you versions of the food and drinks people reach for every day — familiar flavours, real ingredients, and a lot less sugar.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
@@ -194,7 +194,7 @@ export default function LandingHub() {
               onClick={() => router.push("/product-lab")}
               className="px-8 py-3.5 bg-[#2A7F7F] hover:bg-[#1e5c5c] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 cursor-pointer shadow-[0_4px_14px_rgba(42,127,127,0.3)] hover:shadow-[0_6px_20px_rgba(42,127,127,0.4)] hover:scale-[1.02]"
             >
-              <span>See the drinks</span>
+              <span>See the range</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <button 
@@ -220,10 +220,10 @@ export default function LandingHub() {
             The Default
           </span>
           <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
-            A sugary soda or shake follows almost every meal in our cities.
+            Everyday food and drink defaults aren't doing us any favours.
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-            It's the default and it harms the gut. Wellness answered with joyless powders and rules nobody keeps.
+            A sugary soda, processed snack, or heavy dessert follows almost every meal. Trelis makes the better-tasting, better-for-you version.
           </p>
         </div>
       </section>
@@ -234,12 +234,12 @@ export default function LandingHub() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#2A7F7F]/5 rounded-full blur-[80px] pointer-events-none" />
           
           <Search className="w-6 h-6 text-[#2A7F7F] mx-auto opacity-70" />
-          <h2 className="text-xl sm:text-2xl font-light text-slate-900 leading-relaxed px-4">
-            We didn't make another health drink — <br className="hidden md:block" />
-            we remade the drinks you already love, better.
+          <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
+            We didn't make another diet food or health drink — <br className="hidden md:block" />
+            we remade the everyday foods and drinks you already reach for, better.
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-            Taste is how you get people to actually do the healthy thing.
+            Because food should be food first. Taste is how you make healthy habits stick.
           </p>
         </div>
       </section>
@@ -270,7 +270,7 @@ export default function LandingHub() {
                 <h3 className="text-lg font-bold text-slate-900">ALIVE</h3>
                 <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Glass</span>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Probiotic gut soda.</p>
+              <p className="text-sm font-medium text-slate-700 mb-2">Better-for-you probiotic soda.</p>
               <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> nimbu/goli soda & sweet colas.
               </p>
@@ -315,7 +315,7 @@ export default function LandingHub() {
                 <h3 className="text-lg font-bold text-slate-900">PULP</h3>
                 <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Gut smoothies.</p>
+              <p className="text-sm font-medium text-slate-700 mb-2">Active culture smoothies.</p>
               <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> green juice, mango shakes, skipped breakfasts.
               </p>
@@ -330,7 +330,7 @@ export default function LandingHub() {
                 <h3 className="text-lg font-bold text-slate-900">STEEP</h3>
                 <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Mug</span>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Hot gut-friendly brews.</p>
+              <p className="text-sm font-medium text-slate-700 mb-2">Hot botanical brews.</p>
               <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> sugary chai, instant coffee, after-dinner sweets.
               </p>
@@ -345,7 +345,7 @@ export default function LandingHub() {
                 <h3 className="text-lg font-bold text-slate-900">GRIT</h3>
                 <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Bar</span>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Gut bars & bites.</p>
+              <p className="text-sm font-medium text-slate-700 mb-2">Whole-food bars & bites.</p>
               <p className="text-xs text-slate-500 font-light leading-relaxed">
                 <strong className="text-slate-800 font-medium">Replaces:</strong> sugary granola bars, biscuits, fried namkeen.
               </p>
@@ -407,7 +407,7 @@ export default function LandingHub() {
           </span>
           
           <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
-            A better-for-you version of every drink you reach for, all day.
+            A better-for-you version of the food and drink you reach for, all day.
           </h2>
 
           {/* Custom minimal illustration of seeds/grain as section graphic */}

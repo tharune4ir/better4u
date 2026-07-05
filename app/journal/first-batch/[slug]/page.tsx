@@ -84,7 +84,7 @@ export default function RecipeDetailPage() {
 
   // F-GOALS Full meanings map
   const fGoalsLabels: Record<string, { label: string; desc: string }> = {
-    "F": { label: "Fermentable Fibers", desc: "feeds beneficial gut microbes" },
+    "F": { label: "Fermentable Fibers", desc: "feeds beneficial microbes" },
     "G": { label: "Greens & Prebiotics", desc: "strengthens mucosal barrier" },
     "O": { label: "Oats & Grains", desc: "supplies beta-glucans and slow starch" },
     "A": { label: "Ancestral Foods", desc: "traditional wild ferments and grains" },
@@ -155,7 +155,7 @@ export default function RecipeDetailPage() {
 
             {/* F-GOALS Tags list explained */}
             <div className="bg-white/50 border border-black/[0.03] rounded-2xl p-6 space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">Gut-Healing Targets</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">Digestive Healing Targets</h4>
               <div className="space-y-3">
                 {recipe.tags.map((tag) => {
                   const target = fGoalsLabels[tag];
@@ -270,7 +270,7 @@ export default function RecipeDetailPage() {
                   <div className="bg-white/60 p-5 rounded-2xl border border-black/[0.03] space-y-2">
                     <div className="flex items-center gap-2 text-[#2A7F7F]">
                       <Shuffle className="w-4 h-4" />
-                      <h5 className="font-semibold text-xs uppercase tracking-wider">Gut-Friendly Swap</h5>
+                      <h5 className="font-semibold text-xs uppercase tracking-wider">Better-for-You Swap</h5>
                     </div>
                     <p className="text-xs text-slate-500 font-light leading-relaxed">
                       {recipe.swaps}

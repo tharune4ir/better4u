@@ -318,7 +318,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     subName: "ALIVE by Trelis",
     folderName: "1_alive_concept_brand",
     heroTagline: "The classics, re-fermented",
-    heroDescription: "We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active gut cultures inside premium frosted glass.",
+    heroDescription: "We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active probiotic cultures inside premium frosted glass.",
     accentColor: "#2A7F7F"
   },
   {
@@ -344,8 +344,8 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "PULP",
     subName: "PULP by Trelis",
     folderName: "4_pulp_concept_brand",
-    heroTagline: "Gut-loaded smoothies",
-    heroDescription: "Thick, meal-replacement gut smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round gut nutrition.",
+    heroTagline: "Active culture smoothies",
+    heroDescription: "Thick, meal-replacement smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round nutrition.",
     accentColor: "#9DAE8C"
   },
   {
@@ -353,8 +353,8 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "STEEP",
     subName: "STEEP by Trelis",
     folderName: "5_steep_concept_brand",
-    heroTagline: "Hot gut-friendly brews",
-    heroDescription: "After-meal soothing digestifs. Traditional hot beverages re-engineered to be rich in polyphenols and prebiotic fibers for a warm, gentle digestion finish.",
+    heroTagline: "Hot botanical brews",
+    heroDescription: "After-meal soothing digestifs. Traditional hot brews re-engineered to be rich in polyphenols and prebiotic fibers for a warm, gentle digestion finish.",
     accentColor: "#DAA520"
   },
   {
@@ -362,8 +362,8 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     name: "GRIT",
     subName: "GRIT by Trelis",
     folderName: "6_grit_concept_brand",
-    heroTagline: "Gut bars & bites",
-    heroDescription: "Solid whole-food gut bars combining complex carbohydrates, whole grains, and prebiotics for sustained energy and zero refined sugar.",
+    heroTagline: "Whole-food bars & bites",
+    heroDescription: "Solid whole-food bars combining complex carbohydrates, whole grains, and prebiotics for sustained energy and zero refined sugar.",
     accentColor: "#CDAA7D"
   }
 ];
@@ -707,8 +707,8 @@ export default function ProductLabPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center space-y-3 mb-16">
               <span className="text-[10px] tracking-[0.2em] font-bold uppercase" style={{ color: activeBrand.accentColor }}>SMALL-BATCH RANGE</span>
-              <h2 className="text-3xl font-extralight text-slate-900 tracking-tight">
-                Four little brands. One idea: <span className="font-semibold text-slate-950">make the drinks you love, better for your gut.</span>
+              <h2 className="text-3xl font-extralight text-slate-900 tracking-tight leading-relaxed max-w-2xl mx-auto">
+                Small-batch food and drink, made the better-for-you way — <span className="font-semibold text-slate-950">real ingredients, real fermentation, and a lot less sugar.</span>
               </h2>
               <p className="text-xs text-slate-500 font-light max-w-md mx-auto leading-relaxed">
                 Small-batch sodas, fresh ferments, and smoothies — made to replace the unhealthy defaults.
@@ -858,7 +858,7 @@ export default function ProductLabPage() {
                 The <span className="font-semibold text-slate-950">{activeBrand.name}</span> Blueprint
               </h2>
               <p className="text-sm sm:text-base text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                We believe that true health begins in the gut. Every formulation in the {activeBrand.name} universe is engineered with a rigorous commitment to purity, bio-availability, and absolute transparency.
+                We believe that true health starts with real, honest nourishment. Every formulation in the {activeBrand.name} universe is engineered with a rigorous commitment to purity, bio-availability, and absolute transparency.
               </p>
             </div>
 
@@ -887,7 +887,7 @@ export default function ProductLabPage() {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">Clinical Precision</h3>
                 <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                  Every batch is formulated to hit precise therapeutic targets. We ensure optimal probiotic CFU counts and prebiotic fiber loads to guarantee real, measurable gut impact.
+                  Every batch is formulated to hit precise therapeutic targets. We ensure optimal probiotic CFU counts and prebiotic fiber loads to guarantee real, measurable benefits.
                 </p>
               </motion.div>
 

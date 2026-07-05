@@ -199,7 +199,7 @@ const RECIPES_DATA: RecipeItem[] = [
     ],
     sensoryCues: "Intense magenta color, tangy taste, with a pleasant mustard heat.",
     troubleshooting: "If a thin white film forms on top, scrape it off (it is Kahm yeast). If fuzzy, colored mold grows, discard the batch.",
-    whyHeals: "Rich in anthocyanin and betalain antioxidants (polyphenols) that selectively feed anti-inflammatory gut microbes."
+    whyHeals: "Rich in anthocyanin and betalain antioxidants (polyphenols) that selectively feed anti-inflammatory microbes."
   },
   {
     id: "F8",
@@ -254,7 +254,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Close the pressure cooker lid. Cook for 3–4 whistles, then turn off heat. Let the pressure release naturally.",
       "Open, mash slightly with a ladle, and serve warm with a drizzle of ghee."
     ],
-    whyHeals: "Moong is the gentlest protein on a healing gut; ghee supports the gut lining, and the spices prevent gas."
+    whyHeals: "Moong is the gentlest protein on a healing system; ghee supports the digestive lining, and the spices prevent gas."
   },
   {
     id: "R2",
@@ -324,7 +324,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Stir the gongura pulp and salt into the mashed dal. Simmer on low heat for 3 minutes.",
       "In a small tempering pan, heat ghee. Add garlic and red chilli. Sauté until garlic is golden, then pour over the dal."
     ],
-    whyHeals: "Gongura leaves are exceptionally rich in gut-loving polyphenols; garlic provides strong prebiotics."
+    whyHeals: "Gongura leaves are exceptionally rich in health-promoting polyphenols; garlic provides strong prebiotics."
   },
   {
     id: "R5",
@@ -368,7 +368,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Top with the fresh berries, pomegranate, or jamun.",
       "Sprinkle the flaxseeds, chia seeds, and pumpkin seeds over the top. Eat immediately."
     ],
-    whyHeals: "Combines live gut-friendly bacteria with seed mucilage to coat and heal the stomach lining."
+    whyHeals: "Combines live beneficial bacteria with seed mucilage to coat and heal the stomach lining."
   },
   {
     id: "R7",
@@ -410,7 +410,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Stir in the ginger juice, cumin powder, black salt, and chopped curry leaves.",
       "Serve chilled after lunch."
     ],
-    whyHeals: "Replenishes beneficial gut flora while cumin and ginger prevent post-meal bloating."
+    whyHeals: "Replenishes beneficial flora while cumin and ginger prevent post-meal bloating."
   },
   {
     id: "R9",
@@ -450,7 +450,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Stir in the lemon juice, roasted cumin, pink salt, and crushed mint leaves.",
       "Serve cool."
     ],
-    whyHeals: "High-protein, highly soluble plant fiber that digests easily and supports the gut lining."
+    whyHeals: "High-protein, highly soluble plant fiber that digests easily and supports the digestive lining."
   },
   {
     id: "R11",
@@ -470,7 +470,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Cover the mouth with a clean cloth. Let ferment in a sunny window for 3–5 days, stirring once daily.",
       "Refrigerate and drink ½ cup daily."
     ],
-    whyHeals: "A living probiotic liquid that seeds diverse bacterial strains into the gut."
+    whyHeals: "A living probiotic liquid that seeds diverse bacterial strains into the system."
   },
   {
     id: "R12",
@@ -490,7 +490,7 @@ const RECIPES_DATA: RecipeItem[] = [
       "Turn off the heat, cover, and let steep for 5 minutes.",
       "Strain and sip warm after heavy meals."
     ],
-    whyHeals: "Classic herbal carminatives that relax gut muscles and immediately calm bloating, gas, or cramps."
+    whyHeals: "Classic herbal carminatives that relax digestive muscles and immediately calm bloating, gas, or cramps."
   },
   
   // Future Items (Coming Soon placeholders)
@@ -588,10 +588,10 @@ export default function RecipesPage() {
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-16 z-10 relative">
         <div className="mb-10 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl font-extralight text-slate-900 tracking-tight">
-            The Gut-Healing <span className="font-semibold text-slate-950">Recipe Hub</span>
+            The Better-for-You <span className="font-semibold text-slate-950">Recipe Hub</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-500 font-light mt-2 max-w-2xl leading-relaxed">
-            Simple, gluten-free, vegetarian recipes structured to make gut-friendly cooking completely automatic and beginner-proof.
+            Simple, gluten-free, vegetarian recipes structured to make wholesome cooking completely automatic and beginner-proof.
           </p>
         </div>
 
