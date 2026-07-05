@@ -66,7 +66,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☑ | ☑ | ☑ | 2026-07-05 |
-| 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☐ | ☐ | ☐ | |
+| 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 18 | 13.1 Command Center frontend (seed 016) | ☐ | ☐ | ☐ | |
 | 19 | 14.1 Deploy + demo mode + README (seed 017) | ☐ | ☐ | ☐ | |
 
@@ -249,13 +249,13 @@ THE CONCEPT THAT CLICKED: Fanning out queries concurrently using asyncio.gather 
 STILL FUZZY: None.
 TERMS LEARNED: Cron, misfire, coalescing, fan-out/fan-in, graceful degradation, proactive agent.
 
-### Block 12.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 12.1 — Date: 2026-07-05 Hours: 1.5
+WHAT I BUILT: Installed langfuse. Created backend/app/observability.py to export the Langfuse CallbackHandler. Injected it into the FastAPI /chat stream route and enabled global LiteLLM-level success/failure callbacks to capture all LLM completions. Created backend/app/evals.py implementing the 4-case Golden Query evaluation dataset with patch mocks (Gmail, Calendar, proposer, web scraper), LLM-as-a-Judge scoring engine, and database persistence to the new eval_runs table. Created the frontend evals view page on web/app/evals/page.tsx.
+WHAT BROKE: backend default view_file parameter parser failing when EndLine was omitted.
+HOW I FIXED IT: Provided explicit StartLine and EndLine values to view_file calls.
+THE CONCEPT THAT CLICKED: Tracing vs flat logging. Tracing nests child spans (tool executions, SQL queries, LLM completions) under a parent trace in LangGraph. Mocks are critical in evaluations to isolate the core agent reasoning and routing loops from third-party API dependencies.
+STILL FUZZY: None.
+TERMS LEARNED: Observability, tracing, golden dataset, LLM-as-a-judge, regression testing.
 
 ### Block 13.1 — Date: ____ Hours: ____
 WHAT I BUILT:
