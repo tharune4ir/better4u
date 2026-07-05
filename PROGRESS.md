@@ -67,7 +67,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☑ | ☑ | ☑ | 2026-07-05 |
-| 18 | 13.1 Command Center frontend (seed 016) | ☐ | ☐ | ☐ | |
+| 18 | 13.1 Command Center frontend (seed 016) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 19 | 14.1 Deploy + demo mode + README (seed 017) | ☐ | ☐ | ☐ | |
 
 **Milestone moments — record the date you felt each one:**
@@ -257,13 +257,13 @@ THE CONCEPT THAT CLICKED: Tracing vs flat logging. Tracing nests child spans (to
 STILL FUZZY: None.
 TERMS LEARNED: Observability, tracing, golden dataset, LLM-as-a-judge, regression testing.
 
-### Block 13.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 13.1 — Date: 2026-07-05 Hours: 1.5
+WHAT I BUILT: Replaced the Next.js home entrypoint web/app/page.tsx with a premium unified dark Command Center console. Integrated the main SSE Chat interface (with real-time status updates and interrupt approval triggers), approvals list (subscribing to Supabase Realtime changes via WebSockets), recent briefings select list + overlays modal, and System Health indicator (eval run averages). Created backend/migrations/023_frontend_seed.sql.
+WHAT BROKE: N/A — built preventively by reusing proven patterns from approvals and briefings.
+HOW I FIXED IT: N/A
+THE CONCEPT THAT CLICKED: Unified layout and state sync. Placing chat, approvals, and briefings in a single viewport eliminates navigation friction and context switching. Connecting graph interrupts to instant buttons that post to the resume API makes human-in-the-loop interactions feel seamless.
+STILL FUZZY: None.
+TERMS LEARNED: Glassmorphism, micro-animations, unified dashboard, real-time sync.
 
 ### Block 14.1 — Date: ____ Hours: ____
 WHAT I BUILT:
