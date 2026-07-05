@@ -298,7 +298,54 @@ def propose_create_task(title: str, due_date: str, notes: str, rationale: str) -
         return f"Error creating task proposal: {e}"
 
 
-scheduler_tools = [get_current_time, upcoming_events, propose_create_calendar_event, propose_create_task]
+@tool
+def clear_calendar_tomorrow(rationale: str) -> str:
+    """
+    Clears all calendar events for tomorrow from your primary Google Calendar.
+    Uses the native LangGraph interrupt mechanism to pause and wait for approval.
+    """
+    from langgraph.types import interrupt
+    
+    # We call interrupt() which throws an Interrupt exception and pauses the graph execution.
+    user_approved = interrupt(f"NATIVE INTERRUPT: Do you approve clearing your primary calendar tomorrow for rationale: '{rationale}'? (yes/no)")
+    
+    if user_approved != "yes":
+        return "Action aborted: Human rejected calendar clearing."
+        
+    try:
+        from app.google.auth import get_google_credentials
+        from googleapiclient.discovery import build
+        
+        creds = get_google_credentials()
+        service = build("calendar", "v3", credentials=creds)
+        
+        import datetime
+        now = datetime.datetime.now(datetime.timezone.utc)
+        tomorrow_start = (now + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
+        tomorrow_end = (now + datetime.timedelta(days=1)).replace(hour=23, minute=59, second=59, microsecond=999999).isoformat()
+        
+        events_result = service.events().list(
+            calendarId="primary",
+            timeMin=tomorrow_start,
+            timeMax=tomorrow_end,
+            singleEvents=True
+        ).execute()
+        
+        events = events_result.get("items", [])
+        if not events:
+            return "Tomorrow's calendar is already clear (no events found)."
+            
+        deleted_count = 0
+        for event in events:
+            service.events().delete(calendarId="primary", eventId=event["id"]).execute()
+            deleted_count += 1
+            
+        return f"Successfully cleared {deleted_count} calendar events for tomorrow."
+    except Exception as e:
+        return f"Error clearing calendar: {e}"
+
+
+scheduler_tools = [get_current_time, upcoming_events, propose_create_calendar_event, propose_create_task, clear_calendar_tomorrow]
 
 for t in mcp_tools:
     if t.name in ("get_time", "read_todo_list"):
@@ -308,6 +355,7 @@ scheduler_schema = [_get_tool_schema(t) for t in scheduler_tools]
 scheduler_system_prompt = (
     "You are VIZIER's SCHEDULER agent. You manage time-related queries, dates, and calendar events. "
     "Use upcoming_events to check the calendar and get_current_time for the current time. "
+    "If asked to clear or delete calendar events for tomorrow, you MUST call clear_calendar_tomorrow. "
     "CRITICAL RULE: For any write action (creating events or tasks), you MUST use "
     "propose_create_calendar_event or propose_create_task tools. NEVER claim to have created "
     "an event or task without using these propose tools. Proposals require human approval before "

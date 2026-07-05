@@ -27,6 +27,7 @@ import psycopg
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from app.settings import settings
 from app.google.auth import get_google_credentials
+from app.actions.audit import log_audit
 
 
 def _parse_db_url_to_dsn(url: str) -> str:
@@ -64,6 +65,11 @@ def _mark_executed(cur, proposal_id: str, result: dict):
         "UPDATE proposed_actions SET status='executed', executed_at=%s, result=%s WHERE id=%s",
         (datetime.now(timezone.utc), json.dumps(result), proposal_id)
     )
+    log_audit(
+        actor="system",
+        event_type="proposal_executed",
+        details={"proposal_id": proposal_id, "result": result}
+    )
 
 
 def _mark_failed(cur, proposal_id: str, error: str):
@@ -71,6 +77,11 @@ def _mark_failed(cur, proposal_id: str, error: str):
     cur.execute(
         "UPDATE proposed_actions SET status='failed', executed_at=%s, result=%s WHERE id=%s",
         (datetime.now(timezone.utc), json.dumps({"error": error}), proposal_id)
+    )
+    log_audit(
+        actor="system",
+        event_type="proposal_failed",
+        details={"proposal_id": proposal_id, "error": error}
     )
 
 

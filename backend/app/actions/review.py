@@ -107,12 +107,24 @@ def approve_proposal(cur, proposal_id: str):
         "UPDATE proposed_actions SET status='approved', decided_at=%s WHERE id=%s AND status='proposed'",
         (datetime.now(timezone.utc), proposal_id)
     )
+    from app.actions.audit import log_audit
+    log_audit(
+        actor="human",
+        event_type="proposal_approved",
+        details={"proposal_id": proposal_id, "interface": "cli"}
+    )
 
 
 def reject_proposal(cur, proposal_id: str):
     cur.execute(
         "UPDATE proposed_actions SET status='rejected', decided_at=%s WHERE id=%s AND status='proposed'",
         (datetime.now(timezone.utc), proposal_id)
+    )
+    from app.actions.audit import log_audit
+    log_audit(
+        actor="human",
+        event_type="proposal_rejected",
+        details={"proposal_id": proposal_id, "interface": "cli"}
     )
 
 
