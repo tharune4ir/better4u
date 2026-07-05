@@ -65,7 +65,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 13 | 9.2 Write actions via proposal gate (mig 011) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☑ | ☑ | ☑ | 2026-07-05 |
-| 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☐ | ☐ | ☐ | |
+| 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☐ | ☐ | ☐ | |
 | 18 | 13.1 Command Center frontend (seed 016) | ☐ | ☐ | ☐ | |
 | 19 | 14.1 Deploy + demo mode + README (seed 017) | ☐ | ☐ | ☐ | |
@@ -241,13 +241,13 @@ THE CONCEPT THAT CLICKED: Spotlighting (quarantining) untrusted external content
 STILL FUZZY: None.
 TERMS LEARNED: Indirect prompt injection, lethal trifecta, exfiltration, spotlighting, red teaming.
 
-### Block 11.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 11.1 — Date: 2026-07-05 Hours: 1.5
+WHAT I BUILT: Installed apscheduler and feedparser. Created backend/app/scheduler.py managing recurring cron-triggers for daily Morning Briefing and Weekly Reviews. Handled fan-out concurrency with asyncio.gather, database persistence to the new briefings table, and Telegram alerts. Hooked scheduler lifecycle inside FastAPI lifespan. Created briefings list and read view page on web/app/briefings/page.tsx.
+WHAT BROKE: Backtracking resolver loop in pip when installing without package constraints. VertexAI Gemini API experiencing transient 503 high demand during testing.
+HOW I FIXED IT: Interrupted the unconstrained pip installer and ran target pip install command directly. Tested the Model Gateway's robust cooldown/failover system, which successfully caught the Gemini 503 and routed both syntheses through Groq Versatile llama-3.3-70b cleanly.
+THE CONCEPT THAT CLICKED: Fanning out queries concurrently using asyncio.gather allows us to aggregate from 6 separate resources in parallel without cumulative HTTP network latency. Ensuring try-except wrappers on each source achieves robust Graceful Degradation.
+STILL FUZZY: None.
+TERMS LEARNED: Cron, misfire, coalescing, fan-out/fan-in, graceful degradation, proactive agent.
 
 ### Block 12.1 — Date: ____ Hours: ____
 WHAT I BUILT:
