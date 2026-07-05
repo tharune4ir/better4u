@@ -76,20 +76,28 @@ def propose_action(
     action_type: str,
     payload: dict,
     risk_tier: str,
-    rationale: str
+    rationale: str,
+    thread_id: Optional[str] = None
 ) -> str:
     """
-    Evaluates policy permissions and inserts a new proposal row.
+    Evaluates policy permissions, runs prompt-injection defenses, and inserts a new proposal row.
     
     Tiers Checked:
     - 'blocked': Raising an error, preventing database insert.
     - 'auto_approve_low_risk': Auto-approving if risk_tier is 'low'.
     - 'always_ask': Setting status to 'proposed'.
+    
+    Injection Protections:
+    - Heuristics: Searches payload and rationale for instruction-override keywords.
+    - Correlation: Checks thread checkpoint history to see if payload overlaps with untrusted fetched data.
+    - Flagged proposals are auto-escalated to HIGH risk, forcing status='proposed' (always_ask).
     """
     if action_type not in ('send_email', 'create_calendar_event', 'create_task', 'label_email'):
         raise ValueError(f"Unknown action_type: '{action_type}'")
     if risk_tier not in ('low', 'medium', 'high'):
         raise ValueError(f"Unknown risk_tier: '{risk_tier}'")
+
+    from app.actions.scanner import scan_content_heuristics, check_untrusted_correlation
 
     dsn = _parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
     
@@ -123,13 +131,35 @@ def propose_action(
         )
         raise PermissionError(error_msg)
 
-    # 3. Determine status based on policy and risk tier
-    status = "proposed"
-    decided_at = None
-    
-    if permission_policy == "auto_approve_low_risk" and risk_tier == "low":
-        status = "approved"
-        decided_at = datetime.now(timezone.utc)
+    # 3. Prompt injection detection & correlation
+    is_flagged = False
+    flagged_reasons = []
+
+    # Heuristics check
+    payload_text = " ".join(str(v) for v in payload.values()) + " " + rationale
+    if scan_content_heuristics(payload_text):
+        is_flagged = True
+        flagged_reasons.append("suspicious_heuristics")
+
+    # Correlation check
+    if thread_id and check_untrusted_correlation(payload, thread_id):
+        is_flagged = True
+        flagged_reasons.append("correlated_untrusted_source")
+
+    # If flagged, escalate to high risk / proposed (always ask)
+    if is_flagged:
+        print(f"[Proposer] ⚠️ Prompt injection/correlation detected! Escalating proposal risk to HIGH. Reasons: {flagged_reasons}")
+        risk_tier = "high"
+        status = "proposed"
+        decided_at = None
+    else:
+        # Determine status based on policy and risk tier
+        if permission_policy == "auto_approve_low_risk" and risk_tier == "low":
+            status = "approved"
+            decided_at = datetime.now(timezone.utc)
+        else:
+            status = "proposed"
+            decided_at = None
 
     idempotency_key = str(uuid.uuid4())
     
@@ -161,7 +191,9 @@ def propose_action(
             "status": status,
             "payload": payload,
             "rationale": rationale,
-            "policy_applied": permission_policy
+            "policy_applied": permission_policy,
+            "is_flagged": is_flagged,
+            "flagged_reasons": flagged_reasons
         }
     )
 
