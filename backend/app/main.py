@@ -67,14 +67,28 @@ async def poll_approved_actions():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global _poller_task
+    # Start Poller loop
     _poller_task = asyncio.create_task(poll_approved_actions())
+    
+    # Start APScheduler
+    from app.scheduler import scheduler, init_scheduler
+    init_scheduler()
+    scheduler.start()
+    print("[Main] Scheduler started.")
+    
     yield
+    
+    # Shutdown Poller loop
     if _poller_task:
         _poller_task.cancel()
         try:
             await _poller_task
         except asyncio.CancelledError:
             pass
+            
+    # Shutdown APScheduler
+    scheduler.shutdown()
+    print("[Main] Scheduler shut down.")
 
 
 app = FastAPI(
@@ -606,5 +620,59 @@ def get_audit_logs(limit: int = 100):
                     "actor": r[2],
                     "event_type": r[3],
                     "details": r[4]
+                } for r in rows
+            ]
+
+
+@app.post("/jobs/briefing/run-now")
+async def run_morning_briefing_now():
+    """Trigger the Morning Briefing generation manually for testing."""
+    from app.scheduler import run_morning_briefing
+    summary = await run_morning_briefing()
+    return {"status": "ok", "summary": summary}
+
+
+@app.post("/jobs/weekly/run-now")
+async def run_weekly_review_now():
+    """Trigger the Weekly Review generation manually for testing."""
+    from app.scheduler import run_weekly_review
+    summary = await run_weekly_review()
+    return {"status": "ok", "summary": summary}
+
+
+@app.get("/briefings")
+def get_briefings(limit: int = 50):
+    """Retrieve historical morning briefings and weekly reviews."""
+    import psycopg
+    import re
+    from app.settings import settings
+
+    def parse_db_url_to_dsn(url):
+        m = re.match(r"postgresql://([^:]+):(.+)@([^:]+):(\d+)/(.+)", url)
+        if not m:
+            return url
+        user, password, host, port, dbname = m.groups()
+        return f"dbname={dbname} user={user} password={password} host={host} port={port}"
+
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id, created_at, kind, summary, raw_data
+                FROM briefings
+                ORDER BY created_at DESC
+                LIMIT %s
+                """,
+                (limit,)
+            )
+            rows = cur.fetchall()
+            return [
+                {
+                    "id": str(r[0]),
+                    "created_at": r[1].isoformat(),
+                    "kind": r[2],
+                    "summary": r[3],
+                    "raw_data": r[4]
                 } for r in rows
             ]

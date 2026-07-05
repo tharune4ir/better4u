@@ -33,6 +33,11 @@ class Settings(BaseSettings):
     TELEGRAM_BOT_TOKEN: str
     TELEGRAM_CHAT_ID: str
 
+    # Proactive Services / Weather Geolocation
+    WEATHER_LAT: float = 28.6139
+    WEATHER_LON: float = 77.2090
+    USER_CITY: str = "Delhi"
+
     # Pydantic Settings configuration
     model_config = SettingsConfigDict(
         env_file=".env",
