@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     WEATHER_LON: float = 77.2090
     USER_CITY: str = "Delhi"
 
+    # Deployment / Demo Mode Settings
+    DEMO_MODE: bool = False
+
     # Pydantic Settings configuration
     model_config = SettingsConfigDict(
         env_file=".env",

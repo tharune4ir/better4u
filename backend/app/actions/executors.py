@@ -345,11 +345,28 @@ def execute_proposal(proposal_id: str) -> dict:
     """
     Dispatch an approved proposal to its matching executor.
     Used by both the CLI reviewer and the FastAPI approval endpoint.
+    Supports DEMO_MODE simulation to bypass real Google OAuth/write API calls.
     """
     dsn = _parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
     with psycopg.connect(dsn) as conn:
         with conn.cursor() as cur:
             proposal = _load_proposal(cur, proposal_id)
+            
+            # If DEMO_MODE is active, run mock execution directly!
+            if getattr(settings, "DEMO_MODE", False):
+                print(f"[Demo Mode] ⚡ Simulating execution for proposal {proposal_id} ({proposal['action_type']})...")
+                mock_result = {
+                    "status": "simulated_executed",
+                    "proposal_id": proposal_id,
+                    "action_type": proposal["action_type"],
+                    "payload": proposal["payload"],
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                
+                # Mark as executed and log audit
+                _mark_executed(cur, proposal_id, mock_result)
+                conn.commit()
+                return mock_result
     
     executor = EXECUTOR_MAP.get(proposal["action_type"])
     if not executor:
