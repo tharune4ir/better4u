@@ -125,7 +125,13 @@ async def chat(request: ChatRequest):
     """
     async def sse_generator():
         thread_id = request.thread_id or "default-session"
-        config = {"configurable": {"thread_id": thread_id}}
+        
+        from app.observability import get_langfuse_callback
+        callbacks = get_langfuse_callback(trace_name="chat_interaction", thread_id=thread_id)
+        config = {
+            "configurable": {"thread_id": thread_id},
+            "callbacks": callbacks
+        }
         
         if request.resume is not None:
             from langgraph.types import Command
@@ -674,5 +680,56 @@ def get_briefings(limit: int = 50):
                     "kind": r[2],
                     "summary": r[3],
                     "raw_data": r[4]
+                } for r in rows
+            ]
+
+
+@app.post("/evals/run")
+async def run_evals():
+    """Trigger the Golden Evaluation suite synchronously and return result summary."""
+    from app.evals import run_eval_suite
+    results = run_eval_suite()
+    return {"status": "ok", "results": results}
+
+
+@app.get("/evals/history")
+def get_evals_history(limit: int = 200):
+    """Retrieve historical evaluation test runs."""
+    import psycopg
+    import re
+    from app.settings import settings
+
+    def parse_db_url_to_dsn(url):
+        m = re.match(r"postgresql://([^:]+):(.+)@([^:]+):(\d+)/(.+)", url)
+        if not m:
+            return url
+        user, password, host, port, dbname = m.groups()
+        return f"dbname={dbname} user={user} password={password} host={host} port={port}"
+
+    dsn = parse_db_url_to_dsn(settings.SUPABASE_DB_URL)
+    with psycopg.connect(dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id, created_at, run_id, query, expected_route, actual_route, routing_match, judge_score, judge_reason, raw_response
+                FROM eval_runs
+                ORDER BY created_at DESC
+                LIMIT %s
+                """,
+                (limit,)
+            )
+            rows = cur.fetchall()
+            return [
+                {
+                    "id": str(r[0]),
+                    "created_at": r[1].isoformat(),
+                    "run_id": r[2],
+                    "query": r[3],
+                    "expected_route": r[4],
+                    "actual_route": r[5],
+                    "routing_match": r[6],
+                    "judge_score": r[7],
+                    "judge_reason": r[8],
+                    "raw_response": r[9]
                 } for r in rows
             ]

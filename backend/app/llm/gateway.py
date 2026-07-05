@@ -22,6 +22,16 @@ class ModelGateway:
         # Track cooldown end timestamps for each provider
         # Format: { provider_name: timestamp }
         self.cooldowns: Dict[str, float] = {}
+
+        # Enable LiteLLM Langfuse callbacks if credentials are set
+        if settings.LANGFUSE_PUBLIC_KEY and settings.LANGFUSE_SECRET_KEY:
+            os.environ["LANGFUSE_PUBLIC_KEY"] = settings.LANGFUSE_PUBLIC_KEY
+            os.environ["LANGFUSE_SECRET_KEY"] = settings.LANGFUSE_SECRET_KEY
+            os.environ["LANGFUSE_HOST"] = settings.LANGFUSE_HOST
+            
+            litellm.success_callback = ["langfuse"]
+            litellm.failure_callback = ["langfuse"]
+            print("[Gateway] LiteLLM Langfuse global integration enabled.")
         
         # Define priority chain configuration
         self.providers = [
