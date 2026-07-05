@@ -145,7 +145,6 @@ export default function FirstBatchCollectionPage() {
         </div>
       </header>
 
-      {/* MAIN CONTENT AREA */}
       <main className="flex-1 w-full max-w-4xl mx-auto px-6 pb-24 z-10 relative">
         <AnimatePresence mode="wait">
           {activeContentTab === "guide" ? (
@@ -158,18 +157,18 @@ export default function FirstBatchCollectionPage() {
               className="space-y-16 max-w-3xl mx-auto"
             >
               {/* INTRO SUMMARY */}
-              <section className="bg-white/40 glassmorphic p-6 md:p-8 rounded-3xl border border-black/[0.03] text-slate-700 italic font-light text-sm md:text-base leading-relaxed space-y-4">
-                <p>
+              <section className="bg-white/40 glassmorphic p-6 md:p-8 rounded-[2rem] border border-black/[0.03] text-slate-700 text-sm md:text-base leading-relaxed space-y-4">
+                <p className="font-light italic text-slate-650">
                   A Trelis Journal collection. Your starting set: real food, made simple. Everything here is vegetarian, made without wheat, without fluid milk, and without a grain of added sugar — gentle on the gut, and doable in a tiny kitchen with nothing but a pressure cooker, a gas stove, and a fridge.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 not-italic">
-                  <div className="bg-white/50 p-4 rounded-2xl border border-black/[0.02]">
-                    <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">Why "First Batch"?</span>
-                    <span className="text-xs text-slate-500 font-light">These are the everyday dishes you cook on repeat — the foundation you master first, one batch at a time. Learn these and you can cook for yourself, for good.</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                  <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.02] space-y-1">
+                    <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block">Why "First Batch"?</span>
+                    <p className="text-xs text-slate-555 font-light leading-relaxed">These are the everyday dishes you cook on repeat — the foundation you master first, one batch at a time. Learn these and you can cook for yourself, for good.</p>
                   </div>
-                  <div className="bg-white/50 p-4 rounded-2xl border border-black/[0.02]">
-                    <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block mb-1">How to read this:</span>
-                    <span className="text-xs text-slate-500 font-light">start with Start Here and Your Tiny Kitchen once. After that, you never need theory again — just rotate the 21 recipes. Every recipe tells you why it's good for your gut, exactly what to buy, and every step as if it's your first day in a kitchen.</span>
+                  <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.02] space-y-1">
+                    <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest block">How to read this:</span>
+                    <p className="text-xs text-slate-555 font-light leading-relaxed">Start with Start Here and Your Tiny Kitchen once. After that, you never need theory again — just rotate the 21 recipes. Every recipe tells you why it's good for your gut, exactly what to buy, and every step as if it's your first day in a kitchen.</p>
                   </div>
                 </div>
               </section>
@@ -177,18 +176,71 @@ export default function FirstBatchCollectionPage() {
               {/* 1. START HERE */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">01</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.startHere.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">01</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.startHere.title}</h3>
                 </div>
-                <div className="space-y-4 text-sm md:text-base text-slate-600 font-light leading-relaxed">
-                  {INTRO_SECTIONS.startHere.paragraphs.map((p, idx) => (
-                    <p key={idx} className="whitespace-pre-line">{p}</p>
-                  ))}
+                <div className="space-y-6 text-sm md:text-base text-slate-650 font-light leading-relaxed">
+                  <p>
+                    You are not on a diet. You are feeding the trillions of friendly bacteria in your gut — and when they're happy, your digestion, energy, skin, mood and immunity all follow. Three simple pillars run everything in this guide:
+                  </p>
+
+                  {/* 3 Pillars layout */}
+                  <div className="grid grid-cols-1 gap-4">
+                    <div className="flex gap-4 p-5 bg-white/40 rounded-2xl border border-black/[0.02] hover:bg-white hover:border-[#2A7F7F]/10 hover:shadow-[0_4px_20px_rgba(0,0,0,0.01)] transition-all">
+                      <div className="w-8 h-8 rounded-full bg-[#2A7F7F]/10 text-[#2A7F7F] font-bold flex items-center justify-center flex-shrink-0 text-sm font-mono">1</div>
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-slate-800 text-sm md:text-base">Diversity</h4>
+                        <p className="text-xs md:text-sm text-slate-555 leading-relaxed">Eat many different plants across a week (aim for 30+). Every vegetable, fruit, lentil, herb, spice, nut and seed counts as one. Variety matters more than quantity.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-4 p-5 bg-white/40 rounded-2xl border border-black/[0.02] hover:bg-white hover:border-[#2A7F7F]/10 hover:shadow-[0_4px_20px_rgba(0,0,0,0.01)] transition-all">
+                      <div className="w-8 h-8 rounded-full bg-[#2A7F7F]/10 text-[#2A7F7F] font-bold flex items-center justify-center flex-shrink-0 text-sm font-mono">2</div>
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-slate-800 text-sm md:text-base">Fermented Foods</h4>
+                        <p className="text-xs md:text-sm text-slate-555 leading-relaxed">Eat something naturally cultured most days (homemade curd, idli, a spoon of home-ferment). These add live, friendly microbes.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 p-5 bg-white/40 rounded-2xl border border-black/[0.02] hover:bg-white hover:border-[#2A7F7F]/10 hover:shadow-[0_4px_20px_rgba(0,0,0,0.01)] transition-all">
+                      <div className="w-8 h-8 rounded-full bg-[#2A7F7F]/10 text-[#2A7F7F] font-bold flex items-center justify-center flex-shrink-0 text-sm font-mono">3</div>
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-slate-800 text-sm md:text-base">Fibre That Feeds Them</h4>
+                        <p className="text-xs md:text-sm text-slate-555 leading-relaxed">Lentils, vegetables, fruit, seeds and gentle whole grains are food for your gut bugs.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Golden Rule Callout */}
+                  <div className="bg-amber-500/[0.03] border-l-2 border-amber-600/40 p-6 rounded-r-2xl space-y-2">
+                    <span className="text-[10px] font-bold tracking-widest text-amber-700 uppercase block">The Golden Rule of this Kitchen</span>
+                    <h4 className="font-semibold text-slate-800 text-sm md:text-base">Gentle First</h4>
+                    <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-light">
+                      A calm gut prefers food that is soft, well-cooked, and soluble-fibre-forward — think dals, khichdi, curd rice, cooked vegetables and porridges — over piles of raw, rough, bran-heavy food. So we start low and go slow: add new plants gradually, cook things properly soft, and let your gut adjust over weeks, not days. This is why nothing here is spicy, oily, or heavy — gentle food is what actually heals.
+                    </p>
+                  </div>
+
+                  {/* Rest and Q&A */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-2">
+                      <h4 className="font-semibold text-slate-800 text-sm md:text-base">Give Your Gut a Rest</h4>
+                      <p className="text-xs md:text-sm text-slate-555 leading-relaxed font-light">
+                        Your gut does its cleaning and repair between meals, not during them. So this guide fits naturally with an eating window (for example, two solid meals in the day with a long overnight gap) and avoids constant snacking. Two complete, nourishing meals beat six scattered ones.
+                      </p>
+                    </div>
+
+                    <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-2">
+                      <h4 className="font-semibold text-slate-800 text-sm md:text-base">Why no sugar, wheat, or fluid milk?</h4>
+                      <p className="text-xs md:text-sm text-slate-555 leading-relaxed font-light">
+                        Added sugar feeds the wrong microbes and drives inflammation. Wheat and fluid milk are two of the most common things sensitive guts feel better without. Take them out and most people feel lighter within a week — so this whole kitchen is built without them, and you won't miss them.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 {/* F-GOALS Table */}
                 <div className="bg-white/50 rounded-2xl border border-black/[0.03] overflow-hidden mt-6 shadow-sm">
-                  <div className="p-4 bg-[#2A7F7F]/5 border-b border-black/[0.03]">
+                  <div className="p-5 bg-[#2A7F7F]/5 border-b border-black/[0.03]">
                     <h4 className="font-semibold text-slate-800 text-sm">{fGoalsDefinitions.title}</h4>
                     <p className="text-xs text-slate-500 font-light">{fGoalsDefinitions.subtitle}</p>
                   </div>
@@ -196,17 +248,21 @@ export default function FirstBatchCollectionPage() {
                     <table className="w-full text-left border-collapse text-xs md:text-sm">
                       <thead>
                         <tr className="border-b border-black/[0.03] bg-white/20 text-slate-400 uppercase tracking-widest font-bold text-[10px]">
-                          <th className="p-4">{fGoalsDefinitions.headers[0]}</th>
-                          <th className="p-4">{fGoalsDefinitions.headers[1]}</th>
+                          <th className="p-4 w-20 text-center">{fGoalsDefinitions.headers[0]}</th>
+                          <th className="p-4 w-44">{fGoalsDefinitions.headers[1]}</th>
                           <th className="p-4">{fGoalsDefinitions.headers[2]}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-black/[0.03]">
                         {fGoalsDefinitions.rows.map((row, idx) => (
                           <tr key={idx} className="hover:bg-white/40 transition-colors">
-                            <td className="p-4 font-bold text-[#2A7F7F] text-base">{row[0]}</td>
-                            <td className="p-4 font-medium text-slate-800">{row[1]}</td>
-                            <td className="p-4 text-slate-500 font-light">{row[2]}</td>
+                            <td className="p-4 text-center">
+                              <span className="w-8 h-8 rounded-full bg-[#2A7F7F] text-white flex items-center justify-center font-bold text-xs mx-auto">
+                                {row[0]}
+                              </span>
+                            </td>
+                            <td className="p-4 font-semibold text-slate-800">{row[1]}</td>
+                            <td className="p-4 text-slate-555 font-light leading-relaxed">{row[2]}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -218,32 +274,69 @@ export default function FirstBatchCollectionPage() {
               {/* 2. YOUR TINY KITCHEN */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">02</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.tinyKitchen.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">02</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.tinyKitchen.title}</h3>
                 </div>
-                <div className="space-y-4 text-sm md:text-base text-slate-600 font-light leading-relaxed">
-                  <p className="font-medium text-slate-800">
-                    <span className="uppercase text-[#2A7F7F] font-bold text-xs tracking-wider mr-2 block md:inline">Equipment Required:</span>
-                    {INTRO_SECTIONS.tinyKitchen.equipment.replace("equipment: ", "")}
+                <div className="space-y-6 text-sm md:text-base text-slate-655 font-light leading-relaxed">
+                  <p>
+                    A clean gut kitchen requires minimal equipment. No oven, no air-fryer, no complex tools. Just basic heat, pressure, and chopping:
                   </p>
+
+                  {/* Equipment Grid */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">🍲</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Pressure Cooker</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">Essential for cooking soft grains & lentils.</p>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">🔥</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Gas Stove</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">The heat source for tempering and boiling.</p>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">❄️</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Fridge</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">For resisting starches and storing starters.</p>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">🍳</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Kadai / Pan</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">For tempering (tadkas) and stir-fries.</p>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">🥄</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Ladle</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">For stirring and serving soft textures.</p>
+                    </div>
+                    <div className="bg-white/50 p-4 rounded-xl border border-black/[0.02] text-center space-y-1">
+                      <span className="text-xl">🔪</span>
+                      <h5 className="font-semibold text-slate-800 text-xs uppercase tracking-wider">Board & Knife</h5>
+                      <p className="text-[10px] text-slate-500 font-light leading-snug">For fine chopping so vegetables cook soft.</p>
+                    </div>
+                  </div>
                   
-                  <div className="bg-white/50 p-6 rounded-2xl border border-black/[0.03] space-y-4 mt-4 shadow-sm">
-                    <h4 className="font-semibold text-slate-800">{INTRO_SECTIONS.tinyKitchen.pantryTitle}</h4>
-                    <ul className="space-y-2 text-sm">
+                  <div className="bg-white/50 p-6 rounded-2xl border border-black/[0.03] space-y-4 shadow-sm">
+                    <h4 className="font-semibold text-slate-850 text-sm md:text-base border-b border-black/[0.03] pb-2">
+                      {INTRO_SECTIONS.tinyKitchen.pantryTitle}
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {INTRO_SECTIONS.tinyKitchen.pantryItems.map((item, idx) => {
                         const [title, desc] = item.split(": ");
                         return (
-                          <li key={idx} className="flex gap-2">
-                            <span className="text-[#2A7F7F] font-semibold select-none">•</span>
-                            <span>
-                              <strong className="text-slate-800">{title}</strong>
-                              {desc && <span>: {desc}</span>}
+                          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm">
+                            <span className="w-5 h-5 rounded-full bg-[#2A7F7F]/10 text-[#2A7F7F] font-bold text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5 select-none font-mono">
+                              {idx + 1}
                             </span>
-                          </li>
+                            <div className="space-y-0.5">
+                              <strong className="text-slate-800 font-semibold">{title}</strong>
+                              {desc && <span className="text-slate-500 font-light block leading-relaxed">{desc}</span>}
+                            </div>
+                          </div>
                         );
                       })}
-                    </ul>
-                    <p className="text-xs text-slate-400 italic pt-2 border-t border-black/[0.03]">
+                    </div>
+                    <p className="text-xs text-slate-400 italic pt-3 border-t border-black/[0.03] leading-relaxed">
                       {INTRO_SECTIONS.tinyKitchen.note}
                     </p>
                   </div>
@@ -253,13 +346,16 @@ export default function FirstBatchCollectionPage() {
               {/* 3. MASTER TECHNIQUES */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">03</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.masterTechniques.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">03</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.masterTechniques.title}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {INTRO_SECTIONS.masterTechniques.techniques.map((tech, idx) => (
-                    <div key={idx} className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-2 hover:shadow-sm transition-all duration-300">
-                      <h4 className="font-semibold text-slate-800 text-sm md:text-base">{tech.name}</h4>
+                    <div key={idx} className="bg-white/50 p-6 rounded-2xl border border-black/[0.03] space-y-2 hover:shadow-sm hover:border-[#2A7F7F]/10 transition-all duration-300">
+                      <div className="flex justify-between items-center">
+                        <h4 className="font-semibold text-slate-800 text-sm md:text-base">{tech.name.replace(/^\d+\.\s*/, "")}</h4>
+                        <span className="text-[10px] font-bold text-slate-450 font-mono">TECH 0{idx + 1}</span>
+                      </div>
                       <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">{tech.description}</p>
                     </div>
                   ))}
@@ -269,73 +365,190 @@ export default function FirstBatchCollectionPage() {
               {/* 4. THE ROTATING CORE */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">04</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.rotatingCore.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">04</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.rotatingCore.title}</h3>
                 </div>
-                <div className="space-y-4 text-sm md:text-base text-slate-600 font-light leading-relaxed">
-                  {INTRO_SECTIONS.rotatingCore.paragraphs.map((p, idx) => (
-                    <p key={idx} className="whitespace-pre-line">{p}</p>
-                  ))}
+                <div className="space-y-6 text-sm md:text-base text-slate-655 font-light leading-relaxed">
+                  <p>
+                    A sensitive gut does not want a diet of constant variety and novel ingredients. It wants stability, with controlled diversity. That is the philosophy behind our rotating core.
+                  </p>
+
+                  {/* Flowchart/Equation Layout */}
+                  <div className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-6 text-center space-y-4">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#2A7F7F]">The Daily Rhythm Equation</div>
+                    <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-xs md:text-sm font-semibold text-slate-850">
+                      <span className="bg-white px-3 py-1.5 rounded-xl border border-black/[0.03]">1 Base</span>
+                      <span className="text-slate-400 font-light">+</span>
+                      <span className="bg-white px-3 py-1.5 rounded-xl border border-black/[0.03]">1 Protein</span>
+                      <span className="text-slate-400 font-light">+</span>
+                      <span className="bg-white px-3 py-1.5 rounded-xl border border-black/[0.03]">1 Veg</span>
+                      <span className="text-slate-400 font-light">+</span>
+                      <span className="bg-white px-3 py-1.5 rounded-xl border border-black/[0.03]">1 Ferment</span>
+                    </div>
+                  </div>
+
+                  {/* Equation Components list */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#2A7F7F]" />
+                        <h4 className="font-semibold text-slate-800 text-sm">Base & Protein</h4>
+                      </div>
+                      <ul className="space-y-1.5 text-xs md:text-sm text-slate-555 list-none pl-4">
+                        <li className="flex gap-2">
+                          <span className="text-[#2A7F7F] font-semibold select-none">·</span>
+                          <span><strong>Base:</strong> Red Matta rice, khichdi, idli, or a porridge</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-[#2A7F7F] font-semibold select-none">·</span>
+                          <span><strong>Protein:</strong> A dal or legume</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#2A7F7F]" />
+                        <h4 className="font-semibold text-slate-800 text-sm">Veg & Ferment</h4>
+                      </div>
+                      <ul className="space-y-1.5 text-xs md:text-sm text-slate-555 list-none pl-4">
+                        <li className="flex gap-2">
+                          <span className="text-[#2A7F7F] font-semibold select-none">·</span>
+                          <span><strong>Veg:</strong> One gentle vegetable dish (rotated daily)</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-[#2A7F7F] font-semibold select-none">·</span>
+                          <span><strong>Ferment:</strong> A spoon of curd, raita, or a home-ferment</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Tips Box */}
+                  <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-3">
+                    <h4 className="font-semibold text-slate-800 text-sm md:text-base">Everyday Rhythm Guidelines:</h4>
+                    <div className="space-y-2 text-xs md:text-sm text-slate-555 leading-relaxed font-light">
+                      <div className="flex gap-3 items-start">
+                        <span className="text-[#2A7F7F] font-semibold mt-0.5">•</span>
+                        <p>Rotate the vegetable and dal daily, keep the base familiar, and add a chutney/podi or fruit for extra plant points.</p>
+                      </div>
+                      <div className="flex gap-3 items-start">
+                        <span className="text-[#2A7F7F] font-semibold mt-0.5">•</span>
+                        <p>One "gentle day" a week (or whenever your stomach feels off): keep it to khichdi, curd rice, and ripe banana.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
 
               {/* 5. THE MILLET GUIDE */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">05</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.milletGuide.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">05</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.milletGuide.title}</h3>
                 </div>
-                <div className="space-y-4 text-sm md:text-base text-slate-600 font-light leading-relaxed">
+                <div className="space-y-4 text-sm md:text-base text-slate-655 font-light leading-relaxed">
                   <p>{INTRO_SECTIONS.milletGuide.intro}</p>
-                  <ul className="space-y-2 text-sm bg-white/50 p-6 rounded-2xl border border-black/[0.03] shadow-sm">
-                    {INTRO_SECTIONS.milletGuide.items.map((item, idx) => (
-                      <li key={idx} className="flex gap-2">
-                        <span className="text-[#2A7F7F] font-semibold select-none">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {INTRO_SECTIONS.milletGuide.items.map((item, idx) => {
+                      const [title, desc] = item.split(": ");
+                      return (
+                        <div key={idx} className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-1 hover:shadow-sm transition-all duration-300">
+                          <div className="flex items-center gap-2">
+                            <span className="w-5 h-5 rounded-full bg-[#2A7F7F]/10 text-[#2A7F7F] font-bold text-[10px] flex items-center justify-center flex-shrink-0 font-mono">0{idx + 1}</span>
+                            <h4 className="font-semibold text-slate-800 text-xs sm:text-sm uppercase tracking-wider">{title}</h4>
+                          </div>
+                          {desc && <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">{desc}</p>}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </section>
 
               {/* 6. GENTLE DAYS */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">06</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.gentleDays.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">06</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.gentleDays.title}</h3>
                 </div>
-                <div className="space-y-4 text-sm md:text-base text-slate-600 font-light leading-relaxed">
+                <div className="space-y-6 text-sm md:text-base text-slate-655 font-light leading-relaxed">
                   <p>{INTRO_SECTIONS.gentleDays.intro}</p>
-                  <ul className="space-y-2 text-sm bg-white/50 p-6 rounded-2xl border border-black/[0.03] shadow-sm">
-                    {INTRO_SECTIONS.gentleDays.items.map((item, idx) => (
-                      <li key={idx} className="flex gap-2">
-                        <span className="text-[#2A7F7F] font-semibold select-none">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="italic text-slate-500 text-xs">{INTRO_SECTIONS.gentleDays.outro}</p>
+                  
+                  {/* Protocol checklist */}
+                  <div className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 p-6 rounded-2xl space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-[#2A7F7F]" />
+                      <h4 className="font-bold text-xs uppercase tracking-wider text-[#2A7F7F]">Calming Protocol Checklist</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm text-slate-700">
+                      {INTRO_SECTIONS.gentleDays.items.map((item, idx) => (
+                        <div key={idx} className="flex gap-2.5 items-start bg-white/70 p-3.5 rounded-xl border border-black/[0.02]">
+                          <Check className="w-4 h-4 text-[#2A7F7F] flex-shrink-0 mt-0.5" />
+                          <span className="font-light">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <p className="italic text-slate-500 text-sm text-center font-light pt-2">
+                    "{INTRO_SECTIONS.gentleDays.outro}"
+                  </p>
                 </div>
               </section>
 
               {/* 7. SYSTEMS THAT MAKE THIS EASY */}
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-black/[0.05] pb-3">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#2A7F7F]">07</span>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.systemsEasy.title}</h3>
+                  <span className="bg-[#2A7F7F]/10 text-[#2A7F7F] font-mono text-xs font-bold px-2.5 py-1 rounded-md">07</span>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{INTRO_SECTIONS.systemsEasy.title}</h3>
                 </div>
                 <div className="space-y-4">
-                  {INTRO_SECTIONS.systemsEasy.items.map((sys, idx) => (
-                    <div key={idx} className="bg-white/50 p-5 rounded-2xl border border-black/[0.03] space-y-1.5 hover:shadow-sm transition-all duration-300">
-                      <h4 className="font-semibold text-slate-850 text-sm md:text-base">{sys.name}</h4>
-                      <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">{sys.text}</p>
-                    </div>
-                  ))}
+                  {INTRO_SECTIONS.systemsEasy.items.map((sys, idx) => {
+                    // Check if it's the shopping list (sys 2) to render it with beautiful categorized tags
+                    const isShoppingList = sys.name.toLowerCase().includes("shopping list");
+                    
+                    return (
+                      <div key={idx} className="bg-white/50 p-6 rounded-2xl border border-black/[0.03] space-y-3 hover:shadow-sm hover:border-[#2A7F7F]/10 transition-all duration-300">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#2A7F7F] font-semibold text-xs tracking-wider font-mono">SYSTEM 0{idx + 1}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                          <h4 className="font-semibold text-slate-850 text-sm md:text-base">{sys.name}</h4>
+                        </div>
+                        
+                        {isShoppingList ? (
+                          <div className="space-y-3 pt-2">
+                            <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">{sys.text.split("Grain")[0].trim()}</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+                              <div className="bg-white/80 p-3.5 rounded-xl border border-black/[0.02] space-y-1.5">
+                                <span className="font-bold text-[#2A7F7F] uppercase tracking-wider text-[9px] block">Grains</span>
+                                <span className="text-slate-655 font-light block leading-relaxed">Kerala Red Matta rice, idli rice, foxtail millet, little millet, ragi flour</span>
+                              </div>
+                              <div className="bg-white/80 p-3.5 rounded-xl border border-black/[0.02] space-y-1.5">
+                                <span className="font-bold text-[#2A7F7F] uppercase tracking-wider text-[9px] block">Lentils</span>
+                                <span className="text-slate-655 font-light block leading-relaxed">Moong dal, toor dal, masoor dal, urad dal, chana dal, roasted chana</span>
+                              </div>
+                              <div className="bg-white/80 p-3.5 rounded-xl border border-black/[0.02] space-y-1.5">
+                                <span className="font-bold text-[#2A7F7F] uppercase tracking-wider text-[9px] block">Veggies & Aromatics</span>
+                                <span className="text-slate-655 font-light block leading-relaxed">Bottle gourd, carrot, beans, beetroot, tomato, ginger, garlic, curry leaves</span>
+                              </div>
+                              <div className="bg-white/80 p-3.5 rounded-xl border border-black/[0.02] space-y-1.5">
+                                <span className="font-bold text-[#2A7F7F] uppercase tracking-wider text-[9px] block">Pantry & Seeds</span>
+                                <span className="text-slate-655 font-light block leading-relaxed">Ghee, coconut, flax, chia, pumpkin seeds, groundnuts, walnuts, spices, gluten-free hing</span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed whitespace-pre-line">{sys.text}</p>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
 
               {/* GENTLE NOTE / MEDICAL DISCLAIMER */}
-              <section className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-6 space-y-3">
+              <section className="bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 rounded-2xl p-6 space-y-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.01)]">
                 <div className="flex items-center gap-2 text-[#2A7F7F]">
                   <Info className="w-4 h-4" />
                   <h4 className="font-bold text-xs uppercase tracking-wider">{INTRO_SECTIONS.gentleNote.title}</h4>
@@ -358,7 +571,6 @@ export default function FirstBatchCollectionPage() {
                   <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                 </button>
               </div>
-
             </motion.div>
           ) : (
             <motion.div
