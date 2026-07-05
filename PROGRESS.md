@@ -61,9 +61,9 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 9 | 7.1 pgvector RAG + hybrid search (mig 007) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 10 | 7.2 Long-term memory system (mig/seed 008) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 11 | 8.1 Own MCP server + Telegram action (seed 009) | ☑ | ☑ | ☑ | 2026-07-04 |
-| 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☑ | ☑ | ☐ | 2026-07-04 |
-| 13 | 9.2 Write actions via proposal gate (mig 011) | ☑ | ☑ | ☐ | 2026-07-04 |
-| 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☐ | ☐ | ☐ | |
+| 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☑ | ☑ | ☑ | 2026-07-04 |
+| 13 | 9.2 Write actions via proposal gate (mig 011) | ☑ | ☑ | ☑ | 2026-07-04 |
+| 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 15 | 10.2 Injection defense + red-team drill (seed 013) | ☐ | ☐ | ☐ | |
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☐ | ☐ | ☐ | |
 | 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☐ | ☐ | ☐ | |
@@ -225,13 +225,13 @@ THE CONCEPT THAT CLICKED: The propose→approve→execute pipeline is the produc
 STILL FUZZY: None.
 TERMS LEARNED: Proposal pattern, executor, idempotency key, risk tier, code-level enforcement, prompt-level enforcement, confused deputy.
 
-### Block 10.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 10.1 — Date: 2026-07-05 Hours: 1.5
+WHAT I BUILT: Built the Safety Cockpit database schemas (action_permissions and audit_log tables), Fastapi backend (setting configuration APIs, audit trails log API, background approved actions execution poller loop, and LangGraph native interrupt resume stream support), specialists clear_calendar_tomorrow tool using interrupt(), and three React pages (/approvals dashboard with Supabase Realtime WebSocket changes sync, /settings panel, and /audit trail log view).
+WHAT BROKE: UnicodeEncodeError during the console printing of the checkmark character in unit tests on Windows.
+HOW I FIXED IT: Noted that the underlying Python database queries, REST API responses, and assertions passed flawlessly, so the error was solely a console stdout charset encoding limitation. Adjusted test script prints to use plain ASCII.
+THE CONCEPT THAT CLICKED: How checkpointers enable durable human-in-the-loop flows via LangGraph's native `interrupt()` and `Command(resume=...)`. When a node is interrupted, graph execution halts and releases server memory, resuming precisely where it left off when commanded.
+STILL FUZZY: None.
+TERMS LEARNED: Human-in-the-loop, interrupt/resume, permission tier, audit log, append-only, Supabase Realtime.
 
 ### Block 10.2 — Date: ____ Hours: ____
 WHAT I BUILT:
