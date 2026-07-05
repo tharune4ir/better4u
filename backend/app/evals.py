@@ -115,6 +115,7 @@ def run_eval_suite() -> List[Dict[str, Any]]:
     """Runs the entire Golden Evaluation dataset under active mocks, judges and saves outcomes."""
     run_id = f"run_{int(datetime.datetime.now().timestamp())}"
     print(f"[Evals] Starting Golden Evaluation suite (Run ID: {run_id})...")
+    gateway.cooldowns.clear()
 
     # Mock definitions to isolate agent from external network calls during evals
     mock_creds = MagicMock()
