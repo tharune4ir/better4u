@@ -64,7 +64,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 12 | 9.1 Google OAuth + Gmail/Calendar READ (seed 010) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 13 | 9.2 Write actions via proposal gate (mig 011) | ☑ | ☑ | ☑ | 2026-07-04 |
 | 14 | 10.1 Approval Inbox + tiers + audit (mig 012) | ☑ | ☑ | ☑ | 2026-07-05 |
-| 15 | 10.2 Injection defense + red-team drill (seed 013) | ☐ | ☐ | ☐ | |
+| 15 | 10.2 Injection defense + red-team drill (seed 013) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☐ | ☐ | ☐ | |
 | 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☐ | ☐ | ☐ | |
 | 18 | 13.1 Command Center frontend (seed 016) | ☐ | ☐ | ☐ | |
@@ -233,13 +233,13 @@ THE CONCEPT THAT CLICKED: How checkpointers enable durable human-in-the-loop flo
 STILL FUZZY: None.
 TERMS LEARNED: Human-in-the-loop, interrupt/resume, permission tier, audit log, append-only, Supabase Realtime.
 
-### Block 10.2 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 10.2 — Date: 2026-07-05 Hours: 1.0
+WHAT I BUILT: Created backend/app/actions/scanner.py with a regex-based heuristic scanner and checkpointer-based correlation analyzer. Modified proposer.py to call scanner and auto-escalate flagged proposals to HIGH risk. Updated read_recent_emails and web_fetch tools in specialists.py to wrap outputs in XML quarantine tags. Created academy_workbooks/red_team_01.md drill workbook and docs/14_injection_lesson.md.
+WHAT BROKE: ModuleNotFoundError on sys.path in unit tests.
+HOW I FIXED IT: Fixed backslash escaping typo by prepending path addition with raw string r"..." prefix.
+THE CONCEPT THAT CLICKED: Spotlighting (quarantining) untrusted external content inside custom tags instructs the LLM attention mechanism that the text is data, not system instructions, preventing indirect prompt injection from hijacking the agent.
+STILL FUZZY: None.
+TERMS LEARNED: Indirect prompt injection, lethal trifecta, exfiltration, spotlighting, red teaming.
 
 ### Block 11.1 — Date: ____ Hours: ____
 WHAT I BUILT:
