@@ -118,6 +118,39 @@ export default function JournalHubPage() {
               </div>
             </motion.div>
 
+            {/* SECOND BATCH: The Kitchen Collection Card */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              onClick={() => router.push("/journal/second-batch")}
+              className="group cursor-pointer bg-white rounded-[2rem] border border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] overflow-hidden transition-all duration-300"
+            >
+              <div className="relative aspect-[21/9] w-full bg-[#f3f0e8] overflow-hidden">
+                <img 
+                  src="/all_image_files/Modern_Trelis_storefront_healthy…_2K_202607060059.jpeg" 
+                  alt="The Kitchen Cover"
+                  className="w-full h-full object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out filter brightness-[0.95]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent flex items-end p-6 md:p-8">
+                  <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-[#2A7F7F] px-3 py-1 rounded-full shadow-sm">
+                    12 Dishes · Menu Vault
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8 space-y-3">
+                <h4 className="text-2xl font-light text-slate-900 group-hover:text-[#2A7F7F] transition-colors">
+                  Second Batch: The Kitchen
+                </h4>
+                <p className="text-sm text-slate-500 font-light leading-relaxed">
+                  Comfort food, engineered for your microbiome. High protein, high fibre, and always fermented. Discover the public menu vault.
+                </p>
+                <div className="pt-2 flex items-center gap-2 text-xs font-bold text-[#2A7F7F] uppercase tracking-wider group-hover:translate-x-1 transition-transform duration-300">
+                  <span>Explore Menu Vault</span>
+                  <span className="text-sm">→</span>
+                </div>
+              </div>
+            </motion.div>
+
             {/* COMING SOON Indicator */}
             <div className="pt-4 text-center">
               <span className="text-[10px] tracking-widest uppercase text-slate-400 font-light flex items-center justify-center gap-2">
