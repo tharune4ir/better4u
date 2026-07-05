@@ -68,7 +68,7 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 16 | 11.1 Scheduler + Morning Briefing (mig 013, seed 014) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 17 | 12.1 Langfuse + golden evals (mig 014, seed 015) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 18 | 13.1 Command Center frontend (seed 016) | ☑ | ☑ | ☑ | 2026-07-05 |
-| 19 | 14.1 Deploy + demo mode + README (seed 017) | ☐ | ☐ | ☐ | |
+| 19 | 14.1 Deploy + demo mode + README (seed 017) | ☑ | ☑ | ☑ | 2026-07-05 |
 
 **Milestone moments — record the date you felt each one:**
 - ⚡ Fallback chain saved me when I sabotaged my Gemini key: ____
@@ -265,13 +265,13 @@ THE CONCEPT THAT CLICKED: Unified layout and state sync. Placing chat, approvals
 STILL FUZZY: None.
 TERMS LEARNED: Glassmorphism, micro-animations, unified dashboard, real-time sync.
 
-### Block 14.1 — Date: ____ Hours: ____
-WHAT I BUILT:
-WHAT BROKE:
-HOW I FIXED IT:
-THE CONCEPT THAT CLICKED:
-STILL FUZZY:
-TERMS LEARNED:
+### Block 14.1 — Date: 2026-07-05 Hours: 1.0
+WHAT I BUILT: Created backend/Dockerfile and backend/.dockerignore for production containerization. Added DEMO_MODE: bool setting to settings.py and intercepted execute_proposal in executors.py to bypass real Google OAuth/write API calls with mock simulated executions when active. Created docs/17_deployment_lesson.md guide comparing local-first tunnels, HF Spaces, and Render. Wrote the portfolio-grade ROOT README.md containing Hero Pitch, routing flows, feature-to-competency mappings, and interview demo scripts.
+WHAT BROKE: N/A
+HOW I FIXED IT: N/A
+THE CONCEPT THAT CLICKED: Deploying safety-first applications. Public demo targets (like recruiters or portfolios) must never hold active write credentials/tokens. Implementing a clean DEMO_MODE bypass at the dispatcher level isolates mock behavior from the agent reasoning graph, allowing secure demonstrations.
+STILL FUZZY: None.
+TERMS LEARNED: Container, image, cold start, tunnel, demo mode.
 
 ---
 
