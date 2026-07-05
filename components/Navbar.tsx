@@ -40,7 +40,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   const navItems = [
     { id: "approach" as NavTab, label: "The Approach", sub: "", icon: Leaf },
     { id: "product-lab" as NavTab, label: "Product Lab", sub: "THE RANGE", icon: Sparkle },
-    { id: "journal" as NavTab, label: "Journal", sub: "Coming Soon", icon: BookOpen },
+    { id: "journal" as NavTab, label: "Journal", sub: "RECIPES", icon: BookOpen },
   ];
 
   return (
