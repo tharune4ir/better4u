@@ -91,7 +91,7 @@ export default function FirstBatchCollectionPage() {
 
         <div className="space-y-3">
           <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-3 py-1 rounded-full inline-block">
-            Collection index
+            First Batch · Everyday Indian
           </span>
           <h1 className="text-4xl sm:text-5xl font-extralight tracking-tight text-slate-900">
             First Batch
