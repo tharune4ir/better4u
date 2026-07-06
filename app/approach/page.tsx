@@ -108,23 +108,36 @@ export default function ApproachPage() {
             <h3 className="text-xl font-semibold tracking-wide uppercase text-slate-800">The Swap</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {swaps.map((swap, idx) => (
-              <motion.div 
-                key={idx}
-                whileHover={{ y: -2 }}
-                className="flex flex-col bg-white/60 p-5 rounded-2xl border border-black/[0.03] shadow-sm group hover:shadow-md transition-all duration-300"
-              >
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Instead of</span>
-                <span className="text-sm sm:text-base text-slate-500 font-light line-through decoration-slate-300 mb-4">
-                  {swap.instead}
-                </span>
-                
-                <span className="text-[10px] font-bold text-[#2A7F7F] uppercase tracking-widest mb-1 mt-auto">Reach for</span>
-                <span className="text-base sm:text-lg font-bold text-slate-900">
-                  {swap.reachFor}
-                </span>
-              </motion.div>
-            ))}
+            {swaps.map((swap, idx) => {
+              const [brand, flavor] = swap.reachFor.split(" · ");
+              return (
+                <motion.div 
+                  key={idx}
+                  whileHover={{ y: -2 }}
+                  className="flex flex-col bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_20px_rgba(0,0,0,0.01)] group hover:shadow-[0_8px_30px_rgba(0,0,0,0.025)] transition-all duration-300"
+                >
+                  <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">
+                    Instead of
+                  </span>
+                  <span className="text-xs sm:text-sm text-slate-400 font-light line-through decoration-slate-200 mb-5">
+                    {swap.instead}
+                  </span>
+                  
+                  <span className="text-[9px] font-semibold text-[#2A7F7F] uppercase tracking-widest mb-1.5 mt-auto">
+                    Reach for
+                  </span>
+                  <span className="text-base font-light text-slate-800 tracking-tight">
+                    <span className="font-semibold text-slate-900">{brand}</span>
+                    {flavor && (
+                      <>
+                        <span className="text-slate-300 mx-2">·</span>
+                        <span className="text-slate-650 font-light">{flavor}</span>
+                      </>
+                    )}
+                  </span>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 

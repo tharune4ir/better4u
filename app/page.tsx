@@ -257,98 +257,170 @@ export default function LandingHub() {
             <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
               Every time you'd reach for the unhealthy default, Trelis has the better-tasting version.
             </p>
-          </div>
+                    </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* ALIVE */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">ALIVE</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Glass</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">ALIVE</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Glass
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Better-for-you probiotic soda.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Better-for-you probiotic soda.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> nimbu/goli soda & sweet colas.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  nimbu/goli soda & sweet colas.
+                </span>
+              </div>
             </motion.div>
 
             {/* JOSH */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">JOSH</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Can</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">JOSH</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Can
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Prebiotic fizz.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Prebiotic fizz.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> cola, kala-khatta gola, orange/rose pops.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  cola, gola, orange/rose pops.
+                </span>
+              </div>
             </motion.div>
 
             {/* BATCH */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">BATCH</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">BATCH</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Cup
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Fresh ferments, made daily.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Fresh ferments, made daily.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary tonics, store kombucha, lassi.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  sugary tonics, store kombucha, lassi.
+                </span>
+              </div>
             </motion.div>
 
             {/* PULP */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">PULP</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Cup</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">PULP</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Cup
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Active culture smoothies.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Active culture smoothies.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> green juice, mango shakes, skipped breakfasts.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  green juice, mango shakes, skipped breakfasts.
+                </span>
+              </div>
             </motion.div>
 
             {/* STEEP */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">STEEP</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Mug</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">STEEP</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Mug
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Hot botanical brews.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Hot botanical brews.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary chai, instant coffee, after-dinner sweets.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  sugary chai, instant coffee, dessert sweets.
+                </span>
+              </div>
             </motion.div>
 
             {/* GRIT */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="bg-white/50 p-6 sm:p-8 rounded-3xl border border-black/[0.02] shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg transition-all duration-300"
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-slate-900">GRIT</h3>
-                <span className="text-[9px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2 py-1 rounded-full border border-[#2A7F7F]/10">Bar</span>
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">GRIT</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    Bar
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Whole-food bars & bites.
+                </p>
               </div>
-              <p className="text-sm font-medium text-slate-700 mb-2">Whole-food bars & bites.</p>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                <strong className="text-slate-800 font-medium">Replaces:</strong> sugary granola bars, biscuits, fried namkeen.
-              </p>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  sugary granola bars, biscuits, fried namkeen.
+                </span>
+              </div>
             </motion.div>
 
           </div>
