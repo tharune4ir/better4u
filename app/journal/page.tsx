@@ -126,7 +126,7 @@ export default function JournalHubPage() {
             >
               <div className="relative aspect-[21/9] w-full bg-[#f3f0e8] overflow-hidden">
                 <img 
-                  src="/all_image_files/Modern_Trelis_storefront_healthy…_2K_202607060059.jpeg" 
+                  src="/all_image_files/Modern_better4u_storefront_healthy…_2K_202607060059.jpeg" 
                   alt="Second Batch Cover"
                   className="w-full h-full object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out filter brightness-[0.95]"
                 />

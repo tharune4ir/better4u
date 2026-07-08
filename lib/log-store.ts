@@ -29,7 +29,7 @@ function setItem<T>(key: string, value: T): void {
 }
 
 export function getWeekPlants(isoWeekKey: string): Set<string> {
-  const key = `trelis.v1.plants.${isoWeekKey}`;
+  const key = `better4u.v1.plants.${isoWeekKey}`;
   const list = getItem<string[]>(key, []);
   return new Set(list);
 }
@@ -41,20 +41,20 @@ export function togglePlant(isoWeekKey: string, foodId: string): void {
   } else {
     plants.add(foodId);
   }
-  setItem(`trelis.v1.plants.${isoWeekKey}`, Array.from(plants));
+  setItem(`better4u.v1.plants.${isoWeekKey}`, Array.from(plants));
 }
 
 export function resetWeekPlants(isoWeekKey: string): void {
-  setItem(`trelis.v1.plants.${isoWeekKey}`, []);
+  setItem(`better4u.v1.plants.${isoWeekKey}`, []);
 }
 
 export function getFermentsToday(dateIso: string): number {
-  const key = `trelis.v1.ferments.${dateIso}`;
+  const key = `better4u.v1.ferments.${dateIso}`;
   return getItem<number>(key, 0);
 }
 
 export function logFerment(dateIso: string, count: number): void {
-  const key = `trelis.v1.ferments.${dateIso}`;
+  const key = `better4u.v1.ferments.${dateIso}`;
   setItem(key, count);
 }
 

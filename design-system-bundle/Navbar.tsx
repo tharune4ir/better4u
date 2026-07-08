@@ -49,7 +49,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           <div className="relative w-9 h-9 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"
-              alt="Trelis Life Logo"
+              alt="better4u Logo"
               fill
               sizes="36px"
               className="object-contain"
@@ -107,7 +107,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           <div className="relative w-11 h-11 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"
-              alt="Trelis Life Logo"
+              alt="better4u Logo"
               fill
               sizes="44px"
               className="object-contain"

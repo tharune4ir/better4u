@@ -85,7 +85,7 @@ export default function LandingHub() {
           <div className="relative w-10 h-10 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"
-              alt="Trelis Logo"
+              alt="better4u Logo"
               fill
               sizes="40px"
               className="object-contain"
@@ -201,7 +201,7 @@ export default function LandingHub() {
           className="text-center max-w-4xl space-y-8 z-10 flex flex-col items-center"
         >
           <span className="text-[10px] tracking-widest text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block">
-            Trelis Life Hub
+            better4u Hub
           </span>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-slate-900 leading-[1.15] px-2 max-w-3xl">
@@ -494,7 +494,7 @@ export default function LandingHub() {
               The Method
             </span>
             <h2 className="text-3xl font-light tracking-tight text-slate-900">
-              The Trelis Food <span className="font-semibold text-slate-950">Engine</span>
+              The better4u Food <span className="font-semibold text-slate-950">Engine</span>
             </h2>
             <p className="text-xs text-slate-500 font-light max-w-md">
               A comprehensive system of checklists, live logs, recipes, and foundations to make dietary diversity effortless.

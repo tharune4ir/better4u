@@ -20,25 +20,25 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Trelis Life",
+  title: "better4u",
   description: "A grain-first, prebiotic-rich gut health food hub.",
   manifest: "/manifest.json",
   openGraph: {
-    title: "Trelis Life",
+    title: "better4u",
     description: "A grain-first, prebiotic-rich gut health food hub.",
     images: [
       {
         url: "/logo-transparent.png",
         width: 1200,
         height: 630,
-        alt: "Trelis Life Logo",
+        alt: "better4u Logo",
       },
     ],
   },
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
-    apple: "/icons/icon-192.webp",
+    apple: "/icons/icon-192.png",
   },
 };
 

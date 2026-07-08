@@ -580,7 +580,7 @@ export default function ProductLabPage() {
   // Load cart and box configuration on mount
   useEffect(() => {
     console.log("[ProductLabPage] Component mounted. Setting up video playback...");
-    const savedCart = localStorage.getItem("better4u_lab_cart") || localStorage.getItem("trelis_lab_cart");
+    const savedCart = localStorage.getItem("better4u_lab_cart");
     if (savedCart) {
       try {
         const parsed = JSON.parse(savedCart);

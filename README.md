@@ -1,30 +1,19 @@
-# Trelis Life Hub
+# better4u Hub
 
-Trelis Life Hub is a clean, public-facing portal dedicated to better-for-you, taste-first gut health food and functional physical capability.
+better4u is a clean, public-facing portal dedicated to better-for-you, taste-first gut health food and functional physical capability.
 
 Built with a calm, premium aesthetic, it offers interactive tools, guides, and structured recipes designed to make nourishing routines simple, delicious, and automatic.
 
-## Key Wings & Features
+## Brand World & Concept Houses
 
-### 1. The Food Wing (`/food`)
-A grain-first, prebiotic-rich nourishing framework designed to foster natural microbiome variety:
-- **Daily Habits & Plate:** Simple formulas for structural eating windows and nutrient ratios.
-- **30+ Plants Engine:** An interactive weekly checklist tracking plant diversity (whole grains, vegetables, seeds, herbs).
-- **3-Ferments Logger:** A daily tracker for cultured foods and live probiotics (curd, buttermilk, fermented root vegetables).
-- **Pantry Staples & Kitchen Foundations:** Interactive checklists of core ingredients and the 12 essential scratch-cooking guidelines.
-
-### 2. The Recipe Hub (`/recipes`)
-A dedicated recipe book containing step-by-step instructions for:
-- Traditional & Live Ferments (Kanji, Sauerkraut, Millet Idli & Dosa, Beet-Carrot Kanji, Ragi Koozh)
-- Warm Mains & Comfort Bowls (Foxtail-Moong Khichdi, Sorrel Dal, Sabzis)
-- Prebiotic Breakfasts, Smoothies & Tonics (Jeera-Ajwain-Saunf Tea, Sattu Sharbat)
-
-### 3. The Movement Wing (`/movement`)
-A physical capability framework built on movement first principles:
-- **Capability Vision Board:** Track markers for strength, mobility, endurance, and recovery.
-- **Morning Flow Player:** Interactive player guiding you through mobility, activation, and calibration.
-- **Strength Progression Ladder:** Calisthenics steps spanning Squats, Push, Pull, Hinge, Carry, and Core.
-- **Recovery Protocols:** Simple breathwork, non-sleep deep rest (NSDR), and the "Do-Nothing Corner."
+better4u operates across seven concept houses, each serving a distinct purpose:
+1. **ALIVE** — Probiotic sodas crafted with real fruit infusions and active cultures.
+2. **JOSH** — Nutrient-dense, functional wellness shots.
+3. **BATCH** — Small-batch premium craft foods.
+4. **PULP** — Whole fruit cold-pressed juices.
+5. **STEEP** — Warm digestive teas and prebiotic herbal infusions.
+6. **GRIT** — Whole-food energy bars and raw snack bites.
+7. **PAUSE** — High-protein RTD (Ready to Drink) beverages with clean flavours and zero digestive compromise.
 
 ---
 

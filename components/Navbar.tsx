@@ -49,9 +49,10 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
       <header className="flex md:hidden items-center justify-between px-6 h-16 bg-[#F7F6F2]/80 backdrop-blur-md border-b border-black/[0.03] sticky top-0 z-40 select-none">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => router.push("/")}>
           <div className="relative w-9 h-9 flex-shrink-0">
+            {/* Note: A real brand logo can be dropped in later by replacing this file */}
             <Image
-              src="/icons/icon-128.webp"
-              alt="Trelis Life Logo"
+              src="/icons/icon-128.png"
+              alt="better4u Logo"
               fill
               sizes="36px"
               className="object-contain"
@@ -113,9 +114,10 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
         {/* Brand Logo */}
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
           <div className="relative w-11 h-11 flex-shrink-0">
+            {/* Note: A real brand logo can be dropped in later by replacing this file */}
             <Image
-              src="/icons/icon-128.webp"
-              alt="Trelis Life Logo"
+              src="/icons/icon-128.png"
+              alt="better4u Logo"
               fill
               sizes="44px"
               className="object-contain"

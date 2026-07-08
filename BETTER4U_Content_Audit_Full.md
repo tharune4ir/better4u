@@ -1,13 +1,13 @@
-# Trelis Life: Complete Public Content Audit & Source of Truth
+# better4u: Complete Public Content Audit & Source of Truth
 
-This document contains every piece of public-facing text, copy, and content across the Trelis Life application. It is structured by page and section to serve as a comprehensive reference for brand positioning and surgical content editing. There are no summaries here—this is the exact literal content displayed on the screen.
+This document contains every piece of public-facing text, copy, and content across the better4u application. It is structured by page and section to serve as a comprehensive reference for brand positioning and surgical content editing. There are no summaries here—this is the exact literal content displayed on the screen.
 
 ---
 
 ## 1. Landing Hub (`app/page.tsx`)
 
 ### Navigation & Meta
-- **Brand/Logo Icon:** Trelis Logo (`/icons/icon-128.webp`) accompanied by a custom pulse-animating Sparkle icon.
+- **Brand/Logo Icon:** better4u Logo (`/icons/icon-128.webp`) accompanied by a custom pulse-animating Sparkle icon.
 - **Top Navigation Buttons:** 
   - **The Approach** (Redirects to `/approach`)
   - **Product Lab** (Redirects to `/product-lab`)
@@ -16,7 +16,7 @@ This document contains every piece of public-facing text, copy, and content acro
 ### Hero Section (The Hook)
 - **Super-Header Tag:** BUILT IN THE OPEN
 - **Main Heading:** Real food that actually *tastes good*.
-- **Subheading:** Trelis makes better-for-you versions of the food and drinks people reach for every day — familiar flavours, real ingredients, and a lot less sugar.
+- **Subheading:** better4u makes better-for-you versions of the food and drinks people reach for every day — familiar flavours, real ingredients, and a lot less sugar.
 - **Primary CTA Button:** See the range (Redirects to `/product-lab`)
 - **Secondary CTA Button:** Why we exist (Redirects to `/approach`)
 - **Scroll Indicator:** Scroll to Discover (accompanied by an animated bounce arrow).
@@ -25,17 +25,17 @@ This document contains every piece of public-facing text, copy, and content acro
 #### Part 1: The Problem (The Default)
 - **Tag:** The Default
 - **Heading:** Everyday food and drink defaults aren't doing us any favours.
-- **Description:** A sugary soda, processed snack, or heavy dessert follows almost every meal. Trelis makes the better-tasting, better-for-you version.
+- **Description:** A sugary soda, processed snack, or heavy dessert follows almost every meal. better4u makes the better-tasting, better-for-you version.
 
 #### Part 2: The Insight (The Remake)
 - **Tag Icon:** Search
 - **Heading:** We didn't make another diet food or health drink — we remade the everyday foods and drinks you already reach for, better.
 - **Description:** Because food should be food first. Taste is how you make healthy habits stick.
 
-#### Part 3: The Universe (House of Trelis)
+#### Part 3: The Universe (House of better4u)
 - **Tag:** The Universe
-- **Heading:** House of Trelis
-- **Description:** Every time you'd reach for the unhealthy default, Trelis has the better-tasting version.
+- **Heading:** House of better4u
+- **Description:** Every time you'd reach for the unhealthy default, better4u has the better-tasting version.
 - **Cards Matrix:**
   1. **ALIVE**
      - Subtitle: Better-for-you probiotic soda.
@@ -935,7 +935,7 @@ This document contains every piece of public-facing text, copy, and content acro
   - **Banner Tag:** 12 RECIPES · GLOBAL COMFORT
   - **Title:** Second Batch
   - **Description:** Comfort food, engineered for your microbiome. High protein, high fibre, and always fermented.
-  - **Cover Image:** `/all_image_files/Modern_Trelis_storefront_healthy_food_and_drink_2K_202607060059.jpeg`
+  - **Cover Image:** `/all_image_files/Modern_better4u_storefront_healthy_food_and_drink_2K_202607060059.jpeg`
   - **CTA:** Explore Recipes
 - **Coming Soon Indicator:** More collections cooking in the background.
 

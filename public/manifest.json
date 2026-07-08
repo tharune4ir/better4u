@@ -1,53 +1,65 @@
 {
-  "name": "Trelis Life",
-  "short_name": "Trelis",
-  "description": "Structure for a better life.",
+  "name": "better4u",
+  "short_name": "better4u",
+  "description": "Better-for-you versions of everyday food and drinks, crafted with real ingredients and a lot less sugar.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7F6F2",
   "theme_color": "#F7F6F2",
   "icons": [
     {
-      "src": "/icons/icon-48.webp",
+      "src": "/icons/icon-48.png",
       "sizes": "48x48",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-72.webp",
+      "src": "/icons/icon-72.png",
       "sizes": "72x72",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-96.webp",
+      "src": "/icons/icon-96.png",
       "sizes": "96x96",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-128.webp",
+      "src": "/icons/icon-128.png",
       "sizes": "128x128",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-192.webp",
+      "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-256.webp",
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-256.png",
       "sizes": "256x256",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.webp",
+      "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

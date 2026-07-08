@@ -192,7 +192,7 @@ const FrostedBottle = ({
                 <div className="space-y-0.5">
                   <div className="w-4 h-[0.5px] bg-white/20 mx-auto" />
                   <span className="text-[4px] tracking-wider text-white/50 block font-light">
-                    BY TRELIS
+                    BY better4u
                   </span>
                 </div>
               </div>
@@ -270,7 +270,7 @@ export default function ProductLabPage() {
   // Load cart and box configuration on mount
   useEffect(() => {
     console.log("[ProductLabPage] Component mounted. Initializing video playback...");
-    const savedCart = localStorage.getItem("trelis_lab_cart");
+    const savedCart = localStorage.getItem("better4u_lab_cart");
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
@@ -307,7 +307,7 @@ export default function ProductLabPage() {
 
   const saveCart = (newCart: CartItem[]) => {
     setCart(newCart);
-    localStorage.setItem("trelis_lab_cart", JSON.stringify(newCart));
+    localStorage.setItem("better4u_lab_cart", JSON.stringify(newCart));
   };
 
   // Cart actions
@@ -432,7 +432,7 @@ export default function ProductLabPage() {
               transition={{ duration: 0.6 }}
               className="text-[10px] tracking-[0.3em] text-[#2A7F7F] font-bold uppercase bg-[#2A7F7F]/5 border border-[#2A7F7F]/10 px-4 py-1.5 rounded-full inline-block"
             >
-              LIVE SPARK by Trelis
+              LIVE SPARK by better4u
             </motion.span>
             
             <motion.h1 

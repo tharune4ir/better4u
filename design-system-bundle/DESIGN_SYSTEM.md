@@ -1,13 +1,13 @@
-# Trelis Life — Brand Design System Spec
+# better4u — Brand Design System Spec
 **Editorial. Culinary. Science-First. Built in the Open.**
 
-This design system spec outlines the exact visual, structural, and interactive principles that define the Trelis Life platform. It is extracted directly from the actual values and patterns used within the codebase, ensuring that any future platform, product page, or asset remains perfectly aligned with the brand's premium, minimalist aesthetic.
+This design system spec outlines the exact visual, structural, and interactive principles that define the better4u platform. It is extracted directly from the actual values and patterns used within the codebase, ensuring that any future platform, product page, or asset remains perfectly aligned with the brand's premium, minimalist aesthetic.
 
 ---
 
 ## 1. Color Palette
 
-Trelis Life is styled around a high-end editorial look that feels like premium, textured card stock ("paper"). Colors are warm, natural, and soft, avoiding harsh synthetic darks and high-contrast clinical white.
+better4u is styled around a high-end editorial look that feels like premium, textured card stock ("paper"). Colors are warm, natural, and soft, avoiding harsh synthetic darks and high-contrast clinical white.
 
 ### Foundational Colors
 
@@ -34,7 +34,7 @@ Each product flavor features a unique theme color used for glowing backdrop ambi
 
 ## 2. Typography
 
-Trelis Life treats text as a premium editorial journal. The hierarchy relies on weight contrast (ultra-light vs. bold) and character spacing rather than size alone.
+better4u treats text as a premium editorial journal. The hierarchy relies on weight contrast (ultra-light vs. bold) and character spacing rather than size alone.
 
 ### Font Families
 *   **Primary Sans (Body & Labels)**: `Geist Sans` (Fallback: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`). Used for clean, technical data representation.
@@ -131,7 +131,7 @@ Cards do not use solid backgrounds. They float as translucent sheets over the gr
 
 ## 6. Voice & Tone
 
-Trelis Life is not an intimidating medical platform; it is a kitchen-first, flavor-obsessed companion. The messaging reflects humble mastery, transparent learning, and culinary pleasure.
+better4u is not an intimidating medical platform; it is a kitchen-first, flavor-obsessed companion. The messaging reflects humble mastery, transparent learning, and culinary pleasure.
 
 ### Core Values
 1.  **Taste-First**: If a gut-healthy food does not taste spectacular, it does not belong on the table.
