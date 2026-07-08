@@ -22,10 +22,42 @@ import {
   Eye,
   Leaf,
   FlaskConical,
-  Droplets
+  Droplets,
+  UtensilsCrossed
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { MOCK_PRODUCTS, ProductSKU } from "@/lib/store-data";
+
+// Recipe pairings: product id → relevant recipe IDs + labels from the Recipe Hub
+const PRODUCT_RECIPE_PAIRINGS: Record<string, { id: string; title: string; tag: string }[]> = {
+  // ALIVE — probiotic sodas pair with ferment-forward recipes
+  "alive-lime":    [{ id: "R8",  title: "Spiced Neer-Mor",           tag: "No-cook" }, { id: "R12", title: "Jeera–Ajwain–Saunf Tea", tag: "Quick" }, { id: "F1",  title: "Fermented Kanji Rice",       tag: "Ferment" }],
+  "alive-ginger":  [{ id: "R8",  title: "Spiced Neer-Mor",           tag: "No-cook" }, { id: "R12", title: "Jeera–Ajwain–Saunf Tea", tag: "Quick" }, { id: "R10", title: "Sattu Sharbat Tonic",         tag: "No-cook" }],
+  "alive-spice":   [{ id: "R12", title: "Jeera–Ajwain–Saunf Tea",   tag: "Quick"  }, { id: "R1",  title: "Foxtail–Moong Khichdi",   tag: "One-pot" }, { id: "R5",  title: "Any-Vegetable Sabzi",          tag: "Mains"  }],
+  "alive-berry":   [{ id: "R9",  title: "Purple Polyphenol Smoothie",tag: "No-cook" }, { id: "R11", title: "Probiotic Beet Kanji",    tag: "Ferment" }, { id: "R6",  title: "Curd–Berry–Seed Bowl",        tag: "Breakfast" }],
+  // JOSH — prebiotic sodas pair with fibre-rich meals
+  "josh-kala-khatta":  [{ id: "R9",  title: "Purple Polyphenol Smoothie", tag: "No-cook" }, { id: "F7", title: "Spiced Beet-Carrot Kanji", tag: "Ferment" }, { id: "R4",  title: "Gongura Pappu",              tag: "Mains"  }],
+  "josh-masala-cola":  [{ id: "R1",  title: "Foxtail–Moong Khichdi",     tag: "One-pot" }, { id: "R3", title: "Universal Dal + Brown Rice",tag: "Mains"  }, { id: "R5",  title: "Any-Vegetable Sabzi",        tag: "Mains"  }],
+  "josh-gulab":        [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R7", title: "Ragi Ambali Porridge",    tag: "Breakfast" }, { id: "F8", title: "Traditional Ragi Koozh",     tag: "Ferment" }],
+  "josh-santra":       [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R2", title: "Moong Pesarattu Crepe",   tag: "Breakfast" }, { id: "R10", title: "Sattu Sharbat Tonic",       tag: "No-cook" }],
+  // BATCH — fresh ferments naturally pair with their DIY versions
+  "batch-kanji":             [{ id: "F7",  title: "Spiced Beet-Carrot Kanji",   tag: "Ferment" }, { id: "F3",  title: "Lacto-Fermented Root Veg", tag: "Ferment" }, { id: "R11", title: "Probiotic Beet Kanji",         tag: "Ferment" }],
+  "batch-strawberry-kefir":  [{ id: "R6",  title: "Curd–Berry–Seed Bowl",      tag: "Breakfast" }, { id: "F4",  title: "Simple Water Kefir",       tag: "Ferment" }, { id: "R7",  title: "Ragi Ambali Porridge",         tag: "Breakfast" }],
+  "batch-jamun-lime-kombucha":[{ id: "R15", title: "Wild Tea Kombucha",          tag: "Ferment" }, { id: "R9",  title: "Purple Polyphenol Smoothie",tag: "No-cook" }, { id: "F7",  title: "Spiced Beet-Carrot Kanji",    tag: "Ferment" }],
+  // PULP — gut smoothies pair with high-fibre bowls & breakfast
+  "pulp-green-reset":    [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R9",  title: "Purple Polyphenol Smoothie", tag: "No-cook" }, { id: "R2",  title: "Moong Pesarattu Crepe",        tag: "Breakfast" }],
+  "pulp-cacao-daily":    [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R10", title: "Sattu Sharbat Tonic",        tag: "No-cook" }, { id: "R7",  title: "Ragi Ambali Porridge",          tag: "Breakfast" }],
+  "pulp-papaya-sunrise": [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R7",  title: "Ragi Ambali Porridge",       tag: "Breakfast" }, { id: "F8",  title: "Traditional Ragi Koozh",       tag: "Ferment" }],
+  // STEEP — digestif teas pair with warming meals
+  "steep-three-root":    [{ id: "R12", title: "Jeera–Ajwain–Saunf Tea",    tag: "Quick"  }, { id: "R1",  title: "Foxtail–Moong Khichdi",    tag: "One-pot" }, { id: "R3",  title: "Universal Dal + Brown Rice",   tag: "Mains"  }],
+  "steep-tulsi-ginger":  [{ id: "R12", title: "Jeera–Ajwain–Saunf Tea",    tag: "Quick"  }, { id: "R7",  title: "Ragi Ambali Porridge",      tag: "Breakfast" }, { id: "R8",  title: "Spiced Neer-Mor",              tag: "No-cook" }],
+  "steep-ashwagandha":   [{ id: "R1",  title: "Foxtail–Moong Khichdi",      tag: "One-pot" }, { id: "R3",  title: "Universal Dal + Brown Rice", tag: "Mains"  }, { id: "R8",  title: "Spiced Neer-Mor",              tag: "No-cook" }],
+  // GRIT — whole-food bars pair with ferments & mains
+  "grit-ragi-date":      [{ id: "F6",  title: "Millet Idli & Dosa Batter",  tag: "Ferment" }, { id: "R7",  title: "Ragi Ambali Porridge",      tag: "Breakfast" }, { id: "R2",  title: "Moong Pesarattu Crepe",        tag: "Breakfast" }],
+  "grit-trail-mix":      [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R10", title: "Sattu Sharbat Tonic",        tag: "No-cook" }, { id: "R2",  title: "Moong Pesarattu Crepe",        tag: "Breakfast" }],
+  "grit-oat-cocoa":      [{ id: "R6",  title: "Curd–Berry–Seed Bowl",       tag: "Breakfast" }, { id: "R7",  title: "Ragi Ambali Porridge",       tag: "Breakfast" }, { id: "F5",  title: "Steamed Besan Dhokla",         tag: "Ferment" }],
+};
+
 
 interface CartItem {
   product: ProductSKU;
@@ -1073,6 +1105,39 @@ export default function ProductLabPage() {
                       {selectedProduct.tasteHighlight}
                     </p>
                   </div>
+
+                  {/* Pairs Well With — Recipe Pairings */}
+                  {PRODUCT_RECIPE_PAIRINGS[selectedProduct.id] && (
+                    <div className="space-y-2.5">
+                      <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest flex items-center gap-1.5">
+                        <UtensilsCrossed className="w-3.5 h-3.5" style={{ color: activeBrand.accentColor }} />
+                        Pairs Well With
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {PRODUCT_RECIPE_PAIRINGS[selectedProduct.id].map((recipe) => (
+                          <a
+                            key={recipe.id}
+                            href="/recipes"
+                            onClick={() => setSelectedProduct(null)}
+                            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[10px] font-semibold tracking-wide transition-all cursor-pointer hover:scale-[1.02] hover:shadow-sm"
+                            style={{
+                              color: activeBrand.accentColor,
+                              borderColor: `${activeBrand.accentColor}25`,
+                              backgroundColor: `${activeBrand.accentColor}08`
+                            }}
+                          >
+                            <span className="font-bold opacity-60">{recipe.id}</span>
+                            <span>{recipe.title}</span>
+                            <span className="ml-1 px-1.5 py-0.5 rounded text-[8px] uppercase tracking-wider font-bold bg-white/60 opacity-70">{recipe.tag}</span>
+                          </a>
+                        ))}
+                      </div>
+                      <p className="text-[9px] text-slate-400 font-light mt-1">
+                        Full step-by-step instructions in the{" "}
+                        <a href="/recipes" onClick={() => setSelectedProduct(null)} className="underline hover:opacity-80 transition-opacity" style={{ color: activeBrand.accentColor }}>Recipe Hub →</a>
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-black/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">

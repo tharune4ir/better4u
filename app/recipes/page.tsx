@@ -493,39 +493,78 @@ const RECIPES_DATA: RecipeItem[] = [
     whyHeals: "Classic herbal carminatives that relax digestive muscles and immediately calm bloating, gas, or cramps."
   },
   
-  // Future Items (Coming Soon placeholders)
+  // R13-R15: Unlocked Ferment Recipes
   {
-    id: "COMING1",
+    id: "R13",
     title: "Rejuvelac",
     category: "ferments",
-    tags: ["Ferments", "Live Probiotics"],
-    prepTime: "Coming Soon",
-    ingredients: ["Sprouted wheatberries or quinoa", "Filtered water"],
-    steps: ["Recipe currently in testing phase. Coming soon!"],
-    whyHeals: "Living enzymatic wild ferment.",
-    comingSoon: true
+    tags: ["Ferments", "No-cook", "Live Probiotics"],
+    prepTime: "15 min + 3-4 days",
+    ingredients: [
+      "½ cup organic wheat berries or quinoa",
+      "4 cups filtered water (for soaking)",
+      "4 cups fresh filtered water (for fermenting)"
+    ],
+    steps: [
+      "Rinse the wheat berries or quinoa thoroughly in a strainer.",
+      "Soak in 4 cups of filtered water for 8–12 hours (overnight).",
+      "Drain and rinse. Transfer the soaked grains to a clean glass jar.",
+      "Cover the jar mouth with a breathable muslin cloth and secure with a rubber band. Tilt the jar at an angle so any remaining water drains out. Leave at room temperature for 24–36 hours until you see tiny tails (sprouts) appear.",
+      "Once sprouted, add 4 cups of fresh filtered water to the jar and let it ferment uncovered at room temperature for 2 days, stirring once daily.",
+      "Strain the cloudy, lemon-scented liquid into a sealed bottle. This is your Rejuvelac. Refrigerate and drink ½ cup daily. Keeps for up to 5 days."
+    ],
+    sensoryCues: "Should smell lemony, slightly yeasty, and refreshing — like a light wheat beer without the alcohol. A cloudy, milky white color is perfectly normal.",
+    troubleshooting: "If the liquid smells rotten, cheesy, or has visible mold growth, discard the batch. Ensure the sprouts are fully drained before the fermentation step — standing water causes mold.",
+    whyHeals: "A wild prebiotic enzyme drink loaded with amylase and lactobacilli that pre-digest complex starches before they even reach your gut."
   },
   {
-    id: "COMING2",
+    id: "R14",
     title: "Apple Cider Vinegar (ACV with Mother)",
     category: "ferments",
-    tags: ["Ferments", "Live Probiotics"],
-    prepTime: "Coming Soon",
-    ingredients: ["Organic apples", "Sugar", "Water"],
-    steps: ["Recipe currently in testing phase. Coming soon!"],
-    whyHeals: "Acidity regulator and digestive stimulant.",
-    comingSoon: true
+    tags: ["Ferments", "No-cook", "Live Probiotics"],
+    prepTime: "15 min + 4-6 weeks",
+    ingredients: [
+      "6 organic apples (any variety, cores and peels included)",
+      "3 tbsp raw sugar or jaggery",
+      "4 cups filtered water"
+    ],
+    steps: [
+      "Chop the apples roughly (do not peel or core). Place in a clean glass jar.",
+      "Dissolve the sugar in the filtered water and pour over the apples. The apples must be fully submerged.",
+      "Cover the jar with a breathable cloth and secure with a rubber band.",
+      "Ferment at room temperature for 3–4 weeks, stirring every 2–3 days. Alcohol will form first, then acetic acid bacteria will convert it to vinegar. A slimy 'mother' culture will form on the surface — this is exactly what you want.",
+      "Strain out the apple pieces. Pour the liquid back into a clean jar and let it continue to ferment uncovered for another 2–4 weeks until it reaches a sharp, clean vinegar smell.",
+      "Bottle it and store with the mother. Use 1 tsp in a glass of warm water 20 minutes before meals."
+    ],
+    sensoryCues: "Sharp, clean, apple-tinged vinegar aroma. The mother will look like a gelatinous, cloudy disc — this is alive with billions of beneficial bacteria.",
+    troubleshooting: "If the liquid turns dark or smells like nail polish remover, the fermentation went too fast (acetone). Discard and restart in a cooler spot with a slower sugar ratio.",
+    whyHeals: "Raw ACV with mother resets stomach acid, stimulates digestive enzymes, and delivers a colony of acetic acid bacteria that regulate blood sugar spikes after meals."
   },
   {
-    id: "COMING3",
+    id: "R15",
     title: "Wild Tea Kombucha",
     category: "ferments",
     tags: ["Ferments", "Live Probiotics"],
-    prepTime: "Coming Soon",
-    ingredients: ["SCOBY culture", "Black tea", "Sugar"],
-    steps: ["Recipe currently in testing phase. Coming soon!"],
-    whyHeals: "Effervescent probiotic tea.",
-    comingSoon: true
+    prepTime: "20 min + 7-14 days",
+    ingredients: [
+      "4 black tea bags (or 4 tsp loose-leaf black tea)",
+      "1 cup organic cane sugar",
+      "8 cups filtered water",
+      "1 active SCOBY (Symbiotic Culture Of Bacteria and Yeast)",
+      "½ cup raw starter kombucha (from a previous batch or store-bought unflavored)"
+    ],
+    steps: [
+      "Bring 4 cups of filtered water to a boil. Steep the tea bags or loose-leaf tea for 10 minutes, then remove.",
+      "Add the sugar and stir until completely dissolved. Let the sweet tea cool completely to room temperature — never add a SCOBY to hot liquid.",
+      "Pour the cooled sweet tea and the remaining 4 cups of cold filtered water into a clean wide-mouth glass jar.",
+      "Gently slide in the SCOBY and pour the raw starter kombucha over it. The acidity protects the brew from mold at the start.",
+      "Cover the jar mouth with a tightly woven cloth or coffee filter and secure with a rubber band.",
+      "Ferment at room temperature away from direct sunlight for 7–14 days. Taste from day 7 using a straw. When it tastes like a balanced sweet-sour tea, it's ready.",
+      "Carefully remove the SCOBY and ½ cup of kombucha for your next batch. Bottle the rest and refrigerate. For natural fizz, do a second fermentation: seal tightly in a bottle for 2 more days at room temperature before moving to the fridge."
+    ],
+    sensoryCues: "Light amber, effervescent, with a clean vinegary-tea aroma and a pleasantly sour-sweet finish. Tiny bubbles are a sign of a healthy ferment.",
+    troubleshooting: "Fuzzy green, black, or pink mold on the SCOBY surface means contamination — discard everything and get a fresh SCOBY. A white, smooth SCOBY baby forming is completely normal and healthy.",
+    whyHeals: "Double-fermented black tea packed with organic acids, B vitamins, and a living community of bacteria and yeast that diversify gut flora and support liver detoxification."
   }
 ];
 
@@ -651,9 +690,7 @@ export default function RecipesPage() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => setSelectedRecipe(recipe)}
-                className={`glassmorphic rounded-3xl p-6 border border-black/[0.03] hover:border-[#2A7F7F]/30 hover:shadow-[0_8px_30px_rgba(42,127,127,0.02)] transition-all duration-300 flex flex-col justify-between cursor-pointer ${
-                  recipe.comingSoon ? "opacity-60 bg-white/20 hover:border-black/[0.04]" : "bg-white/40"
-                }`}
+                className="glassmorphic rounded-3xl p-6 border border-black/[0.03] hover:border-[#2A7F7F]/30 hover:shadow-[0_8px_30px_rgba(42,127,127,0.02)] transition-all duration-300 flex flex-col justify-between cursor-pointer bg-white/40"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3.5">
@@ -667,7 +704,7 @@ export default function RecipesPage() {
                   </div>
 
                   <h3 className="text-base font-semibold text-slate-900 mb-2.5">
-                    {recipe.title} {recipe.comingSoon && <span className="text-sm font-normal text-amber-600">(Soon)</span>}
+                    {recipe.title}
                   </h3>
                   <p className="text-sm text-slate-500 font-light leading-relaxed mb-4 line-clamp-2">
                     {recipe.ingredients.slice(0, 3).join(", ")}...
@@ -683,7 +720,7 @@ export default function RecipesPage() {
                     ))}
                   </div>
                   <span className="text-sm text-[#2A7F7F] font-semibold flex items-center gap-0.5 hover:translate-x-0.5 transition-transform">
-                    {recipe.comingSoon ? "Locked" : "Cook"}
+                    Cook
                     <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
@@ -752,16 +789,7 @@ export default function RecipesPage() {
                   </div>
                 </div>
 
-                {selectedRecipe.comingSoon ? (
-                  <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-6 text-center">
-                    <AlertTriangle className="w-8 h-8 text-amber-500 mx-auto mb-3" />
-                    <h4 className="text-base font-bold text-slate-800 uppercase tracking-wider">Formula Under Active Testing</h4>
-                    <p className="text-sm text-slate-500 font-light mt-1.5 max-w-sm mx-auto leading-relaxed">
-                      We are currently tuning hydration ratios and fermentation times for this live prebiotic culture. Draft will unlock in the next system push.
-                    </p>
-                  </div>
-                ) : (
-                  <>
+                <>
                     {/* Ingredients & Steps */}
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                       <div className="md:col-span-2 space-y-3">
@@ -839,8 +867,7 @@ export default function RecipesPage() {
                         </p>
                       </div>
                     </div>
-                  </>
-                )}
+                </>
               </div>
             </motion.div>
           </div>
