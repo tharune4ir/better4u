@@ -21,18 +21,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Trelis Life",
+  metadataBase: new URL("https://better4u.life"),
+  title: "better4u",
   description: "Better-for-you versions of everyday food and drinks, crafted with real ingredients and a lot less sugar.",
   manifest: "/manifest.json",
   openGraph: {
-    title: "Trelis Life",
+    title: "better4u",
     description: "Better-for-you versions of everyday food and drinks, crafted with real ingredients and a lot less sugar.",
     images: [
       {
         url: "/logo-transparent.png",
         width: 1200,
         height: 630,
-        alt: "Trelis Life Logo",
+        alt: "better4u Logo",
       },
     ],
   },

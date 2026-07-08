@@ -800,5 +800,155 @@ export const MOCK_PRODUCTS: ProductSKU[] = [
     tasteHighlight: "A fudgy date-caramel centre with roasted-hazelnut crunch and the snap of a dark-chocolate shell finished with flaky sea salt.",
     replaces: "Chocolate-hazelnut bars / Sugary candy bars",
     brandId: "grit"
+  },
+  // ==================== BRAND 7: PAUSE ====================
+  {
+    id: "pause-coco-chill",
+    name: "Coco Chill",
+    category: "RTD Protein",
+    tagline: "Creamy Coconut & Protein Blend",
+    description: "A clean, ready-to-drink protein shake with organic coconut milk and plant-based protein. Refreshing, smooth, and easily digestible.",
+    badge: "[x.y billion] Live Cultures",
+    price: 160,
+    imagePlaceholder: "coco-chill",
+    glowColor: "rgba(90, 77, 65, 0.15)",
+    accentColor: "#5A4D41",
+    specs: {
+      cfu: "CFU count: [x.y billion]",
+      sugar: "[x.y]g Sugar",
+      calories: "[x.y] kcal Calories",
+      benefits: "Clean muscle recovery & microbiome support"
+    },
+    ingredients: [
+      "Pure Spring Water",
+      "Organic Coconut Milk",
+      "Plant-based Protein",
+      "Prebiotic Chicory Fibre",
+      "Natural Vanilla Extract",
+      "Active Probiotics"
+    ],
+    tasteHighlight: "Smooth, velvety coconut flavor with a light vanilla note. Tastes like a dessert, feels like recovery.",
+    replaces: "Sugary coconut drinks & heavy protein powders",
+    brandId: "pause"
+  },
+  {
+    id: "pause-mango-tango",
+    name: "Mango Tango",
+    category: "RTD Protein",
+    tagline: "Sun-ripened Mango & Creamy Protein",
+    description: "A luscious protein RTD combining the tropical sweetness of pure mango pulp with clean, easily digestible protein.",
+    badge: "[x.y billion] Live Cultures",
+    price: 160,
+    imagePlaceholder: "mango-tango",
+    glowColor: "rgba(90, 77, 65, 0.15)",
+    accentColor: "#5A4D41",
+    specs: {
+      cfu: "CFU count: [x.y billion]",
+      sugar: "[x.y]g Sugar",
+      calories: "[x.y] kcal Calories",
+      benefits: "Supports recovery & lean muscle synthesis"
+    },
+    ingredients: [
+      "Pure Spring Water",
+      "Organic Mango Pulp",
+      "Plant-based Protein",
+      "Prebiotic Chicory Fibre",
+      "Citric Acid",
+      "Active Probiotics"
+    ],
+    tasteHighlight: "Rich, fruity mango sweetness balanced with clean, creamy protein texture.",
+    replaces: "High-sugar mango milkshakes & RTD gainers",
+    brandId: "pause"
+  },
+  {
+    id: "pause-rich-cold-coffee",
+    name: "Rich Cold Coffee",
+    category: "RTD Protein",
+    tagline: "Bold Brewed Coffee & Protein Fuel",
+    description: "A clean energy boost combining double-shot brewed coffee with high-quality protein. Perfect for post-workout refueling or an afternoon pick-me-up.",
+    badge: "[x.y billion] Live Cultures",
+    price: 160,
+    imagePlaceholder: "rich-cold-coffee",
+    glowColor: "rgba(90, 77, 65, 0.15)",
+    accentColor: "#5A4D41",
+    specs: {
+      cfu: "CFU count: [x.y billion]",
+      sugar: "[x.y]g Sugar",
+      calories: "[x.y] kcal Calories",
+      benefits: "Combines caffeine alertness with muscle repair"
+    },
+    ingredients: [
+      "Pure Spring Water",
+      "Cold Brew Coffee Extract",
+      "Plant-based Protein",
+      "Prebiotic Chicory Fibre",
+      "Raw Cocoa",
+      "Active Probiotics"
+    ],
+    tasteHighlight: "Bold, nutty coffee flavor with a smooth chocolate finish and no chalky aftertaste.",
+    replaces: "Sugary canned coffees & chalky shakes",
+    brandId: "pause"
+  },
+  {
+    id: "pause-rosy-falooda",
+    name: "Rosy Falooda",
+    category: "RTD Protein",
+    tagline: "Floral Rose & Sweet Basil Seed Shake",
+    description: "A modern, healthy protein spin on the traditional dessert. Infused with organic rose water and sweet basil seeds for a prebiotic boost.",
+    badge: "[x.y billion] Live Cultures",
+    price: 160,
+    imagePlaceholder: "rosy-falooda",
+    glowColor: "rgba(90, 77, 65, 0.15)",
+    accentColor: "#5A4D41",
+    specs: {
+      cfu: "CFU count: [x.y billion]",
+      sugar: "[x.y]g Sugar",
+      calories: "[x.y] kcal Calories",
+      benefits: "Prebiotic fiber support + muscle recovery"
+    },
+    ingredients: [
+      "Pure Spring Water",
+      "Organic Rose Water",
+      "Sweet Basil Seeds (Sabja)",
+      "Plant-based Protein",
+      "Prebiotic Chicory Fibre",
+      "Beetroot Juice Powder (color)",
+      "Active Probiotics"
+    ],
+    tasteHighlight: "Delicately floral with a refreshing texture from sweet basil seeds.",
+    replaces: "Calorie-dense traditional faloodas & milkshakes",
+    brandId: "pause"
+  },
+  {
+    id: "pause-thandai-chill",
+    name: "Thandai Chill",
+    category: "RTD Protein",
+    tagline: "Spiced Almond & Melon Seed Elixir",
+    description: "A nutty, traditional thandai protein shake spiced with cardamom, saffron, black pepper, and fennel seeds.",
+    badge: "[x.y billion] Live Cultures",
+    price: 160,
+    imagePlaceholder: "thandai-chill",
+    glowColor: "rgba(90, 77, 65, 0.15)",
+    accentColor: "#5A4D41",
+    specs: {
+      cfu: "CFU count: [x.y billion]",
+      sugar: "[x.y]g Sugar",
+      calories: "[x.y] kcal Calories",
+      benefits: "Nutritious spices + protein for optimal recovery"
+    },
+    ingredients: [
+      "Pure Spring Water",
+      "Almonds",
+      "Melon Seeds",
+      "Fennel Seeds",
+      "Cardamom Powder",
+      "Saffron Threads",
+      "Black Pepper",
+      "Plant-based Protein",
+      "Active Probiotics"
+    ],
+    tasteHighlight: "Aromatic cardamom and saffron upfront, followed by a nutty almond base and a subtle black pepper kick.",
+    replaces: "High-sugar festive drinks & post-workout shakes",
+    brandId: "pause"
   }
 ];

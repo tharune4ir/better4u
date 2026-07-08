@@ -62,7 +62,7 @@ export default function LandingHub() {
           <div className="relative w-10 h-10 flex-shrink-0">
             <Image
               src="/icons/icon-128.webp"
-              alt="Trelis Logo"
+              alt="better4u Logo"
               fill
               sizes="40px"
               className="object-contain"
@@ -419,6 +419,33 @@ export default function LandingHub() {
                 </span>
                 <span className="text-xs text-slate-500 font-light text-right leading-tight">
                   sugary granola bars, biscuits, fried namkeen.
+                </span>
+              </div>
+            </motion.div>
+
+            {/* PAUSE */}
+            <motion.div 
+              whileHover={{ y: -4 }}
+              className="bg-white/70 p-6 rounded-[1.5rem] border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_35px_rgba(0,0,0,0.035)] transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3.5">
+                  <h3 className="text-xl font-light tracking-wide text-slate-900">PAUSE</h3>
+                  <span className="text-[8px] font-bold tracking-widest text-[#2A7F7F] uppercase bg-[#2A7F7F]/5 px-2.5 py-0.5 rounded-md border border-[#2A7F7F]/10">
+                    RTD
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 font-light leading-relaxed mb-6">
+                  Better-for-you protein, ready to drink.
+                </p>
+              </div>
+              
+              <div className="pt-3.5 border-t border-black/[0.03] flex items-center justify-between gap-3">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-widest flex-shrink-0">
+                  Replaces
+                </span>
+                <span className="text-xs text-slate-500 font-light text-right leading-tight">
+                  sugary protein shakes & mass-gainers.
                 </span>
               </div>
             </motion.div>

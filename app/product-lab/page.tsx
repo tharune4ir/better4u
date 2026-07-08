@@ -23,7 +23,8 @@ import {
   Leaf,
   FlaskConical,
   Droplets,
-  UtensilsCrossed
+  UtensilsCrossed,
+  Play
 } from "lucide-react";
 import Navbar, { NavTab } from "@/components/Navbar";
 import { MOCK_PRODUCTS, ProductSKU } from "@/lib/store-data";
@@ -106,6 +107,67 @@ const CarbonationBubbles = ({ color }: { color: string }) => {
           }}
         />
       ))}
+    </div>
+  );
+};
+
+// 1.5. Lazy Loaded Video Player Component
+const LazyVideo = ({ 
+  src, 
+  poster, 
+  className = "" 
+}: { 
+  src: string; 
+  poster: string; 
+  className?: string;
+}) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  useEffect(() => {
+    if (isPlaying && videoRef.current) {
+      videoRef.current.play().catch(err => console.warn("Video play failed:", err));
+    }
+  }, [isPlaying]);
+
+  return (
+    <div className={`relative w-full h-full bg-black flex items-center justify-center overflow-hidden ${className}`}>
+      {!isPlaying ? (
+        <>
+          {/* Poster Image */}
+          <img 
+            src={poster} 
+            alt="Video Poster" 
+            className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100 duration-[500ms]" 
+            loading="lazy"
+          />
+          {/* Light Play Control Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/15 transition-colors hover:bg-black/30">
+            <button
+              onClick={handlePlay}
+              className="p-4 bg-white/80 backdrop-blur-md hover:bg-white text-slate-800 rounded-full shadow-lg transition-all transform hover:scale-110 cursor-pointer flex items-center justify-center border border-white/20 z-10"
+              aria-label="Play video"
+            >
+              <Play className="w-5 h-5 fill-slate-800 translate-x-[1px]" />
+            </button>
+          </div>
+        </>
+      ) : (
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-full object-cover animate-fade-in"
+          controls
+          autoPlay
+          muted
+          playsInline
+          preload="none"
+        />
+      )}
     </div>
   );
 };
@@ -198,6 +260,17 @@ const FrostedBottle = ({
     const file = filenames[imagePlaceholder] || "1.1_millet_date.jpeg";
     frontSrc = `/all_image_files/product-lab/${brandFolder}/${file}`;
     backSrc = frontSrc;
+  } else if (brandFolder === "pause_protein_RTD") {
+    const filenames: Record<string, string> = {
+      "coco-chill": "coco_chill.png",
+      "mango-tango": "mango_tango.png",
+      "rich-cold-coffee": "rich_cold_coffee.png",
+      "rosy-falooda": "rosy_falooda.png",
+      "thandai-chill": "thandai_chill.png"
+    };
+    const file = filenames[imagePlaceholder] || "coco_chill.png";
+    frontSrc = `/all_image_files/pause_protein_RTD/images/${file}`;
+    backSrc = frontSrc;
   }
 
   const imageSrc = showBack ? backSrc : frontSrc;
@@ -238,7 +311,12 @@ const FrostedBottle = ({
     lime: "linear-gradient(180deg, rgba(163, 230, 53, 0.35) 0%, rgba(42, 127, 127, 0.2) 100%)",
     ginger: "linear-gradient(180deg, rgba(245, 158, 11, 0.45) 0%, rgba(180, 83, 9, 0.2) 100%)",
     spice: "linear-gradient(180deg, rgba(180, 83, 9, 0.45) 0%, rgba(120, 53, 4, 0.25) 100%)",
-    berry: "linear-gradient(180deg, rgba(139, 92, 246, 0.45) 0%, rgba(76, 29, 149, 0.2) 100%)"
+    berry: "linear-gradient(180deg, rgba(139, 92, 246, 0.45) 0%, rgba(76, 29, 149, 0.2) 100%)",
+    "coco-chill": "linear-gradient(180deg, rgba(245, 245, 220, 0.4) 0%, rgba(90, 77, 65, 0.15) 100%)",
+    "mango-tango": "linear-gradient(180deg, rgba(251, 191, 36, 0.35) 0%, rgba(217, 119, 6, 0.15) 100%)",
+    "rich-cold-coffee": "linear-gradient(180deg, rgba(120, 80, 50, 0.35) 0%, rgba(90, 77, 65, 0.15) 100%)",
+    "rosy-falooda": "linear-gradient(180deg, rgba(244, 63, 94, 0.3) 0%, rgba(190, 24, 74, 0.15) 100%)",
+    "thandai-chill": "linear-gradient(180deg, rgba(253, 224, 71, 0.3) 0%, rgba(133, 77, 14, 0.15) 100%)"
   };
 
   const liquidColor = liquidColors[imagePlaceholder] || "rgba(42, 127, 127, 0.2)";
@@ -397,6 +475,15 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
     heroTagline: "Whole-food bars & bites",
     heroDescription: "Solid whole-food bars combining complex carbohydrates, whole grains, and prebiotics for sustained energy and zero refined sugar.",
     accentColor: "#CDAA7D"
+  },
+  {
+    id: "pause",
+    name: "PAUSE",
+    subName: "PAUSE by better4u",
+    folderName: "pause_protein_RTD",
+    heroTagline: "Better-for-you protein, ready to drink",
+    heroDescription: "Replaces sugary protein shakes & mass-gainers. Real protein, rich clean flavours, and no digestive compromise.",
+    accentColor: "#5A4D41"
   }
 ];
 
@@ -409,7 +496,11 @@ export default function ProductLabPage() {
   const [videoSrc, setVideoSrc] = useState(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
 
   useEffect(() => {
-    setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
+    if (activeBrand.id === "pause") {
+      setVideoSrc(`/all_image_files/pause_protein_RTD/videos/home_page.mp4`);
+    } else {
+      setVideoSrc(`/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`);
+    }
   }, [activeBrand]);
 
   useEffect(() => {
@@ -421,9 +512,14 @@ export default function ProductLabPage() {
   }, [videoSrc]);
 
   const handleVideoError = () => {
-    const fallbackVideo = `/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`;
+    const fallbackVideo = activeBrand.id === "pause" 
+      ? `/all_image_files/pause_protein_RTD/videos/home_page.mp4`
+      : `/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`;
+    const secondaryFallback = `/all_image_files/product-lab/1_alive_concept_brand/1_video1.mp4`;
     if (videoSrc !== fallbackVideo) {
       setVideoSrc(fallbackVideo);
+    } else if (videoSrc !== secondaryFallback) {
+      setVideoSrc(secondaryFallback);
     }
   };
 
@@ -484,7 +580,7 @@ export default function ProductLabPage() {
   // Load cart and box configuration on mount
   useEffect(() => {
     console.log("[ProductLabPage] Component mounted. Setting up video playback...");
-    const savedCart = localStorage.getItem("trelis_lab_cart");
+    const savedCart = localStorage.getItem("better4u_lab_cart") || localStorage.getItem("trelis_lab_cart");
     if (savedCart) {
       try {
         const parsed = JSON.parse(savedCart);
@@ -536,7 +632,7 @@ export default function ProductLabPage() {
 
   const saveCart = (newCart: CartItem[]) => {
     setCart(newCart);
-    localStorage.setItem("trelis_lab_cart", JSON.stringify(newCart));
+    localStorage.setItem("better4u_lab_cart", JSON.stringify(newCart));
   };
 
   // Cart actions
@@ -874,6 +970,29 @@ export default function ProductLabPage() {
               })}
             </div>
 
+            {activeBrand.id === "pause" && (
+              <div className="mt-32 max-w-4xl mx-auto bg-white/40 border border-black/[0.03] rounded-3xl p-8 shadow-xs flex flex-col md:flex-row items-center gap-8 z-10 relative">
+                <div className="w-full md:w-1/2 space-y-4">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] border px-3 py-1 rounded-full inline-block animate-pulse" style={{ color: activeBrand.accentColor, borderColor: `${activeBrand.accentColor}20`, backgroundColor: `${activeBrand.accentColor}0a` }}>
+                    EXPLAINER
+                  </span>
+                  <h3 className="text-3xl font-extralight text-slate-900 tracking-tight">
+                    How can <span className="font-semibold text-slate-950">PAUSE</span> help?
+                  </h3>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">
+                    Watch our quick explainer video to see how PAUSE RTD Protein helps you recover and refuel with zero digestive compromise, clean ingredients, and zero junk.
+                  </p>
+                </div>
+                <div className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-md relative aspect-video bg-black flex items-center justify-center">
+                  <LazyVideo
+                    src="/all_image_files/pause_protein_RTD/videos/howcanihelp_page.mp4"
+                    poster="/all_image_files/pause_protein_RTD/images/coco_chill.png"
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              </div>
+            )}
+
           </div>
         </section>
 
@@ -987,36 +1106,52 @@ export default function ProductLabPage() {
               {/* Left Panel: Bottle render (Edge-to-Edge) */}
               <div className="w-full md:w-[45%] bg-[#F2F1EC] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-black/[0.03] relative min-h-[300px] md:min-h-[100%] overflow-hidden">
                 
-                {/* Full Bleed Image Container */}
-                <div className="absolute inset-0 w-full h-full flex items-center justify-center group cursor-zoom-in hover:scale-105 transition-transform duration-700">
-                  <FrostedBottle 
-                    flavor={selectedProduct.name}
-                    glowColor={selectedProduct.glowColor}
-                    accentColor={selectedProduct.accentColor}
-                    imagePlaceholder={selectedProduct.imagePlaceholder}
-                    isDetailed={true}
-                    showBack={modalShowBack}
-                    brandFolder={activeBrand.folderName}
-                    brandName={activeBrand.name}
-                    onZoom={setZoomedImageSrc}
+                {selectedProduct.brandId === "pause" ? (
+                  <LazyVideo 
+                    src="/all_image_files/pause_protein_RTD/videos/product_page.mp4"
+                    poster={
+                      selectedProduct.imagePlaceholder === "coco-chill" ? "/all_image_files/pause_protein_RTD/images/coco_chill.png" :
+                      selectedProduct.imagePlaceholder === "mango-tango" ? "/all_image_files/pause_protein_RTD/images/mango_tango.png" :
+                      selectedProduct.imagePlaceholder === "rich-cold-coffee" ? "/all_image_files/pause_protein_RTD/images/rich_cold_coffee.png" :
+                      selectedProduct.imagePlaceholder === "rosy-falooda" ? "/all_image_files/pause_protein_RTD/images/rosy_falooda.png" :
+                      "/all_image_files/pause_protein_RTD/images/thandai_chill.png"
+                    }
+                    className="absolute inset-0 w-full h-full"
                   />
-                </div>
+                ) : (
+                  <>
+                    {/* Full Bleed Image Container */}
+                    <div className="absolute inset-0 w-full h-full flex items-center justify-center group cursor-zoom-in hover:scale-105 transition-transform duration-700">
+                      <FrostedBottle 
+                        flavor={selectedProduct.name}
+                        glowColor={selectedProduct.glowColor}
+                        accentColor={selectedProduct.accentColor}
+                        imagePlaceholder={selectedProduct.imagePlaceholder}
+                        isDetailed={true}
+                        showBack={modalShowBack}
+                        brandFolder={activeBrand.folderName}
+                        brandName={activeBrand.name}
+                        onZoom={setZoomedImageSrc}
+                      />
+                    </div>
 
-                {/* Flip Toggle Button Overlaid */}
-                {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
-                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1.5 z-20">
-                    <button 
-                      onClick={() => setModalShowBack(!modalShowBack)}
-                      className="px-5 py-2 bg-black/60 backdrop-blur-md hover:bg-black/80 text-white rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-md flex items-center gap-1.5"
-                    >
-                      <span>View {modalShowBack ? "Front" : "Back Label"}</span>
-                    </button>
-                    {modalShowBack && (
-                      <span className="text-[8px] text-white/80 tracking-wider uppercase font-semibold select-none drop-shadow-md">
-                        *Tap bottle to zoom
-                      </span>
+                    {/* Flip Toggle Button Overlaid */}
+                    {["lime", "ginger", "spice", "berry"].includes(selectedProduct.imagePlaceholder) && (
+                      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1.5 z-20">
+                        <button 
+                          onClick={() => setModalShowBack(!modalShowBack)}
+                          className="px-5 py-2 bg-black/60 backdrop-blur-md hover:bg-black/80 text-white rounded-full text-[9px] font-bold tracking-widest uppercase cursor-pointer transition-all hover:scale-105 shadow-md flex items-center gap-1.5"
+                        >
+                          <span>View {modalShowBack ? "Front" : "Back Label"}</span>
+                        </button>
+                        {modalShowBack && (
+                          <span className="text-[8px] text-white/80 tracking-wider uppercase font-semibold select-none drop-shadow-md">
+                            *Tap bottle to zoom
+                          </span>
+                        )}
+                      </div>
                     )}
-                  </div>
+                  </>
                 )}
               </div>
 
