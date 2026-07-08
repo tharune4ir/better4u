@@ -84,7 +84,7 @@ export default function LandingHub() {
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="relative w-10 h-10 flex-shrink-0">
             <Image
-              src="/icons/icon-128.webp"
+              src="/icons/icon-128.png"
               alt="better4u Logo"
               fill
               sizes="40px"

@@ -723,7 +723,7 @@ export default function ProductLabPage() {
           
           <div className="max-w-3xl space-y-8 relative z-10">
             {/* Concept Brand Selector Capsular Menu */}
-            <div className="flex items-center justify-center gap-1.5 p-1 bg-white/40 backdrop-blur-md border border-black/[0.04] rounded-full max-w-md mx-auto shadow-3xs select-none mb-6">
+            <div className="flex items-center justify-start md:justify-center gap-1.5 p-1 bg-white/40 backdrop-blur-md border border-black/[0.04] rounded-full max-w-full md:max-w-xl mx-auto overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] whitespace-nowrap shadow-3xs select-none mb-6">
               {CONCEPT_BRANDS.map(brand => {
                 const isActive = activeBrand.id === brand.id;
                 return (
@@ -734,7 +734,7 @@ export default function ProductLabPage() {
                       backgroundColor: isActive ? brand.accentColor : "transparent",
                       color: isActive ? "#ffffff" : "rgba(15, 23, 42, 0.7)",
                     }}
-                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex-shrink-0 ${
                       isActive ? "shadow-2xs scale-105" : "hover:bg-slate-900/5 hover:text-slate-900"
                     }`}
                   >
