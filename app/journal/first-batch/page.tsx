@@ -159,7 +159,7 @@ export default function FirstBatchCollectionPage() {
               {/* INTRO SUMMARY */}
               <section className="bg-white/40 glassmorphic p-6 md:p-8 rounded-[2rem] border border-black/[0.03] text-slate-700 text-sm md:text-base leading-relaxed space-y-4">
                 <p className="font-light italic text-slate-650">
-                  A Trelis Journal collection. Your starting set: real food, made simple. Everything here is vegetarian, made without wheat, without fluid milk, and without a grain of added sugar — gentle on your system, and doable in a tiny kitchen with nothing but a pressure cooker, a gas stove, and a fridge.
+                  A better4u Journal collection. Your starting set: real food, made simple. Everything here is vegetarian, made without wheat, without fluid milk, and without a grain of added sugar — gentle on your system, and doable in a tiny kitchen with nothing but a pressure cooker, a gas stove, and a fridge.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                   <div className="bg-white/50 p-5 rounded-2xl border border-black/[0.02] space-y-1">

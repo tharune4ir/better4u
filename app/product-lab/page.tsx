@@ -320,7 +320,7 @@ const FrostedBottle = ({
                 <div className="space-y-0.5">
                   <div className="w-4 h-[0.5px] bg-white/20 mx-auto" />
                   <span className="text-[4px] tracking-wider text-white/50 block font-light">
-                    BY TRELIS
+                    BY BETTER4U
                   </span>
                 </div>
               </div>
@@ -347,7 +347,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "alive",
     name: "ALIVE",
-    subName: "ALIVE by Trelis",
+    subName: "ALIVE by better4u",
     folderName: "1_alive_concept_brand",
     heroTagline: "The classics, re-fermented",
     heroDescription: "We took the everyday carbonated soft drink, stripped away the chemical sweeteners, and rebuilt it. Real organic juices, warm spices, and millions of active probiotic cultures inside premium frosted glass.",
@@ -356,7 +356,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "josh",
     name: "JOSH",
-    subName: "JOSH by Trelis",
+    subName: "JOSH by better4u",
     folderName: "2_josh_concept_brand",
     heroTagline: "Nostalgia, with prebiotics",
     heroDescription: "Shelf-stable prebiotic plant fiber in a sleek can, built to scale. Flavors sit in Indian-nostalgia soft-drink territory, offering 7g of prebiotic fiber to fuel your microbiome.",
@@ -365,7 +365,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "batch",
     name: "BATCH",
-    subName: "BATCH by Trelis",
+    subName: "BATCH by better4u",
     folderName: "3_batch_concept brand",
     heroTagline: "Fresh ferments, made daily",
     heroDescription: "Fresh, short-shelf-life elixirs made on-site and served in clear grab-and-go cups. Cloudy, active, and containing up to 5 billion live cultures across diverse probiotic strains.",
@@ -374,7 +374,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "pulp",
     name: "PULP",
-    subName: "PULP by Trelis",
+    subName: "PULP by better4u",
     folderName: "4_pulp_concept_brand",
     heroTagline: "Active culture smoothies",
     heroDescription: "Thick, meal-replacement smoothies combining dense plant fibers with active live ferments. Centered on evergreen, year-round nutrition.",
@@ -383,7 +383,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "steep",
     name: "STEEP",
-    subName: "STEEP by Trelis",
+    subName: "STEEP by better4u",
     folderName: "5_steep_concept_brand",
     heroTagline: "Hot botanical brews",
     heroDescription: "After-meal soothing digestifs. Traditional hot brews re-engineered to be rich in polyphenols and prebiotic fibers for a warm, gentle digestion finish.",
@@ -392,7 +392,7 @@ const CONCEPT_BRANDS: ConceptBrand[] = [
   {
     id: "grit",
     name: "GRIT",
-    subName: "GRIT by Trelis",
+    subName: "GRIT by better4u",
     folderName: "6_grit_concept_brand",
     heroTagline: "Whole-food bars & bites",
     heroDescription: "Solid whole-food bars combining complex carbohydrates, whole grains, and prebiotics for sustained energy and zero refined sugar.",

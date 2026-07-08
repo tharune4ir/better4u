@@ -155,7 +155,7 @@ export default function SecondBatchCollectionPage() {
           >
             <span className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
-              The Trelis Standard
+              The better4u Standard
             </span>
             {activeContentTab === "standards" && (
               <motion.div 
@@ -400,7 +400,7 @@ export default function SecondBatchCollectionPage() {
               {/* Philosophy Callout */}
               <section className="bg-white/40 glassmorphic p-6 md:p-8 rounded-[2rem] border border-black/[0.03] text-slate-700 text-sm md:text-base leading-relaxed space-y-4">
                 <p className="font-light italic text-slate-650">
-                  Any cafe can say "healthy." Trelis draws a strict, public line every single recipe must pass to earn its place on the counter—the exact same clinical standards that power our Product Lab.
+                  Any cafe can say "healthy." better4u draws a strict, public line every single recipe must pass to earn its place on the counter—the exact same clinical standards that power our Product Lab.
                 </p>
               </section>
 

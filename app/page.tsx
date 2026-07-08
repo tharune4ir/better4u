@@ -186,7 +186,7 @@ export default function LandingHub() {
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-xl leading-relaxed">
-            Trelis makes better-for-you versions of the food and drinks people reach for every day — familiar flavours, real ingredients, and a lot less sugar.
+            better4u makes better-for-you versions of the food and drinks people reach for every day — familiar flavours, real ingredients, and a lot less sugar.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
@@ -223,7 +223,7 @@ export default function LandingHub() {
             Everyday food and drink defaults aren't doing us any favours.
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-            A sugary soda, processed snack, or heavy dessert follows almost every meal. Trelis makes the better-tasting, better-for-you version.
+            A sugary soda, processed snack, or heavy dessert follows almost every meal. better4u makes the better-tasting, better-for-you version.
           </p>
         </div>
       </section>
@@ -252,10 +252,10 @@ export default function LandingHub() {
               The Universe
             </span>
             <h2 className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed px-4">
-              House of Trelis
+              House of better4u
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-              Every time you'd reach for the unhealthy default, Trelis has the better-tasting version.
+              Every time you'd reach for the unhealthy default, better4u has the better-tasting version.
             </p>
                     </div>
 

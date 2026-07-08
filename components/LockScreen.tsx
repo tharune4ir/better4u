@@ -163,7 +163,7 @@ export default function LockScreen({ children }: LockScreenProps) {
 
               {/* Title & Micro-copy */}
               <h1 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-[#2A7F7F] uppercase mb-2">
-                Trelis Life
+                better4u
               </h1>
               <p className="text-[10px] font-medium tracking-widest text-slate-400 uppercase mb-8 h-4">
                 {isUnlocking ? "Decrypted" : isError ? "Access Denied" : "System Secured"}
