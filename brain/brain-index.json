@@ -1,0 +1,410 @@
+{
+  "nodes": [
+    {
+      "id": "domain-health-core",
+      "label": "Health Core",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "health-core",
+      "description": "first-principles physiology, sleep, energy, labs literacy"
+    },
+    {
+      "id": "domain-gut",
+      "label": "Gut Health",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "gut",
+      "description": "microbiome, fiber, fermentation, digestion, gut repair"
+    },
+    {
+      "id": "domain-mind-gut",
+      "label": "Mind–Gut Axis",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "mind-gut",
+      "description": "vagus nerve, stress↔digestion, mood↔microbiome"
+    },
+    {
+      "id": "domain-body",
+      "label": "Body & Movement",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "body",
+      "description": "strength, mobility, joint-smart training, breath"
+    },
+    {
+      "id": "domain-nutrition",
+      "label": "Nutrition",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "nutrition",
+      "description": "foods, macros/micros, meal systems, hydration"
+    },
+    {
+      "id": "domain-mind",
+      "label": "Mind & Thinking",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "mind",
+      "description": "critical thinking, mental models, focus, learning"
+    },
+    {
+      "id": "domain-communication",
+      "label": "Communication",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "communication",
+      "description": "articulation, storytelling, pausing, teaching"
+    },
+    {
+      "id": "domain-family-os",
+      "label": "Family OS",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "family-os",
+      "description": "reusable family systems & routines (no private data)"
+    },
+    {
+      "id": "domain-handyman",
+      "label": "Mr Handyman",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "handyman",
+      "description": "practical home/repair/how-to know-how"
+    },
+    {
+      "id": "domain-meta",
+      "label": "Meta / System",
+      "type": "domain",
+      "ring": "knowledge",
+      "domain": "meta",
+      "description": "how the brain itself works, skills, routines registry"
+    },
+    {
+      "id": "center-vizier",
+      "label": "VIZIER",
+      "type": "center",
+      "ring": "center",
+      "path": "brain/VIZIER.md"
+    },
+    {
+      "id": "brain/knowledge/body/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "body",
+      "path": "brain/knowledge/body/README.md",
+      "size": 68,
+      "modified": "2026-07-09T00:16:34.639Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/communication/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "communication",
+      "path": "brain/knowledge/communication/README.md",
+      "size": 63,
+      "modified": "2026-07-09T00:16:46.805Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/family-os/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "family-os",
+      "path": "brain/knowledge/family-os/README.md",
+      "size": 66,
+      "modified": "2026-07-09T00:16:51.571Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/gut/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "gut",
+      "path": "brain/knowledge/gut/README.md",
+      "size": 69,
+      "modified": "2026-07-09T00:16:23.570Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/handyman/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "handyman",
+      "path": "brain/knowledge/handyman/README.md",
+      "size": 53,
+      "modified": "2026-07-09T00:16:55.847Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/health-core/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "health-core",
+      "path": "brain/knowledge/health-core/README.md",
+      "size": 73,
+      "modified": "2026-07-09T00:16:18.136Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/meta/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "meta",
+      "path": "brain/knowledge/meta/README.md",
+      "size": 71,
+      "modified": "2026-07-09T00:17:00.343Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/mind/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "mind",
+      "path": "brain/knowledge/mind/README.md",
+      "size": 69,
+      "modified": "2026-07-09T00:16:42.837Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/mind-gut/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "mind-gut",
+      "path": "brain/knowledge/mind-gut/README.md",
+      "size": 70,
+      "modified": "2026-07-09T00:16:29.554Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "brain/knowledge/nutrition/README.md",
+      "label": "README",
+      "type": "knowledge",
+      "ring": "knowledge",
+      "domain": "nutrition",
+      "path": "brain/knowledge/nutrition/README.md",
+      "size": 59,
+      "modified": "2026-07-09T00:16:38.876Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "",
+      "note_type": "stub"
+    },
+    {
+      "id": "count-memories",
+      "label": "Memories (2)",
+      "type": "supabase-count",
+      "ring": "knowledge",
+      "domain": "meta",
+      "size": 2,
+      "live": true,
+      "status": "online"
+    },
+    {
+      "id": "count-documents",
+      "label": "RAG Documents (1)",
+      "type": "supabase-count",
+      "ring": "knowledge",
+      "domain": "meta",
+      "size": 1,
+      "live": true,
+      "status": "online"
+    },
+    {
+      "id": "count-proposed_actions",
+      "label": "Proposed Actions (2)",
+      "type": "supabase-count",
+      "ring": "applications",
+      "domain": "meta",
+      "size": 2,
+      "live": true,
+      "status": "online"
+    },
+    {
+      "id": "count-dictionary_terms",
+      "label": "Dictionary Terms (124)",
+      "type": "supabase-count",
+      "ring": "knowledge",
+      "domain": "meta",
+      "size": 124,
+      "live": true,
+      "status": "online"
+    }
+  ],
+  "edges": [
+    {
+      "source": "center-vizier",
+      "target": "domain-health-core",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-gut",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-mind-gut",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-body",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-nutrition",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-mind",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-communication",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-family-os",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-handyman",
+      "type": "domain-core"
+    },
+    {
+      "source": "center-vizier",
+      "target": "domain-meta",
+      "type": "domain-core"
+    },
+    {
+      "source": "domain-body",
+      "target": "brain/knowledge/body/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-communication",
+      "target": "brain/knowledge/communication/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-family-os",
+      "target": "brain/knowledge/family-os/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-gut",
+      "target": "brain/knowledge/gut/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-handyman",
+      "target": "brain/knowledge/handyman/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-health-core",
+      "target": "brain/knowledge/health-core/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-meta",
+      "target": "brain/knowledge/meta/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-mind",
+      "target": "brain/knowledge/mind/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-mind-gut",
+      "target": "brain/knowledge/mind-gut/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "domain-nutrition",
+      "target": "brain/knowledge/nutrition/README.md",
+      "type": "containment"
+    },
+    {
+      "source": "center-vizier",
+      "target": "count-memories",
+      "type": "supabase-count-link"
+    },
+    {
+      "source": "center-vizier",
+      "target": "count-documents",
+      "type": "supabase-count-link"
+    },
+    {
+      "source": "center-vizier",
+      "target": "count-proposed_actions",
+      "type": "supabase-count-link"
+    },
+    {
+      "source": "center-vizier",
+      "target": "count-dictionary_terms",
+      "type": "supabase-count-link"
+    }
+  ],
+  "stats": {
+    "health-core": 2,
+    "gut": 2,
+    "mind-gut": 2,
+    "body": 2,
+    "nutrition": 2,
+    "mind": 2,
+    "communication": 2,
+    "family-os": 2,
+    "handyman": 2,
+    "meta": 6
+  },
+  "metadata": {
+    "generated_at": "2026-07-09T00:23:23.882Z",
+    "node_count": 25,
+    "edge_count": 24
+  }
+}
