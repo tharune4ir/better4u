@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { runExport } = require('../../brain/export-public.js');
+// Note: gen-preview-brain.js can be run separately: node tools/site-build/gen-preview-brain.js
 
 const repoRoot = path.join(__dirname, '../..');
 const siteDir = path.join(repoRoot, 'site');
@@ -373,13 +374,14 @@ function buildSite() {
 <body>
   <div class="container">
     <header>
-      <div class="brand">VIZIER</div>
+      <a href="../index.html" class="brand">VIZIER</a>
       <div class="day-badge">Day ${dayNumber} of 251</div>
     </header>
     <nav>
-      <a href="../index.html">🕸️ Brain Graph</a>
-      <a href="../feed.html">📜 Latest Feed</a>
-      <a href="../about.html">🔍 About</a>
+      <a href="../brain.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg> Brain</a>
+      <a href="../feed.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg> Feed</a>
+      <a href="../capabilities.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Capabilities</a>
+      <a href="../about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
     </nav>
     <main style="margin-top: 20px;">
       ${contentHtml}
@@ -414,7 +416,10 @@ function buildSite() {
       noteMeta.title || noteSlug,
       siteConfig.canonical_url ? `${siteConfig.canonical_url}/notes/${noteSlug}.html` : '',
       `
-      <a href="../index.html" class="back-btn">← Back to Graph</a>
+      <a href="../brain.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="margin-right:4px;"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Brain
+      </a>
       <article>
         <h1>${noteMeta.title || noteSlug}</h1>
         <div class="metadata-row">
@@ -459,6 +464,7 @@ function buildSite() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Latest Feed — VIZIER Living Brain</title>
+  <meta name="description" content="Chronological index of published knowledge nodes from the VIZIER living brain.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -467,17 +473,18 @@ function buildSite() {
 <body>
   <div class="container">
     <header>
-      <div class="brand">VIZIER</div>
+      <a href="index.html" class="brand">VIZIER</a>
       <div class="day-badge">Day ${dayNumber} of 251</div>
     </header>
     <nav>
-      <a href="index.html">🕸️ Brain Graph</a>
-      <a href="feed.html">📜 Latest Feed</a>
-      <a href="about.html">🔍 About</a>
+      <a href="brain.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg> Brain</a>
+      <a href="feed.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg> Feed</a>
+      <a href="capabilities.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Capabilities</a>
+      <a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
     </nav>
     <main style="margin-top: 20px;">
       <h1>Latest Notes Feed</h1>
-      <p style="color: var(--text-muted); margin-bottom: 30px;">Chronological index of published knowledge nodes.</p>
+      <p style="color: var(--text-muted); margin-bottom: 30px;">Chronological index of published knowledge nodes. Every entry is cited, tiered, and challenged.</p>
       <div class="feed-list">
         ${feedListHtml || '<p style="color: var(--text-dark)">No public nodes exported yet.</p>'}
       </div>
@@ -494,6 +501,7 @@ function buildSite() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — VIZIER Living Brain</title>
+  <meta name="description" content="About VIZIER — a self-built, cited, scientific knowledge brain built over 251 days. The three gates, honest limits, and daily protocol.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -502,16 +510,17 @@ function buildSite() {
 <body>
   <div class="container">
     <header>
-      <div class="brand">VIZIER</div>
+      <a href="index.html" class="brand">VIZIER</a>
       <div class="day-badge">Day ${dayNumber} of 251</div>
     </header>
     <nav>
-      <a href="index.html">🕸️ Brain Graph</a>
-      <a href="feed.html">📜 Latest Feed</a>
-      <a href="about.html">🔍 About</a>
+      <a href="brain.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg> Brain</a>
+      <a href="feed.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg> Feed</a>
+      <a href="capabilities.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Capabilities</a>
+      <a href="about.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
     </nav>
     <main style="margin-top: 20px;">
-      <h1>About VIZIER — A Living Brain</h1>
+      <h1>About VIZIER &mdash; A Living Brain</h1>
       
       <h2>What is this?</h2>
       <p>This is a living, public knowledge graph representing a personal knowledge repository built on top of the operational VIZIER agent loop. Over a span of 251 days, one new structured, cited, and challenged knowledge node is published here daily.</p>
@@ -520,9 +529,12 @@ function buildSite() {
       <p>Every note published to this brain must pass three validation checkpoints before it is allowed to go live:</p>
       <ul>
         <li><strong>Cited</strong>: Every factual claim made must carry a direct link to primary scientific literature.</li>
-        <li><strong>Tiered</strong>: All sources are transparently categorized by evidence strength (Tier 1: Systematic reviews/meta-analyses, Tier 2: Randomized controlled trials, Tier 3: Explainer portals).</li>
+        <li><strong>Tiered</strong>: All sources are transparently categorized by evidence strength (Tier 1: Systematic reviews/meta-analyses; Tier 2: RCTs; Tier 3: Secondary explainers; Tier 4: Weak or anecdotal).</li>
         <li><strong>Challenged</strong>: Every note carries a mandatory, prominent section highlighting limits, conflicting evidence, or potential ways the claims could be incorrect to prevent confirmation bias.</li>
       </ul>
+
+      <h2>Honest Limits</h2>
+      <p>The three gates do not eliminate error &mdash; they make uncertainty explicit. &ldquo;No hallucinations&rdquo; is never claimed; calibrated uncertainty is the goal.</p>
 
       <h2>Safety & Clinical Framing</h2>
       <p>Any note touching biological systems, gut microbiome, or health domains carries a mandatory clinician disclaimer. The search engines operate under strict abstention policies, refusing to formulate responses when source abstracts are unavailable or empty.</p>
@@ -532,69 +544,33 @@ function buildSite() {
 </html>`;
   fs.writeFileSync(path.join(siteDir, 'about.html'), aboutPageHtml);
 
-  // 7. Adapt index.html (graph homepage visualizer)
-  const viewerSrcPath = path.join(repoRoot, 'brain', 'viewer', 'index.html');
-  if (fs.existsSync(viewerSrcPath)) {
-    let viewerHtml = fs.readFileSync(viewerSrcPath, 'utf-8');
-    
-    // Replace title
-    viewerHtml = viewerHtml.replace('<title>VIZIER — Brain Graph Visualizer</title>', '<title>VIZIER — A Living Brain</title>');
-
-    // Inject trailing slash redirect to ensure relative fetches work correctly
-    const redirectScript = `
-  <script>
-    if (window.location.pathname.endsWith('/site')) {
-      window.location.replace(window.location.pathname + '/');
-    }
-  </script>`;
-    viewerHtml = viewerHtml.replace('<head>', '<head>' + redirectScript);
-    
-    // Replace header VIZIER title with brand + Day badge
-    viewerHtml = viewerHtml.replace(
-      '<h1>Vizier Brain <span>Life-OS</span></h1>',
-      `<h1>Vizier Brain <span>Day ${dayNumber} of 251</span></h1>`
+  // 7. Update brain.html Day counter (if the file was hand-crafted, just leave it)
+  // The showcase brain.html at site/brain.html is the interactive viewer.
+  // site/index.html is the real homepage and must NOT be overwritten by this script.
+  const brainHtmlPath = path.join(siteDir, 'brain.html');
+  if (fs.existsSync(brainHtmlPath)) {
+    let brainHtml = fs.readFileSync(brainHtmlPath, 'utf-8');
+    // Update Day N chip in brain.html
+    brainHtml = brainHtml.replace(
+      /document\.getElementById\('day-chip'\)\.textContent = `Day \d+ of 251`;/,
+      `document.getElementById('day-chip').textContent = \`Day ${dayNumber} of 251\`;`
     );
-
-    // Replace the d3.json source file target
-    viewerHtml = viewerHtml.replace('d3.json("../brain-index.json")', 'd3.json("brain-index.public.json")');
-
-    // Replace the preview fetch path from '../../' to relative site notes folder
-    viewerHtml = viewerHtml.replace("fetch('../../' + node.path)", "fetch(node.path)");
-
-    // Inject navigation links under header in index.html control panel
-    const navInsert = `<div style="margin-bottom: 10px; display: flex; gap: 12px; font-size: 0.8rem; text-transform: uppercase;">
-      <a href="feed.html" style="color: var(--accent-bright); text-decoration: none;">📜 Feed</a>
-      <a href="about.html" style="color: var(--accent-bright); text-decoration: none;">🔍 About</a>
-    </div>`;
-    viewerHtml = viewerHtml.replace(
-      '<h1>Vizier Brain <span>Day ' + dayNumber + ' of 251</span></h1>',
-      '<h1>Vizier Brain <span>Day ' + dayNumber + ' of 251</span></h1>\n    ' + navInsert
+    // No other changes — brain.html owns its own LIVE/PREVIEW logic
+    fs.writeFileSync(brainHtmlPath, brainHtml);
+    console.log('Updated Day counter in site/brain.html.');
+  }
+  // site/index.html is the real homepage — it is NOT touched by this build script.
+  console.log('site/index.html (homepage) left untouched.');
+  console.log('Run: node tools/site-build/gen-preview-brain.js  to regenerate preview brain.');
+  // Update feed.html with current day
+  const feedHtmlPath = path.join(siteDir, 'feed.html');
+  if (fs.existsSync(feedHtmlPath)) {
+    let feedHtml = fs.readFileSync(feedHtmlPath, 'utf-8');
+    feedHtml = feedHtml.replace(
+      /document\.getElementById\('day-badge'\)\.textContent = `Day \d+ of 251`;/,
+      `document.getElementById('day-badge').textContent = \`Day ${dayNumber} of 251\`;`
     );
-
-    // Inject "View Note Page" button inside the inspector action row
-    viewerHtml = viewerHtml.replace(
-      '<button class="btn-action" id="btn-copy-path">Copy Path</button>',
-      '<button class="btn-action" id="btn-copy-path">Copy Path</button>\n      <button class="btn-action" id="btn-view-page" style="margin-left: 8px;">View Note Page</button>'
-    );
-
-    // Inject the view-page button event listener
-    const viewBtnListener = `
-    const btnView = document.getElementById("btn-view-page");
-    if (btnView) {
-      btnView.addEventListener("click", () => {
-        if (selectedNode && selectedNode.slug) {
-          window.open('notes/' + selectedNode.slug + '.html', '_blank');
-        }
-      });
-    }
-    `;
-    viewerHtml = viewerHtml.replace(
-      'document.getElementById("btn-copy-path").addEventListener("click", () => {',
-      viewBtnListener + '\n    document.getElementById("btn-copy-path").addEventListener("click", () => {'
-    );
-
-    fs.writeFileSync(path.join(siteDir, 'index.html'), viewerHtml);
-    console.log('Saved adapted index.html to site/index.html.');
+    fs.writeFileSync(feedHtmlPath, feedHtml);
   }
 
   console.log('--- Static Site Build Completed successfully! ---');
