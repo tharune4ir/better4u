@@ -70,6 +70,20 @@ For each block: tick the three boxes, then fill its logbook entry in Section 4.
 | 18 | 13.1 Command Center frontend (seed 016) | ☑ | ☑ | ☑ | 2026-07-05 |
 | 19 | 14.1 Deploy + demo mode + README (seed 017) | ☑ | ☑ | ☑ | 2026-07-05 |
 
+### Phase 15 — LIFE-OS BRAIN LAYER (Additive Extension)
+
+| # | Block/Layer | Prompted | Ran & Verified | Committed | Date |
+|---|---|---|---|---|---|
+| 20 | L1 Domains taxonomy & skeleton | ☑ | ☑ | ☑ | 2026-07-09 |
+| 21 | L2 metadata scanner scan.js | ☑ | ☑ | ☑ | 2026-07-09 |
+| 22 | L3 D3 brain graph viewer UI | ☑ | ☑ | ☑ | 2026-07-09 |
+| 23 | L4 Hybrid Canvas optimization | ☑ | ☑ | ☑ | 2026-07-09 |
+| 24 | L5 Feynman Note Layer CLI | ☑ | ☑ | ☑ | 2026-07-09 |
+| 25 | L6 Routines & Apps registries | ☑ | ☑ | ☑ | 2026-07-09 |
+| 26 | L7 Grounded Research Mode | ☑ | ☑ | ☑ | 2026-07-09 |
+| 27 | L8 Micro-learning Telegram loop | ☑ | ☑ | ☑ | 2026-07-09 |
+| 28 | L9 "Better model" reasoning tier | ☑ | ☑ | ☑ | 2026-07-09 |
+
 **Milestone moments — record the date you felt each one:**
 - ⚡ Fallback chain saved me when I sabotaged my Gemini key: ____
 - ⚡ Agent memory survived a server kill: ____
