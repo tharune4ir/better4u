@@ -40,3 +40,6 @@ Thumbs.db
 .idea/
 .gemini/
 antigravity-ide/
+
+# Brain tracking state
+brain/.seen-lessons.json
