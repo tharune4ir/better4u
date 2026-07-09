@@ -646,7 +646,8 @@
 
   <!-- Main Canvas -->
   <div id="canvas-container">
-    <svg id="graph-svg"></svg>
+    <canvas id="graph-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; display: none;"></canvas>
+    <svg id="graph-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3;"></svg>
   </div>
 
   <script>
@@ -683,6 +684,25 @@
       'applications': 640
     };
 
+    // Initialize Canvas
+    const canvas = d3.select("#graph-canvas");
+    const ctx = canvas.node().getContext("2d");
+    let currentTransform = d3.zoomIdentity;
+    let hoveredNode = null;
+    let quadtree = null;
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.attr("width", window.innerWidth * dpr)
+            .attr("height", window.innerHeight * dpr);
+      ctx.scale(dpr, dpr);
+      if (graphData && graphData.nodes && graphData.nodes.length > 1500) {
+        drawCanvas();
+      }
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
     // Initialize SVG
     const svg = d3.select("#graph-svg");
     const mainGroup = svg.append("g").attr("class", "main-group");
@@ -691,7 +711,11 @@
     const zoom = d3.zoom()
       .scaleExtent([0.1, 8])
       .on("zoom", (event) => {
+        currentTransform = event.transform;
         mainGroup.attr("transform", event.transform);
+        if (graphData && graphData.nodes && graphData.nodes.length > 1500) {
+          drawCanvas();
+        }
       });
       
     svg.call(zoom);
@@ -740,12 +764,24 @@
       return baseNodeSize;
     }
 
+    let link = d3.select(null);
+    let nodeG = d3.select(null);
+
     function renderGraph() {
       // Clear previous nodes/edges
       mainGroup.selectAll("*").remove();
 
       const nodes = graphData.nodes;
       const links = graphData.edges;
+
+      const useCanvas = nodes.length > 1500;
+      if (useCanvas) {
+        d3.select("#graph-canvas").style("display", "block");
+        quadtree = d3.quadtree().x(d => d.x).y(d => d.y).addAll(nodes);
+        drawCanvas();
+      } else {
+        d3.select("#graph-canvas").style("display", "none");
+      }
 
       // Draw Rings Guides if in Rings mode
       if (layoutMode === 'rings') {
@@ -767,41 +803,43 @@
         });
       }
 
-      // Draw Links
-      const link = mainGroup.append("g")
-        .attr("class", "links")
-        .selectAll("line")
-        .data(links)
-        .join("line")
-        .attr("class", d => `link ${d.type === 'wiki-link' ? 'wiki-link' : ''}`);
+      if (!useCanvas) {
+        // Draw Links
+        link = mainGroup.append("g")
+          .attr("class", "links")
+          .selectAll("line")
+          .data(links)
+          .join("line")
+          .attr("class", d => `link ${d.type === 'wiki-link' ? 'wiki-link' : ''}`);
 
-      // Draw Nodes Group
-      const nodeG = mainGroup.append("g")
-        .attr("class", "nodes")
-        .selectAll("g")
-        .data(nodes)
-        .join("g")
-        .attr("class", "node-group")
-        .on("click", (event, d) => showInspector(d))
-        .call(d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended)
-        );
+        // Draw Nodes Group
+        nodeG = mainGroup.append("g")
+          .attr("class", "nodes")
+          .selectAll("g")
+          .data(nodes)
+          .join("g")
+          .attr("class", "node-group")
+          .on("click", (event, d) => showInspector(d))
+          .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended)
+          );
 
-      // Draw Node Circles
-      const circle = nodeG.append("circle")
-        .attr("class", "node")
-        .attr("r", d => getNodeRadius(d))
-        .attr("fill", d => colors[d.type] || 'white')
-        .attr("stroke", "rgba(0,0,0,0.6)")
-        .attr("stroke-width", 1);
+        // Draw Node Circles
+        nodeG.append("circle")
+          .attr("class", "node")
+          .attr("r", d => getNodeRadius(d))
+          .attr("fill", d => colors[d.type] || 'white')
+          .attr("stroke", "rgba(0,0,0,0.6)")
+          .attr("stroke-width", 1);
 
-      // Draw Labels
-      const text = nodeG.append("text")
-        .attr("class", "node-label")
-        .attr("dy", d => -getNodeRadius(d) - 4)
-        .text(d => d.label);
+        // Draw Labels
+        nodeG.append("text")
+          .attr("class", "node-label")
+          .attr("dy", d => -getNodeRadius(d) - 4)
+          .text(d => d.label);
+      }
 
       // Update simulation data
       simulation.nodes(nodes);
@@ -846,15 +884,130 @@
 
       // Simulation Ticks
       simulation.on("tick", () => {
-        link
-          .attr("x1", d => d.source.x)
-          .attr("y1", d => d.source.y)
-          .attr("x2", d => d.target.x)
-          .attr("y2", d => d.target.y);
+        const useCanvas = nodes.length > 1500;
+        if (useCanvas) {
+          quadtree = d3.quadtree().x(d => d.x).y(d => d.y).addAll(nodes);
+          drawCanvas();
+        } else {
+          link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
 
-        nodeG.attr("transform", d => `translate(${d.x},${d.y})`);
+          nodeG.attr("transform", d => `translate(${d.x},${d.y})`);
+        }
       });
     }
+
+    function drawCanvas() {
+      if (!graphData) return;
+      const nodes = graphData.nodes;
+      const links = graphData.edges;
+      
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      
+      ctx.save();
+      ctx.translate(currentTransform.x, currentTransform.y);
+      ctx.scale(currentTransform.k, currentTransform.k);
+      
+      // Draw links
+      ctx.strokeStyle = "rgba(42, 127, 127, 0.15)";
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      for (const link of links) {
+        let sx = 0, sy = 0, tx = 0, ty = 0;
+        if (typeof link.source === 'object') {
+          sx = link.source.x;
+          sy = link.source.y;
+        } else {
+          const sNode = graphData.nodes.find(n => n.id === link.source);
+          if (sNode) { sx = sNode.x; sy = sNode.y; }
+        }
+        if (typeof link.target === 'object') {
+          tx = link.target.x;
+          ty = link.target.y;
+        } else {
+          const tNode = graphData.nodes.find(n => n.id === link.target);
+          if (tNode) { tx = tNode.x; ty = tNode.y; }
+        }
+        ctx.moveTo(sx, sy);
+        ctx.lineTo(tx, ty);
+      }
+      ctx.stroke();
+      
+      // Draw nodes
+      for (const node of nodes) {
+        ctx.beginPath();
+        const r = getNodeRadius(node);
+        ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
+        ctx.fillStyle = colors[node.type] || '#ffffff';
+        ctx.fill();
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.stroke();
+        
+        if (selectedNode && selectedNode.id === node.id) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, r + 2.5, 0, 2 * Math.PI);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+      }
+      
+      // Draw hover details
+      if (hoveredNode) {
+        const r = getNodeRadius(hoveredNode);
+        ctx.beginPath();
+        ctx.arc(hoveredNode.x, hoveredNode.y, r + 3, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'var(--accent-bright)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px Geist, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(hoveredNode.label, hoveredNode.x, hoveredNode.y - r - 6);
+      }
+      
+      ctx.restore();
+    }
+
+    // Setup mouse events for canvas mode
+    svg.on("mousemove", (event) => {
+      if (graphData && graphData.nodes.length > 1500) {
+        const [mx, my] = d3.pointer(event, mainGroup.node());
+        if (quadtree) {
+          const searchRadius = 20 / currentTransform.k;
+          const closest = quadtree.find(mx, my, searchRadius);
+          if (closest !== hoveredNode) {
+            hoveredNode = closest;
+            drawCanvas();
+          }
+        }
+      }
+    });
+
+    svg.on("click", (event) => {
+      // If user clicked directly on the canvas or an empty area, handle it
+      if (event.target === svg.node()) {
+        if (graphData && graphData.nodes.length > 1500) {
+          const [mx, my] = d3.pointer(event, mainGroup.node());
+          if (quadtree) {
+            const searchRadius = 25 / currentTransform.k;
+            const closest = quadtree.find(mx, my, searchRadius);
+            if (closest) {
+              showInspector(closest);
+              drawCanvas();
+            } else {
+              closeInspector();
+              drawCanvas();
+            }
+          }
+        }
+      }
+    });
 
     // Dragging helper events
     function dragstarted(event, d) {
@@ -1069,7 +1222,7 @@
         .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale));
         
       // Add pulsing trigger
-      const element = mainGroup.selectAll("circle").filter(d => d.id === node.id);
+      const element = mainGroup.selectAll(".node").filter(d => d && d.id === node.id);
       element.classed("pulsing", true);
       setTimeout(() => element.classed("pulsing", false), 3000);
       
