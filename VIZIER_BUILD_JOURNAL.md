@@ -1179,5 +1179,78 @@ cd backend
 
 ---
 
+## PART 11: 251-DAY KNOWLEDGE BRAIN SYSTEM COMPANION & OPERATING MANUAL
+
+This section outlines how you, the owner of VIZIER, should operate and expand this knowledge system daily over the next 251 days to build a hyper-dense, connected web of expertise.
+
+### Why 251 Days?
+In knowledge base architecture, a graph feels sparse until it reaches ~250 highly connected nodes. By dedicating just 15 minutes a day to reading, synthesizing, and documenting one topic using the Feynman CLI and push loop, you will grow a personal, cited, and clinical-grade knowledge graph of 250+ entries.
+
+---
+
+### 📅 The Daily Operating Routine (15 Minutes)
+
+Follow this exact 4-step sequence every single day:
+
+#### Step 1: Learn & Identify
+During your daily study or research, find a key study, concept, or technical framework that falls under one of your 10 domains (e.g., gut-microbiome signaling, productivity loops, household handyman fixes).
+
+#### Step 2: Scaffold the Feynman Template
+Open **PowerShell** and run the feynman notes CLI generator to template a structured file:
+```powershell
+node brain/new-feynman.js "Your Note Title" <domain>
+```
+*Example:* `node brain/new-feynman.js "Short chain fatty acids and microglia activation" mind-gut`
+This generates a clean file: `brain/feynman/short-chain-fatty-acids-and-microglia-activation.md`.
+
+#### Step 3: Synthesis & Documentation
+Open the generated markdown note in your editor. Fill in the four required sections:
+- **The one-sentence version**: Boil the concept down so a 12-year-old understands it instantly.
+- **The slightly deeper version**: Add 2-4 plain-English paragraphs with one clear analogy.
+- **Where this could be wrong**: Critically challenge the idea—mandatory to prevent overconfidence.
+- **Sources**: Cite references, tagging each with its evidence tier (Tiers 1 to 4).
+
+#### Step 4: Refresh the Graph & Push Daily Lesson
+1.  Run the index scanner to recalculate node connections and link vectors:
+    ```powershell
+    node brain/scan.js
+    ```
+2.  Trigger the daily push script to parse the next unseen lesson and push it as a beautifully formatted lesson card to your Telegram:
+    ```powershell
+    node brain/push-micro-lesson.js
+    ```
+    This script automatically updates `brain/.seen-lessons.json` (your progress list) so the same lesson is never pushed twice.
+
+---
+
+### 🛡️ The Weekly System Audit & Maintenance Program (Every Sunday)
+
+Execute these three checkups once a week to ensure VIZIER stays healthy and online:
+
+#### 1. Google OAuth Token Renewal (Every ~7 Days)
+Because Google credentials operate in testing mode, Google's safety policy expires authorization tokens every 7 days. If VIZIER fails to read your emails/calendar, run:
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+python -m app.google.authorize
+```
+Follow the browser prompts to grant consent and refresh your local credentials token file.
+
+#### 2. Supabase Cloud Database Health Check
+Supabase's free cloud tier automatically pauses databases that experience no active connections for over a week. If the browser visualizer or backend returns database connection refused errors:
+1. Go to your Supabase web dashboard (`supabase.com`).
+2. If paused, click **Restore Project** (takes ~30 seconds to boot up).
+
+#### 3. Grounded Specialist Validation
+Verify that the researcher agent's grounded synthesis and rate-limiting fallbacks are working properly by running the test harness:
+```powershell
+cd backend
+.\.venv\Scripts\python.exe test_grounded_mode.py
+```
+Check that the agent successfully calls Europe PMC, includes inline citations, shows source tiers, and correctly abstains (refuses to answer) when no relevant info is found, ensuring zero model hallucination.
+
+---
+
 *Built entirely with free APIs and open-source tools.*
 *Every line of code written by Antigravity AI. Every concept owned by you.*
+
