@@ -38,9 +38,9 @@ A browser window will open. Google will say "This app isn't verified" — that's
 
 ---
 
-### Step 1 — Open TWO PowerShell terminal windows side by side
+### Step 1 — Open THREE PowerShell terminal windows side by side
 
-> You need two terminals because the backend and frontend are two separate programs running simultaneously.
+> You need three terminals because the backend API, frontend interface, and Life-OS Brain Graph visualizer run as independent local services.
 
 **Terminal 1 — Start the backend (FastAPI server):**
 ```powershell
@@ -68,6 +68,17 @@ You should see:
 ```
 Leave this terminal running. **Do NOT close it.**
 
+**Terminal 3 — Start the Graph Visualizer Server:**
+```powershell
+cd "c:\000_workspace_22626\1_Product Lab Portfolio\0_vizier\vizier"
+node brain/server.js
+```
+You should see:
+```
+Server running at http://localhost:3005/
+```
+Leave this terminal running. **Do NOT close it.**
+
 ---
 
 ### Step 2 — Open your browser
@@ -82,6 +93,7 @@ Open **Google Chrome** (or any browser) and go to:
 | `http://localhost:3000/academy/dictionary` | 🔍 Searchable dictionary of 44+ AI terms |
 | `http://localhost:3000/memories` | 🧠 View / edit / delete VIZIER's long-term memories |
 | `http://localhost:8000/docs` | ⚙️ FastAPI interactive API explorer (all backend routes) |
+| `http://localhost:3005/brain/viewer/index.html` | 🕸️ VIZIER Life-OS Brain Graph Visualizer (interactive D3.js layout) |
 
 ---
 
