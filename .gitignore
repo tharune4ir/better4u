@@ -16,13 +16,18 @@ dist/
 
 # Local configuration and credentials
 .env
+.env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-backend/secrets/google_token.json
+*token*.json
+google_oauth_client.json
+secrets/
+backend/secrets/
 *.backup
 *.backup.*
+
 
 # Local cache
 .cache/
