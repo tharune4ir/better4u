@@ -539,6 +539,15 @@ function buildSite() {
     
     // Replace title
     viewerHtml = viewerHtml.replace('<title>VIZIER — Brain Graph Visualizer</title>', '<title>VIZIER — A Living Brain</title>');
+
+    // Inject trailing slash redirect to ensure relative fetches work correctly
+    const redirectScript = `
+  <script>
+    if (window.location.pathname.endsWith('/site')) {
+      window.location.replace(window.location.pathname + '/');
+    }
+  </script>`;
+    viewerHtml = viewerHtml.replace('<head>', '<head>' + redirectScript);
     
     // Replace header VIZIER title with brand + Day badge
     viewerHtml = viewerHtml.replace(
