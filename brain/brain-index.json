@@ -228,6 +228,20 @@
       "note_type": "stub"
     },
     {
+      "id": "brain/feynman/why-fiber-feeds-the-gut.md",
+      "label": "Why fiber feeds the gut",
+      "type": "feynman",
+      "ring": "knowledge",
+      "domain": "gut",
+      "path": "brain/feynman/why-fiber-feeds-the-gut.md",
+      "size": 754,
+      "modified": "2026-07-09T00:34:42.459Z",
+      "tags": [],
+      "sources": [],
+      "confidence": "high",
+      "note_type": "feynman"
+    },
+    {
       "id": "count-memories",
       "label": "Memories (2)",
       "type": "supabase-count",
@@ -370,6 +384,11 @@
       "type": "containment"
     },
     {
+      "source": "domain-gut",
+      "target": "brain/feynman/why-fiber-feeds-the-gut.md",
+      "type": "containment"
+    },
+    {
       "source": "center-vizier",
       "target": "count-memories",
       "type": "supabase-count-link"
@@ -392,7 +411,7 @@
   ],
   "stats": {
     "health-core": 2,
-    "gut": 2,
+    "gut": 3,
     "mind-gut": 2,
     "body": 2,
     "nutrition": 2,
@@ -403,8 +422,8 @@
     "meta": 6
   },
   "metadata": {
-    "generated_at": "2026-07-09T00:34:24.050Z",
-    "node_count": 25,
-    "edge_count": 24
+    "generated_at": "2026-07-09T00:34:48.060Z",
+    "node_count": 26,
+    "edge_count": 25
   }
 }

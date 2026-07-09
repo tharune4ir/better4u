@@ -24,7 +24,8 @@
     "brain/knowledge/family-os/README.md"
   ],
   "gut": [
-    "brain/knowledge/gut/README.md"
+    "brain/knowledge/gut/README.md",
+    "brain/feynman/why-fiber-feeds-the-gut.md"
   ],
   "handyman": [
     "brain/knowledge/handyman/README.md"
@@ -43,5 +44,14 @@
   ],
   "nutrition": [
     "brain/knowledge/nutrition/README.md"
+  ],
+  "why": [
+    "brain/feynman/why-fiber-feeds-the-gut.md"
+  ],
+  "fiber": [
+    "brain/feynman/why-fiber-feeds-the-gut.md"
+  ],
+  "feeds": [
+    "brain/feynman/why-fiber-feeds-the-gut.md"
   ]
 }
