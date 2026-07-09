@@ -299,5 +299,15 @@ TERMS LEARNED: Container, image, cold start, tunnel, demo mode.
 
 ## 8. PARKED IDEAS (do NOT build mid-phase — park here)
 
--
--
+- None.
+
+---
+
+## 9. MODEL TIER ROLES & MAPPINGS
+
+| Node/Task Type | Model Role | Primary Model | Fallback Models |
+|---|---|---|---|
+| **Supervisor Planning** (`supervisor`) | `reasoning` | `gemini/gemini-1.5-pro` | `groq/llama-3.3-70b-versatile` $\rightarrow$ OpenRouter Llama 70B $\rightarrow$ Standard free chain |
+| **Grounded Research Mode** (`RESEARCHER`) | `reasoning` | `gemini/gemini-1.5-pro` | `groq/llama-3.3-70b-versatile` $\rightarrow$ OpenRouter Llama 70B $\rightarrow$ Standard free chain |
+| **Everyday Chat/Execution** (Standard) | `default` | `gemini/gemini-2.5-flash-lite` | `groq/llama-3.3-70b-versatile` $\rightarrow$ OpenRouter Gemini $\rightarrow$ Local Ollama Qwen |
+

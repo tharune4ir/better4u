@@ -40,6 +40,7 @@ class Settings(BaseSettings):
 
     # Deployment / Demo Mode Settings
     DEMO_MODE: bool = False
+    GROUNDED_RESEARCH_MODE: bool = False
 
     # Pydantic Settings configuration
     model_config = SettingsConfigDict(

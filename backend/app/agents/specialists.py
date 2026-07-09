@@ -631,17 +631,55 @@ def search_my_documents(query: str) -> str:
     except Exception as e:
         return f"Error searching private documents: {e}"
 
-researcher_tools = [web_search, web_fetch, search_my_documents]
-researcher_schema = [
-    {
-        "type": "function",
-        "function": {
-            "name": t.name,
-            "description": t.description,
-            "parameters": t.args_schema.schema() if t.args_schema else {"type": "object", "properties": {}}
+@tool
+def fetch_scientific_literature(query: str) -> str:
+    """
+    Searches Europe PMC (open access repository of biomedical and life sciences literature)
+    for peer-reviewed studies, abstracts, and systematic reviews. Returns titles, authors, journals, 
+    and abstracts if available.
+    """
+    try:
+        url = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+        params = {
+            "query": query,
+            "format": "json",
+            "resultType": "core",
+            "pageSize": 3
         }
-    } for t in researcher_tools
-]
+        res = httpx.get(url, params=params, timeout=10)
+        if res.status_code != 200:
+            return f"Europe PMC search failed. Status: {res.status_code}"
+        
+        data = res.json()
+        results = data.get("resultList", {}).get("result", [])
+        if not results:
+            return f"No scientific publications found for query: '{query}'"
+        
+        formatted = []
+        for idx, r in enumerate(results):
+            title = r.get("title", "No Title")
+            authors = r.get("authorString", "Unknown Authors")
+            journal = r.get("journalInfo", {}).get("journal", {}).get("title", "Unknown Journal")
+            year = r.get("pubYear", "N/A")
+            doi = r.get("doi", "N/A")
+            pmcid = r.get("pmcid", "N/A")
+            abstract = r.get("abstractText", "No abstract available.")
+            abstract = abstract[:800] + "..." if len(abstract) > 800 else abstract
+            
+            formatted.append(
+                f"Study {idx+1}:\n"
+                f"Title: {title}\n"
+                f"Authors: {authors}\n"
+                f"Journal/Year: {journal} ({year})\n"
+                f"Identifiers: DOI: {doi}, PMCID: {pmcid}\n"
+                f"Abstract: {abstract}\n"
+            )
+        return "\n---\n".join(formatted)
+    except Exception as e:
+        return f"Error querying scientific literature: {e}"
+
+researcher_tools = [web_search, web_fetch, search_my_documents, fetch_scientific_literature]
+researcher_schema = [_get_tool_schema(t) for t in researcher_tools]
 
 researcher_system_prompt = (
     "You are VIZIER's RESEARCHER agent. You fetch information from the web or your private knowledge base. "
@@ -650,7 +688,53 @@ researcher_system_prompt = (
     "Cite sources and document names where possible."
 )
 
-researcher_node = make_specialist_node("RESEARCHER", researcher_system_prompt, researcher_schema)
+def researcher_node(state: SpecialistState) -> Dict[str, Any]:
+    from app.settings import settings
+    
+    is_grounded = getattr(settings, "GROUNDED_RESEARCH_MODE", False)
+    
+    if is_grounded:
+        prompt = (
+            "You are VIZIER's GROUNDED RESEARCHER agent. Your task is to provide a highly reliable, "
+            "citations-grounded, medical-grade scientific analysis.\n\n"
+            "STRICT RULES:\n"
+            "1. Answer ONLY from information retrieved by your tools (search_my_documents, fetch_scientific_literature, web_search, web_fetch). Do NOT use your own training memory "
+            "to make claims that are not in the retrieved content.\n"
+            "2. If no relevant information is retrieved, or if the sources do not contain the answer, you MUST "
+            "explicitly abstain by saying: 'I don't have a source for this.' and stop. Do NOT speculate or make things up.\n"
+            "3. Require an inline citation (e.g. [1] or [Title]) on every factual sentence.\n"
+            "4. Categorize and tag each source with its evidence tier in your answer:\n"
+            "   - Tier 1: Systematic reviews, meta-analyses, major health guidelines (e.g., CDC, WHO)\n"
+            "   - Tier 2: Individual peer-reviewed clinical trials or primary scientific studies\n"
+            "   - Tier 3: Reputable secondary explainers (e.g., university health portals, textbook chapters)\n"
+            "   - Tier 4: Other secondary sources (e.g., news articles, blogs, self-reports)\n"
+            "5. Show the evidence tier inline next to each claim (e.g., 'Claim text [Tier 2]').\n"
+            "6. If the question concerns health, gut, nutrition, physiology, or clinical topics, you MUST append the following "
+            "disclaimer footer exactly at the very end of your response:\n\n"
+            "Educational summary from cited sources — not medical advice; confirm anything you'd act on with a qualified clinician."
+        )
+    else:
+        prompt = researcher_system_prompt
+
+    msgs = [SystemMessage(content=prompt)] + list(state["messages"])
+    gateway_messages = _bridge_to_gateway(msgs)
+    
+    res = gateway.complete(gateway_messages, tools=researcher_schema)
+    reply = res["reply"]
+    tool_calls = res["tool_calls"]
+    
+    # Enforce health footer at response level if grounded is enabled and topic matches
+    if is_grounded and reply:
+        has_health_query = any(word in str(gateway_messages).lower() for word in [
+            "health", "gut", "microbiome", "diet", "nutrition", "physio", "medical", "clinical", "sleep", "heart", "disease", "body", "fiber", "leak"
+        ])
+        if has_health_query and "clinician" not in reply.lower():
+            reply += "\n\nEducational summary from cited sources — not medical advice; confirm anything you'd act on with a qualified clinician."
+            
+    lc_tool_calls = _bridge_to_langchain(tool_calls)
+    ai_msg = AIMessage(content=reply, tool_calls=lc_tool_calls)
+    return {"messages": [ai_msg]}
+
 researcher_tool_node = ToolNode(researcher_tools)
 
 researcher_workflow = StateGraph(SpecialistState)

@@ -61,6 +61,28 @@ class ModelGateway:
             }
         ]
 
+        # Define reasoning chain configuration (stronger models)
+        self.reasoning_providers = [
+            {
+                "name": "gemini-pro",
+                "model": "gemini/gemini-1.5-pro",
+                "api_key": settings.GEMINI_API_KEY,
+                "api_base": None
+            },
+            {
+                "name": "groq-70b",
+                "model": "groq/llama-3.3-70b-versatile",
+                "api_key": settings.GROQ_API_KEY,
+                "api_base": None
+            },
+            {
+                "name": "openrouter-pro",
+                "model": "openrouter/meta-llama/llama-3.3-70b-instruct",
+                "api_key": settings.OPENROUTER_API_KEY,
+                "api_base": "https://openrouter.ai/api/v1"
+            }
+        ]
+
     def _get_cache_key(self, messages: List[Dict[str, str]], model: str, tools: Optional[List[Dict[str, Any]]] = None, **kwargs) -> str:
         """
         Generate a unique MD5 hash for the request payload.
@@ -115,12 +137,16 @@ class ModelGateway:
         self.cooldowns[provider_name] = time.time() + duration
         print(f"\n[Gateway Cooldown] Cooldown applied to '{provider_name}' for {duration} seconds.")
 
-    def complete(self, messages: List[Dict[str, str]], tools: Optional[List[Dict[str, Any]]] = None, **kwargs) -> Dict[str, Any]:
+    def complete(self, messages: List[Dict[str, str]], tools: Optional[List[Dict[str, Any]]] = None, reasoning: bool = False, **kwargs) -> Dict[str, Any]:
         """
         Execute completions using the priority chain, retrying with backoff/jitter 
         and falling back on failures.
         """
-        cache_key = self._get_cache_key(messages, self.providers[0]["model"], tools, **kwargs)
+        chain = self.providers
+        if reasoning:
+            chain = self.reasoning_providers + self.providers
+
+        cache_key = self._get_cache_key(messages, chain[0]["model"], tools, **kwargs)
         
         # 1. Lookup cache
         cached_res = self._lookup_cache(cache_key)
@@ -130,7 +156,7 @@ class ModelGateway:
             return cached_res
 
         # 2. Iterate priority chain
-        for provider in self.providers:
+        for provider in chain:
             name = provider["name"]
             model = provider["model"]
             api_key = provider["api_key"]

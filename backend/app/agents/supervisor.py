@@ -94,7 +94,7 @@ def call_supervisor(state: AgentState) -> Dict[str, Any]:
             gateway_messages.append({"role": "tool", "name": m.name, "content": m.content, "tool_call_id": m.tool_call_id})
 
     # Call gateway for JSON output
-    res = gateway.complete(gateway_messages, response_format={"type": "json_object"})
+    res = gateway.complete(gateway_messages, response_format={"type": "json_object"}, reasoning=True)
     reply_content = res["reply"].strip()
     
     # Parse structured JSON decision
